@@ -23,18 +23,18 @@
 
     <!-- Custom fonts for this template-->
     <link
-      href="<?php echo base_url()."assets/" ?>vendor/fontawesome-free/css/all.min.css"
+      href="<?php echo assetUrl() ?>vendor/fontawesome-free/css/all.min.css"
       rel="stylesheet"
       type="text/css"
     />
     <!-- Custom styles for this template-->
-    <link href="<?php echo base_url()."assets/" ?>css/sb-admin-2.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url()."assets/" ?>css/custom.css" rel="stylesheet" />
-    <script src="<?php echo base_url()."assets/" ?>vendor/jquery/jquery.min.js"></script>
+    <link href="<?php echo assetUrl() ?>css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>vendor/select2-develop/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>vendor/sweetalert-master/dist/sweetalert.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>vendor/bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.standalone.min.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>css/custom.css" rel="stylesheet" />
+    <script src="<?php echo assetUrl() ?>vendor/jquery/jquery.min.js"></script>
   </head>
 
   <body id="page-top">
@@ -245,7 +245,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['username'] ?></span>
-                <img class="img-profile rounded-circle" src="<?php echo base_url()."assets/img/default.png" ?>">
+                <img class="img-profile rounded-circle" src="<?php echo assetUrl()."img/default.png" ?>">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -362,18 +362,18 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?php echo base_url()."assets/" ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="<?php echo base_url()."assets/" ?>vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="<?php echo base_url()."assets/" ?>js/sb-admin-2.min.js"></script>
-    <script src="<?php echo base_url()."assets/" ?>vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url()."assets/" ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
-    <script src="<?php echo base_url()."assets/" ?>vendor/select2-develop/dist/js/select2.min.js"></script>
-    <script src="<?php echo base_url()."assets/" ?>vendor/sweetalert-master/dist/sweetalert-dev.js"></script>
-    <script src="<?php echo base_url()."assets/" ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
-    <script src="<?php echo base_url()."assets/" ?>js/custom.js"></script>
+    <script src="<?php echo assetUrl() ?>js/sb-admin-2.min.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/select2-develop/dist/js/select2.min.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/sweetalert-master/dist/sweetalert-dev.js"></script>
+    <script src="<?php echo assetUrl() ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="<?php echo assetUrl() ?>js/custom.js"></script>
   </body>
 </html>

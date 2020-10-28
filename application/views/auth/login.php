@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="<?php echo base_url()."assets/" ?>css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>css/sb-admin-2.min.css" rel="stylesheet" />
     <link
-      href="<?php echo base_url()."assets/" ?>vendor/fontawesome-free/css/all.min.css"
+      href="<?php echo assetUrl() ?>vendor/fontawesome-free/css/all.min.css"
       rel="stylesheet"
       type="text/css"
     />
-    <link href="<?php echo base_url()."assets/" ?>css/custom.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?php echo base_url()."assets/" ?>/animate/animate.min.css">
+    <link href="<?php echo assetUrl() ?>css/custom.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo assetUrl() ?>/animate/animate.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
   <!--webfonts-->
@@ -122,9 +122,9 @@
 </body>
 </html>
 <!-- jQuery 3 -->
-<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo assetUrl(); ?>vendor/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="<?php echo base_url(); ?>assets/vendor/jquery/jquery-ui.min.js"></script>
+<script src="<?php echo assetUrl(); ?>vendor/jquery/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
 function coba() {
@@ -138,7 +138,7 @@ $(document).ready(function(e){
     // alert(usernameid);
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url();?>index.php/Login/aksi_login',
+      url: '<?php echo base_url();?>Login/aksi_login',
       data: { username: usernameid, password: passwordid },
       beforeSend: function () {
           $('#body_form').addClass('animated bounceOut');

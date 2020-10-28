@@ -67,7 +67,7 @@ class Login extends CI_Controller{
             );
           }
           $this->session->set_userdata($data_session);
-  				echo base_url().'index.php/dashboard';
+  				echo base_url().'dashboard';
 
         }else{
           $this->session->set_flashdata("message", "Password salah");

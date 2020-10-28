@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="<?php echo base_url()."assets/" ?>css/sb-admin-2.min.css" rel="stylesheet" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/owl-carousel/owl.carousel.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url()."assets/" ?>vendor/owl-carousel/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url()."assets/" ?>css/frontend.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="<?php echo assetUrl() ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo assetUrl() ?>vendor/owl-carousel/owl.carousel.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo assetUrl() ?>vendor/owl-carousel/owl.theme.default.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo assetUrl() ?>css/frontend.css" rel="stylesheet" />
     <title>SINTAK JTI - Sistem Informasi Tugas Akhir</title>
 </head>
 <body>
 <div class="loading">
     <div>
-        <img src="<?php echo base_url()."assets/img/loading.gif" ?>" alt="">
+        <img src="<?php echo assetUrl()."img/loading.gif" ?>" alt="">
         <p>Loading....</p>
     </div>
 </div>
@@ -196,9 +196,9 @@
 </div>
 <br>
 <br>
-<script src="<?php echo base_url()."assets/" ?>vendor/jquery/jquery.min.js"></script>
-<script src="<?php echo base_url()."assets/" ?>vendor/bootstrap/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url()."assets/" ?>vendor/owl-carousel/owl.carousel.min.js"></script>
-<script src="<?php echo base_url()."assets/" ?>js/frontend.js"></script>
+<script src="<?php echo assetUrl() ?>vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo assetUrl() ?>vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="<?php echo assetUrl() ?>vendor/owl-carousel/owl.carousel.min.js"></script>
+<script src="<?php echo assetUrl() ?>js/frontend.js"></script>
 </body>
 </html>

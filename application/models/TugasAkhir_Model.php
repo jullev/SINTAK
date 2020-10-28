@@ -21,6 +21,7 @@ Class TugasAkhir_Model extends CI_Model{
             $this->db->like("LOWER(Judul_TA)",strtolower($like));
             $this->db->or_like("LOWER(topik.topik)",strtolower($like));
         }
+        $this->db->order_by("id",'asc');
         return $this->db->get();
     }
 

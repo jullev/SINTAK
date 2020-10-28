@@ -1,20 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1ubuntu0.1
--- http://www.phpmyadmin.net
+-- version 4.9.0.1
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Oct 27, 2020 at 09:35 AM
--- Server version: 5.5.62-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.29
+-- Host: 127.0.0.1
+-- Generation Time: Oct 28, 2020 at 04:13 AM
+-- Server version: 10.3.15-MariaDB
+-- PHP Version: 7.3.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `sinta`
@@ -26,16 +28,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `dosen`
 --
 
-CREATE TABLE IF NOT EXISTS `dosen` (
+CREATE TABLE `dosen` (
   `NIP` varchar(20) NOT NULL,
   `NIDN` varchar(45) DEFAULT NULL,
   `NAMA` varchar(45) DEFAULT NULL,
   `Alamat` varchar(45) DEFAULT NULL,
   `No_hp` varchar(11) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `idRole` int(11) DEFAULT NULL,
-  PRIMARY KEY (`NIP`),
-  KEY `fk_Dosen_Role1_idx` (`idRole`)
+  `idRole` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -46,7 +46,7 @@ INSERT INTO `dosen` (`NIP`, `NIDN`, `NAMA`, `Alamat`, `No_hp`, `password`, `idRo
 ('197008311998031001', '0031087001', 'Moh. Munih Dian W, S.Kom,MT', 'Jember', '123456789', '$2y$10$F1NvhGoBNRexnHwju3t7juyU3QX9qkp9aOMI4NwqdxezLXBNhM7T2', 2),
 ('197104082001121003', '`0008047103', 'Wahyu Kurnia Dewanto,S.Kom, MT', 'Jember', '123456789', '$2y$10$bfkTeoAVQKoWW/VcO.bVN.h/CFqDw.gfiapFAffVqmZ5FJDc82n4S', 2),
 ('197110092003121001', '0009107104', 'Denny Trias Utomo, S,Si, MT', 'Jember', '123456789', '$2y$10$8AsSB5vCQvuhdZBLGY6J5.cV5W1OGEP87ia.KVLC1Zkujj1Sw1ODO', 2),
-('197111151998021001', '0015117106', 'Adi Heru Utomo, S.Kom, M.Kom', 'Jember', '123456789', '$2y$10$MAoTQ2kjQ8tjp0u2k1Fz9eMAxGXsPGPExAay4M.9HoNK6fkgjxsWS', 2),
+('197111151998021001', '0015117106', 'Adi Heru Utomo, S.Kom, M.Kom', 'Jember', '123456789', '$2y$10$MAoTQ2kjQ8tjp0u2k1Fz9eMAxGXsPGPExAay4M.9HoNK6fkgjxsWS', 6),
 ('197405192003121002', '0019057403', 'Nugroho Setyo Wibowo, ST,MT', 'Jember', '123456789', '$2y$10$nMcWTFOhu56VuBH24E90CeHVUDbb8br6wEGewvXNHA5GZ5nhZMALi', 2),
 ('197709292005011003', '0029097704', 'Didit Rahmat Hartadi S.Kom , MT', 'Jember', '123456789', '$2y$10$c8zsQOLjtPmvVr/4Jf1UJ.P97t/jirmyeq.ZIaF2ObLzlceMF/ady', 2),
 ('19780816 200501 1 00', '0016087806', 'Beni Widiawan, S.ST, MT', 'jember', '123456789', '19780816 200501 1 002', 2),
@@ -69,7 +69,7 @@ INSERT INTO `dosen` (`NIP`, `NIDN`, `NAMA`, `Alamat`, `No_hp`, `password`, `idRo
 ('198907102019031010', '0010078903', 'Ery Setiyawan Julev Atmaji,S.Kom,M.Cs', 'Jember', '123456789', '$2y$10$BIGeqqqKrmHSNVeKvQ7OP.79hvbNVxnmy9hcvFhebyRDWt/Wv8asu', 1),
 ('199002272018032001', '8868110016', 'Trismayanti Dwi P ,S.Kom, M,Cs', 'Jember', '123456789', '$2y$10$qFpE/0objW618aipOZp4gOLnQpYmzSLqdBMljnmgeqIRfmTNPbNny', 5),
 ('199103152017031001', '', 'Syamsiar Kautsar S.ST., MT.', 'Jember', '123456789', '$2y$10$QC.lcgXV/EpNHJqRHhWLCuyWvHSXK2NN2WqCYkC0c11nlBJiLvIwK', 2),
-('199104292019031011', '0029049102', 'Faisal Lutfi Afriansyah S.Kom.,M.T.', 'Jember', '123456789', '$2y$10$7iP/mfmRT9SbjdLAdRAd2eUK/uh2JKBDLJsqUr7F3SAH3atVGVmRu', 7),
+('199104292019031011', '0029049102', 'Faisal Lutfi Afriansyah S.Kom.,M.T.', 'Jember', '123456789', '$2y$10$7iP/mfmRT9SbjdLAdRAd2eUK/uh2JKBDLJsqUr7F3SAH3atVGVmRu', 1),
 ('199112112018031001', '', 'Khafidurohman A., S.Pd., M.Eng.', 'Jember', '123456789', '$2y$10$wF5/Fe1WfJRvVMacGxSyBeWqtAnlK0xBmguZ0w15h09DOT0W5AK7K', 2),
 ('199203022018032001', '', 'Zilvanhisna Emka Fitri ST., MT.', 'Jember', '123456789', '$2y$10$frHWrNt5OZNRTZK6HYvoie9Lpe4jq45wbh1aH22BnlKjZynmoHPHK', 2),
 ('199205282018032001', '', 'Bety Etikasari, S.Pd., M.Pd.', 'Jember', '123456789', '$2y$10$IEJ5OSNHiPD5xI4coN7Pv.60kzHjO08Ktcrr.zDradF/Mmr9vm6XC', 2),
@@ -81,16 +81,14 @@ INSERT INTO `dosen` (`NIP`, `NIDN`, `NAMA`, `Alamat`, `No_hp`, `password`, `idRo
 -- Table structure for table `mahasiswa`
 --
 
-CREATE TABLE IF NOT EXISTS `mahasiswa` (
+CREATE TABLE `mahasiswa` (
   `NIM` varchar(9) NOT NULL,
   `NAMA` varchar(45) DEFAULT NULL,
   `Alamat` varchar(45) DEFAULT NULL,
   `Tahun_masuk` year(4) DEFAULT NULL,
   `Prodi_idProdi` int(11) NOT NULL,
   `tanggallahir` date DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`NIM`),
-  KEY `fk_Mahasiswa_Prodi1_idx` (`Prodi_idProdi`)
+  `password` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -143,10 +141,10 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41160978', 'Nova An-Nisa Azizah', 'sempu krajan kalisetail, rt/rw 01/01 ', 2016, 3, '1997-11-21', '$2y$10$mQXOSx4NUU4ENVEIwAQhmeDAgR/SgpD4JFGVQVvGQ2fet5EBIeC56'),
 ('E41161052', 'Farida Ayu Dusturiya', 'Perum Mastrip Blok Z No 5/ 68121  ', 2016, 3, '1997-11-12', '$2y$10$LtxUKoh119xHnAFM8I6emOT0gQuiNzDpqcZ6pbxKShUN.G28osG2O'),
 ('E41161056', 'Indri Ayu Saputri', 'Dusun Kedung Langkap RT 003 RW 011 Desa Krato', 2016, 3, '1998-08-15', '$2y$10$LO8ZcTFIRm0e/x27dFZKaOawLhU/PSjcT/dPGwiIs47LINviGn54m'),
-('E41161062', 'Esa sakti', '''desa semekan utara,kedit,panarukan,situbondo', 2016, 3, '1997-06-18', '$2y$10$u3yS2YdgEeTUgQZwyEIJCuFCI30xUdmWEnPgPCnqhItu2CIr8glWW'),
+('E41161062', 'Esa sakti', '\'desa semekan utara,kedit,panarukan,situbondo', 2016, 3, '1997-06-18', '$2y$10$u3yS2YdgEeTUgQZwyEIJCuFCI30xUdmWEnPgPCnqhItu2CIr8glWW'),
 ('E41161091', 'Aisyah Safitri', 'JL. Manggar III/22 ,RT02/RW024, GEBANG DARWO ', 2016, 3, '1999-01-19', '$2y$10$55yxjHP.enSqoNn8JXqE...02iyhdoTLUcqxowMzO2nueByU3AQrm'),
 ('E41161100', 'Deny fadhilah akbar', 'JL NANAS NO 35 PATRANG JEMBER/68111  ', 2016, 3, '1997-03-10', '$2y$10$hXqOtPPT0Vy/1JjUU5.WLeEVjYmx.tLalvb.uxpU0Pm.ahrorATLW'),
-('E41161120', 'Fachry Asy''ari', 'Perum Bumi Mangli Permai blok IB-11 Mangli Ka', 2016, 3, '1997-03-07', '$2y$10$dj4YIOmNt7Cpvob2T0hOS./4GdOh5YTnphXTNXmMHnN7qsp9GEj72'),
+('E41161120', 'Fachry Asy\'ari', 'Perum Bumi Mangli Permai blok IB-11 Mangli Ka', 2016, 3, '1997-03-07', '$2y$10$dj4YIOmNt7Cpvob2T0hOS./4GdOh5YTnphXTNXmMHnN7qsp9GEj72'),
 ('E41161132', 'AL FARIS CAHYA PRATAMA', 'dusun sumberanjl sentot prawiro no 3. RT 1 / ', 2016, 3, '1998-04-27', '$2y$10$vE4Ws0v5.0gd7cb9g6iwtewDAIVUCx2w09V0sQNK0hikfF4E3o9ia'),
 ('E41161145', 'Ahmad Shafry Shiddiq', 'JL. GAJAH MADA IV/40, KALIWATES, JEMBER ', 2016, 3, '1998-01-17', '$2y$10$7dq6iprOIktcPgf9bNDp2ej/CoIlA7xnlXO5NR41dZ6B88MfCdV5G'),
 ('E41161178', 'Cahya Affrillah Prasetyo', 'PERUM KALIURANG CLUSTER BLOK D/ NO.6', 2016, 3, '1997-06-29', '$2y$10$XaSxBs5JS4nBmskigqq.QOrCsEsKEMC9A.s/y/SwbPmEerr/z0e7m'),
@@ -168,7 +166,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41161385', 'Mardiana Azizah', 'DUSUN ATERAN, RT 44/RW 006, DESA TEMPEH TENGA', 2016, 3, '1997-09-21', '$2y$10$D7AOSHbOyjXDcBFB4GomieSJQ8RsBBVqO8pPKVDbXPk9gA7CIJhPq'),
 ('E41161390', 'Jazil Ramadhanty', 'DUSUN TULUSREJO II RT.05 RW.03 TEMPEH LOR- TE', 2016, 3, '1998-12-01', '$2y$10$rSqCCz.GcSANxJ5Ep.KzauAzPssR/sy7zaXU9evUDXP9uMtt28OUa'),
 ('E41161395', 'Aditia Afif Arfiansyah', 'Dsn.Sumber Sari TimurRT/RW  :001/006Desa  :Pe', 2016, 3, '1998-07-25', '$2y$10$jvDvduZOu2UTz9JnCKRl7efo21DKaOGQvlnVCBZIne64cJAwFsBHW'),
-('E41161401', 'Ladeta Okta Verawan', '''DUSUN KTAJAN RT.02RW.04 SUKORAMBI JEMBER ', 2016, 3, '1997-11-10', '$2y$10$Jzv06uLo2qi2wGaj4A4MSudvTIZJnayECDg.kjJXUTECg5lyyTpb.'),
+('E41161401', 'Ladeta Okta Verawan', '\'DUSUN KTAJAN RT.02RW.04 SUKORAMBI JEMBER ', 2016, 3, '1997-11-10', '$2y$10$Jzv06uLo2qi2wGaj4A4MSudvTIZJnayECDg.kjJXUTECg5lyyTpb.'),
 ('E41161422', 'Ahmad Aris Ubaidillah', 'RT 02 RW 08 GEBANGAN RAMPET KEC KAPONGAN SITU', 2016, 3, '1998-10-06', '$2y$10$l5wXxN5hjy6gsG5S.LnVz.3x./uqaGlwdp5Mwk94aMY848srBOJXm'),
 ('E41161520', 'RIZKY NUR FAQIH', 'PERUM. BUMI MANGLI PERMAI BLOK AB 1OB RT 05 R', 2016, 3, '1998-06-02', '$2y$10$NURwwXlt7SaJHfS0Sr8bcu7AZ6sMSoF0BzKS8llSkYCi4QqqpciY.'),
 ('E41161529', 'Ravel Alfarisy Fardan Rofinsyah', 'RT 001 RW 002 DUSUN GAPLEK, DESA GAPLEK', 2016, 3, '1997-12-18', '$2y$10$ffjV0bwg5e0uN.taRAydjOvNVdJZaYG4xSgJtYjaC8NCZk86LDEmK'),
@@ -183,7 +181,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41161641', 'Ikmawati Maremningtyas', 'JL. PATIMURA-TEMPEH LOR-TEMPEH RT.11 RW.02 KE', 2016, 3, '1997-12-11', '$2y$10$eqFS/PdjLPxwJPlKUGxEZu3J6SAJlnN66dN3YlNyJ8OUaIha3Ws6q'),
 ('E41161676', 'Dimas Kristanto', 'Tempurejo RT 04 RW 01 Purwodadi Gambiran Bany', 2016, 3, '1998-09-03', '$2y$10$OEqUQhAL9adTR5Qi3RQACupzvOd/7RQSd/1H1AbAYWkHR9F6rYkDC'),
 ('E41161716', 'Citra Nika Sasmita', NULL, 2016, 3, '1970-01-01', '$2y$10$7qzaUvUunb5oS4sLho67WOHPk95IyEqKtKQb/TYrk6vhIZqkWAopq'),
-('E41161779', 'Nur Hidayatul Afidah', 'DUSUN PUCU''AN 002/003 SIDOMULYO SEMBORO / 681', 2016, 3, '1998-04-01', '$2y$10$wTxUROCNMrJKmJfIuzCjyeO35ksOZYCnA4iV97cByiECX0f5k88QS'),
+('E41161779', 'Nur Hidayatul Afidah', 'DUSUN PUCU\'AN 002/003 SIDOMULYO SEMBORO / 681', 2016, 3, '1998-04-01', '$2y$10$wTxUROCNMrJKmJfIuzCjyeO35ksOZYCnA4iV97cByiECX0f5k88QS'),
 ('E41161807', 'Sylvia Febrianti', 'JL. LUMPANG RT 14 RW 01, PUTAT KIDUL, GONDANG', 2016, 3, '1999-03-02', '$2y$10$OaY/AZ20KFWgo0P2BTnb6OhGDi5EzlbKk03cNO2yLTDx.mcMzCrIu'),
 ('E41161838', 'Rahajeng Rahma Kencana Giri', 'Perumahan Mondokan Sentosa Y-5', 2016, 3, '1997-06-27', '$2y$10$KfykHai/kHylHWl45mUWHuA/b0CRLFoIdwynujTBYSI3RagOxtPqG'),
 ('E41161854', 'Dayu Agastya Rani', 'Desa Pontang, Kecamatan Ambulu, Kab Jember', 2016, 3, '1998-01-26', '$2y$10$sN2sWZ3O6NamooIIcYN2MewIM2skD7mwsW40zqJRc0MKEGXu8uHba'),
@@ -199,7 +197,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41162009', 'Nanang Budi Utomo', 'DSN. SELOREJO RT/RW: 003/002 Desa TEMUREJO Ke', 2016, 3, '1997-07-24', '$2y$10$vqFxCRLgBW8U9SscxoanKeLp5z5KFJeegDKVRKvpndt4qYuBaM94O'),
 ('E41162018', 'Nur Afifah', 'dsn. pandansari rt/rw:004/002 desa: tukum kec', 2016, 3, '1999-06-22', '$2y$10$2cFPNropuu9B8714rB3LK.9efc9tPzXuxea.jdtlzcwefAuMp/9iW'),
 ('E41162045', 'Sheila Anggun Choirunnisa', 'JL Arief rahman Hakim Gg Seruni 1 No3b. Kelur', 2016, 3, '1997-11-06', '$2y$10$6YgbQ9M69Zp0jtWEngXRmOoLA150chhhgJ38CPKfMBlECiUIdWsV2'),
-('E41162068', 'IL JAMI''ATIN ZANNAH', 'DSN. KIDUL SAWAH RT 001 RW 004, DESA KUDUS, K', 2016, 3, '1997-08-22', '$2y$10$q05PYY4JAjdSiZvGzFxRUueFDRvk9i1FLwuRDoeoTh4GqdV/VZAUG'),
+('E41162068', 'IL JAMI\'ATIN ZANNAH', 'DSN. KIDUL SAWAH RT 001 RW 004, DESA KUDUS, K', 2016, 3, '1997-08-22', '$2y$10$q05PYY4JAjdSiZvGzFxRUueFDRvk9i1FLwuRDoeoTh4GqdV/VZAUG'),
 ('E41162071', 'Arif Rakhmat Aprilianto', 'KLAMPIS AJI NO 39', 2016, 3, '1996-04-20', '$2y$10$3T99oeQEeSsPG4PaTOPSJeuIFXInbqEZ0OXkmfqgYLoXaYDg/fcri'),
 ('E41170052', 'E.Muhammad Fachriansyah B', 'Jalan Seruni No.12 Probolinggo/67219', 2017, 1, '0000-00-00', '$2y$10$Q9asCJllkixq0u8Xk8pwsuZsF1XGikGAVikZXVO9/ke/bdDg.u5hy'),
 ('E41170061', 'Elsa Manora Ramadania', 'KAUMAN TEMPUREJORT 3 RW 12', 2017, 1, '0000-00-00', '$2y$10$WlpjPSJmP4s0tZ/BxwbMMuIQbphRXQuDHZNAobj1IzcCAmT7y18P6'),
@@ -263,7 +261,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41171093', 'Firlana Priyadna Putri', 'Jalan Letjen Suprapto RT 3 RW 5 Desa Bulu, Ke', 2017, 1, '1998-08-16', '$2y$10$1SjARBbp3kIrrr0dfxXi2OK6c4UUsllwonSTbFKT9NdRrtLb7LEIS'),
 ('E41171101', 'Mochammad Rozy Andrean Syah', 'JALAN TAWANG MANGU 3 NO 24 SUMBERSARI JEMBER', 2017, 1, '1998-04-05', '$2y$10$it.bD.tztj6Xz9bOIQXxbOJosvYVr.eDUiI94.gzOKrGehPaLEmCq'),
 ('E41171104', 'Maulana Malik Ibrahim', 'JALAN SEMANGKA 31A PATRANG-JEMBER', 2017, 1, '0000-00-00', '$2y$10$gCfy0KdDgDLmtf53sysPuOPiGVQbbW3z28q.FT4x3Lnim4LU8ddOm'),
-('E41171111', 'Muhammad irfan shidqi laksono', 'JL.KAPTEN TESNA NO.11''', 2017, 1, '1999-11-07', '$2y$10$WNoMqaEFogV3sBJMlo1RbeDcgsPhbrf7eiTbYiXeZ2PBPFTXKoKn.'),
+('E41171111', 'Muhammad irfan shidqi laksono', 'JL.KAPTEN TESNA NO.11\'', 2017, 1, '1999-11-07', '$2y$10$WNoMqaEFogV3sBJMlo1RbeDcgsPhbrf7eiTbYiXeZ2PBPFTXKoKn.'),
 ('E41171118', 'Fernando Farista Ahmad', 'DUSUN WUNGUREJO RT. 06 RW. O6 DESA SIDOREJO K', 2017, 1, '0000-00-00', '$2y$10$61jDsGgH2Ooy.Cn2doMEFeuxtUEBYLNFVAy7.AQ.HCw2ick/.SDlu'),
 ('E41171120', 'Muhammad Arief Rachman Muttaqien', 'Jl. Rejoagung No.2, RT 1, RW 16, Semboro, Jem', 2017, 1, '1999-05-13', '$2y$10$doyuL8lvNH/nKjXycgASgeY99vnwWYfDmJtNUMpEbNbsISUb7Y3O6'),
 ('E41171128', 'Romi Septian Wahyu Ilahi', 'Dusun Tukum kidul RT 31 RW 11 kec. Tekung Lum', 2017, 1, '1998-05-09', '$2y$10$rEKdpYSGw2/2EgRj9CXDxukHE8oH28nJQEkRADsGZVclQ0lzH2tDG'),
@@ -272,7 +270,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41171142', 'Kevin Harlis Oktaviano', 'Dusun koncer malang  2 rt 4 rw ,Desa koncer d', 2017, 1, '0000-00-00', '$2y$10$IqylLApq7.wqMHTNa.oLTuGsC0SOzKhrOcNLEH2LD1EB7Sb6ByShS'),
 ('E41171164', 'Adi Lukito', 'Jl.Kertabumi Gang 4 No.8 Jember', 2017, 1, '1999-05-21', '$2y$10$b8pL4Gn50I2xJTp7mM5o3u3T1PM0Zfm1Nlwb3Kp5CzMuqRIytcfbK'),
 ('E41171169', 'Fedy Rahmatullah', 'DUSUN BABAN TIMUR BEDENGAN, RT 001, RW 008, M', 2017, 1, '1999-02-27', '$2y$10$OiwIul6MoqJkmIjS0uItWektnOS/4api0JlBABuNET0GpJHh7Mfym'),
-('E41171171', 'Atho'' Fajarianto', 'RT/RW 01/02, Desa Sumberagung, Kec. Pesanggar', 2017, 1, '1999-04-06', '$2y$10$yyHIdJGhiwrt8ocrruNcK.nXwvm8T2DHzawK3LhYrhOtTFABlO5ZS'),
+('E41171171', 'Atho\' Fajarianto', 'RT/RW 01/02, Desa Sumberagung, Kec. Pesanggar', 2017, 1, '1999-04-06', '$2y$10$yyHIdJGhiwrt8ocrruNcK.nXwvm8T2DHzawK3LhYrhOtTFABlO5ZS'),
 ('E41171178', 'Moh. Ainun Najib', 'Jl. KH. Moh. Tohir. Dusun Krajan, Puger Wetan', 2017, 1, '0000-00-00', '$2y$10$ZSEFio139xY/JWDNOKd1/.109xQ9aaq5c454cvNmYRUJfYOdxPZ9O'),
 ('E41171192', 'Zulfian Hilman Firdausyi', 'DUSUN JATILAWANG RT 02 RW 06 TEGALWANGI-UMBUL', 2017, 1, '0000-00-00', '$2y$10$sl9q7vNBDBeFNErbdEYJs.dgUFHF1od33UzXTy6YODUCvrECPrN..'),
 ('E41171252', 'Niko Wahyu Fitrianto', 'Perumahan panji permai blok OO-19, kelurahan ', 2017, 1, '0000-00-00', '$2y$10$a0OTCHS4bRHSvKVAyBTEm.ybjkA..d1lHWFdH5aJfHhsy4eL0dA/a'),
@@ -305,7 +303,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41171683', 'MOCHAMAD WELDANI EFANSYAH', 'JL. Dr. Soebandi no.116 Jember / 68111', 2017, 1, '0000-00-00', '$2y$10$tOBo6ws0uOq3wjfHU4QWgexpSxpX4jLNRBkByWHQikVLK1NxsfNLu'),
 ('E41171691', 'Susilawati', 'Jl. Raya Banlendur Kalowang Kecamatan Gayam/6', 2017, 1, '0000-00-00', '$2y$10$Gp7VpFC4qfjY7DJMnSDsK.AbhsPn8D1OOGr7ADOtmwApciLgapWKS'),
 ('E41171697', 'MUCH NESHA ADINATA R', 'Jl. Moh seruji 0 RT.4 RW.18 Dusun Bedengan, D', 2017, 1, '0000-00-00', '$2y$10$zdQYIi52zweMDMCxUdDeauaezGf0CoBmlpHxATiAVNh8UoZJaX5I6'),
-('E41171720', 'Ahmad Rifa''i', 'KALIANYAR II RT 10 RW 02 SIDODADI, PAITON, PR', 2017, 1, '1999-10-05', '$2y$10$mnmYy02ZxLDL/hBPh11lQeY/xY92.ybdTNsnKnt9yFmTWzKW/yiCu'),
+('E41171720', 'Ahmad Rifa\'i', 'KALIANYAR II RT 10 RW 02 SIDODADI, PAITON, PR', 2017, 1, '1999-10-05', '$2y$10$mnmYy02ZxLDL/hBPh11lQeY/xY92.ybdTNsnKnt9yFmTWzKW/yiCu'),
 ('E41171725', 'Khosnol Khotimatul Arifah', 'Dusun: Bansanik RT:02 RW:02', 2017, 1, '1998-10-15', '$2y$10$CG4v9s6WX04rg9ZwE1IoS.TFwvbyv/ZkLMvuK1zb8sLnyIQa1lk76'),
 ('E41171742', 'Ridwan Hananto Aji Arifin', 'Dusun Krajan RT 05 RW 05 Tanggul Kulon, Kecam', 2017, 1, '1999-01-25', '$2y$10$ZcFs8/pch3uSJ74/MaueOu9ge.2lGvNe/eBr5Ap.1e4wx/LS2B2fi'),
 ('E41171746', 'Muhammad Fatihal', 'Jl.IR SUKARNO 110 Desa Pisang,Kecamatan Patia', 2017, 1, '0000-00-00', '$2y$10$QE7y0RKFwIhTqzythYYPF.vjRy/DoQrw/VS1jOqv4uKNvSiwWOJZK'),
@@ -319,7 +317,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41171807', 'AJI PRATAMA', 'DUSUN KRAJAN II RT.03/RW.06 DESA KETING-JOMBA', 2017, 1, '0000-00-00', '$2y$10$CemHIHuVtIGpJtvDO9KrKO1Mr13gnck2bq6ARGDLyle5Fv6GLBMsi'),
 ('E41171823', 'Siti Nur Azizah', 'DSN. KRAJAN GUGUT RAMBIPUJI JEMBER', 2017, 1, '1999-07-08', '$2y$10$z5m9scSEDljBwzwm41yE4.yFx150i9gRS3..TYhs0/UXqIX31koXK'),
 ('E41171829', 'MEGA SILVIA', 'Desa wonokerto RT 05 RW 05, Dusun Krajan , ke', 2017, 1, '0000-00-00', '$2y$10$fHzYxj/f1/6xGOT6eeIAn.zyocqtRcaLvl1iYbSKBryYVLHRJGNaS'),
-('E41171843', 'OKTA ROHMATUN NISA’', '''DUSUN DEMANGAN RT/RW 008/006 KESILIR WULUHAN', 2017, 1, '0000-00-00', '$2y$10$80B..gYoX8uNqxYaCkaHkelVvGoqZPoA2F6NmLzIe4xB.2PSBD/xe'),
+('E41171843', 'OKTA ROHMATUN NISA’', '\'DUSUN DEMANGAN RT/RW 008/006 KESILIR WULUHAN', 2017, 1, '0000-00-00', '$2y$10$80B..gYoX8uNqxYaCkaHkelVvGoqZPoA2F6NmLzIe4xB.2PSBD/xe'),
 ('E41171845', 'YUNIAR FABI PUTRA', 'DUSUN KRAJAN AMPELRT 02 RW 01JL.SUNAN KALIJAG', 2017, 1, '0000-00-00', '$2y$10$XlNckt.qC471F1AGMCVoD.A6JD24Ful7UTb2VIObhJpy1wd7OJfoG'),
 ('E41171874', 'Yusuf Tri Wibowo', 'Dsn Plaosan Ds. Plaosan RT. 018 RW. 005 Kec. ', 2017, 1, '0000-00-00', '$2y$10$VBr7zFRM7buFxSfOCSkVQuo.LHJp6mIJJGpePeQ.IzjRXFoYHpVAe'),
 ('E41171890', 'Mohammad Debby Karomi', 'JL WACHID HASYIM XXI BLOK 3 NO 146', 2017, 1, '0000-00-00', '$2y$10$CVWhBk7ph048v/gV4n.mEeoLsgIOL6BPdbNLET9IvNiV6.PNxxpqW'),
@@ -344,7 +342,7 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 ('E41172092', 'Moch. Zainur Rofan Fannani', 'JL KH AGUS SALIM 04 (rofil) - KRAJAN - MUMBUL', 2017, 1, '1999-12-25', '$2y$10$Apb41P.Ol8BbFl6Z6clAK.3Dms.TeL.EiqC7su0E3VK6tRjWvStO.'),
 ('E41172094', 'Ferdian Nada', 'Jl.Sumberwadung RT01 RW02 - Dsn.Tugung - Ds.S', 2017, 1, '1998-06-11', '$2y$10$zq1f4qnt5BzddYz/.QhDeeFM6Q7Yk7.2V1fq98rq7cBPJblcOw262'),
 ('E41172104', 'Gilang Rahmadhan', 'KEBONAN BULAKWINONG,PASIRIAN 67372', 2017, 1, '1998-07-12', '$2y$10$YHmwrshHSCXJz/9/xfE7p.jwo8LXWW3bnm6CFw6nD.S9j5DOLTO7i'),
-('E41172109', 'Nava Shoqibatul Khoiriyah', 'Perempuan'', ''Dsn. Pandanrejo RT.013 / RW.002,', 2017, 1, '0000-00-00', '$2y$10$CAynqsAIRh9TA38snVZkDeMkw20dIxVUVuvJlEJFyZSiPF7/e9AA6'),
+('E41172109', 'Nava Shoqibatul Khoiriyah', 'Perempuan\', \'Dsn. Pandanrejo RT.013 / RW.002,', 2017, 1, '0000-00-00', '$2y$10$CAynqsAIRh9TA38snVZkDeMkw20dIxVUVuvJlEJFyZSiPF7/e9AA6'),
 ('E41172111', 'Rizmawan Widi Wiranata', 'JL.SEMERU XXII/Z16 JEMBER ', 2017, 1, '1997-10-09', '$2y$10$i7s93W1XW0g2IxoBw44tAOlnPWauWYb9faXhw4LrdYZviFysfERJ2'),
 ('E41172126', 'Morgan Ardianto', 'DSN TEGAL PAKIS RT 02 RW 01 KALIBARU WETAN, K', 2017, 1, '1970-01-01', '$2y$10$EZlBMtc4ScSUTcwiexevq.ZSydqEiurdmTOCrwAjpCdJuNDsYDiOO'),
 ('E41172128', 'TRI AMBARWATI', 'JL.YOS SUDARSO N0 721, DESA PABEAN, KECAMATAN', 2017, 1, '0000-00-00', '$2y$10$ALoJGnvJeQch68.cgbw4p.kcDiK9QEMvIRIkmxMZPMY7DjQM0ENc2'),
@@ -367,11 +365,10 @@ INSERT INTO `mahasiswa` (`NIM`, `NAMA`, `Alamat`, `Tahun_masuk`, `Prodi_idProdi`
 -- Table structure for table `master_status`
 --
 
-CREATE TABLE IF NOT EXISTS `master_status` (
-  `idMaster_status` int(3) NOT NULL AUTO_INCREMENT,
-  `Status` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idMaster_status`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+CREATE TABLE `master_status` (
+  `idMaster_status` int(3) NOT NULL,
+  `Status` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `master_status`
@@ -393,11 +390,10 @@ INSERT INTO `master_status` (`idMaster_status`, `Status`) VALUES
 -- Table structure for table `prodi`
 --
 
-CREATE TABLE IF NOT EXISTS `prodi` (
-  `idProdi` int(11) NOT NULL AUTO_INCREMENT,
-  `Nama_prodi` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idProdi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+CREATE TABLE `prodi` (
+  `idProdi` int(11) NOT NULL,
+  `Nama_prodi` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `prodi`
@@ -414,11 +410,10 @@ INSERT INTO `prodi` (`idProdi`, `Nama_prodi`) VALUES
 -- Table structure for table `role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
-  `idRole` int(11) NOT NULL AUTO_INCREMENT,
-  `Role` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idRole`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+CREATE TABLE `role` (
+  `idRole` int(11) NOT NULL,
+  `Role` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `role`
@@ -439,11 +434,10 @@ INSERT INTO `role` (`idRole`, `Role`) VALUES
 -- Table structure for table `ruangan`
 --
 
-CREATE TABLE IF NOT EXISTS `ruangan` (
-  `idRuangan` int(11) NOT NULL AUTO_INCREMENT,
-  `Nama_ruangan` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idRuangan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+CREATE TABLE `ruangan` (
+  `idRuangan` int(11) NOT NULL,
+  `Nama_ruangan` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ruangan`
@@ -458,14 +452,12 @@ INSERT INTO `ruangan` (`idRuangan`, `Nama_ruangan`) VALUES
 -- Table structure for table `td_bimbingan`
 --
 
-CREATE TABLE IF NOT EXISTS `td_bimbingan` (
+CREATE TABLE `td_bimbingan` (
   `id_bimbingan` int(11) NOT NULL,
   `Tugas_akhir_id` int(11) NOT NULL,
-  `Deskripsi` text,
-  `Data_Dukung` text,
-  `Tanggal_bimbingan` date DEFAULT NULL,
-  PRIMARY KEY (`id_bimbingan`),
-  KEY `fk_TD_Bimbingan_Tugas_akhir1_idx` (`Tugas_akhir_id`)
+  `Deskripsi` text DEFAULT NULL,
+  `Data_Dukung` text DEFAULT NULL,
+  `Tanggal_bimbingan` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -473,7 +465,8 @@ CREATE TABLE IF NOT EXISTS `td_bimbingan` (
 --
 
 INSERT INTO `td_bimbingan` (`id_bimbingan`, `Tugas_akhir_id`, `Deskripsi`, `Data_Dukung`, `Tanggal_bimbingan`) VALUES
-(13, 1, 'asasdsdzxzxzx', '7a02c0e50919ddfd3426c0f0d9418f6e.png', '2020-03-23');
+(1, 1, 'Bimbingan 1', NULL, '2020-10-28'),
+(13, 105, 'asasdsdzxzxzx', '7a02c0e50919ddfd3426c0f0d9418f6e.png', '2020-03-23');
 
 -- --------------------------------------------------------
 
@@ -481,7 +474,7 @@ INSERT INTO `td_bimbingan` (`id_bimbingan`, `Tugas_akhir_id`, `Deskripsi`, `Data
 -- Table structure for table `td_seminar`
 --
 
-CREATE TABLE IF NOT EXISTS `td_seminar` (
+CREATE TABLE `td_seminar` (
   `id_seminar` int(11) NOT NULL,
   `Nilai` int(11) DEFAULT NULL,
   `Tanggal` date DEFAULT NULL,
@@ -489,12 +482,7 @@ CREATE TABLE IF NOT EXISTS `td_seminar` (
   `id_TA` int(11) NOT NULL,
   `NIP_Panelis` varchar(20) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL,
-  `idruangan` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_seminar`),
-  KEY `fk_TD_seminar_Tugas_akhir1_idx` (`id_TA`),
-  KEY `fk_TD_seminar_Dosen1_idx` (`NIP_Panelis`),
-  KEY `fk_TD_seminar_Master_status1_idx` (`id_status`),
-  KEY `fk_TD_seminar_Ruangan1_idx` (`idruangan`)
+  `idruangan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -502,9 +490,7 @@ CREATE TABLE IF NOT EXISTS `td_seminar` (
 --
 
 INSERT INTO `td_seminar` (`id_seminar`, `Nilai`, `Tanggal`, `jam`, `id_TA`, `NIP_Panelis`, `id_status`, `idruangan`) VALUES
-(0, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-(6, 23, '2020-03-26', '11:11:00', 1, '197110092003121001', 1, 1),
-(8, NULL, NULL, NULL, 1, NULL, NULL, NULL);
+(9, NULL, NULL, NULL, 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -512,7 +498,7 @@ INSERT INTO `td_seminar` (`id_seminar`, `Nilai`, `Tanggal`, `jam`, `id_TA`, `NIP
 -- Table structure for table `td_sidang`
 --
 
-CREATE TABLE IF NOT EXISTS `td_sidang` (
+CREATE TABLE `td_sidang` (
   `id_sidang` int(11) NOT NULL,
   `Nilai` int(11) DEFAULT NULL,
   `Tanggal` date DEFAULT NULL,
@@ -520,8 +506,7 @@ CREATE TABLE IF NOT EXISTS `td_sidang` (
   `id_TA` int(11) NOT NULL,
   `NIP_Panelis` varchar(20) DEFAULT NULL,
   `id_status` int(11) DEFAULT NULL,
-  `idruangan` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_sidang`)
+  `idruangan` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -537,13 +522,12 @@ INSERT INTO `td_sidang` (`id_sidang`, `Nilai`, `Tanggal`, `jam`, `id_TA`, `NIP_P
 -- Table structure for table `topik`
 --
 
-CREATE TABLE IF NOT EXISTS `topik` (
-  `idTopik` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `topik` (
+  `idTopik` int(11) NOT NULL,
   `Topik` varchar(45) DEFAULT NULL,
-  `Deskripsi` text,
-  `icon` varchar(30) NOT NULL,
-  PRIMARY KEY (`idTopik`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+  `Deskripsi` text DEFAULT NULL,
+  `icon` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `topik`
@@ -551,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `topik` (
 
 INSERT INTO `topik` (`idTopik`, `Topik`, `Deskripsi`, `icon`) VALUES
 (1, 'Big data', 'asaksaks', ''),
-(2, 'Jaringan Komputer', 'Topik Jaringan Komputer', 'a'),
+(2, 'Jaringan Komputer', 'Topik Jaringan Komputer', 'fa fa-globe'),
 (3, 'Artificial Intelegence', 'Sistem Cerdas ', 'w'),
 (4, 'Pengolahan Citra Digital', 'Image Processing', 'e'),
 (5, 'Iot', 'Internet Of Thing', 'y'),
@@ -569,39 +553,34 @@ INSERT INTO `topik` (`idTopik`, `Topik`, `Deskripsi`, `icon`) VALUES
 -- Table structure for table `tugas_akhir`
 --
 
-CREATE TABLE IF NOT EXISTS `tugas_akhir` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tugas_akhir` (
+  `id` int(11) NOT NULL,
   `Judul_TA` varchar(45) DEFAULT NULL,
-  `Deskripsi` text,
-  `abstract` text,
-  `keywords` text,
+  `Deskripsi` text DEFAULT NULL,
+  `abstract` text DEFAULT NULL,
+  `keywords` text DEFAULT NULL,
   `Dosen_NIP` varchar(20) NOT NULL,
   `Mahasiswa_NIM` varchar(9) NOT NULL,
   `id_status` int(11) NOT NULL,
   `id_topik` int(11) NOT NULL,
   `tgl_ACC` date DEFAULT NULL,
-  `tgl_pengajuan` date DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `fk_Tugas_akhir_Dosen_idx` (`Dosen_NIP`),
-  KEY `fk_Tugas_akhir_Mahasiswa1_idx` (`Mahasiswa_NIM`),
-  KEY `fk_Tugas_akhir_Master_status1_idx` (`id_status`),
-  KEY `fk_Tugas_akhir_Topik1_idx` (`id_topik`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=104 ;
+  `tgl_pengajuan` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `tugas_akhir`
 --
 
 INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`, `Dosen_NIP`, `Mahasiswa_NIM`, `id_status`, `id_topik`, `tgl_ACC`, `tgl_pengajuan`) VALUES
-(1, '"PENGEMBANGAN SISTEM USABILITY TESTING MENGGU', 'a', 'a', 'a,', '199112112018031001', 'E41161324', 1, 9, NULL, '2020-09-18'),
-(2, '"PENGEMBANGAN SISTEM PENGUKUR KESESUAIAN USER', 'z', 'c', 'b.', '199112112018031001', 'E41161322', 1, 10, NULL, '2020-09-18'),
+(1, 'CCTV otomatis menggunakan hp cetol', 'Polijesip', 'polije ashiap', 'robot', '197111151998021001', 'E41171892', 4, 5, NULL, '2020-10-28'),
+(2, '\"PENGEMBANGAN SISTEM PENGUKUR KESESUAIAN USER', 'z', 'c', 'b.', '199112112018031001', 'E41161322', 1, 10, NULL, '2020-09-18'),
 (3, 'Penentuan Menu Diet Seimbang Bagi Penderita D', 'Penentuan Menu Diet Seimbang Bagi Penderita Diabetes Mellitus Menggunakan Logika Fuzzy Metode Tsukamoto\r\n', 'Penentuan Menu Diet Seimbang Bagi Penderita Diabetes Mellitus Menggunakan Logika Fuzzy Metode Tsukamoto\r\n', 'c.', '197810112005012002', 'E41161779', 1, 7, NULL, '2020-09-18'),
 (4, 'Sistem Pendukung Keputusan Pemilihan Menu Mak', 'Sistem Pendukung Keputusan Pemilihan Menu Makanan Pasien Hipertensi Menggunakan Fuzzy Mamdani\r\n', 'Sistem Pendukung Keputusan Pemilihan Menu Makanan Pasien Hipertensi Menggunakan Fuzzy Mamdani\r\n', 'b.', '197810112005012002', 'E41162018', 1, 7, NULL, '2020-09-18'),
 (5, 'Sistem Pakar Seleksi Kesiapan Bertelur pada A', 'Sistem Pakar Seleksi Kesiapan Bertelur pada Ayam Ras Menggunakan Metode Certainty Factor\r\n', 'Sistem Pakar Seleksi Kesiapan Bertelur pada Ayam Ras Menggunakan Metode Certainty Factor\r\n', 'c.', '199002272018032001', 'E41161395', 1, 8, NULL, '2020-09-18'),
 (6, 'Implementasi Fuzzy tsukamoto untuk optimalisa', 'Implementasi Fuzzy tsukamoto untuk optimalisasi produksi batako studi kasus UD.AA', 'Implementasi Fuzzy tsukamoto untuk optimalisasi produksi batako studi kasus UD.AA', 'b.', '198907102019031010', 'E41161189', 1, 3, NULL, '2020-09-18'),
 (7, 'Sistem Informasi Diagnosis Ikterus Neonatorum', 'Sistem Informasi Diagnosis Ikterus Neonatorum Menggunakan Logika Fuzzy\r\n', 'Sistem Informasi Diagnosis Ikterus Neonatorum Menggunakan Logika Fuzzy\r\n', 'si.', '199002272018032001', 'E41161390', 1, 12, NULL, '2020-09-18'),
 (8, 'SISTEM IDENTIFIKASI KERUSAKAN BIJI KOPI ARABI', 'SISTEM IDENTIFIKASI KERUSAKAN BIJI KOPI ARABIKA MENGGUNAKAN BACKPROPAGATION\r\n', 'SISTEM IDENTIFIKASI KERUSAKAN BIJI KOPI ARABIKA MENGGUNAKAN BACKPROPAGATION\r\n', 'spk.', '199203022018032001', 'E41161965', 1, 8, NULL, '2020-09-18'),
-(9, '"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SM', '"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SMOOTHING DALAM FORECASTING PENGADAAN BUKU DI DINAS PERPUSTAKAAN DAN KEARSIPAN \r\nKABUPATEN BONDOWOSO"\r\n', '"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SMOOTHING DALAM FORECASTING PENGADAAN BUKU DI DINAS PERPUSTAKAAN DAN KEARSIPAN \r\nKABUPATEN BONDOWOSO"\r\n', 'pcd.', '198012122005011001', 'E41161281', 1, 4, NULL, '2020-09-18'),
+(9, '\"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SM', '\"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SMOOTHING DALAM FORECASTING PENGADAAN BUKU DI DINAS PERPUSTAKAAN DAN KEARSIPAN \r\nKABUPATEN BONDOWOSO\"\r\n', '\"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SMOOTHING DALAM FORECASTING PENGADAAN BUKU DI DINAS PERPUSTAKAAN DAN KEARSIPAN \r\nKABUPATEN BONDOWOSO\"\r\n', 'pcd.', '198012122005011001', 'E41161281', 1, 4, NULL, '2020-09-18'),
 (10, 'Aksara jawa untuk klasifikasi level motorik h', 'Aksara jawa untuk klasifikasi level motorik halus anak usia awal sekolah\r\n', 'Aksara jawa untuk klasifikasi level motorik halus anak usia awal sekolah\r\n', 'A.i', '197808192005012001', 'E41161716', 1, 3, NULL, '2020-09-18'),
 (11, 'Penerapan Algoritma C4.5 pada Aplikasi Penent', 'Penerapan Algoritma C4.5 pada Aplikasi Penentuan Kemampuan Motorik Halus Anak Usia Awal Sekolah\r\n', 'Penerapan Algoritma C4.5 pada Aplikasi Penentuan Kemampuan Motorik Halus Anak Usia Awal Sekolah\r\n', 'A.i', '197808192005012001', 'E41161385', 1, 3, NULL, '2020-09-18'),
 (12, 'Penerapan Metode Dempster Shafer dan Certaint', 'Penerapan Metode Dempster Shafer dan Certainty Factor pada Sistem Pakar Diagnosis Hama dan Penyakit Tanaman Pisang\r\n', 'Penerapan Metode Dempster Shafer dan Certainty Factor pada Sistem Pakar Diagnosis Hama dan Penyakit Tanaman Pisang\r\n', 'sp.', '198012122005011001', 'E41161211', 1, 8, NULL, '2020-09-18'),
@@ -627,7 +606,7 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (32, 'Sistem pakar diagnosa hama dan penyakit jamur', 'Sistem pakar diagnosa hama dan penyakit jamur tiram menggunakan certainty factor\r\n', 'Sistem pakar diagnosa hama dan penyakit jamur tiram menggunakan certainty factor\r\n', 'sp.', '197405192003121002', 'E41161401', 1, 8, NULL, '2020-09-18'),
 (33, 'Penentuan Status Gizi dan Menu Makanan Atlet ', 'Penentuan Status Gizi dan Menu Makanan Atlet Karate Menggunakan Metode K-Nearest Neighbor (KNN)\r\n', 'Penentuan Status Gizi dan Menu Makanan Atlet Karate Menggunakan Metode K-Nearest Neighbor (KNN)\r\n', 'sp.', '199002272018032001', 'E41161520', 1, 8, NULL, '2020-09-18'),
 (34, 'Sistem informasi estimasi masak fisiologis be', 'Sistem informasi estimasi masak fisiologis benih padi berdasarkan metode akumulasi panas\r\n', 'Sistem informasi estimasi masak fisiologis benih padi berdasarkan metode akumulasi panas\r\n', 'si.', '198511282008121002', 'E41160728', 1, 12, NULL, '2020-09-18'),
-(35, '"Sistem pendukung keputusan penilaian kinerja', '"Sistem pendukung keputusan penilaian kinerja pegawai menggunakan metode analytical hierarchy proses (AHP) \r\n(Studi Kasus : PT. Mangli Djaya Raya)"\r\n', '"Sistem pendukung keputusan penilaian kinerja pegawai menggunakan metode analytical hierarchy proses (AHP) \r\n(Studi Kasus : PT. Mangli Djaya Raya)"\r\n', 'spk.', '197405192003121002', 'E41160083', 1, 7, NULL, '2020-09-18'),
+(35, '\"Sistem pendukung keputusan penilaian kinerja', '\"Sistem pendukung keputusan penilaian kinerja pegawai menggunakan metode analytical hierarchy proses (AHP) \r\n(Studi Kasus : PT. Mangli Djaya Raya)\"\r\n', '\"Sistem pendukung keputusan penilaian kinerja pegawai menggunakan metode analytical hierarchy proses (AHP) \r\n(Studi Kasus : PT. Mangli Djaya Raya)\"\r\n', 'spk.', '197405192003121002', 'E41160083', 1, 7, NULL, '2020-09-18'),
 (36, 'Sistem pakar identifikasi penyakit tanaman te', 'Sistem pakar identifikasi penyakit tanaman tembakau kasturi menggunakan metode fuzzy\r\n', 'Sistem pakar identifikasi penyakit tanaman tembakau kasturi menggunakan metode fuzzy\r\n', 'sp.', '199112112018031001', 'E41161383', 1, 8, NULL, '2020-09-18'),
 (37, 'Perbandingan metode euclidean probability dan', 'Perbandingan metode euclidean probability dan decision tree j48 dalam mendiagnosa penyakit dan hama kedelai edamame\r\n', 'Perbandingan metode euclidean probability dan decision tree j48 dalam mendiagnosa penyakit dan hama kedelai edamame\r\n', 'A.i', '198511282008121002', 'E41160825', 1, 3, NULL, '2020-09-18'),
 (38, 'Analisis Kualitas Perangkat Lunak Website Jur', 'Analisis Kualitas Perangkat Lunak Website Jurnal Teknologi Informasi dan Terapan (JTIT) Menggunakan MCCall\r\n', 'Analisis Kualitas Perangkat Lunak Website Jurnal Teknologi Informasi dan Terapan (JTIT) Menggunakan MCCall\r\n', 'sc.', '199002272018032001', 'E41160513', 1, 9, NULL, '2020-09-18'),
@@ -640,7 +619,7 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (45, 'Penentuan Rute Terpendek Pengiriman Barang Me', 'Penentuan Rute Terpendek Pengiriman Barang Menggunakan Algoritma Dijkstra Berbasis Android\r\n', 'Penentuan Rute Terpendek Pengiriman Barang Menggunakan Algoritma Dijkstra Berbasis Android\r\n', 'sc.', '199205282018032001', 'E41161340', 1, 9, NULL, '2020-09-18'),
 (46, 'Sistem Pakar Diagnosa Stunting pada Balita', 'Sistem Pakar Diagnosa Stunting pada Balita\r\n', 'Sistem Pakar Diagnosa Stunting pada Balita\r\n', 'sp.', '197405192003121002', 'E41160519', 1, 8, NULL, '2020-09-18'),
 (47, 'Pengembangan Person of Interest System, mengg', 'Pengembangan Person of Interest System, menggunakan metode Task Analysis(studi kasus: Lisa Blackpink)\r\n', 'Pengembangan Person of Interest System, menggunakan metode Task Analysis(studi kasus: Lisa Blackpink)\r\n', 'sc.', '199112112018031001', 'E41161342', 1, 9, NULL, '2020-09-18'),
-(48, '"Sistem Peramalan Stok Penjualan  Sembako Pad', '"Sistem Peramalan Stok Penjualan \r\nSembako Pada Toko Morodadi Menggunakan Metode Triple Exponential Smoothing"\r\n', '"Sistem Peramalan Stok Penjualan \r\nSembako Pada Toko Morodadi Menggunakan Metode Triple Exponential Smoothing"\r\n', 'si.', '197810112005012002', 'E41161578', 1, 12, NULL, '2020-09-18'),
+(48, '\"Sistem Peramalan Stok Penjualan  Sembako Pad', '\"Sistem Peramalan Stok Penjualan \r\nSembako Pada Toko Morodadi Menggunakan Metode Triple Exponential Smoothing\"\r\n', '\"Sistem Peramalan Stok Penjualan \r\nSembako Pada Toko Morodadi Menggunakan Metode Triple Exponential Smoothing\"\r\n', 'si.', '197810112005012002', 'E41161578', 1, 12, NULL, '2020-09-18'),
 (49, 'Sistem informasi geografis penentuan jalur te', 'Sistem informasi geografis penentuan jalur terpendek objek wisata di jawa timur menggunakan metode floyd warshall\r\n', 'Sistem informasi geografis penentuan jalur terpendek objek wisata di jawa timur menggunakan metode floyd warshall\r\n', 'si.G', '197405192003121002', 'E41160242', 1, 12, NULL, '2020-09-18'),
 (50, 'PENGEMBANGAN SISTEM PERAMALAN RADIASI MATAHAR', 'PENGEMBANGAN SISTEM PERAMALAN RADIASI MATAHARI MENGGUNAKAN METODE LONG SHORT-TERM MEMORY\r\n', 'PENGEMBANGAN SISTEM PERAMALAN RADIASI MATAHARI MENGGUNAKAN METODE LONG SHORT-TERM MEMORY\r\n', 'si.', '199112112018031001', 'E41160660', 1, 12, NULL, '2020-09-18'),
 (51, 'Pemutuan Edamame Menggunakan Citra Digital De', 'Pemutuan Edamame Menggunakan Citra Digital Dengan K-Nearest Neighbour\r\n', 'Pemutuan Edamame Menggunakan Citra Digital Dengan K-Nearest Neighbour\r\n', 'pcd.', '197810112005012002', 'E41160603', 1, 4, NULL, '2020-09-18'),
@@ -666,11 +645,11 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (71, 'ANALISA HAMA DAN PENYAKIT PADA TANAMAN KUBIS ', 'ANALISA HAMA DAN PENYAKIT PADA TANAMAN KUBIS BUNGA (BRASSICA OLERACEA VAR. BOTRITYS L) DENGAN MEMANFAATKAN METODE DEMPSTER - SHAFER\r\n', 'ANALISA HAMA DAN PENYAKIT PADA TANAMAN KUBIS BUNGA (BRASSICA OLERACEA VAR. BOTRITYS L) DENGAN MEMANFAATKAN METODE DEMPSTER - SHAFER\r\n', 'pcd.', '198907102019031010', 'E41161676', 1, 4, NULL, '2020-09-18'),
 (72, 'ANALISIS WEBSITE INDODAX DENGAN MENGGUNAKAN M', 'ANALISIS WEBSITE INDODAX DENGAN MENGGUNAKAN METODE USER CENTERED DIAGRAM\r\n', 'ANALISIS WEBSITE INDODAX DENGAN MENGGUNAKAN METODE USER CENTERED DIAGRAM\r\n', 'A.i', '199112112018031001', 'E41161610', 1, 3, NULL, '2020-09-18'),
 (73, 'Pengembangan Sistem Informasi Geografis Sebar', 'Pengembangan Sistem Informasi Geografis Sebaran Kepadatan Arus Lalu Lintas Di Kota Jember Pada Jam Tertentu\r\n', 'Pengembangan Sistem Informasi Geografis Sebaran Kepadatan Arus Lalu Lintas Di Kota Jember Pada Jam Tertentu\r\n', 'si.G', '199112112018031001', 'E41161953', 1, 12, NULL, '2020-09-18'),
-(74, '"SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN MENU MA', '"SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN MENU MAKANAN BERDASARKAN KEBUTUHAN GIZI MENGGUNAKAN METODE ALGORITMA GENETIKA:\r\nSTUDI KASUS KANTIN POLITEKNIK NEGERI JEMBER"\r\n', '"SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN MENU MAKANAN BERDASARKAN KEBUTUHAN GIZI MENGGUNAKAN METODE ALGORITMA GENETIKA:\r\nSTUDI KASUS KANTIN POLITEKNIK NEGERI JEMBER"\r\n', 'spk.', '198907102019031010', 'E41160914', 1, 7, NULL, '2020-09-18'),
+(74, '\"SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN MENU MA', '\"SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN MENU MAKANAN BERDASARKAN KEBUTUHAN GIZI MENGGUNAKAN METODE ALGORITMA GENETIKA:\r\nSTUDI KASUS KANTIN POLITEKNIK NEGERI JEMBER\"\r\n', '\"SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN MENU MAKANAN BERDASARKAN KEBUTUHAN GIZI MENGGUNAKAN METODE ALGORITMA GENETIKA:\r\nSTUDI KASUS KANTIN POLITEKNIK NEGERI JEMBER\"\r\n', 'spk.', '198907102019031010', 'E41160914', 1, 7, NULL, '2020-09-18'),
 (75, 'PENGENALAN MOTIF BATIK MENGGUNAKAN METODE GLC', 'PENGENALAN MOTIF BATIK MENGGUNAKAN METODE GLCM DAN NAIVE BAYES CLASSIFIER\r\n', 'PENGENALAN MOTIF BATIK MENGGUNAKAN METODE GLCM DAN NAIVE BAYES CLASSIFIER\r\n', 'A.i', '198511282008121002', 'E41160295', 1, 3, NULL, '2020-09-18'),
 (76, 'Sistem pakar pemilihan menu makanan berdasark', 'Sistem pakar pemilihan menu makanan berdasarkan kebutuhan kalori pada ibu hamil\r\n', 'Sistem pakar pemilihan menu makanan berdasarkan kebutuhan kalori pada ibu hamil\r\n', 'sp.', '199205282018032001', 'E41160701', 1, 8, NULL, '2020-09-18'),
 (77, 'ANALISIS DAN EVALUASI TINGKAT KEPUASAN PENGGU', 'ANALISIS DAN EVALUASI TINGKAT KEPUASAN PENGGUNA SISTEM INFORMASI INLIS DINAS PERPUSTAKAAN DAN KEARSIPAN KABUPATEN BONDOWOSO\r\n', 'ANALISIS DAN EVALUASI TINGKAT KEPUASAN PENGGUNA SISTEM INFORMASI INLIS DINAS PERPUSTAKAAN DAN KEARSIPAN KABUPATEN BONDOWOSO\r\n', 'si.', '198608022015042002', 'E41162009', 1, 12, NULL, '2020-09-18'),
-(78, 'Sistem Peramalan Pengadaan Obat Berbasis Web ', 'Sistem Peramalan Pengadaan Obat Berbasis Web Dengan Metode Triple Exponential Smoothing Dan Winter''s Exponential Smoothing (Studi Kasus Di Klinik Dokterku Taman Gading Jember)\r\n', 'Sistem Peramalan Pengadaan Obat Berbasis Web Dengan Metode Triple Exponential Smoothing Dan Winter''s Exponential Smoothing (Studi Kasus Di Klinik Dokterku Taman Gading Jember)\r\n', 'si.', '198012122005011001', 'E41160352', 1, 12, NULL, '2020-09-18'),
+(78, 'Sistem Peramalan Pengadaan Obat Berbasis Web ', 'Sistem Peramalan Pengadaan Obat Berbasis Web Dengan Metode Triple Exponential Smoothing Dan Winter\'s Exponential Smoothing (Studi Kasus Di Klinik Dokterku Taman Gading Jember)\r\n', 'Sistem Peramalan Pengadaan Obat Berbasis Web Dengan Metode Triple Exponential Smoothing Dan Winter\'s Exponential Smoothing (Studi Kasus Di Klinik Dokterku Taman Gading Jember)\r\n', 'si.', '198012122005011001', 'E41160352', 1, 12, NULL, '2020-09-18'),
 (79, 'Sistem Pendukung Keputusan Pelurusan Rambut R', 'Sistem Pendukung Keputusan Pelurusan Rambut Rebonding dan Smoothing Menggunakan Metode SAW\r\n', 'Sistem Pendukung Keputusan Pelurusan Rambut Rebonding dan Smoothing Menggunakan Metode SAW\r\n', 'spk.', '197810112005012002', 'E41160331', 1, 7, NULL, '2020-09-18'),
 (80, 'Implementasi Fuzzy Tsukamoto Untuk Menentukan', 'Implementasi Fuzzy Tsukamoto Untuk Menentukan Tingkat Keparahan Penyakit Scabies Pada Kucing\r\n', 'Implementasi Fuzzy Tsukamoto Untuk Menentukan Tingkat Keparahan Penyakit Scabies Pada Kucing\r\n', 'A.i', '197008311998031001', 'E41161091', 1, 3, NULL, '2020-09-18'),
 (81, 'Online Weather Station Monitoring System dan ', 'Online Weather Station Monitoring System dan Klasifikasi kualitas Udara untuk area Persawahan dengan Metode Fuzzy\r\n', 'Online Weather Station Monitoring System dan Klasifikasi kualitas Udara untuk area Persawahan dengan Metode Fuzzy\r\n', 'el.', '199103152017031001', 'E41160775', 1, 6, NULL, '2020-09-18'),
@@ -685,7 +664,7 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (90, 'SIMSTEM PAKAR DIAGNOSA JENIS PENYAKIT ANEMIA ', 'SIMSTEM PAKAR DIAGNOSA JENIS PENYAKIT ANEMIA MENGGUNAKAN METODE CERTAINTY FACTOR BERBASIS ANDROID\r\n', 'SIMSTEM PAKAR DIAGNOSA JENIS PENYAKIT ANEMIA MENGGUNAKAN METODE CERTAINTY FACTOR BERBASIS ANDROID\r\n', 'sp.', '198608022015042002', 'E41160344', 1, 8, NULL, '2020-09-18'),
 (91, 'ANALISIS PERBANDINGAN ALGORITMA FUZZYSAW DAN ', 'ANALISIS PERBANDINGAN ALGORITMA FUZZYSAW DAN WEIGHTED PRODUCT PADA SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN SMARTPHONE BERBASIS WEBSITE\r\n', 'ANALISIS PERBANDINGAN ALGORITMA FUZZYSAW DAN WEIGHTED PRODUCT PADA SISTEM PENDUKUNG KEPUTUSAN PEMILIHAN SMARTPHONE BERBASIS WEBSITE\r\n', 'spk.', '199002272018032001', 'E41161100', 1, 7, NULL, '2020-09-18'),
 (92, 'Sistem Pengenalan Huruf Latin Menggunakan Pri', 'Sistem Pengenalan Huruf Latin Menggunakan Principal Component Analysis dan Backpropagation Untuk Pendidikan Anak Usia Dini\r\n', 'Sistem Pengenalan Huruf Latin Menggunakan Principal Component Analysis dan Backpropagation Untuk Pendidikan Anak Usia Dini\r\n', 'si.', '199203022018032001', 'E41161943', 1, 12, NULL, '2020-09-18'),
-(93, 'Sistem Pendukung Keputusan Rekomendasi Jumlah', 'Sistem Pendukung Keputusan Rekomendasi Jumlah Produksi Roti Dengan Metode Simpleks Studi Kasus "Roti SIP Polije"\r\n', 'Sistem Pendukung Keputusan Rekomendasi Jumlah Produksi Roti Dengan Metode Simpleks Studi Kasus "Roti SIP Polije"\r\n', 'spk.', '198511282008121002', 'E41160237', 1, 7, NULL, '2020-09-18'),
+(93, 'Sistem Pendukung Keputusan Rekomendasi Jumlah', 'Sistem Pendukung Keputusan Rekomendasi Jumlah Produksi Roti Dengan Metode Simpleks Studi Kasus \"Roti SIP Polije\"\r\n', 'Sistem Pendukung Keputusan Rekomendasi Jumlah Produksi Roti Dengan Metode Simpleks Studi Kasus \"Roti SIP Polije\"\r\n', 'spk.', '198511282008121002', 'E41160237', 1, 7, NULL, '2020-09-18'),
 (94, 'SISTEM PAKAR PEMBERIAN MENU MAKANAN BAGI PEND', 'SISTEM PAKAR PEMBERIAN MENU MAKANAN BAGI PENDERITA ANEMIA DEFISIENSI BESI UNTUK REMAJA PUTRI MENGGUNAKAN METODE FUZZY MAMDANI\r\n', 'SISTEM PAKAR PEMBERIAN MENU MAKANAN BAGI PENDERITA ANEMIA DEFISIENSI BESI UNTUK REMAJA PUTRI MENGGUNAKAN METODE FUZZY MAMDANI\r\n', 'sp.', '197111151998021001', 'E41161807', 1, 8, NULL, '2020-09-18'),
 (95, 'Impelemntasi Fuzzy Logic Untuk Sistem Monitor', 'Impelemntasi Fuzzy Logic Untuk Sistem Monitoring Suhu Dan Kelembapan Pada Inkubator Telur Berbasis Android\r\n', 'Impelemntasi Fuzzy Logic Untuk Sistem Monitoring Suhu Dan Kelembapan Pada Inkubator Telur Berbasis Android\r\n', 'el.', '19780816 200501 1 00', 'E41161297', 1, 6, NULL, '2020-09-18'),
 (96, 'SISTEM IDENTIFIKASI PENYAKIT PADA DAUN JERUK ', 'SISTEM IDENTIFIKASI PENYAKIT PADA DAUN JERUK SIAM (citrus noblilis lour. var. microcarpa) BERDASARKAN GRAY LEVEL CO-OCCURRENCE MATRIX MENGGUNAKAN METODE PROBABILISTIC NEURAL NETWORK\r\n', 'SISTEM IDENTIFIKASI PENYAKIT PADA DAUN JERUK SIAM (citrus noblilis lour. var. microcarpa) BERDASARKAN GRAY LEVEL CO-OCCURRENCE MATRIX MENGGUNAKAN METODE PROBABILISTIC NEURAL NETWORK\r\n', 'sp.', '199203022018032001', 'E41161315', 1, 8, NULL, '2020-09-18'),
@@ -695,14 +674,16 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (100, 'PENGEMBANGAN APLIKASI ANALISIS KUALITAS WEBSI', 'PENGEMBANGAN APLIKASI ANALISIS KUALITAS WEBSITE MENGGUNAKAN METODE WEBQUAL 4.0 (SMAN 4 JEMBER)\r\n', 'PENGEMBANGAN APLIKASI ANALISIS KUALITAS WEBSITE MENGGUNAKAN METODE WEBQUAL 4.0 (SMAN 4 JEMBER)\r\n', 'si.', '199112112018031001', 'E41161520', 1, 12, NULL, '2020-09-18'),
 (101, 'Prediksi forex menggunakan fuzzy mamdani', 'Prediksi forex menggunakan fuzzy mamdani\r\n', 'Prediksi forex menggunakan fuzzy mamdani\r\n', 'spk.', '198511282008121002', 'E41162071', 1, 7, NULL, '2020-09-18'),
 (102, 'Penerapan Metode K-Nearest Neighbor Untuk Kla', 'Penerapan Metode K-Nearest Neighbor Untuk Klasifikasi Mutu Biji Kacang Panjang\r\n', 'Penerapan Metode K-Nearest Neighbor Untuk Klasifikasi Mutu Biji Kacang Panjang\r\n', 'pcd.', '199203022018032001', 'E41161213', 1, 4, NULL, '2020-09-18'),
-(103, 'Sistem Pakar Kualitas Ekspor Kakao Menggunaka', 'Sistem Pakar Kualitas Ekspor Kakao Menggunakan metode K-nearest neighbor dan Pengolahan Citra Digital\r\n', 'Sistem Pakar Kualitas Ekspor Kakao Menggunakan metode K-nearest neighbor dan Pengolahan Citra Digital\r\n', 'sp.', '197810112005012002', 'E41161948', 1, 8, NULL, '2020-09-18');
+(103, 'Sistem Pakar Kualitas Ekspor Kakao Menggunaka', 'Sistem Pakar Kualitas Ekspor Kakao Menggunakan metode K-nearest neighbor dan Pengolahan Citra Digital\r\n', 'Sistem Pakar Kualitas Ekspor Kakao Menggunakan metode K-nearest neighbor dan Pengolahan Citra Digital\r\n', 'sp.', '197810112005012002', 'E41161948', 1, 8, NULL, '2020-09-18'),
+(105, '\"PENGEMBANGAN SISTEM USABILITY TESTING MENGGU', 'a', 'a', 'a,', '199112112018031001', 'E41161324', 1, 9, NULL, '2020-09-18');
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_seminar`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `v_seminar` (
+CREATE TABLE `v_seminar` (
 `id_seminar` int(11)
 ,`Nilai` int(11)
 ,`Tanggal` date
@@ -716,12 +697,14 @@ CREATE TABLE IF NOT EXISTS `v_seminar` (
 ,`Status` varchar(45)
 ,`Nama_ruangan` varchar(45)
 );
+
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `v_sidang`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `v_sidang` (
+CREATE TABLE `v_sidang` (
 `id_sidang` int(11)
 ,`Nilai` int(11)
 ,`Tanggal` date
@@ -735,6 +718,7 @@ CREATE TABLE IF NOT EXISTS `v_sidang` (
 ,`Status` varchar(45)
 ,`Nama_ruangan` varchar(45)
 );
+
 -- --------------------------------------------------------
 
 --
@@ -742,7 +726,7 @@ CREATE TABLE IF NOT EXISTS `v_sidang` (
 --
 DROP TABLE IF EXISTS `v_seminar`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_seminar` AS select `tds`.`id_seminar` AS `id_seminar`,`tds`.`Nilai` AS `Nilai`,`tds`.`Tanggal` AS `Tanggal`,`tds`.`jam` AS `jam`,`tds`.`id_TA` AS `id_TA`,`ta`.`Judul_TA` AS `Judul_TA`,(select `mahasiswa`.`NAMA` from `mahasiswa` where (`mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`)) AS `NAMA`,(select `mahasiswa`.`NIM` from `mahasiswa` where (`mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`)) AS `Mahasiswa_NIM`,(select `dosen`.`NAMA` from `dosen` where (`dosen`.`NIP` = `ta`.`Dosen_NIP`)) AS `dosen_pembimbing`,(select `dosen`.`NAMA` from `dosen` where (`dosen`.`NIP` = `tds`.`NIP_Panelis`)) AS `dosen_panelis`,`ms`.`Status` AS `Status`,`r`.`Nama_ruangan` AS `Nama_ruangan` from (((`td_seminar` `tds` left join `tugas_akhir` `ta` on((`tds`.`id_TA` = `ta`.`id`))) left join `master_status` `ms` on((`tds`.`id_status` = `ms`.`idMaster_status`))) left join `ruangan` `r` on((`tds`.`idruangan` = `r`.`idRuangan`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_seminar`  AS  select `tds`.`id_seminar` AS `id_seminar`,`tds`.`Nilai` AS `Nilai`,`tds`.`Tanggal` AS `Tanggal`,`tds`.`jam` AS `jam`,`tds`.`id_TA` AS `id_TA`,`ta`.`Judul_TA` AS `Judul_TA`,(select `mahasiswa`.`NAMA` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `NAMA`,(select `mahasiswa`.`NIM` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `Mahasiswa_NIM`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `ta`.`Dosen_NIP`) AS `dosen_pembimbing`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `tds`.`NIP_Panelis`) AS `dosen_panelis`,`ms`.`Status` AS `Status`,`r`.`Nama_ruangan` AS `Nama_ruangan` from (((`td_seminar` `tds` left join `tugas_akhir` `ta` on(`tds`.`id_TA` = `ta`.`id`)) left join `master_status` `ms` on(`tds`.`id_status` = `ms`.`idMaster_status`)) left join `ruangan` `r` on(`tds`.`idruangan` = `r`.`idRuangan`)) ;
 
 -- --------------------------------------------------------
 
@@ -751,7 +735,146 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `v_sidang`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_sidang` AS select `tds`.`id_sidang` AS `id_sidang`,`tds`.`Nilai` AS `Nilai`,`tds`.`Tanggal` AS `Tanggal`,`tds`.`jam` AS `jam`,`tds`.`id_TA` AS `id_TA`,`ta`.`Judul_TA` AS `Judul_TA`,(select `mahasiswa`.`NAMA` from `mahasiswa` where (`mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`)) AS `NAMA`,(select `mahasiswa`.`NIM` from `mahasiswa` where (`mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`)) AS `Mahasiswa_NIM`,(select `dosen`.`NAMA` from `dosen` where (`dosen`.`NIP` = `ta`.`Dosen_NIP`)) AS `dosen_pembimbing`,(select `dosen`.`NAMA` from `dosen` where (`dosen`.`NIP` = `tds`.`NIP_Panelis`)) AS `dosen_panelis`,`ms`.`Status` AS `Status`,`r`.`Nama_ruangan` AS `Nama_ruangan` from (((`td_sidang` `tds` left join `tugas_akhir` `ta` on((`tds`.`id_TA` = `ta`.`id`))) left join `master_status` `ms` on((`tds`.`id_status` = `ms`.`idMaster_status`))) left join `ruangan` `r` on((`tds`.`idruangan` = `r`.`idRuangan`)));
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_sidang`  AS  select `tds`.`id_sidang` AS `id_sidang`,`tds`.`Nilai` AS `Nilai`,`tds`.`Tanggal` AS `Tanggal`,`tds`.`jam` AS `jam`,`tds`.`id_TA` AS `id_TA`,`ta`.`Judul_TA` AS `Judul_TA`,(select `mahasiswa`.`NAMA` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `NAMA`,(select `mahasiswa`.`NIM` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `Mahasiswa_NIM`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `ta`.`Dosen_NIP`) AS `dosen_pembimbing`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `tds`.`NIP_Panelis`) AS `dosen_panelis`,`ms`.`Status` AS `Status`,`r`.`Nama_ruangan` AS `Nama_ruangan` from (((`td_sidang` `tds` left join `tugas_akhir` `ta` on(`tds`.`id_TA` = `ta`.`id`)) left join `master_status` `ms` on(`tds`.`id_status` = `ms`.`idMaster_status`)) left join `ruangan` `r` on(`tds`.`idruangan` = `r`.`idRuangan`)) ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `dosen`
+--
+ALTER TABLE `dosen`
+  ADD PRIMARY KEY (`NIP`),
+  ADD KEY `fk_Dosen_Role1_idx` (`idRole`);
+
+--
+-- Indexes for table `mahasiswa`
+--
+ALTER TABLE `mahasiswa`
+  ADD PRIMARY KEY (`NIM`),
+  ADD KEY `fk_Mahasiswa_Prodi1_idx` (`Prodi_idProdi`);
+
+--
+-- Indexes for table `master_status`
+--
+ALTER TABLE `master_status`
+  ADD PRIMARY KEY (`idMaster_status`);
+
+--
+-- Indexes for table `prodi`
+--
+ALTER TABLE `prodi`
+  ADD PRIMARY KEY (`idProdi`);
+
+--
+-- Indexes for table `role`
+--
+ALTER TABLE `role`
+  ADD PRIMARY KEY (`idRole`);
+
+--
+-- Indexes for table `ruangan`
+--
+ALTER TABLE `ruangan`
+  ADD PRIMARY KEY (`idRuangan`);
+
+--
+-- Indexes for table `td_bimbingan`
+--
+ALTER TABLE `td_bimbingan`
+  ADD PRIMARY KEY (`id_bimbingan`),
+  ADD KEY `fk_TD_Bimbingan_Tugas_akhir1_idx` (`Tugas_akhir_id`);
+
+--
+-- Indexes for table `td_seminar`
+--
+ALTER TABLE `td_seminar`
+  ADD PRIMARY KEY (`id_seminar`),
+  ADD KEY `fk_TD_seminar_Tugas_akhir1_idx` (`id_TA`),
+  ADD KEY `fk_TD_seminar_Dosen1_idx` (`NIP_Panelis`),
+  ADD KEY `fk_TD_seminar_Master_status1_idx` (`id_status`),
+  ADD KEY `fk_TD_seminar_Ruangan1_idx` (`idruangan`);
+
+--
+-- Indexes for table `td_sidang`
+--
+ALTER TABLE `td_sidang`
+  ADD PRIMARY KEY (`id_sidang`);
+
+--
+-- Indexes for table `topik`
+--
+ALTER TABLE `topik`
+  ADD PRIMARY KEY (`idTopik`);
+
+--
+-- Indexes for table `tugas_akhir`
+--
+ALTER TABLE `tugas_akhir`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_Tugas_akhir_Dosen_idx` (`Dosen_NIP`),
+  ADD KEY `fk_Tugas_akhir_Mahasiswa1_idx` (`Mahasiswa_NIM`),
+  ADD KEY `fk_Tugas_akhir_Master_status1_idx` (`id_status`),
+  ADD KEY `fk_Tugas_akhir_Topik1_idx` (`id_topik`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `master_status`
+--
+ALTER TABLE `master_status`
+  MODIFY `idMaster_status` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `prodi`
+--
+ALTER TABLE `prodi`
+  MODIFY `idProdi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `role`
+--
+ALTER TABLE `role`
+  MODIFY `idRole` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `ruangan`
+--
+ALTER TABLE `ruangan`
+  MODIFY `idRuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `td_bimbingan`
+--
+ALTER TABLE `td_bimbingan`
+  MODIFY `id_bimbingan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `td_seminar`
+--
+ALTER TABLE `td_seminar`
+  MODIFY `id_seminar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `td_sidang`
+--
+ALTER TABLE `td_sidang`
+  MODIFY `id_sidang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `topik`
+--
+ALTER TABLE `topik`
+  MODIFY `idTopik` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `tugas_akhir`
+--
+ALTER TABLE `tugas_akhir`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- Constraints for dumped tables
@@ -762,6 +885,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `mahasiswa`
   ADD CONSTRAINT `fk_Mahasiswa_Prodi1` FOREIGN KEY (`Prodi_idProdi`) REFERENCES `prodi` (`idProdi`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
