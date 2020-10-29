@@ -13,12 +13,15 @@ Class Tugas_akhir extends CI_controller{
     }
 
     function index(){
+
         $param['pageInfo'] = "List Tugas Akhir";
         if($_SESSION['kode_level']==8){
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
         }
-        else{
-            $filter = "";
+        else if($_SESSION['kode_level']==2){
+            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+        }else{
+
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
