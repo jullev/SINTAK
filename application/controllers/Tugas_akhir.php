@@ -21,7 +21,7 @@ Class Tugas_akhir extends CI_controller{
         else if($_SESSION['kode_level']==2){
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         }else{
-
+            $filter='';
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();

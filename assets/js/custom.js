@@ -130,7 +130,7 @@ $(document).ready(function() {
 			}
 		);
 	});
-	$(".edit-ta").click(function(e) {
+	$(".table-responsive").on("click", ".edit-ta", function(e) {
 		e.preventDefault();
 		var id = $(this).data("id");
 		$.ajax({

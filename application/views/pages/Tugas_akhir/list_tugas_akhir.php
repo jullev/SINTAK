@@ -52,7 +52,7 @@
                     <?php
                     if ($_SESSION['kode_level'] == 7) {
                     ?>
-                      <a href="" class="edit-ta dropdown-item" data-id="<?php echo $i->id ?>">Validasi</a>
+                      <a href="#" class="edit-ta dropdown-item" data-id="<?php echo $i->id ?>">Validasi</a>
                     <?php } else if ($_SESSION['kode_level'] == 2 || ($_SESSION['kode_level'] == 8 && $i->id_status != 1)) {
                     ?>
                       <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>
