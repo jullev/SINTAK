@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$(".datatable").DataTable();
 	$(".select2").select2();
 	$(".datepicker").datepicker({
-		format: "yyyy/mm/dd"
+		format: "yyyy-mm-dd"
 	});
 	$("button[type='reset']").click(function() {
 		$(".select2")
