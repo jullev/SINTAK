@@ -21,6 +21,7 @@
                         <td>Tanggal</td>
                         <td>Deskripsi</td>                        
                         <td>Data Dukung</td>
+                        <td>Revisi</td>
                         <td>Aksi</td>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@
                         <td><?php echo $i->Tanggal_bimbingan; ?></td>
                         <td><?php echo $i->Deskripsi; ?></td>
                         <td><a href="<?php echo base_url().'uploaded_file/'.$i->Data_Dukung; ?>"><?php echo $i->Data_Dukung; ?></a></td>
+                        <td><?=($i->revisi == null) ? 'Belum Di Revisi' : $i->revisi ?></td>
                         <td class="text-center">
                         <?php 
                           if($_SESSION['kode_level']==8){
@@ -47,8 +49,20 @@
                               <a href="<?php echo base_url().'index.php/bimbingan/delete/'.$i->id_bimbingan; ?>" class="dropdown-item confirm">Delete</a>
                             </div>
                           </div>
+                          <?php } else if($_SESSION['kode_level']==2){ ?>
+                            <div class="dropdown">
+                            <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Option
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <a href="" class="Revisi-bimbingan dropdown-item" data-id="<?php echo $i->id_bimbingan; ?>">Revisi</a>
+                              <a href="" class="edit-bimbingan dropdown-item" data-id="<?php echo $i->id_bimbingan; ?>">Edit</a>
+                              <a href="<?php echo base_url().'index.php/bimbingan/delete/'.$i->id_bimbingan; ?>" class="dropdown-item confirm">Delete</a>
+                            </div>
+                          </div>
                           <?php } else{ echo "-";} ?>
 												</td>
+
                     </tr>
                     <?php } ?>
                 </tbody>
@@ -149,6 +163,42 @@
               <br>
               <small class="text-dafault font-italic">*Hanya Digunakan Untuk Mengganti File Lama</small>
             </div>
+          </div>
+					<br>
+					<?php 
+						$this->load->view("common/btn")
+					?>
+				</form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- --------- modal revisi ------------- -->
+<div class="modal" id="modalRevisi">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title">Revisi Bimbingan</h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body f-15 my-3">
+				<form method="post" enctype="multipart/form-data" action="<?php echo base_url().'Bimbingan/revisi_action' ?>" id="formValidasi">
+          <div>
+          <input type="hidden" name="Bimbingan_ID" id="Bimbingan_ID">
+          </div>
+          <div class="row">
+
+            <div class="col-md-12">
+              <label for="">Revisi</label>
+              <textarea name="revisi_dosen" id="revisi_dosen" class="form-control" style="height:75px;" placeholder="Masukkan Deskripsi" required></textarea>
+            <br>
+            </div>
+
           </div>
 					<br>
 					<?php 

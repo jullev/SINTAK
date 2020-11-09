@@ -104,7 +104,50 @@ Class Bimbingan extends CI_controller{
         header("content-type:json/application");
         echo json_encode($data);
     }
-
+    function revisi_action(){
+        $id_bimbingan = $this->input->post('Bimbingan_ID');
+        $cekIdBimbingan = $this->Bimbingan_model->getById($id_bimbingan, $_SESSION['id_login'])->num_rows();
+        if($cekIdBimbingan==1){
+            //GET ID Bimbingan
+            //Variabel Untuk Menampung beberapa isi record berdasarkan ID Bimbingan
+            $Bimbingan = $this->Bimbingan_model->getById($id_bimbingan)->row_array();
+            //Get ID Tugas Akhir : Digunakan Untuk Redirect
+            $TA_id = $Bimbingan['Tugas_akhir_id'];
+    
+            //Config
+            $config = array(
+                array(
+                    'field' => 'revisi_dosen',
+                    'label' => 'Revisi',
+                    'rules' => 'required',
+                    "errors" => [
+                        'required' => '%s Harus Diisi',
+                    ],
+                )
+            );
+            $this->form_validation->set_rules($config);
+            if($this->form_validation->run() == TRUE){ //Jika validasi Form Berhasil
+                $data = array(
+                    'revisi' => $this->input->post('revisi_dosen'),
+                );
+                
+                if($this->Bimbingan_model->update($id_bimbingan,$data)){
+                    //Flash Message Sukses
+                    $this->session->set_flashdata("update_validation","<div class='alert alert-success'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Bimbingan Berhasil Diupdate</div>");
+                }else{
+                    //Flash Message Gagal
+                    $this->session->set_flashdata("update_validation","<div class='alert alert-danger'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Bimbingan Gagal Diupdate</div>");
+                }
+            }
+            
+            redirect(base_url().'Bimbingan/TugasAkhir/'.$TA_id);
+        }
+        else{
+            show_404();
+        }
+    }
     function update_action(){
         $id_bimbingan = $this->input->post('Bimbingan_ID');
         $cekIdBimbingan = $this->Bimbingan_model->getById($id_bimbingan, $_SESSION['id_login'])->num_rows();

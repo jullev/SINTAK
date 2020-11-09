@@ -170,6 +170,14 @@ $(document).ready(function() {
 			}
 		});
 	});
+	
+	$(".table-responsive").on("click", ".Revisi-bimbingan", function(e) {
+		e.preventDefault();
+		const id = $(this).data("id");
+
+		$("#modalRevisi #Bimbingan_ID").val(id);
+		$("#modalRevisi").modal("show");
+	});
 
 	$(".edit-seminar").click(function(e) {
 		e.preventDefault();
