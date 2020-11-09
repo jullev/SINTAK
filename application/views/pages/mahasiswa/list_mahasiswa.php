@@ -34,6 +34,7 @@
         </div>
         <?php
         //Memunculkan Pemberitahuan Sukses/Gagalnya Delete
+        echo $this->session->flashdata('input_validation');
         echo $this->session->flashdata('delete_validation');
         $this->load->view('common/msg')
         ?>
@@ -67,6 +68,7 @@
                             <?php 
                                 $dropdown['link'] = array(
                                     "Edit" => base_url().'Mahasiswa/edit/'.$i->NIM,
+                                    "Reset Password" => base_url().'Mahasiswa/resetpassword/'.$i->NIM,
                                     "Delete" => base_url().'Mahasiswa/delete/'.$i->NIM
                                 );
                                 $this->load->view("common/dropdown", $dropdown);

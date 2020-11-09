@@ -50,6 +50,7 @@ Class Mahasiswa extends CI_controller{
                 </button>
                 <div class=\"dropdown-menu\">
                     <a href='".base_url()."Mahasiswa/edit/$i->NIM' class='dropdown-item'>Edit</a>
+                    <a href='".base_url()."Mahasiswa/resetpassword/$i->NIM' class='dropdown-item'>Edit</a>
                     <a href='".base_url()."Mahasiswa/delete/$i->NIM' class='dropdown-item'>Hapus</a>
                 </div>
             </div>
@@ -127,6 +128,7 @@ Class Mahasiswa extends CI_controller{
                 'Prodi_idProdi' => $this->input->post('idProdi'),
                 'tanggallahir' => $this->input->post('tanggallahir'),
                 'password' => password_hash($this->input->post('tanggallahir'),PASSWORD_DEFAULT)
+                // 'password' => $this->input->post('tanggallahir')
             );
             if($this->Mahasiswa_model->save($data)){
                 //Flash Message Sukses
@@ -329,6 +331,18 @@ Class Mahasiswa extends CI_controller{
         else{
             echo $error['error'];
         }
+    }
+
+    public function resetPassword($nim)
+    {
+        $mahasiswa = $this->Mahasiswa_model->getById($nim)->result();
+        $tglLahir = $mahasiswa[0]->tanggallahir;
+        $this->Mahasiswa_model->update($nim, ['password' => password_hash($tglLahir,PASSWORD_DEFAULT)]);
+
+        $this->session->set_flashdata("input_validation","<div class='alert alert-success'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Berhasil reset password.</div>");
+
+        redirect(base_url().'Mahasiswa');
     }
 
 }
