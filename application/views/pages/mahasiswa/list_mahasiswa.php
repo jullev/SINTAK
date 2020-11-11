@@ -45,7 +45,6 @@
                         <td>#</td>
                         <td>NIM</td>
                         <td>Nama</td>
-                        <td>Email</td>
                         <td>Alamat</td>
                         <td>Tahun Masuk</td>
                         <td>Prodi</td>
@@ -61,7 +60,6 @@
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $i->NIM; ?></td>
                         <td><?php echo $i->NAMA; ?></td>
-                        <td><?php echo $i->email; ?></td>
                         <td><?php echo $i->Alamat; ?></td>
                         <td><?php echo $i->Tahun_masuk; ?></td>
                         <td><?php echo $i->Nama_prodi; ?></td>

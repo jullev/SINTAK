@@ -8,7 +8,6 @@
 
     //Validasi Masing-Masing Inputan
     $validation_NIM = "";
-    $validation_email = "";
     $validation_NAMA = "";
     $validation_Alamat = "";
     $validation_tahunmasuk = "";
@@ -16,7 +15,6 @@
     $validation_tanggallahir = "";
     if(!empty($this->session->flashdata('error_field'))){
         $validation_NIM = $this->session->flashdata('error_field')->NIM;
-        $validation_email = $this->session->flashdata('error_field')->email;
         $validation_NAMA = $this->session->flashdata('error_field')->NAMA;
         $validation_Alamat = $this->session->flashdata('error_field')->Alamat;
         $validation_tahunmasuk = $this->session->flashdata('error_field')->tahunmasuk;
@@ -40,11 +38,6 @@
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control form-control-sm" name="email" placeholder="Masukkan Email" required>
-                    <div class="text-danger ml-1 mt-1"><?php echo $validation_email; ?></div>
-                </div>
-                <div class="col-md-6 form-group">
                     <label>Tahun Masuk</label>
                     <select name="tahunmasuk" id="tahunmasuk" class="form-control select2" required>
                         <option value="">--Pilih--</option>
@@ -55,6 +48,11 @@
                         ?>
                     </select>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_tahunmasuk; ?></div>
+                </div>
+                <div class="col-md-6 form-group">
+                    <label>Alamat</label>
+                    <textarea name="Alamat" class="form-control form-control-sm" required></textarea>
+                    <div class="text-danger ml-1 mt-1"><?php echo $validation_Alamat; ?></div>
                 </div>
             </div>
             <div class="row">
@@ -68,14 +66,6 @@
                     </div>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_tanggallahir; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
-                    <label>Alamat</label>
-                    <textarea name="Alamat" class="form-control form-control-sm" required></textarea>
-                    <div class="text-danger ml-1 mt-1"><?php echo $validation_Alamat; ?></div>
-                </div>
-            </div>
-            <div class="row">
-                
                 <div class="col-md-6 form-group">
                     <label>Prodi</label>
                     <select class="form-control form-control-sm select2" name="idProdi" required>

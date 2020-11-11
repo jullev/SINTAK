@@ -109,9 +109,6 @@
                                 <span class="fa fa-lock"></span>
                             </div>
                             <br>
-                            <a href="<?php echo base_url() . 'resetpassword' ?>" >Reset Password</a>
-                            <br>
-                            <br>
                             <button type="sumit" class="btn btn-primary px-5 font-weight-bold ls-1">Login</button>
                         </form>
                     </div>

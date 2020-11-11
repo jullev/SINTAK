@@ -9,7 +9,6 @@
     //Validasi Masing-Masing Inputan
     $validation_NIM = "";
     $validation_NAMA = "";
-    $validation_email = "";
     $validation_Alamat = "";
     $validation_tahunmasuk = "";
     $validation_idProdi = "";
@@ -17,7 +16,6 @@
     if(!empty($this->session->flashdata('error_field'))){
         $validation_NIM = $this->session->flashdata('error_field')->NIM;
         $validation_NAMA = $this->session->flashdata('error_field')->NAMA;
-        $validation_email = $this->session->flashdata('error_field')->email;
         $validation_Alamat = $this->session->flashdata('error_field')->Alamat;
         $validation_tahunmasuk = $this->session->flashdata('error_field')->tahunmasuk;
         $validation_idProdi = $this->session->flashdata('error_field')->idProdi;
@@ -42,11 +40,6 @@
             </div>
             <div class="row">
                 <div class="col-md-6 form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control form-control-sm" name="email" placeholder="Masukkan Email" value="<?php echo $data->email; ?>" >
-                    <div class="text-danger ml-1 mt-1"><?php echo $validation_email; ?></div>
-                </div>
-                <div class="col-md-6 form-group">
                     <label>Tahun Masuk</label>
                     <select name="tahunmasuk" id="tahunmasuk" class="form-control" >
                         <option value="">--Pilih--</option>
@@ -62,13 +55,6 @@
                     </select>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_tahunmasuk; ?></div>
                 </div>
-            </div>
-            <div class="row">
-            <div class="col-md-6 form-group">
-                    <label>Tanggal Lahir</label>
-                    <input type="text" class="form-control datepicker form-control-sm" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value="<?php echo $data->tanggallahir; ?>" >
-                    <div class="text-danger ml-1 mt-1"><?php echo $validation_tanggallahir; ?></div>
-                </div>
                 <div class="col-md-6 form-group">
                     <label>Alamat</label>
                     <textarea name="Alamat" class="form-control form-control-sm" ><?php echo $data->Alamat; ?></textarea>
@@ -76,7 +62,11 @@
                 </div>
             </div>
             <div class="row">
-                
+                <div class="col-md-6 form-group">
+                    <label>Tanggal Lahir</label>
+                    <input type="date" class="form-control form-control-sm" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value="<?php echo $data->tanggallahir; ?>" >
+                    <div class="text-danger ml-1 mt-1"><?php echo $validation_tanggallahir; ?></div>
+                </div>
                 <div class="col-md-6 form-group">
                     <label>Roles</label>
                     <select class="form-control form-control-sm" name="idProdi">
