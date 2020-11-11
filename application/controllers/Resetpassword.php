@@ -47,15 +47,15 @@ Class Resetpassword extends CI_controller{
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 465,
-            'smtp_user' => 'e41170241@student.polije.ac.id',
-            'smtp_pass' => 'inant12111973',
+            'smtp_user' => 'sintakjti@gmail.com',
+            'smtp_pass' => 'sintakjti2020',
             'mailtype'  => 'html', 
             'charset'   => 'iso-8859-1'
           );
           $this->load->library('email', $config);
           $this->email->set_newline("\r\n");
 
-          $this->email->from('e41170241@student.polije.ac.id', 'SINTAK');
+          $this->email->from('sintakjti@gmail.com', 'SINTAK JTI');
           $this->email->to($email); 
 
           $this->email->subject('Reset Password');
