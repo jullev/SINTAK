@@ -355,7 +355,7 @@
             >
               Cancel
             </button>
-            <a class="btn btn-primary" href="<?php echo base_url()."index.php/login/logout" ?>">Logout</a>
+            <a class="btn btn-primary" href="<?php echo base_url()."login/logout" ?>">Logout</a>
           </div>
         </div>
       </div>

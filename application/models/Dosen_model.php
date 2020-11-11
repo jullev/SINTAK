@@ -14,6 +14,12 @@ Class Dosen_model extends CI_Model{
         $where = array('NIP' => $id);
         return $this->db->get_where($this->_table,$where);
     }
+    
+    function getByEmail($email){
+        $this->db->join('role','dosen.idRole=role.idRole','left');
+        $where = array('email' => $email);
+        return $this->db->get_where($this->_table,$where);
+    }
     function save($data){
         return $this->db->insert($this->_table,$data);
     }

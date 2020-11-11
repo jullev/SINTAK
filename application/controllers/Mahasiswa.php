@@ -39,6 +39,7 @@ Class Mahasiswa extends CI_controller{
             <td>". $no++ ."</td>
             <td>". $i->NIM ."</td>
             <td>". $i->NAMA ."</td>
+            <td>". $i->email ."</td>
             <td>". $i->Alamat ."</td>
             <td>". $i->Tahun_masuk ."</td>
             <td>". $i->Nama_prodi ."</td>
@@ -50,7 +51,7 @@ Class Mahasiswa extends CI_controller{
                 </button>
                 <div class=\"dropdown-menu\">
                     <a href='".base_url()."Mahasiswa/edit/$i->NIM' class='dropdown-item'>Edit</a>
-                    <a href='".base_url()."Mahasiswa/resetpassword/$i->NIM' class='dropdown-item'>Edit</a>
+                    <a href='".base_url()."Mahasiswa/resetpassword/$i->NIM' class='dropdown-item'>Reset Password</a>
                     <a href='".base_url()."Mahasiswa/delete/$i->NIM' class='dropdown-item'>Hapus</a>
                 </div>
             </div>
@@ -82,6 +83,16 @@ Class Mahasiswa extends CI_controller{
                 'rules' => 'required',
                 "errors" => [
                     'required' => '%s Harus Diisi',
+                ],
+            ),
+            array(
+                'field' => 'email',
+                'label' => 'Email',
+                'rules' => 'required|valid_email|is_unique[mahasiswa.email]',
+                "errors" => [
+                    'required' => '%s Harus Diisi.',
+                    'valid_email' => '%s Email tidak valid.',
+                    'is_unique' => '%s Email telah terdaftar.',
                 ],
             ),
             array(
@@ -123,6 +134,7 @@ Class Mahasiswa extends CI_controller{
             $data = array(
                 'NIM' => $this->input->post('NIM'),
                 'NAMA' => $this->input->post('NAMA'),
+                'email' => $this->input->post('email'),
                 'Alamat' => $this->input->post('Alamat'),
                 'Tahun_masuk' => $this->input->post('tahunmasuk'),
                 'Prodi_idProdi' => $this->input->post('idProdi'),
@@ -143,6 +155,7 @@ Class Mahasiswa extends CI_controller{
             $error_field = new stdClass();
             $error_field->NIM = form_error('NIM');
             $error_field->NAMA = form_error('NAMA');
+            $error_field->email = form_error('email');
             $error_field->Alamat = form_error('Alamat');
             $error_field->tahunmasuk = form_error('tahunmasuk');
             $error_field->idProdi = form_error('idProdi');
@@ -179,6 +192,15 @@ Class Mahasiswa extends CI_controller{
                 'rules' => 'required',
                 "errors" => [
                     'required' => '%s Harus Diisi',
+                ],
+            ),
+            array(
+                'field' => 'email',
+                'label' => 'Email',
+                'rules' => 'required|valid_email',
+                "errors" => [
+                    'required' => '%s Harus Diisi.',
+                    'valid_email' => '%s Email tidak valid.',
                 ],
             ),
             array(
@@ -221,6 +243,7 @@ Class Mahasiswa extends CI_controller{
             $data = array(
                 'NIM' => $this->input->post('NIM'),
                 'NAMA' => $this->input->post('NAMA'),
+                'email' => $this->input->post('email'),
                 'Alamat' => $this->input->post('Alamat'),
                 'Tahun_masuk' => $this->input->post('tahunmasuk'),
                 'Prodi_idProdi' => $this->input->post('idProdi'),
@@ -240,6 +263,7 @@ Class Mahasiswa extends CI_controller{
             $error_field = new stdClass();
             $error_field->NIM = form_error('NIM');
             $error_field->NAMA = form_error('NAMA');
+            $error_field->email = form_error('email');
             $error_field->Alamat = form_error('Alamat');
             $error_field->tahunmasuk = form_error('tahunmasuk');
             $error_field->idProdi = form_error('idProdi');
@@ -305,10 +329,11 @@ Class Mahasiswa extends CI_controller{
               }
               $inserdata[$i]['NIM'] = $value['A'];
               $inserdata[$i]['NAMA'] = $value['B'];
-              $inserdata[$i]['Alamat'] = $value['C'];
-              $inserdata[$i]['Tahun_masuk'] = $value['D'];
-              $inserdata[$i]['Prodi_idProdi'] = $value['E'];
-              $date = str_replace('/','-',$value['F']);
+              $inserdata[$i]['email'] = $value['C'];
+              $inserdata[$i]['Alamat'] = $value['D'];
+              $inserdata[$i]['Tahun_masuk'] = $value['E'];
+              $inserdata[$i]['Prodi_idProdi'] = $value['F'];
+              $date = str_replace('/','-',$value['G']);
               $newDate = date("Y-m-d", strtotime($date));
               $inserdata[$i]['tanggallahir'] = $newDate;
               $i++;

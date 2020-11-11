@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
   <!--webfonts-->
-    <title>SIMTAK - LOGIN</title>
+    <title>SIMTAK - Reset Password</title>
     <style rel="stylesheet" type="text/css">
     .loader {
   width: 10em;
@@ -77,42 +77,34 @@
 <body class="bg-light">
     <div class="container container-login">
         <div class="row justify-content-center">
-          <div class="col-md-3" id="loading" style="    display: flex;
+          <div class="col-md-3" id="loading" style="display: flex;
     align-items: center;
     justify-content: center;
     top: 120px;
     position: fixed;
     ">
             <div class="loader">
-            <span style="text">Loading...</span>
+            <span>Loading...</span>
             </div>
           </div>
             <div class="col-md-12" id="body_form" style="overflow:auto">
                 <div class="box-login">
                     <div class="top">
-                        <p>LOGIN SIMTAK</p>
+                        <p>RESET PASSWORD</p>
                     </div>
                     <div class="body">
                       <div class="tmp_alert">
 
                       </div>
-                        <form id="FormLogin" class="">
-                            <label for="">Username</label>
-                            <div class="form-underline username">
-                                <input type="text" placeholder="Masukkan Username" id="username" required>
-                                <span class="fa fa-user"></span>
+                        <form id="FormResetPassword" class="">
+                            <label for="">Email</label>
+                            <div class="form-underline email">
+                                <input type="email" placeholder="Masukan Email Anda" id="email" required>
+                                <span class="fa fa-mail"></span>
                             </div>
                             <br>
-                            <label for="">Password</label>
-                            <div class="form-underline password">
-                                <input type="password" placeholder="Masukkan Password" id="password" required>
-                                <span class="fa fa-lock"></span>
-                            </div>
                             <br>
-                            <a href="<?php echo base_url() . 'resetpassword' ?>" >Reset Password</a>
-                            <br>
-                            <br>
-                            <button type="sumit" class="btn btn-primary px-5 font-weight-bold ls-1">Login</button>
+                            <button type="submit" class="btn btn-primary px-5 font-weight-bold ls-1">Submit</button>
                         </form>
                     </div>
                 </div>
@@ -131,18 +123,17 @@
 
 <script type="text/javascript">
 function coba() {
-  $('#FormLogin').addClass('animated bounceOutLeft');
+  $('#FormResetPassword').addClass('animated bounceOutLeft');
 }
 $(document).ready(function(e){
-  $("#FormLogin").on('submit', function(e){
+  $("#FormResetPassword").on('submit', function(e){
     e.preventDefault();
-    var usernameid = $('#username').val();
-    var passwordid = $('#password').val();
-    // alert(usernameid);
+    var email = $('#email').val();
+    // alert(email);
     $.ajax({
       type: 'POST',
-      url: '<?php echo base_url();?>Login/aksi_login',
-      data: { username: usernameid, password: passwordid },
+      url: '<?php echo base_url();?>Resetpassword/resetPassword',
+      data: { email: email},
       beforeSend: function () {
           $('#body_form').addClass('animated bounceOut');
           $('#loading').addClass('animated bounceIn');
@@ -154,25 +145,18 @@ $(document).ready(function(e){
         if (response == "u") {
           $('#body_form').removeClass('animated bounceOut');
           $('#body_form').addClass('animated bounceIn');
-          $('.username').addClass('animated bounce delay-1s');
-          var html = '<div class="alert alert-danger"><b> <span class="fa fa-info-circle"></span> &nbsp; Username Tidak Ditemukan</b></div>';
+          $('.email').addClass('animated bounce delay-1s');
+          var html = '<div class="alert alert-danger"><b> <span class="fa fa-info-circle"></span> &nbsp; Email Tidak Ditemukan</b></div>';
           $(".tmp_alert").html(html);
-        } else if (response == "p") {
+        }
+        else if (response == "success") {
           $('#body_form').removeClass('animated bounceOut');
           $('#body_form').addClass('animated bounceIn');
-          $('.password').addClass('animated bounce delay-1s');
-          var html = '<div class="alert alert-danger"><b> <span class="fa fa-info-circle"></span> &nbsp; Password Anda Salah</b></div>';
-          $(".tmp_alert").html(html);
-        } else if (response == "up") {
-          $('#body_form').removeClass('animated bounceOut');
-          $('#body_form').addClass('animated bounceIn');
-          $('.password').addClass('animated bounce delay-1s');
-          $('.username').addClass('animated bounce delay-1s');
+          $('.email').addClass('animated bounce delay-1s');
 
-          var html = '<div class="alert alert-danger"><b> <span class="fa fa-info-circle"></span> &nbsp; Username atau Password Anda Salah</b></div>';
+          var html = '<div class="alert alert-success"><b> <span class="fa fa-info-circle"></span> &nbsp; Silahkan cek email anda untuk mengetahui password anda.</b></div>';
           $(".tmp_alert").html(html);
-        } else {
-          window.location = response;
+          $('#email').val('');
         }
         // alert(response);
 
