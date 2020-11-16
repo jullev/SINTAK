@@ -61,7 +61,12 @@ Class Mahasiswa_model extends CI_Model{
         $this->db->join('prodi', 'mahasiswa.Prodi_idProdi = prodi.idProdi');
         return $this->db->get();
     }
-
+    function getAngkatan(){
+        $this->db->distinct();
+        $this->db->select('Tahun_masuk');
+        $this->db->from($this->_table);
+        return $this->db->get();
+    }
     function getById($id){
         $where = array('NIM' => $id);
         return $this->db->get_where($this->_table,$where);
