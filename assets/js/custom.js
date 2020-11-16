@@ -261,6 +261,6 @@ $(document).ready(function() {
     $('#filter_angkatan').on('change', function() {
 		const data = $('#filter_angkatan :selected').attr('data-angkatan');
 		const table = $('#dataTable').DataTable();
-        table.search(data).draw();
+        table.column(8).search(data).draw();
     });
 });
