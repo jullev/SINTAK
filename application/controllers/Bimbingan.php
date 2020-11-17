@@ -4,9 +4,15 @@ defined("BASEPATH") or die("No Direct Access Allowed");
 Class Bimbingan extends CI_controller{
     function __construct(){
         parent::__construct();
+
+        if (!$this->session->userdata("id_login")) {
+            redirect('login');
+        }
         $this->load->model('Bimbingan_model');
         $this->load->model('TugasAkhir_model');
         $this->icon = "fa-book";
+        $this->load->helper(array('form', 'url'));
+
     }
 
     function TugasAkhir($id){
@@ -31,16 +37,27 @@ Class Bimbingan extends CI_controller{
     }
 
     function add_action(){
+        $post = $this->input->post();
         //Get ID Tugas Akhir
         $TA_id = $this->input->post('TA_id');
         $cekIdTA = $this->TugasAkhir_model->getAll(['id' => $TA_id,'Mahasiswa_NIM' => $_SESSION['id_login']])->num_rows();
         if($cekIdTA==1){
         //Upload Configuration
-        $config['upload_path'] = 'uploaded_file/'; //path folder
-        $config['allowed_types'] = 'jpg|png|jpeg|pdf|xls|xlsx|doc|docx|txt'; //type yang dapat diakses bisa anda sesuaikan
-        $config['encrypt_name'] = TRUE; //nama yang terupload nantinya 
-        $this->load->library('upload',$config);
+        
+        // $config['upload_path'] = 'uploaded_file/'; //path folder
+        // $config['allowed_types'] = 'jpg|png|jpeg|pdf|xls|xlsx|doc|docx|txt'; //type yang dapat diakses bisa anda sesuaikan
+        // $config['encrypt_name'] = TRUE; //nama yang terupload nantinya 
+        // $this->load->library('upload', $config);
 
+        // -----------! karena library upload CI nya tidak bisa , jadi ssaya ubah ke manual !--------------
+        $dir_file = realpath(APPPATH . '../assets/berkas/bimbingan/');
+        $ori_name = pathinfo($_FILES['data_dukung']['name'], PATHINFO_FILENAME);
+        $name_file = $_FILES['data_dukung']['name'];
+        $extension_file = substr($name_file, strpos($name_file, '.'), strlen($name_file) - 1);
+        $nm_file_bimbingan =  $TA_id . '_' . $ori_name . '_' . $post['Tanggal_bimbingan'] . $extension_file;
+        $tmp_file = $_FILES['data_dukung']['tmp_name'];
+
+        $up_rab = move_uploaded_file($tmp_file, $dir_file . '/' . $nm_file_bimbingan);
 
         //Config
         $config = array(
@@ -71,15 +88,15 @@ Class Bimbingan extends CI_controller{
             );
             
             // Jika Ada File Yang diupload
-            if($this->upload->do_upload('data_dukung')){
-                $image_data = $this->upload->data();
+            // if($this->upload->do_upload('data_dukung')){
+                // $image_data = $this->upload->data();
                 $data = array(
                     'Tugas_akhir_id' => $TA_id,
                     'Deskripsi' => $this->input->post('deskripsi'),
-                    'Data_Dukung' => $image_data['file_name'],
+                    'Data_Dukung' => $nm_file_bimbingan,
                     'Tanggal_bimbingan' => $this->input->post('Tanggal_bimbingan'),
                 );
-            }
+            // }
             
             if($this->Bimbingan_model->save($data)){
                 //Flash Message Sukses
