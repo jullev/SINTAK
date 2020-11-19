@@ -104,13 +104,16 @@
 					<div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 						<div class="py-2 collapse-inner rounded">
 							<a class="collapse-item" href="<?php echo base_url() . "Tugas_akhir" ?>">Tugas Akhir</a>
+							<!-- <a class="collapse-item" href="<?php echo base_url() . "Penentuan_panelis" ?>">Penentuan Panelis</a> -->
+							<a class="collapse-item" href="<?php echo base_url() . "Penentuan_tanggal_seminar" ?>">Penentuan Tanggal Seminar</a>
+							<a class="collapse-item" href="<?php echo base_url() . "Penentuan_tanggal_sidang" ?>">Penentuan Tanggal Sidang</a>
 							<?php
 							if ($_SESSION['kode_level'] == 8) {
 							?>
 								<a class="collapse-item" href="<?php echo base_url() . "Tugas_akhir/add" ?>">Pengajuan Judul</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Seminar" ?>">Seminar</a>
+								<!-- <a class="collapse-item" href="<?php echo base_url() . "Seminar" ?>">Seminar</a> -->
 								<a class="collapse-item" href="<?php echo base_url() . "Seminar/add" ?>">Pengajuan Seminar</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Sidang</a>
+								<!-- <a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Sidang</a> -->
 								<a class="collapse-item" href="<?php echo base_url() . "Sidang/add" ?>">Pengajuan Sidang</a>
 							<?php }   ?>
 						</div>
