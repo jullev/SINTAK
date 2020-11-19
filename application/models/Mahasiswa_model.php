@@ -40,7 +40,7 @@ Class Mahasiswa_model extends CI_Model{
     // }
 
     function filter(){
-        $this->db->select('NIM,NAMA,Alamat,Tahun_masuk,tanggallahir,password,prodi.Nama_prodi');
+        $this->db->select('NIM,NAMA,email,Alamat,Tahun_masuk,tanggallahir,password,prodi.Nama_prodi');
         $this->db->from($this->_table);
         $this->db->join('prodi', 'mahasiswa.Prodi_idProdi = prodi.idProdi');
         if($_GET['id_prodi']!="" && $_GET['tahun']==""){
@@ -56,14 +56,24 @@ Class Mahasiswa_model extends CI_Model{
         return $this->db->get();
     }
     function getAll(){
-        $this->db->select('NIM,NAMA,Alamat,Tahun_masuk,tanggallahir,password,prodi.Nama_prodi');
+        $this->db->select('NIM,NAMA,email,Alamat,Tahun_masuk,tanggallahir,password,prodi.Nama_prodi');
         $this->db->from($this->_table);
         $this->db->join('prodi', 'mahasiswa.Prodi_idProdi = prodi.idProdi');
         return $this->db->get();
     }
-
+    function getAngkatan(){
+        $this->db->distinct();
+        $this->db->select('Tahun_masuk');
+        $this->db->from($this->_table);
+        return $this->db->get();
+    }
     function getById($id){
         $where = array('NIM' => $id);
+        return $this->db->get_where($this->_table,$where);
+    }
+
+    function getByEmail($email){
+        $where = array('email' => $email);
         return $this->db->get_where($this->_table,$where);
     }
     function save($data){
@@ -77,6 +87,7 @@ Class Mahasiswa_model extends CI_Model{
         $where = array('NIM' => $id);
         return $this->db->update($this->_table,$data,$where);
     }
+
     function delete($id){
         $where = array('NIM' => $id);
         return $this->db->delete($this->_table,$where);
