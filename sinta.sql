@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2020 at 07:31 AM
+-- Generation Time: Nov 23, 2020 at 07:46 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -722,42 +722,6 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (102, 'Penerapan Metode K-Nearest Neighbor Untuk Kla', 'Penerapan Metode K-Nearest Neighbor Untuk Klasifikasi Mutu Biji Kacang Panjang\r\n', 'Penerapan Metode K-Nearest Neighbor Untuk Klasifikasi Mutu Biji Kacang Panjang\r\n', 'pcd.', '199203022018032001', 'E41161213', 1, 4, NULL, '2020-09-18', ''),
 (103, 'Sistem Pakar Kualitas Ekspor Kakao Menggunaka', 'Sistem Pakar Kualitas Ekspor Kakao Menggunakan metode K-nearest neighbor dan Pengolahan Citra Digital\r\n', 'Sistem Pakar Kualitas Ekspor Kakao Menggunakan metode K-nearest neighbor dan Pengolahan Citra Digital\r\n', 'sp.', '197810112005012002', 'E41161948', 1, 8, NULL, '2020-09-18', ''),
 (105, '\"PENGEMBANGAN SISTEM USABILITY TESTING MENGGU', 'a', 'a', 'a,', '199112112018031001', 'E41161324', 1, 9, NULL, '2020-09-18', '');
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_seminar`
--- (See below for the actual view)
---
-CREATE TABLE `v_seminar` (
-);
-
--- --------------------------------------------------------
-
---
--- Stand-in structure for view `v_sidang`
--- (See below for the actual view)
---
-CREATE TABLE `v_sidang` (
-);
-
--- --------------------------------------------------------
-
---
--- Structure for view `v_seminar`
---
-DROP TABLE IF EXISTS `v_seminar`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_seminar`  AS  select `tds`.`id_seminar` AS `id_seminar`,`tds`.`Nilai` AS `Nilai`,`tds`.`Tanggal` AS `Tanggal`,`tds`.`jam` AS `jam`,`tds`.`id_TA` AS `id_TA`,`ta`.`Judul_TA` AS `Judul_TA`,(select `mahasiswa`.`NAMA` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `NAMA`,(select `mahasiswa`.`NIM` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `Mahasiswa_NIM`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `ta`.`Dosen_NIP`) AS `dosen_pembimbing`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `tds`.`NIP_Panelis`) AS `dosen_panelis`,`ms`.`Status` AS `Status`,`r`.`Nama_ruangan` AS `Nama_ruangan` from (((`td_seminar` `tds` left join `tugas_akhir` `ta` on(`tds`.`id_TA` = `ta`.`id`)) left join `master_status` `ms` on(`tds`.`id_status` = `ms`.`idMaster_status`)) left join `ruangan` `r` on(`tds`.`idruangan` = `r`.`idRuangan`)) ;
-
--- --------------------------------------------------------
-
---
--- Structure for view `v_sidang`
---
-DROP TABLE IF EXISTS `v_sidang`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_sidang`  AS  select `tds`.`id_sidang` AS `id_sidang`,`tds`.`Nilai` AS `Nilai`,`tds`.`Tanggal` AS `Tanggal`,`tds`.`jam` AS `jam`,`tds`.`id_TA` AS `id_TA`,`ta`.`Judul_TA` AS `Judul_TA`,(select `mahasiswa`.`NAMA` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `NAMA`,(select `mahasiswa`.`NIM` from `mahasiswa` where `mahasiswa`.`NIM` = `ta`.`Mahasiswa_NIM`) AS `Mahasiswa_NIM`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `ta`.`Dosen_NIP`) AS `dosen_pembimbing`,(select `dosen`.`NAMA` from `dosen` where `dosen`.`NIP` = `tds`.`NIP_Panelis`) AS `dosen_panelis`,`ms`.`Status` AS `Status`,`r`.`Nama_ruangan` AS `Nama_ruangan` from (((`td_sidang` `tds` left join `tugas_akhir` `ta` on(`tds`.`id_TA` = `ta`.`id`)) left join `master_status` `ms` on(`tds`.`id_status` = `ms`.`idMaster_status`)) left join `ruangan` `r` on(`tds`.`idruangan` = `r`.`idRuangan`)) ;
 
 --
 -- Indexes for dumped tables
