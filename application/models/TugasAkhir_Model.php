@@ -64,5 +64,24 @@ Class TugasAkhir_Model extends CI_Model{
         $where = array('id' => $id);
         return $this->db->delete($this->_table,$where);
     }
+    public function getMhsBimbing($nip,$row='')
+    {
+        $this->db->select('tugas_akhir.id,tugas_akhir.Judul_TA,tugas_akhir.Mahasiswa_NIM,mahasiswa.NAMA,master_status.Status,mahasiswa.Tahun_masuk,p.Nama_prodi');
+        $this->db->join('mahasiswa', 'tugas_akhir.Mahasiswa_NIM = mahasiswa.NIM');
+        $this->db->join('prodi p','mahasiswa.Prodi_idProdi = p.idProdi');
+        $this->db->join('master_status', 'tugas_akhir.id_status = master_status.idMaster_status');
+        $this->db->from('tugas_akhir');
+        if(isset($_GET['tahun'])){
+            $this->db->where(array('mahasiswa.Tahun_masuk' => $_GET['tahun'], 'mahasiswa.Prodi_idProdi' => $_GET['id_prodi']));
+        }
+        $this->db->where('Dosen_NIP',$nip);
+        $this->db->group_by('tugas_akhir.id');
+        if($row!=''){
+            return $this->db->get()->num_rows();
+        }
+        else{
+            return $this->db->get()->result_array();
+        }
+    }
 
 }

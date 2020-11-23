@@ -28,4 +28,9 @@ Class Seminar_model extends CI_Model{
         $where = array('id_seminar' => $id);
         return $this->db->delete($this->_table,$where);
     }
+    public function seminarNIP($field,$nip)
+    {
+        $this->db->where($field,$nip);
+        return $this->db->get($this->_table);
+    }
 }

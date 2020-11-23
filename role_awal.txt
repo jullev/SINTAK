@@ -1,0 +1,17 @@
+Mahasiswa
+	- mengajukan judul
+	- mengajukan dosen pembimbing
+	- mengajukan pembimbingan -> dengan melampirkan hasil revisi
+	- mengajukan sidang
+Dosen
+	- menerima / menolak usulan judul dan bimbingan
+	- melakukan koreksi terhadap bimbingan -> telegram bot api
+	- melakukan Acc
+Admin Prodi
+	- Melakukan pengecekan terhadap kelengkapan berkas
+	- menjadwalkan ujian
+Koordinator PKL
+	- memantau progress pembimbingan
+	- melihat jumlah bimbingan masing-masing dosen
+	- melihat jumlah penguji masing-masing dosen
+	- memberikan tugas sebagai penguji pada dosen -> telgram bot api

@@ -65,26 +65,164 @@
               <span>Dashboard</span></a
             >
           </li>
-
-          <!-- Heading -->
-          <div class="sidebar-heading">
-              Data Master
-          </div>
-          <!--Data Dosen -->
-          <!-- <li class="nav-item">
-			      <a class="nav-link" href="<?php echo base_url('').'index.php/dosen'; ?>">
-              <i class="fas fa-user-injured"></i>
-              <span class="">Dosen</span>
+          <?php 
+            if($_SESSION['kode_level']!=1 || $_SESSION['kode_level']!=3 || $_SESSION['kode_level']!=4 || $_SESSION['kode_level']!=5){
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/add" ?>">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Pengajuan Judul</span></a
+            >
+            <!---
+              1. Jika mahasiswa tampilkan form untuk menambah pengajuan judul
+              2. Jika Dosen, tampilkan seluruh list mahasiswa bimbingan dan judul yg diajukan, dan dosen dapat melakukan acc atau tidak
+            -->
+          </li>
+        <?php } ?>  
+        <?php 
+          if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir" ?>">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Tugas Akhir</span></a
+            >
+            <!-- 
+              1. Jika  mahasiswa, tampilkan seluruh submit tugas akhir berdasarkan mahasiswa login
+              2. Jika dosen pembimbing tampilkan seluruh judul tugas akhir berdasarkan mahasiswa bimbingan, dan dapat melakukan acc seminar, dan sidang jika memenuhi syarat bimbingan(misal 3x)
+            -->
+          </li>
+          <?php } ?>  
+          <?php 
+            if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir" ?>">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Bimbingan</span></a
+            >
+            <!--- 
+              1. Jika mahasiswa tampilkan daftar riwayat bimbingan
+              2. Jika dosen pembimbing, munculkan list submit bimbingan, order by id  desc
+            -->
+          </li>
+          <?php } ?>  
+          <?php 
+            if($_SESSION['kode_level']>=6 && $_SESSION['kode_level']<=8){
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url().'dosen/pembimbing' ?>">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Pantau Bimbingan</span></a
+            >
+            <!---
+              menu koordinator
+            -->
+          </li>
+          <?php } ?>  
+          <?php 
+            if($_SESSION['kode_level']!=1){
+          ?>
+          <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-desktop"></i>
+              <span>Seminar</span>
             </a>
-		      </li> -->
-          <!--Data Mahasiswa -->
-          <!-- <li class="nav-item">
-			      <a class="nav-link" href="<?php echo base_url('').'index.php/mahasiswa'; ?>">
-              <i class="fas fa-user-injured"></i>
-              <span class="">Mahasiswa</span>
+            <div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="py-2 collapse-inner rounded">
+              <?php 
+                if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==3 || $_SESSION['kode_level']==4 || $_SESSION['kode_level']==5  || $_SESSION['kode_level']==6 || $_SESSION['kode_level']==7 || $_SESSION['kode_level']==8){
+              ?>
+              <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Pengajuan Seminar</a>     
+              <!-- 
+                1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan seminar, setelah submit, munculkan tombol download berkas2 seminar
+                2. Jika admin prodi, tampilkan seluruh list pengajuan seminar berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
+                3. Jika koordinator TA, tampilkan seluruh list pengajuan seminar berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan panelis.
+              -->
+              <?php } ?>  
+              <?php 
+                if($_SESSION['kode_level']!=1){
+              ?>
+              <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Jadwal Seminar</a>
+              <!-- 
+                Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
+              -->
+              <?php } ?>
+              <?php 
+                if($_SESSION['kode_level']!=1 || $_SESSION['kode_level']!=3 || $_SESSION['kode_level']!=4 || $_SESSION['kode_level']!=5){
+              ?>
+              <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Revisi Seminar</a>
+              <!-- 
+                1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
+                2. Jika panelis, bisa melihat dan mengACC revisi
+                3. Jika dosen pembimbing, bisa melihat revisi
+              -->
+              <?php } ?>  
+              </div>
+            </div>
+            </li>
+            <?php } ?>  
+            <?php 
+              if($_SESSION['kode_level']!=1){
+            ?>
+            <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-desktop"></i>
+              <span>Sidang</span>
             </a>
-		      </li> -->
+            <div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="py-2 collapse-inner rounded">
+              <?php 
+                if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==3 || $_SESSION['kode_level']==4 || $_SESSION['kode_level']==5  || $_SESSION['kode_level']==6 || $_SESSION['kode_level']==7 || $_SESSION['kode_level']==8){
+              ?>
+                <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Pengajuan Sidang</a>     
+              <!-- 
+                1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
+                2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
+                3. Jika koordinator TA, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan anggota.
+              -->
+            <?php } ?>  
+            <?php 
+                if($_SESSION['kode_level']!=1){
+            ?>
+            <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Jadwal Sidang</a>
+            <!-- 
+              Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
+            -->
+            <?php } ?>  
+            <?php 
+                if($_SESSION['kode_level']!=1 || $_SESSION['kode_level']!=3 || $_SESSION['kode_level']!=4 || $_SESSION['kode_level']!=5){
+            ?>
+            <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Revisi Sidang</a>
+              <!-- 
+                1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
+                2. Jika panelis, bisa melihat dan mengACC revisi
+                3. Jika dosen pembimbing, bisa melihat revisi
+              -->
+            <?php } ?>  
+              </div>
+            </div>
+            </li>
+            <?php } ?>  
+            <?php 
+                if($_SESSION['kode_level']>=3 && $_SESSION['kode_level']<=8){
+            ?>
+           <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-desktop"></i>
+              <span>Rekap</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Rekap Nilai</a>
+                <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Rekap Sidang</a>
+                <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Rekap Seminar</a>
+              </div>
+            </div>
+            </li>
+          <?php } ?>  
 
+           
           <!-- Nav Item - Pages Collapse Menu -->
           <?php 
             if($_SESSION['kode_level']==1){
@@ -101,35 +239,10 @@
                 <a class="collapse-item" href="<?php echo base_url()."Topik" ?>">Topik</a>
                 <a class="collapse-item" href="<?php echo base_url()."Ruangan" ?>">Ruangan</a>
                 <a class="collapse-item" href="<?php echo base_url()."Master_status" ?>">Master Status</a>
-
-                <!-- <a class="collapse-item" href="<?php echo base_url()."index.php/pages/table" ?>">Table</a>
-                <a class="collapse-item" href="<?php echo base_url()."index.php/pages/form" ?>">Form</a> -->
               </div>
             </div>
           </li>
-         <?php } ?>
-          <!-- untuk data transaksi -->
-           <!-- Nav Item - Pages Collapse Menu -->
-           <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseTwo">
-              <i class="fas fa-fw fa-desktop"></i>
-              <span>Transaksi</span>
-            </a>
-            <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div class="py-2 collapse-inner rounded">
-                <a class="collapse-item" href="<?php echo base_url()."Tugas_akhir" ?>">Tugas Akhir</a>
-                <?php 
-                  if($_SESSION['kode_level']==8){
-                ?>
-                <a class="collapse-item" href="<?php echo base_url()."Tugas_akhir/add" ?>">Pengajuan Judul</a>
-                <a class="collapse-item" href="<?php echo base_url()."Seminar" ?>">Seminar</a>
-                <a class="collapse-item" href="<?php echo base_url()."Seminar/add" ?>">Pengajuan Seminar</a>
-                <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Sidang</a>
-                <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Pengajuan Sidang</a>
-                <?php }   ?>
-              </div>
-            </div>
-          </li>
+          <?php } ?>
 
 
           <!-- Sidebar Toggler (Sidebar) -->
@@ -363,7 +476,6 @@
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo assetUrl() ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
     <!-- Core plugin JavaScript-->
     <script src="<?php echo assetUrl() ?>vendor/jquery-easing/jquery.easing.min.js"></script>
 

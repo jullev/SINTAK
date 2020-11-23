@@ -63,7 +63,7 @@ class Login extends CI_Controller{
               'id_login'   => $data_login_mhs['NIM'],
               'username'   => $data_login_mhs['NAMA'],
               'level'      => "Mahasiswa",
-              'kode_level' => "8"
+              'kode_level' => "12"
             );
           }
           $this->session->set_userdata($data_session);

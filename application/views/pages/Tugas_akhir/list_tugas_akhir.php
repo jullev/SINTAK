@@ -1,10 +1,6 @@
 <div class="card shadow py-2">
   <div class="card-body">
-    <?php
-    if ($_SESSION['kode_level'] == 1) {
-    ?>
       <a href="<?php echo base_url() . "Tugas_akhir/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
-    <?php } ?>
     <?php
     $this->load->view("common/msg")
     ?>
@@ -53,7 +49,7 @@
                     if ($_SESSION['kode_level'] == 7) {
                     ?>
                       <a href="#" class="edit-ta dropdown-item" data-id="<?php echo $i->id ?>">Validasi</a>
-                    <?php } else if ($_SESSION['kode_level'] == 2 || ($_SESSION['kode_level'] == 8 && $i->id_status != 1)) {
+                    <?php } if ($_SESSION['kode_level'] == 7 || $_SESSION['kode_level'] == 2 || ($_SESSION['kode_level'] == 8 && $i->id_status != 1)) {
                     ?>
                       <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>
                     <?php } ?>

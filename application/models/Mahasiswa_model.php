@@ -81,5 +81,4 @@ Class Mahasiswa_model extends CI_Model{
         $where = array('NIM' => $id);
         return $this->db->delete($this->_table,$where);
     }
-
 }

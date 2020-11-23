@@ -8,6 +8,12 @@ Class Dosen_model extends CI_Model{
         $this->db->join('role', 'dosen.idRole = role.idRole','left');
         return $this->db->get();
     }
+    function getDosenPembimbing(){
+        $this->db->select('NIP,NIDN,NAMA');
+        $this->db->from($this->_table);
+        $this->db->where('idRole',7);
+        return $this->db->get();
+    }
 
     function getById($id){
         $this->db->join('role','dosen.idRole=role.idRole','left');
@@ -26,5 +32,4 @@ Class Dosen_model extends CI_Model{
         $where = array('NIP' => $id);
         return $this->db->delete($this->_table,$where);
     }
-
 }

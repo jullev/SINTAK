@@ -21,9 +21,9 @@ $(document).ready(function() {
 	});
 	$(".img-topik").owlCarousel({
 		animateOut: "fadeOut",
+		autoPlay : true,
 		loop: true,
 		items: 6,
-		stagePadding: 0,
 		responsive: {
 			0: {
 				items: 2

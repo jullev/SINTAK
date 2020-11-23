@@ -118,7 +118,7 @@
             <h3 class="label">Tugas Akhir</h3>
         </div>
         <div class="col-md-6">
-            <form action="<?php echo base_url()."index.php/welcome/filter" ?>" id="filterTA" data-topik="">
+            <form action="<?php echo base_url()."welcome/filter" ?>" id="filterTA" data-topik="">
             <div class="input-group mb-3">
                 <select name="id_prodi" id="" class="form-control">
                     <option value="">---Semua Prodi---</option>
