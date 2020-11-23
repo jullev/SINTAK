@@ -34,7 +34,7 @@
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $i->Tanggal_bimbingan; ?></td>
                         <td><?php echo $i->Deskripsi; ?></td>
-                        <td><a href="<?php echo base_url().'uploaded_file/'.$i->Data_Dukung; ?>"><?php echo $i->Data_Dukung; ?></a></td>
+                        <td><a href="<?php echo base_url().'assets/berkas/bimbingan/'.$i->Data_Dukung; ?>"><?php echo $i->Data_Dukung; ?></a></td>
                         <td><?=($i->revisi == null) ? 'Belum Di Revisi' : $i->revisi ?></td>
                         <td class="text-center">
                         <?php 
@@ -91,7 +91,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><span class="fa fa-calendar"></span></span>
                 </div>
-              <input type="text" class="datepicker form-control" name="Tanggal_bimbingan" placeholder="Masukkan Tanggal Bimbingan" required>
+              <input type="text" class="datepicker form-control" name="Tanggal_bimbingan" placeholder="Masukkan Tanggal Bimbingan" >
             </div>
 
               <br>

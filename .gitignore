@@ -29,3 +29,13 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 *.sublime-project
 /tests/tests/
 /tests/results/
+.env.development
+.env.development
+application/controllers/Penentuan_panelis.php
+.env.development
+application/models/Panelis_model.php
+application/views/pages/penentuan_panelis/list_penentuan_panelis.php
+application/views/pages/penentuan_panelis/tambah_panelis.php
+application/views/pages/penentuan_tanggal_seminar/edit_tanggal.php
+application/views/pages/penentuan_panelis/edit_panelis.php
+.env.development

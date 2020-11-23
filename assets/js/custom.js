@@ -5,6 +5,9 @@ $(document).ready(function() {
 	$(".datepicker").datepicker({
 		format: "yyyy-mm-dd"
 	});
+	$(".datepicker").datepicker("setDate", new Date());
+
+
 	$("button[type='reset']").click(function() {
 		$(".select2")
 			.val(null)
@@ -257,4 +260,10 @@ $(document).ready(function() {
 			}
 		);
 	});
+
+    $('#filter_angkatan').on('change', function() {
+		const data = $('#filter_angkatan :selected').attr('data-angkatan');
+		const table = $('#dataTable').DataTable();
+        table.column(8).search(data).draw();
+    });
 });
