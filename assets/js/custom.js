@@ -77,21 +77,40 @@ $(document).ready(function() {
 	// 		}
 	// 	});
 	// });
-	$(".open-desc").click(function(e) {
+	$(".table-responsive").on("click", ".open-desc", function(e) {
 		e.preventDefault();
 		var id = $(this).data("id");
+		var get_url = $(this).data("url");
 		$.ajax({
 			type: "get",
 			data: { id_ta: id },
-			url: baseUrl + "tugas_akhir/deskripsi",
+			url: get_url,
 			success: function(data) {
-				console.log(data);
+				// console.log(data);
 				$("#modalDesc .modal-body").html(data.deskripsi);
 				$("#modalDesc .modal-header h5").html(data.Judul_TA);
 				$("#modalDesc").modal("show");
 			}
 		});
 	});
+	
+	$(".table-responsive").on("click", ".open-abstract", function(e) {
+		e.preventDefault();
+		var id = $(this).data("id");
+		var get_url = $(this).data("url");
+		$.ajax({
+			type: "get",
+			data: { id_ta: id },
+			url: get_url,
+			success: function(data) {
+				// console.log(data);
+				$("#modalDesc .modal-body").html(data.abstract);
+				$("#modalDesc .modal-header h5").html(data.Judul_TA);
+				$("#modalDesc").modal("show");
+			}
+		});
+	});
+
 	$(".btn-status .btn").click(function(e) {
 		e.preventDefault();
 		var status = $(this).data("status");
@@ -133,6 +152,28 @@ $(document).ready(function() {
 			}
 		);
 	});
+	$(".table-responsive").on("click", ".pengajuan-judul", function(e) {
+		e.preventDefault();
+		e.preventDefault();
+		var id = $(this).data("id");
+		var get_url = $(this).data("url");
+		$.ajax({
+			type: "get",
+			url: get_url,
+			data: { id_ta: id },
+			success: function(response) {
+				$("#modalEdit #dosen")
+					.val(response.Dosen_NIP)
+					.change();
+				$("#modalEdit #status")
+					.val(response.id_status)
+					.change();
+				$("#modalEdit #id").val(response.id);
+				$("#modalEdit").modal("show");
+			}
+		});
+	});
+
 	$(".table-responsive").on("click", ".edit-ta", function(e) {
 		e.preventDefault();
 		var id = $(this).data("id");

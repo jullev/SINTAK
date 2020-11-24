@@ -66,13 +66,27 @@
             >
           </li>
           <?php 
-            if($_SESSION['kode_level']!=1 || $_SESSION['kode_level']!=3 || $_SESSION['kode_level']!=4 || $_SESSION['kode_level']!=5){
+            if($_SESSION['kode_level']!=1 && $_SESSION['kode_level']!=3 && $_SESSION['kode_level']!=4 && $_SESSION['kode_level']!=5){
           ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/add" ?>">
-              <i class="fas fa-fw fa-chalkboard-teacher"></i>
-              <span>Pengajuan Judul</span></a
-            >
+            <?php
+            if ($_SESSION['kode_level'] == 12) {
+            ?>
+              <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/add" ?>">
+                <i class="fas fa-fw fa-chalkboard-teacher"></i>
+                <span>Pengajuan Judul</span></a
+              >
+            <?php
+            }
+            elseif($_SESSION['kode_level'] != 12){
+            ?>
+              <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/list_pengajuan_judul" ?>">
+                <i class="fas fa-fw fa-chalkboard-teacher"></i>
+                <span>Pengajuan Judul</span></a
+              >
+            <?php
+            }
+            ?>
             <!---
               1. Jika mahasiswa tampilkan form untuk menambah pengajuan judul
               2. Jika Dosen, tampilkan seluruh list mahasiswa bimbingan dan judul yg diajukan, dan dosen dapat melakukan acc atau tidak
@@ -80,7 +94,7 @@
           </li>
         <?php } ?>  
         <?php 
-          if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
+          if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2 || $_SESSION['koordinator'] == true){
         ?>
           <li class="nav-item">
             <a class="nav-link" href="<?php echo base_url()."Tugas_akhir" ?>">
@@ -93,6 +107,7 @@
             -->
           </li>
           <?php } ?>  
+          
           <?php 
             if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
           ?>
@@ -468,7 +483,7 @@
             >
               Cancel
             </button>
-            <a class="btn btn-primary" href="<?php echo base_url()."index.php/login/logout" ?>">Logout</a>
+            <a class="btn btn-primary" href="<?php echo base_url()."login/logout" ?>">Logout</a>
           </div>
         </div>
       </div>

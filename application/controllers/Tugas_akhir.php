@@ -15,19 +15,36 @@ Class Tugas_akhir extends CI_controller{
     function index(){
 
         $param['pageInfo'] = "List Tugas Akhir";
-        if($_SESSION['kode_level']==8){
+        if($_SESSION['kode_level']==12){
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
         }
         else if($_SESSION['kode_level']==2){
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         }else{
-            $filter='';
+            $filter= ['Prodi_idProdi' => $_SESSION['id_prodi']];
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
         $param['status'] = $this->Status_model->getAllDataForTugasAkhir()->result();
 		$this->template->load("common/template", "pages/Tugas_akhir/list_tugas_akhir", $param);
+    }
+
+    public function list_pengajuan_judul()
+    {
+        $param['pageInfo'] = "List Pengajuan Judul";
+        
+        // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
+        if($_SESSION['koordinator']==true || $_SESSION['kps']==true){
+            $filter= ['Prodi_idProdi' => $_SESSION['id_prodi']];
+        }else{
+            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+        }
+        $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getPengajuanJudul($filter)->result();
+        $param['Topik'] = $this->Topik_model->getAll()->result();
+        $param['dosen'] = $this->Dosen_model->getAll()->result();
+        $param['status'] = $this->Status_model->getAllDataForPengajuanJudul()->result();
+		$this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
     }
 
     function add(){
@@ -110,7 +127,7 @@ Class Tugas_akhir extends CI_controller{
 
         }
         
-        redirect('Tugas_akhir/index');
+        redirect('Tugas_akhir');
     }
     function add_action_admin(){
         $config = array(
@@ -183,13 +200,19 @@ Class Tugas_akhir extends CI_controller{
 
         }
         
-        redirect('Tugas_akhir/index');
+        redirect('Tugas_akhir');
     }
 
 
     public function deskripsi()
     {
         $data = $this->TugasAkhir_Model->getDeskripsi($_GET['id_ta'])[0];
+        header("content-type:json/application");
+        echo json_encode($data);
+    }
+    public function abstract()
+    {
+        $data = $this->TugasAkhir_Model->getAbstract($_GET['id_ta'])[0];
         header("content-type:json/application");
         echo json_encode($data);
     }
@@ -202,23 +225,26 @@ Class Tugas_akhir extends CI_controller{
             echo "error";
         }
     }
+
     public function getPembimbing()
     {
         $data = $this->TugasAkhir_Model->getPembimbing($_GET['id_ta'])[0];
         header("content-type:json/application");
         echo json_encode($data);
     }
+
     public function validasi()
     {
-        if($_SESSION['kode_level']==7 || $_SESSION['kode_level']==1){
+        // if($_SESSION['kode_level']==7 || $_SESSION['kode_level']==1){
             $update = array(
                 "Dosen_NIP" => $_POST['Dosen_NIP'],
-                'id_status' => $_POST['id_status']
+                'id_status' => $_POST['id_status'],
+                'tgl_ACC' => date('Y-m-d')
             );
             
             $msg = $this->TugasAkhir_Model->update($_POST['id'],$update) ? "Validasi Berhasil" : "Validasi Gagal";
             $this->session->set_flashdata('msg',$msg);
-            redirect(base_url().'index.php/Tugas_akhir');
-        }
+            redirect(base_url().'Tugas_akhir/list_pengajuan_judul');
+        // }
     }
 }

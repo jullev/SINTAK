@@ -22,9 +22,9 @@
         }
         ?>
         <form method="POST" action="<?php if ($_SESSION['kode_level'] == 1) {
-        echo base_url() . 'index.php/Tugas_akhir/add_action_admin';
+        echo base_url() . 'Tugas_akhir/add_action_admin';
         } else{
-            echo base_url() . 'index.php/Tugas_akhir/add_action';   
+            echo base_url() . 'Tugas_akhir/add_action';   
         } ?>">
             <?php
             echo validation_errors(); ?>

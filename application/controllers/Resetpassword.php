@@ -61,8 +61,12 @@ Class Resetpassword extends CI_controller{
           $this->email->subject('Reset Password');
           $this->email->message('Password anda berhasil di reset.<br>Password : ' . $password. '<br>Silahkan login kembali ' . base_url().'login' );
           
-          $this->email->send();
-          echo "success";
+          try {
+            $this->email->send();
+            echo "success";
+          } catch (\Throwable $th) {
+            echo "gagal kirim email";
+          }
       }
   }
 }

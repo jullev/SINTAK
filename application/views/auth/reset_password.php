@@ -154,7 +154,7 @@ $(document).ready(function(e){
           $('#body_form').addClass('animated bounceIn');
           $('.email').addClass('animated bounce delay-1s');
 
-          var html = '<div class="alert alert-success"><b> <span class="fa fa-info-circle"></span> &nbsp; Silahkan cek email anda untuk mengetahui password anda.</b></div>';
+          var html = '<div class="alert alert-success"><b> <span class="fa fa-info-circle"></span> &nbsp; Silahkan cek email anda untuk mengetahui password anda. Jika pesan tidak terdapat di inbox, silahkan cek di spam.</b></div>';
           $(".tmp_alert").html(html);
           $('#email').val('');
         }
