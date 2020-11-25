@@ -14,22 +14,29 @@ class Seminar extends CI_Controller
 	function index()
 	{
 		$param['pageInfo'] = "List Seminar";
-		if ($_SESSION['kode_level'] == 8) {
-			$param['data_seminar'] = $this->Seminar_model->getWhere(["Mahasiswa_NIM" => $_SESSION['id_login']])->result();
-		} else {
-			$param['data_seminar'] = $this->Seminar_model->getAll()->result();
+		if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+		} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['NIP_Panelis' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+		} elseif ($_SESSION['kode_level'] == 12) {
+			$param['data_seminar'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA", "tugas_akhir ta", ["mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'tgl_ACC !=' => NULL], "")->result_array();
 		}
 		//Mengambil Data Dari Tabel Master
 		$param['Dosen'] = $this->Dosen_model->getAll()->result();
 		$param['Ruangan'] = $this->Ruangan_model->getAll()->result();
 		$param['Master_status'] = $this->Status_model->getAllDataForSeminar()->result();
-		$this->template->load("common/template", "pages/Seminar/list_seminar", $param);
+		if ($_SESSION['kode_level'] == 12) {
+			$this->template->load("common/template", "pages/Seminar/list_seminar_mhs", $param);
+		} else {
+			$this->template->load("common/template", "pages/Seminar/list_seminar", $param);
+		}
 	}
-	function rekap_seminar(){
-        $param['pageInfo'] = "Rekap Seminar";
+	function rekap_seminar()
+	{
+		$param['pageInfo'] = "Rekap Seminar";
 
 		$this->template->load("common/template", "pages/Seminar/rekap_seminar", $param);
-    }
+	}
 	function add()
 	{
 		$param['pageInfo'] = "Pengajuan Seminar";
@@ -85,16 +92,19 @@ class Seminar extends CI_Controller
 	function update()
 	{
 		$id = $this->input->post('id_');
-		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id, "Mahasiswa_NIM" => $_SESSION['id_login']])->num_rows();
+		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
 		if ($cekId == 1) {
-			$data = array(
-				'Tanggal' => $this->input->post('Tanggal'),
-				'jam' => $this->input->post('jam'),
-				'NIP_Panelis' => $this->input->post('NIP_Panelis'),
-				'idRuangan' => $this->input->post('idRuangan'),
-				'id_status' => $this->input->post('id_status'),
-				'Nilai' => $this->input->post('Nilai'),
-			);
+			if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+				$data = array(
+					'Tanggal' => $this->input->post('Tanggal'),
+					'jam' => $this->input->post('jam'),
+					'idRuangan' => $this->input->post('idRuangan'),
+				);
+			} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+				$data = array(
+					'NIP_Panelis' => $this->input->post('NIP_Panelis'),
+				);
+			}
 			if ($this->Seminar_model->update($id, $data)) {
 				//Flash Message Sukses
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>

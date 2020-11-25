@@ -12,26 +12,19 @@
 						<td>NIM</td>
 						<td>Nama Mahasiswa</td>
 						<td>Judul</td>
-						<td>Tgl. Waktu</td>
-						<td>Ruangan</td>
-						<td>Dosen Panelis</td>
 						<td>Pembimbing</td>
 						<td>Aksi</td>
 					</tr>
-				</thead>
 				<tbody>
 					<?php
 					$no = 1;
-					foreach ($data as $i) {
+					foreach ($data_seminar as $i) {
 					?>
 						<tr>
 							<td><?php echo $no++; ?></td>
 							<td><?php echo $i->Mahasiswa_NIM ?></td>
 							<td><?php echo $i->nama_mahasiswa ?></td>
 							<td><?php echo $i->Judul_TA ?></td>
-							<td><?php echo $i->Tanggal . ' ' . $i->Jam; ?></td>
-							<td><?php echo $i->Nama_ruangan ?></td>
-							<td><?php echo $i->NAMA ?></td>
 							<td><?php echo $i->NAMA ?></td>
 							<td class="text-center">
 								<div class="dropdown">
@@ -72,7 +65,7 @@
 </div>
 
 <div class="modal" id="modalEdit">
-	<div class="modal-dialog modal-xl">
+	<div class="modal-dialog">
 		<div class="modal-content">
 
 			<!-- Modal Header -->
@@ -86,54 +79,51 @@
 				<form action="seminar/update" method="post" id="formValidasi">
 					<input type="hidden" name="id_" id="id_">
 					<div class="row">
-						<div class="col-md-3">
-							<label for="">Tanggal</label>
-							<input type="date" name="Tanggal" id="Tanggal" class="form-control">
-						</div>
-						<div class="col-md-3">
-							<label for="">Jam</label>
-							<input type="time" name="jam" id="jam" class="form-control">
-						</div>
-						<div class="col-md-6">
-							<label for="">Panelis</label>
-							<select name="NIP_Panelis" id="NIP_Panelis" class="form-control">
-								<option value="">--Pilih--</option>
-								<?php
-								foreach ($Dosen as $i) {
-									echo "<option value='$i->NIP'>$i->NAMA</option>";
-								}
-								?>
-							</select>
-						</div>
+						<?php
+						if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+						?>
+							<div class="col-md-12">
+								<label for="">Tanggal</label>
+								<input type="date" name="Tanggal" id="Tanggal" class="form-control">
+							</div>
+							<div class="col-md-12">
+								<label for="">Jam</label>
+								<input type="time" name="jam" id="jam" class="form-control">
+							</div>
+							<div class="col-md-12">
+								<label for="">Ruangan</label>
+								<select name="idRuangan" id="idRuangan" class="form-control">
+									<option value="">--Pilih--</option>
+									<?php
+									foreach ($Ruangan as $i) {
+										echo "<option value='$i->idRuangan'>$i->Nama_ruangan</option>";
+									}
+									?>
+								</select>
+							</div>
+
+						<?php
+						} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+						?>
+							<div class="col-md-12">
+								<label for="">Panelis</label>
+								<select name="NIP_Panelis" id="NIP_Panelis" class="form-control">
+									<option value="">--Pilih--</option>
+									<?php
+									foreach ($Dosen as $i) {
+										echo "<option value='$i->NIP'>$i->NAMA</option>";
+									}
+									?>
+								</select>
+							</div>
+						<?php
+						}
+						?>
 					</div>
-					<div class="row mt-1">
-						<div class="col-md-6">
-							<label for="">Ruangan</label>
-							<select name="idRuangan" id="idRuangan" class="form-control">
-								<option value="">--Pilih--</option>
-								<?php
-								foreach ($Ruangan as $i) {
-									echo "<option value='$i->idRuangan'>$i->Nama_ruangan</option>";
-								}
-								?>
-							</select>
-						</div>
-						<div class="col-md-6">
-							<label for="">Status</label>
-							<select name="id_status" id="id_status" class="form-control">
-								<option value="">--Pilih--</option>
-								<?php
-								foreach ($Master_status as $i) {
-									echo "<option value='$i->idMaster_status'>$i->Status</option>";
-								}
-								?>
-							</select>
-						</div>
-						<div class="col-md-6">
-							<label for="">Nilai</label>
-							<input type="text" name="Nilai" id="Nilai" class="form-control">
-						</div>
-					</div>
+
+					<!-- <div class="row mt-1">
+
+					</div> -->
 					<br>
 					<br>
 					<?php

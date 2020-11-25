@@ -25,7 +25,7 @@ class Seminar_model extends CI_Model
 
 	function getById($id)
 	{
-		$this->db->select('id_seminar,Tanggal,jam,NIP_Panelis,id_status,idRuangan,Nilai');
+		$this->db->select('id_seminar,Tanggal,jam,NIP_Panelis,id_status,idRuangan');
 		return $this->db->get_where($this->_table, ["id_seminar" => $id])->result_array();
 	}
 
