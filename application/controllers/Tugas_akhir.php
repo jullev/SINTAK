@@ -46,7 +46,22 @@ Class Tugas_akhir extends CI_controller{
         $param['status'] = $this->Status_model->getAllDataForPengajuanJudul()->result();
 		$this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
     }
-
+    public function list_bimbingan()
+    {
+        $param['pageInfo'] = "List Bimbingan";
+        
+        // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
+        if($_SESSION['koordinator']==true || $_SESSION['kps']==true){
+            $filter= ['Prodi_idProdi' => $_SESSION['id_prodi']];
+        }else{
+            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+        }
+        $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getBimbingan($filter)->result();
+        $param['Topik'] = $this->Topik_model->getAll()->result();
+        $param['dosen'] = $this->Dosen_model->getAll()->result();
+        $param['status'] = $this->Status_model->getAllDataForPengajuanJudul()->result();
+		$this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
+    }
     function add(){
         $param['pageInfo'] = "Pendaftaran Tugas Akhir";
         $param['role'] = $this->TugasAkhir_Model->getAll()->result();

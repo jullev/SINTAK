@@ -25,7 +25,11 @@ class Seminar extends CI_Controller
 		$param['Master_status'] = $this->Status_model->getAllDataForSeminar()->result();
 		$this->template->load("common/template", "pages/Seminar/list_seminar", $param);
 	}
+	function rekap_seminar(){
+        $param['pageInfo'] = "Rekap Seminar";
 
+		$this->template->load("common/template", "pages/Seminar/rekap_seminar", $param);
+    }
 	function add()
 	{
 		$param['pageInfo'] = "Pengajuan Seminar";

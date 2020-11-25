@@ -112,7 +112,7 @@
             if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
           ?>
           <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir" ?>">
+            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/list_bimbingan" ?>">
               <i class="fas fa-fw fa-chalkboard-teacher"></i>
               <span>Bimbingan</span></a
             >
@@ -230,8 +230,8 @@
             <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
               <div class="py-2 collapse-inner rounded">
               <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Rekap Nilai</a>
-                <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Rekap Sidang</a>
-                <a class="collapse-item" href="<?php echo base_url()."Sidang/add" ?>">Rekap Seminar</a>
+                <a class="collapse-item" href="<?php echo base_url()."Sidang/rekap_sidang" ?>">Rekap Sidang</a>
+                <a class="collapse-item" href="<?php echo base_url()."Seminar/rekap_seminar" ?>">Rekap Seminar</a>
               </div>
             </div>
             </li>
