@@ -1,15 +1,8 @@
-@font-face {
-	font-family: "poppinsregular";
-	src: url("../font/poppins/poppins-regular-webfont.woff2") format("woff2"),
-		url("../font/poppins/poppins-regular-webfont.woff") format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
-
+@import url(https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap);
 body {
-	font-family: "poppinsregular";
+	font-family: "Poppins", sans-serif;
 	background: #f2f7fb;
-	font-size: 14px;
+	font-size: 15px;
 	align-items: center;
 }
 .box-login {
@@ -156,6 +149,9 @@ label {
 .table-striped tbody tr:nth-of-type(odd) {
 	background: rgb(0, 0, 0, 0.02);
 }
+#wrapper #content-wrapper{
+	background: #edf2f7;
+}
 @media (min-width: 768px) {
 	.sidebar {
 		width: 16.5% !important;
@@ -237,8 +233,24 @@ label {
 	width: 83.5%;
 }
 .card {
-	box-shadow: 0 0 5px 0 rgba(43, 43, 43, 0.1),
-		0 11px 6px -7px rgba(43, 43, 43, 0.1) !important;
+	-webkit-box-shadow: 0 2px 4px 0 rgba(43, 43, 43, 0.1) !important;
+	box-shadow: 0 2px 4px 0 rgba(43, 43, 43, 0.1) !important;
+	border : none;
+}
+.card-dashboard.with-notif{
+	border : 3px solid #ffc107;
+	-webkit-box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25) !important; 
+	box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25) !important;
+}
+.card-dashboard {
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	border : none;
+	transition: all.5s ease;
+}
+.card-dashboard:hover {
+	-webkit-box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25) !important; 
+	box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25) !important;
 }
 .sidebar-toggled .navbar.topbar {
 	width: 93%;
@@ -277,6 +289,9 @@ label {
 .color-blue {
 	color: #42a5f5;
 }
+.color-primary {
+	color: #373c6d;
+}
 a:hover {
 	text-decoration: none;
 }
@@ -288,6 +303,19 @@ a:hover {
 	font-size: 15px;
 	letter-spacing: 0.5px;
 }
+.custom-alert{
+	position: relative;
+	overflow: hidden;
+}
+.custom-alert .sticky{
+	position: absolute;
+	top : 0;
+	left : 0;
+	transform: translate(-25%,-25%);
+	font-size: 50px;
+	opacity: .3;
+}
+
 @media (max-width: 768px) {
 	.left-sidebar,
 	.sidebar {

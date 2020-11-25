@@ -434,7 +434,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; Sintak JTI <?= date('Y') ?></span>
           </div>
         </div>
       </footer>
@@ -502,5 +502,5 @@
     <script src="<?php echo assetUrl() ?>vendor/sweetalert-master/dist/sweetalert-dev.js"></script>
     <script src="<?php echo assetUrl() ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="<?php echo assetUrl() ?>js/custom.js"></script>
-  </body>
+    </body>
 </html>

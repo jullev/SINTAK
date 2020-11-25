@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
   <!--webfonts-->
-    <title>SIMTAK - LOGIN</title>
+    <title>SINTAK - LOGIN</title>
     <style rel="stylesheet" type="text/css">
     .loader {
   width: 10em;
@@ -87,10 +87,10 @@
             <span style="text">Loading...</span>
             </div>
           </div>
-            <div class="col-md-12" id="body_form" style="overflow:auto">
+            <div class="col-md-6" id="body_form" style="overflow:auto">
                 <div class="box-login">
                     <div class="top">
-                        <p>LOGIN SIMTAK</p>
+                        <p>LOGIN SINTAK</p>
                     </div>
                     <div class="body">
                       <div class="tmp_alert">
@@ -120,7 +120,7 @@
         </div>
     </div>
     <div class="copyright mt-4">
-        Copyright 2020 - SIMTAK
+      <span>Copyright &copy; Sintak JTI <?= date('Y') ?></span>
     </div>
 </body>
 </html>
