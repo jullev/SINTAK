@@ -38,4 +38,12 @@ Class Dosen_model extends CI_Model{
         $where = array('NIP' => $id);
         return $this->db->delete($this->_table,$where);
     }
+
+    public function getProdi($id_role)
+    {
+        $this->db->select('id_prodi');
+        $this->db->from('role');
+        $this->db->where('idRole', $id_role);
+        return $this->db->get()->result()[0];
+    }
 }

@@ -1,6 +1,5 @@
 <div class="card shadow py-2">
   <div class="card-body">
-      <a href="<?php echo base_url() . "Tugas_akhir/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
     <?php
     $this->load->view("common/msg")
     ?>
@@ -45,14 +44,7 @@
                     Option
                   </button>
                   <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <?php
-                    if ($_SESSION['kode_level'] == 7) {
-                    ?>
-                      <a href="#" class="edit-ta dropdown-item" data-id="<?php echo $i->id ?>">Validasi</a>
-                    <?php } if ($_SESSION['kode_level'] == 7 || $_SESSION['kode_level'] == 2 || ($_SESSION['kode_level'] == 8 && $i->id_status != 1)) {
-                    ?>
-                      <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>
-                    <?php } ?>
+                    <a href="#" class="pengajuan-judul dropdown-item" data-url="<?php echo base_url(). 'Tugas_akhir/getPembimbing' ?>" data-id="<?php echo $i->id ?>">Validasi</a>
                   </div>
                 </div>
               </td>
@@ -83,9 +75,8 @@
 </div>
 
 <?php
-if ($_SESSION['kode_level'] == 7) {
+if ($_SESSION['koordinator'] == true) {
 ?>
-
   <div class="modal" id="modalEdit">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -98,7 +89,7 @@ if ($_SESSION['kode_level'] == 7) {
 
         <!-- Modal body -->
         <div class="modal-body f-15 my-3">
-          <form action="Tugas_akhir/validasi" method="post" class="submitConfirm" id="formValidasi">
+          <form action="<?php echo base_url().'Tugas_akhir/validasi'?>" method="post" class="submitConfirm" id="formValidasi">
             <input type="hidden" name="id" id="id">
             <label for="">Dosen Pembimbing</label>
             <select name="Dosen_NIP" class="form-control select2" id="dosen" style="width :100%">
@@ -113,7 +104,7 @@ if ($_SESSION['kode_level'] == 7) {
               <?php
               foreach ($status as $key => $value) {
 
-                echo "<option value='" . $value->idMaster_status . "'>" . $value->Status . "</option>";
+                echo "<option value='" . $value->id_status . "'>" . $value->status . "</option>";
               }
               ?>
             </select>
@@ -127,4 +118,46 @@ if ($_SESSION['kode_level'] == 7) {
       </div>
     </div>
   </div>
-<?php } ?>
+<?php
+}
+else{
+?>
+  <div class="modal" id="modalEdit">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title">Validasi Judul</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body f-15 my-3">
+          <form action="<?php echo base_url().'Tugas_akhir/validasi'?>" method="post" class="submitConfirm" id="formValidasi">
+            <input type="hidden" name="id" id="id">
+            <input type="hidden" name="Dosen_NIP" value="<?php echo $_SESSION['id_login'] ?>">
+            <label for="" class="mt-3">Status</label>
+            <select name="id_status" class="mb-3 form-control select2" id="status" style="width :100%">
+              <?php
+              foreach ($status as $key => $value) {
+
+                echo "<option value='" . $value->id_status . "'>" . $value->status . "</option>";
+              }
+              ?>
+            </select>
+            <br>
+            <br>
+            <?php
+            $this->load->view("common/btn")
+            ?>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php
+}
+?>
+
+  

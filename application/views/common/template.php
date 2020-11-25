@@ -85,6 +85,65 @@
 							<i class="fas fa-fw fa-chalkboard-teacher"></i>
 							<span>Bimbingan</span></a>
 						<!--- 
+          <!-- Nav Item - Dashboard -->
+          <li class="nav-item active">
+            <a class="nav-link" href="<?php echo base_url().'dashboard' ?>">
+              <i class="fas fa-fw fa-tachometer-alt"></i>
+              <span>Dashboard</span></a
+            >
+          </li>
+          <?php 
+            if($_SESSION['kode_level']!=1 && $_SESSION['kode_level']!=3 && $_SESSION['kode_level']!=4 && $_SESSION['kode_level']!=5){
+          ?>
+          <li class="nav-item">
+            <?php
+            if ($_SESSION['kode_level'] == 12) {
+            ?>
+              <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/add" ?>">
+                <i class="fas fa-fw fa-chalkboard-teacher"></i>
+                <span>Pengajuan Judul</span></a
+              >
+            <?php
+            }
+            elseif($_SESSION['kode_level'] != 12){
+            ?>
+              <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/list_pengajuan_judul" ?>">
+                <i class="fas fa-fw fa-chalkboard-teacher"></i>
+                <span>Pengajuan Judul</span></a
+              >
+            <?php
+            }
+            ?>
+            <!---
+              1. Jika mahasiswa tampilkan form untuk menambah pengajuan judul
+              2. Jika Dosen, tampilkan seluruh list mahasiswa bimbingan dan judul yg diajukan, dan dosen dapat melakukan acc atau tidak
+            -->
+          </li>
+        <?php } ?>  
+        <?php 
+          if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2 || $_SESSION['koordinator'] == true){
+        ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir" ?>">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Tugas Akhir</span></a
+            >
+            <!-- 
+              1. Jika  mahasiswa, tampilkan seluruh submit tugas akhir berdasarkan mahasiswa login
+              2. Jika dosen pembimbing tampilkan seluruh judul tugas akhir berdasarkan mahasiswa bimbingan, dan dapat melakukan acc seminar, dan sidang jika memenuhi syarat bimbingan(misal 3x)
+            -->
+          </li>
+          <?php } ?>  
+          
+          <?php 
+            if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
+          ?>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir" ?>">
+              <i class="fas fa-fw fa-chalkboard-teacher"></i>
+              <span>Bimbingan</span></a
+            >
+            <!--- 
               1. Jika mahasiswa tampilkan daftar riwayat bimbingan
               2. Jika dosen pembimbing, munculkan list submit bimbingan, order by id  desc
             -->
@@ -416,6 +475,44 @@
 	<a class="scroll-to-top rounded" href="#page-top">
 		<i class="fas fa-angle-up"></i>
 	</a>
+    <!-- Logout Modal-->
+    <div
+      class="modal fade"
+      id="logoutModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button
+              class="close"
+              type="button"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Select "Logout" below if you are ready to end your current session.
+          </div>
+          <div class="modal-footer">
+            <button
+              class="btn btn-secondary"
+              type="button"
+              data-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <a class="btn btn-primary" href="<?php echo base_url()."login/logout" ?>">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
 
 	<!-- Logout Modal-->
 	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

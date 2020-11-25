@@ -52,18 +52,37 @@ class Login extends CI_Controller{
       if($cek > 0){
         if(password_verify($password,$password_db)){
           if($cek == 2){ //Dosen
-            $data_session = array(
-              'id_login'   => $data_login_dosen['NIP'],
-              'username'   => $data_login_dosen['NAMA'],
-              'level'      => $data_login_dosen['Role'],
-              'kode_level' => $data_login_dosen['idRole']
-            );
+            if($data_login_dosen['idRole'] >= 6 && $data_login_dosen['idRole'] <= 8)
+            {
+              $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
+              $data_session = array(
+                'id_login'   => $data_login_dosen['NIP'],
+                'username'   => $data_login_dosen['NAMA'],
+                'level'      => $data_login_dosen['Role'],
+                'kode_level' => $data_login_dosen['idRole'],
+                'koordinator'=> true,
+                'kps'        => false,
+                'id_prodi'   => $getProdi->id_prodi
+              );
+            }
+            else
+            {
+              $data_session = array(
+                'id_login'   => $data_login_dosen['NIP'],
+                'username'   => $data_login_dosen['NAMA'],
+                'level'      => $data_login_dosen['Role'],
+                'kode_level' => $data_login_dosen['idRole'],
+                'koordinator'=> false,
+                'kps'        => false,
+                'id_prodi'   => null
+              );
+            }
           }else if($cek == 3){ //Mahasiswa
             $data_session = array(
               'id_login'   => $data_login_mhs['NIM'],
               'username'   => $data_login_mhs['NAMA'],
               'level'      => "Mahasiswa",
-              'kode_level' => "12"
+              'kode_level' => 12
             );
           }
           $this->session->set_userdata($data_session);
