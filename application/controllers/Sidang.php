@@ -24,7 +24,11 @@ Class Sidang extends CI_Controller{
         $param['Master_status'] = $this->Status_model->getAllDataForSidang()->result();
 		$this->template->load("common/template", "pages/Sidang/list_sidang", $param);
     }
+    function rekap_sidang(){
+        $param['pageInfo'] = "Rekap Sidang";
 
+		$this->template->load("common/template", "pages/Sidang/rekap_sidang", $param);
+    }
     function add(){
         $param['pageInfo'] = "Pengajuan Sidang";
         //Mengambil NIM Login Mahasiswa
