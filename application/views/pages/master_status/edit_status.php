@@ -9,11 +9,11 @@
     <hr>
         <form method="POST" action="<?php echo base_url().'Master_status/update_action' ?>">
             <?php foreach($data_status as $data){ ?>
-            <input type="hidden" name="id_" value="<?php echo $data->idMaster_status; ?>">
+            <input type="hidden" name="id_" value="<?php echo $data->id_status; ?>">
             <div class="row">
                 <div class="col-md-6 form-group">
                     <label>Status</label>
-                    <input type="text" class="form-control form-control-sm" name="status" placeholder="Masukkan Status" value="<?php echo $data->Status; ?>">
+                    <input type="text" class="form-control form-control-sm" name="status" placeholder="Masukkan Status" value="<?php echo $data->status; ?>">
                 </div>
             </div>
             <?php } ?>

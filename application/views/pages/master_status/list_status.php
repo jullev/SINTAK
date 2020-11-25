@@ -21,12 +21,12 @@
                     ?>
                     <tr>
                         <td><?php echo $no++; ?></td>
-                        <td><?php echo $i->Status; ?></td>
+                        <td><?php echo $i->status; ?></td>
                         <td class="text-center">
                             <?php 
                                 $dropdown['link'] = array(
-                                    "Edit" => base_url().'Master_status/edit/'.$i->idMaster_status,
-                                    "Delete" => base_url().'Master_status/delete/'.$i->idMaster_status
+                                    "Edit" => base_url().'Master_status/edit/'.$i->id_status,
+                                    "Delete" => base_url().'Master_status/delete/'.$i->id_status
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                             ?>
