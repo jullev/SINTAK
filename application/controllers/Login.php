@@ -65,6 +65,18 @@ class Login extends CI_Controller{
                 'id_prodi'   => $getProdi->id_prodi
               );
             }
+            else if($data_login_dosen['idRole'] >= 3 && $data_login_dosen['idRole'] <= 5){
+              $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
+              $data_session = array(
+                'id_login'   => $data_login_dosen['NIP'],
+                'username'   => $data_login_dosen['NAMA'],
+                'level'      => $data_login_dosen['Role'],
+                'kode_level' => $data_login_dosen['idRole'],
+                'koordinator'=> false,
+                'kps'        => false,
+                'id_prodi'   => $getProdi->id_prodi
+              );
+            }
             else
             {
               $data_session = array(
