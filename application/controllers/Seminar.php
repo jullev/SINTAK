@@ -9,6 +9,7 @@ class Seminar extends CI_Controller
 		$this->load->model('Ruangan_model');
 		$this->load->model('Dosen_model');
 		$this->load->model('Status_model');
+		$this->load->model('Mahasiswa_model');
 		$this->icon = "fa-calendar";
 	}
 	function index()
@@ -33,8 +34,23 @@ class Seminar extends CI_Controller
 	}
 	function rekap_seminar()
 	{
-		$param['pageInfo'] = "Rekap Seminar";
+		$nim = $this->session->userdata('id_login');
+		$prodi = $this->input->post('prodi');
+		$angkatan = $this->input->post('angkatan');
 
+		// kondisi ketika  filter digunakan / tidak. pada rekap seminar
+		if ($prodi != "" && $angkatan != "") {
+			$param['rekap_seminar'] = $this->Seminar_model->getRekapSeminar($angkatan,$prodi)->result();
+			$param['filter_angkatan'] = $angkatan;
+			$param['filter_prodi'] = $prodi;
+		}else{
+			$param['rekap_seminar'] = $this->Seminar_model->getRekapSeminar()->result();
+			$param['filter_angkatan'] = '';
+			$param['filter_prodi'] = '';
+		}
+		$param['angkatan'] = $this->Mahasiswa_model->getAngkatan()->result();
+		$param['prodi'] = $this->Seminar_model->getProdi()->result();
+		$param['pageInfo'] = "Rekap Seminar";
 		$this->template->load("common/template", "pages/Seminar/rekap_seminar", $param);
 	}
 	function add()
