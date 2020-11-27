@@ -50,4 +50,28 @@ class Seminar_model extends CI_Model
 		$this->db->where($field, $nip);
 		return $this->db->get($this->_table);
 	}
+
+	public function getRekapSeminar($angkatan = "", $prodi = "")
+	{
+		$this->db->select("a.id_seminar, b.Judul_TA, a.Tanggal, a.jam, c.Nama_ruangan, d.NAMA as nama_panelis, dd.NAMA as nama_pembimbing, e.NAMA as nama_mahasiswa, e.NIM, a.Nilai_penelis, a.Nilai_pembimbing, e.Tahun_masuk, f.Nama_prodi ");
+		$this->db->from("td_seminar as a");
+		$this->db->join("tugas_akhir as b", "b.id = a.id_TA");
+		$this->db->join("ruangan as c", "c.idRuangan = a.idruangan");
+		$this->db->join("dosen as d", "d.NIP = a.NIP_Panelis", "inner");
+		$this->db->join("dosen as dd", "dd.NIP = b.Dosen_NIP", "inner");
+		$this->db->join("mahasiswa as e", "e.NIM = b.Mahasiswa_NIM ");
+		$this->db->join("prodi as f", "f.idProdi = e.Prodi_idProdi ");
+
+        if($angkatan != "" && $prodi != ""){
+            $filter = array('e.Prodi_idProdi' => $prodi,'e.Tahun_masuk' => $angkatan);
+			$this->db->where($filter);
+		}
+		
+		$query = $this->db->get();
+		return $query;
+	}
+	function getProdi()
+	{
+		return $this->db->get('prodi');
+	}
 }
