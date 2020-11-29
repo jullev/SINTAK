@@ -13,6 +13,8 @@
 						<td>Nama Mahasiswa</td>
 						<td>Judul Tugas Akhir</td>
 						<td>Jadwal Seminar</td>
+						<td>Dospem</td>
+						<td>Dospan</td>
 						<td>Aksi</td>
 					</tr>
 					Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
@@ -23,10 +25,12 @@
 					?>
 						<tr>
 							<td><?php echo $no++; ?></td>
-							<td><?php echo $i->Mahasiswa_NIM ?></td>
-							<td><?php echo $i->nama_mahasiswa ?></td>
+							<td><?php echo $i->NIM ?></td>
+							<td><?php echo $i->NAMA ?></td>
 							<td><?php echo $i->Judul_TA ?></td>
 							<td><?php echo $i->Tanggal . ' ' . $i->jam; ?></td>
+							<td><?php echo $i->dosen_pembimbing ?></td>
+							<td><?php echo $i->dosen_panelis ?></td>
 							<td class="text-center">
 								<div class="dropdown">
 									<button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -80,14 +84,14 @@
 					<input type="hidden" name="id_" id="id_">
 					<div class="row">
 						<?php
-						if ($_SESSION['NIP'] = $i->Dosen_NIP) {
+						if ($_SESSION['id_login'] = $i->dosen_pembimbing) {
 						?>
 							<div class="col-md-12">
 								<label for="">Nilai Pembimbing</label>
 								<input type="text" name="Nilai_pembimbing" id="Nilai_pembimbing" class="form-control">
 							</div>
 						<?php
-						} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+						} elseif ($_SESSION['id_login'] = $i->dosen_panelis) {
 						?>
 							<div class="col-md-12">
 								<label for="">Nilai Panelis</label>

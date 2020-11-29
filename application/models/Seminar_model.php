@@ -23,6 +23,21 @@ class Seminar_model extends CI_Model
 		return $query;
 	}
 
+	function getFilterDosen()
+	{
+		$now = date('Y-m-d');
+		$nip = $_SESSION['id_login'];
+		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, 
+									td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis
+									FROM  td_seminar
+									JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA
+									JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM
+									JOIN dosen as dospem ON dospem.NIP = td_seminar.NIP_Panelis
+									JOIN dosen as dospan ON dospan.NIP = tugas_akhir.Dosen_NIP
+									WHERE td_seminar.Tanggal > '$now' AND dospem.nip = '$nip' OR dospan.nip = '$nip'")->result();
+		return $query;
+	}
+
 	function getById($id)
 	{
 		$this->db->select('id_seminar,Tanggal,jam,NIP_Panelis,id_status,idRuangan');
@@ -62,11 +77,11 @@ class Seminar_model extends CI_Model
 		$this->db->join("mahasiswa as e", "e.NIM = b.Mahasiswa_NIM ");
 		$this->db->join("prodi as f", "f.idProdi = e.Prodi_idProdi ");
 
-        if($angkatan != "" && $prodi != ""){
-            $filter = array('e.Prodi_idProdi' => $prodi,'e.Tahun_masuk' => $angkatan);
+		if ($angkatan != "" && $prodi != "") {
+			$filter = array('e.Prodi_idProdi' => $prodi, 'e.Tahun_masuk' => $angkatan);
 			$this->db->where($filter);
 		}
-		
+
 		$query = $this->db->get();
 		return $query;
 	}

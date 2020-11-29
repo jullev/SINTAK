@@ -35,15 +35,9 @@ class Seminar extends CI_Controller
 
 	function jadwal()
 	{
-		// $param['pageInfo'] = "List Seminar";
-		// if ($_SESSION['kode_level'] == 2) {
-		// 	$param['jadwal_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.Tanggal, s.jam, s.NIP_Panelis", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['ta.Dosen_NIP' => $_SESSION['NIP']], "")->result();
-		// 	// print_r($param);
-		// } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
-		// 	$param['jadwal_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA s.Tanggal, s.jam", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['NIP_Panelis' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
-		// }
+
 		$param['pageInfo'] = "Jadwal Seminar";
-		$param['jadwal_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.Tanggal, s.jam, s.NIP_Panelis", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['ta.Dosen_NIP' => $_SESSION['NIP']], "")->result();
+		$param['jadwal_seminar'] = $this->Seminar_model->getFilterDosen();
 		$this->template->load("common/template", "pages/Seminar/jadwal_seminar", $param);
 	}
 
@@ -55,10 +49,10 @@ class Seminar extends CI_Controller
 
 		// kondisi ketika  filter digunakan / tidak. pada rekap seminar
 		if ($prodi != "" && $angkatan != "") {
-			$param['rekap_seminar'] = $this->Seminar_model->getRekapSeminar($angkatan,$prodi)->result();
+			$param['rekap_seminar'] = $this->Seminar_model->getRekapSeminar($angkatan, $prodi)->result();
 			$param['filter_angkatan'] = $angkatan;
 			$param['filter_prodi'] = $prodi;
-		}else{
+		} else {
 			$param['rekap_seminar'] = $this->Seminar_model->getRekapSeminar()->result();
 			$param['filter_angkatan'] = '';
 			$param['filter_prodi'] = '';

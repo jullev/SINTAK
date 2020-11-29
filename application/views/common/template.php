@@ -136,11 +136,12 @@
               -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['kode_level'] == 2) {
+								if ($_SESSION['kode_level'] != 1) {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwal" ?>">Jadwal Seminar</a>
 									<!-- 
-                Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
+				1.	Menu jadwal seminar hanya untuk dosen pembimbing dan dosen panelis
+                2.	Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
               -->
 								<?php } ?>
 								<?php
