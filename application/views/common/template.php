@@ -77,7 +77,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2 || $_SESSION['koordinator'] == true) {
+				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2 || $_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir" ?>">
