@@ -2,7 +2,7 @@
     $this->load->view('pages/dashboard/alert');
 ?>
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 mb-4">
         <div class="card card-dashboard py-2">
             <div class="card-body">    
                 <div class="row">
@@ -17,7 +17,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mb-4">
         <div class="card card-dashboard py-2">
             <div class="card-body">    
                 <div class="row">
@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mb-4">
         <div class="card card-dashboard py-2">
             <div class="card-body">    
                 <div class="row">
@@ -47,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mb-4">
         <div class="card card-dashboard py-2">
             <div class="card-body">    
                 <div class="row">

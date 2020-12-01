@@ -2,7 +2,7 @@
     $this->load->view('pages/dashboard/alert');
 ?>
 <div class="row">
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
     <div class="card card-dashboard py-2">
         <div class="card-body">    
             <div class="row">
@@ -19,7 +19,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
     <div class="card card-dashboard py-2">
         <div class="card-body">    
             <div class="row">
@@ -36,7 +36,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
     <div class="card card-dashboard py-2">
         <div class="card-body">    
             <div class="row">
@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<div class="col-md-3">
+<div class="col-md-3 mb-4">
     <div class="card card-dashboard py-2">
         <div class="card-body">    
             <div class="row">
@@ -75,6 +75,40 @@
     <div class="col-md-6">
         <div class="card card-dashboard">
             <div class="card-header">
+                Topik Tugas Akhir Mahasiswa Bimbingan
+            </div>
+            <div class="card-body">    
+                <div class="table-repsonsive">
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Topik</th>
+                                <th>Jml Mahasiswa</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                foreach ($topik as $key => $value) {
+                                    $key++;
+                            ?>
+                                <tr>
+                                    <td><?= $key ?></td>
+                                    <td><?= $value['topik'] ?></td>
+                                    <td><?= $value['ttl'] ?></td>
+                                    <td><a href="">Detail</a></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card card-dashboard">
+            <div class="card-header">
                 Persentase Mahasiswa Bimbingan
             </div>
             <div class="card-body">    
@@ -90,27 +124,22 @@ var ctx = document.getElementById('myChart');
 var myChart = new Chart(ctx, {
     type: 'pie',
     data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: ['Belum Bimbingan','Bimbingan Seminar','Bimbingan Tugas Akhir', 'Selesai Sidang'],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: [<?= $belumBimbingan ?>,<?= $bimbinganSeminar ?>, <?= $bimbinganTA ?>, <?= $selesaiSidang ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
+                'rgba(70, 8, 173, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
             ],
             borderColor: [
                 'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
+                'rgba(70, 8, 173, 1)',
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
             ],
-            borderWidth: 1
         }]
     },
     options: {

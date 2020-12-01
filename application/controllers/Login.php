@@ -89,6 +89,8 @@ class Login extends CI_Controller{
                 'id_prodi'   => null
               );
             }
+            $getGlobalRole = $this->common->getData('global_role','role','',['idRole' => $data_login_dosen['idRole']],'')->result_array()[0];
+            $data_session['global_role'] = $getGlobalRole['global_role'];
           }else if($cek == 3){ //Mahasiswa
             $data_session = array(
               'id_login'   => $data_login_mhs['NIM'],
@@ -96,7 +98,9 @@ class Login extends CI_Controller{
               'level'      => "Mahasiswa",
               'kode_level' => 12
             );
+            $data_session['global_role'] = 'Mahasiswa';
           }
+            
           $this->session->set_userdata($data_session);
   				echo base_url().'dashboard';
 
