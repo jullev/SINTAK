@@ -52,6 +52,7 @@ class Login extends CI_Controller{
       if($cek > 0){
         if(password_verify($password,$password_db)){
           if($cek == 2){ //Dosen
+            // koordinator TA
             if($data_login_dosen['idRole'] >= 6 && $data_login_dosen['idRole'] <= 8)
             {
               $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
@@ -62,9 +63,25 @@ class Login extends CI_Controller{
                 'kode_level' => $data_login_dosen['idRole'],
                 'koordinator'=> true,
                 'kps'        => false,
+                'admin_prodi'=> false,
                 'id_prodi'   => $getProdi->id_prodi
               );
             }
+            // ketua program studi
+            else if($data_login_dosen['idRole'] >= 9 && $data_login_dosen['idRole'] <= 11){
+              $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
+              $data_session = array(
+                'id_login'   => $data_login_dosen['NIP'],
+                'username'   => $data_login_dosen['NAMA'],
+                'level'      => $data_login_dosen['Role'],
+                'kode_level' => $data_login_dosen['idRole'],
+                'koordinator'=> false,
+                'kps'        => true,
+                'admin_prodi'=> false,
+                'id_prodi'   => $getProdi->id_prodi
+              );
+            }
+            // admin prodi
             else if($data_login_dosen['idRole'] >= 3 && $data_login_dosen['idRole'] <= 5){
               $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
               $data_session = array(
@@ -74,6 +91,7 @@ class Login extends CI_Controller{
                 'kode_level' => $data_login_dosen['idRole'],
                 'koordinator'=> false,
                 'kps'        => false,
+                'admin_prodi'=> false,
                 'id_prodi'   => $getProdi->id_prodi
               );
             }
@@ -86,6 +104,7 @@ class Login extends CI_Controller{
                 'kode_level' => $data_login_dosen['idRole'],
                 'koordinator'=> false,
                 'kps'        => false,
+                'admin_prodi'=> false,
                 'id_prodi'   => null
               );
             }

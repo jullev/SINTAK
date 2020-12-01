@@ -77,7 +77,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2 || $_SESSION['koordinator'] == true) {
+				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2 || $_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir" ?>">
@@ -87,18 +87,17 @@
               1. Jika  mahasiswa, tampilkan seluruh submit tugas akhir berdasarkan mahasiswa login
               2. Jika dosen pembimbing tampilkan seluruh judul tugas akhir berdasarkan mahasiswa bimbingan, dan dapat melakukan acc seminar, dan sidang jika memenuhi syarat bimbingan(misal 3x)
             -->
-          </li>
-          <?php } ?>  
-          
-          <?php 
-            if($_SESSION['kode_level']==12 || $_SESSION['kode_level']==2){
-          ?>
-          <li class="nav-item">
-            <a class="nav-link" href="<?php echo base_url()."Tugas_akhir/list_bimbingan" ?>">
-              <i class="fas fa-fw fa-chalkboard-teacher"></i>
-              <span>Bimbingan</span></a
-            >
-            <!--- 
+					</li>
+				<?php } ?>
+
+				<?php
+				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2) {
+				?>
+					<li class="nav-item">
+						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/list_bimbingan" ?>">
+							<i class="fas fa-fw fa-chalkboard-teacher"></i>
+							<span>Bimbingan</span></a>
+						<!--- 
               1. Jika mahasiswa tampilkan daftar riwayat bimbingan
               2. Jika dosen pembimbing, munculkan list submit bimbingan, order by id  desc
             -->
@@ -139,15 +138,16 @@
 								<?php
 								if ($_SESSION['kode_level'] != 1) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/add" ?>">Jadwal Seminar</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwal" ?>">Jadwal Seminar</a>
 									<!-- 
-                Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
+				1.	Menu jadwal seminar hanya untuk dosen pembimbing dan dosen panelis
+                2.	Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
               -->
 								<?php } ?>
 								<?php
 								if ($_SESSION['kode_level'] != 1 || $_SESSION['kode_level'] != 3 || $_SESSION['kode_level'] != 4 || $_SESSION['kode_level'] != 5) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/add" ?>">Revisi Seminar</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Seminar/revisi" ?>">Revisi Seminar</a>
 									<!-- 
                 1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
                 2. Jika panelis, bisa melihat dan mengACC revisi
@@ -205,7 +205,7 @@
             ?>
            <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
-              <i class="fas fa-fw fa-file-alt"></i>
+              <i class="fas fa-fw fa-file-excel"></i>
               <span>Rekap</span>
             </a>
             <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -411,15 +411,15 @@
 
 			</div>
 			<!-- End of Main Content -->
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Sintak JTI <?= date('Y') ?></span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
+			<!-- Footer -->
+			<footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; Sintak JTI <?= date('Y') ?></span>
+					</div>
+				</div>
+			</footer>
+			<!-- End of Footer -->
 
 		</div>
 		<!-- End of Content Wrapper -->
@@ -486,4 +486,5 @@
 	<script src="<?php echo assetUrl() ?>vendor/bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
 	<script src="<?php echo assetUrl() ?>js/custom.js"></script>
 </body>
+
 </html>
