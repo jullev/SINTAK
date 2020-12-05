@@ -17,33 +17,8 @@
 						<td>Dospan</td>
 						<td>Aksi</td>
 					</tr>
-					Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
+					Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
 				<tbody>
-					<?php
-					print_r($_SESSION);
-					$no = 1;
-					foreach ($jadwal_seminar as $i) {
-					?>
-						<tr>
-							<td><?php echo $no++; ?></td>
-							<td><?php echo $i->NIM ?></td>
-							<td><?php echo $i->NAMA ?></td>
-							<td><?php echo $i->Judul_TA ?></td>
-							<td><?php echo $i->Tanggal . ' ' . $i->jam; ?></td>
-							<td><?php echo $i->dosen_pembimbing ?></td>
-							<td><?php echo $i->dosen_panelis ?></td>
-							<td class="text-center">
-								<div class="dropdown">
-									<button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Option
-									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-										<a href="" class="edit-seminar dropdown-item" data-id="<?php echo $i->id_seminar ?>">Edit</a>
-									</div>
-								</div>
-							</td>
-						</tr>
-					<?php } ?>
 				</tbody>
 			</table>
 		</div>

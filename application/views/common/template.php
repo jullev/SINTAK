@@ -138,7 +138,7 @@
 								<?php
 								if ($_SESSION['kode_level'] != 1) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwal" ?>">Jadwal Seminar</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminar" ?>">Jadwal Seminar</a>
 									<!-- 
 				1.	Menu jadwal seminar hanya untuk dosen pembimbing dan dosen panelis
                 2.	Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
@@ -147,7 +147,7 @@
 								<?php
 								if ($_SESSION['kode_level'] != 1 || $_SESSION['kode_level'] != 3 || $_SESSION['kode_level'] != 4 || $_SESSION['kode_level'] != 5) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar/revisi" ?>">Revisi Seminar</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Seminar/revisiSeminar" ?>">Revisi Seminar</a>
 									<!-- 
                 1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
                 2. Jika panelis, bisa melihat dan mengACC revisi
@@ -181,7 +181,7 @@
 								<?php
 								if ($_SESSION['kode_level'] != 1) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/add" ?>">Jadwal Sidang</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a>
 									<!-- 
               Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
             -->
@@ -189,7 +189,7 @@
 								<?php
 								if ($_SESSION['kode_level'] != 1 || $_SESSION['kode_level'] != 3 || $_SESSION['kode_level'] != 4 || $_SESSION['kode_level'] != 5) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/add" ?>">Revisi Sidang</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
 									<!-- 
                 1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
                 2. Jika panelis, bisa melihat dan mengACC revisi

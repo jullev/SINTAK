@@ -1,8 +1,10 @@
 <?php
 defined("BASEPATH") or die("No Direct Access Allowed");
 
-Class Tugas_akhir extends CI_controller{
-    function __construct(){
+class Tugas_akhir extends CI_controller
+{
+    function __construct()
+    {
         parent::__construct();
         $this->load->model('Dosen_model');
         $this->load->model('Mahasiswa_model');
@@ -12,66 +14,68 @@ Class Tugas_akhir extends CI_controller{
         $this->icon = "fa-book";
     }
 
-    function index(){
+    function index()
+    {
 
         $param['pageInfo'] = "List Tugas Akhir";
-        if($_SESSION['kode_level']==12){
+        if ($_SESSION['kode_level'] == 12) {
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
-        }
-        else if($_SESSION['kode_level']==2){
+        } else if ($_SESSION['kode_level'] == 2) {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
-        }else{
-            $filter= ['Prodi_idProdi' => $_SESSION['id_prodi']];
+        } else {
+            $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
         $param['status'] = $this->Status_model->getAllDataForTugasAkhir()->result();
-		$this->template->load("common/template", "pages/Tugas_akhir/list_tugas_akhir", $param);
+        $this->template->load("common/template", "pages/Tugas_akhir/list_tugas_akhir", $param);
     }
 
     public function list_pengajuan_judul()
     {
         $param['pageInfo'] = "List Pengajuan Judul";
-        
+
         // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
-        if($_SESSION['koordinator']==true || $_SESSION['kps']==true){
-            $filter= ['Prodi_idProdi' => $_SESSION['id_prodi']];
-        }else{
+        if ($_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
+            $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
+        } else {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getPengajuanJudul($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
         $param['status'] = $this->Status_model->getAllDataForPengajuanJudul()->result();
-		$this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
+        $this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
     }
     public function list_bimbingan()
     {
         $param['pageInfo'] = "List Bimbingan";
-        
+
         // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
-        if($_SESSION['koordinator']==true || $_SESSION['kps']==true){
-            $filter= ['Prodi_idProdi' => $_SESSION['id_prodi']];
-        }else{
+        if ($_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
+            $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
+        } else {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getBimbingan($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
         $param['status'] = $this->Status_model->getAllDataForPengajuanJudul()->result();
-		$this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
+        $this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
     }
-    function add(){
+    function add()
+    {
         $param['pageInfo'] = "Pendaftaran Tugas Akhir";
         $param['role'] = $this->TugasAkhir_Model->getAll()->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
         $param['mahasiswa'] = $this->Mahasiswa_model->getAll()->result();
-		$this->template->load("common/template", "pages/Tugas_akhir/daftar_tugas_akhir", $param);
+        $this->template->load("common/template", "pages/Tugas_akhir/daftar_tugas_akhir", $param);
     }
 
-    function add_action(){
+    function add_action()
+    {
         $config = array(
             array(
                 'field' => 'Judul_TA',
@@ -105,10 +109,10 @@ Class Tugas_akhir extends CI_controller{
                     'required' => '%s Harus Diisi',
                 ],
             ),
-            
+
         );
         $this->form_validation->set_rules($config);
-        if($this->form_validation->run() == TRUE){ //Jika validasi Form Berhasil
+        if ($this->form_validation->run() == TRUE) { //Jika validasi Form Berhasil
             $tgl = date("Y-m-d H:i:s");
             $data = array(
                 'Judul_TA' => $this->input->post('Judul_TA'),
@@ -119,32 +123,31 @@ Class Tugas_akhir extends CI_controller{
                 'Mahasiswa_NIM' => $this->session->userdata("id_login"),
                 'id_status' => 1,
                 'id_topik' => $this->input->post('id_topik'),
-                'tgl_pengajuan' =>$tgl
+                'tgl_pengajuan' => $tgl
             );
             // var_dump($data);
-            if($this->TugasAkhir_Model->save($data)){
+            if ($this->TugasAkhir_Model->save($data)) {
                 //Flash Message Sukses
-                $this->session->set_flashdata("input_validation","<div class='alert alert-success'>
+                $this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pendaftaran Judul Tugas Akhir Berhasil</div>");
-            }else{
+            } else {
                 //Flash Message Gagal
-                $this->session->set_flashdata("input_validation","<div class='alert alert-danger'>
+                $this->session->set_flashdata("input_validation", "<div class='alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pendaftaran Judul Tugas Akhir Gagal</div>");
             }
-        }else{
+        } else {
             $error_field = new stdClass();
             $error_field->Judul_TA = form_error('Judul_TA');
             $error_field->Deskripsi = form_error('Deskripsi');
             $error_field->NIP = form_error('NIP');
             $error_field->id_topik = form_error('id_topik');
-            $this->session->set_flashdata("error_field",$error_field);
-            
-
+            $this->session->set_flashdata("error_field", $error_field);
         }
-        
+
         redirect('Tugas_akhir');
     }
-    function add_action_admin(){
+    function add_action_admin()
+    {
         $config = array(
             array(
                 'field' => 'Judul_TA',
@@ -178,10 +181,10 @@ Class Tugas_akhir extends CI_controller{
                     'required' => '%s Harus Diisi',
                 ],
             ),
-            
+
         );
         $this->form_validation->set_rules($config);
-        if($this->form_validation->run() == TRUE){ //Jika validasi Form Berhasil
+        if ($this->form_validation->run() == TRUE) { //Jika validasi Form Berhasil
             $tgl = date("Y-m-d H:i:s");
             $data = array(
                 'Judul_TA' => $this->input->post('Judul_TA'),
@@ -192,29 +195,27 @@ Class Tugas_akhir extends CI_controller{
                 'Mahasiswa_NIM' => $this->input->post("id_mahasiswa"),
                 'id_status' => 1,
                 'id_topik' => $this->input->post('id_topik'),
-                'tgl_pengajuan' =>$tgl
+                'tgl_pengajuan' => $tgl
             );
             // var_dump($data);
-            if($this->TugasAkhir_Model->save($data)){
+            if ($this->TugasAkhir_Model->save($data)) {
                 //Flash Message Sukses
-                $this->session->set_flashdata("input_validation","<div class='alert alert-success'>
+                $this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pendaftaran Judul Tugas Akhir Berhasil</div>");
-            }else{
+            } else {
                 //Flash Message Gagal
-                $this->session->set_flashdata("input_validation","<div class='alert alert-danger'>
+                $this->session->set_flashdata("input_validation", "<div class='alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pendaftaran Judul Tugas Akhir Gagal</div>");
             }
-        }else{
+        } else {
             $error_field = new stdClass();
             $error_field->Judul_TA = form_error('Judul_TA');
             $error_field->Deskripsi = form_error('Deskripsi');
             $error_field->NIP = form_error('NIP');
             $error_field->id_topik = form_error('id_topik');
-            $this->session->set_flashdata("error_field",$error_field);
-            
-
+            $this->session->set_flashdata("error_field", $error_field);
         }
-        
+
         redirect('Tugas_akhir');
     }
 
@@ -233,10 +234,9 @@ Class Tugas_akhir extends CI_controller{
     }
     public function update_status()
     {
-        if($this->TugasAkhir_Model->update($_GET['id_ta'],["id_status" => $_GET['id_status']])){
+        if ($this->TugasAkhir_Model->update($_GET['id_ta'], ["id_status" => $_GET['id_status']])) {
             echo "success";
-        }
-        else{
+        } else {
             echo "error";
         }
     }
@@ -251,15 +251,15 @@ Class Tugas_akhir extends CI_controller{
     public function validasi()
     {
         // if($_SESSION['kode_level']==7 || $_SESSION['kode_level']==1){
-            $update = array(
-                "Dosen_NIP" => $_POST['Dosen_NIP'],
-                'id_status' => $_POST['id_status'],
-                'tgl_ACC' => date('Y-m-d')
-            );
-            
-            $msg = $this->TugasAkhir_Model->update($_POST['id'],$update) ? "Validasi Berhasil" : "Validasi Gagal";
-            $this->session->set_flashdata('msg',$msg);
-            redirect(base_url().'Tugas_akhir/list_pengajuan_judul');
+        $update = array(
+            "Dosen_NIP" => $_POST['Dosen_NIP'],
+            'id_status' => $_POST['id_status'],
+            'tgl_ACC' => date('Y-m-d')
+        );
+
+        $msg = $this->TugasAkhir_Model->update($_POST['id'], $update) ? "Validasi Berhasil" : "Validasi Gagal";
+        $this->session->set_flashdata('msg', $msg);
+        redirect(base_url() . 'Tugas_akhir/list_pengajuan_judul');
         // }
     }
 }
