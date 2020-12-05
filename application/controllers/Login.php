@@ -10,7 +10,6 @@ class Login extends CI_Controller
     //Codeigniter : Write Less Do More
     $this->load->model("mahasiswa_model");
     $this->load->model("Dosen_model");
-    $this->load->model("TugasAkhir_Model");
   }
 
   // Catatan:
@@ -48,76 +47,13 @@ class Login extends CI_Controller
       // die("username tidak ditemukan");
     }
 
-    // Proses
+    //Proses
     if ($cek > 0) {
       if (password_verify($password, $password_db)) {
         if ($cek == 2) { //Dosen
           // koordinator TA
           if ($data_login_dosen['idRole'] >= 6 && $data_login_dosen['idRole'] <= 8) {
             $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
-      //Proses
-      if($cek > 0){
-        if(password_verify($password,$password_db)){
-          if($cek == 2){ //Dosen
-            // koordinator TA
-            if($data_login_dosen['idRole'] >= 6 && $data_login_dosen['idRole'] <= 8)
-            {
-              $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
-              $data_session = array(
-                'id_login'   => $data_login_dosen['NIP'],
-                'username'   => $data_login_dosen['NAMA'],
-                'level'      => $data_login_dosen['Role'],
-                'kode_level' => $data_login_dosen['idRole'],
-                'koordinator'=> true,
-                'kps'        => false,
-                'admin_prodi'=> false,
-                'id_prodi'   => $getProdi->id_prodi
-              );
-            }
-            // ketua program studi
-            else if($data_login_dosen['idRole'] >= 9 && $data_login_dosen['idRole'] <= 11){
-              $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
-              $data_session = array(
-                'id_login'   => $data_login_dosen['NIP'],
-                'username'   => $data_login_dosen['NAMA'],
-                'level'      => $data_login_dosen['Role'],
-                'kode_level' => $data_login_dosen['idRole'],
-                'koordinator'=> false,
-                'kps'        => true,
-                'admin_prodi'=> false,
-                'id_prodi'   => $getProdi->id_prodi
-              );
-            }
-            // admin prodi
-            else if($data_login_dosen['idRole'] >= 3 && $data_login_dosen['idRole'] <= 5){
-              $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
-              $data_session = array(
-                'id_login'   => $data_login_dosen['NIP'],
-                'username'   => $data_login_dosen['NAMA'],
-                'level'      => $data_login_dosen['Role'],
-                'kode_level' => $data_login_dosen['idRole'],
-                'koordinator'=> false,
-                'kps'        => false,
-                'admin_prodi'=> false,
-                'id_prodi'   => $getProdi->id_prodi
-              );
-            }
-            else
-            {
-              $data_session = array(
-                'id_login'   => $data_login_dosen['NIP'],
-                'username'   => $data_login_dosen['NAMA'],
-                'level'      => $data_login_dosen['Role'],
-                'kode_level' => $data_login_dosen['idRole'],
-                'koordinator'=> false,
-                'kps'        => false,
-                'admin_prodi'=> false,
-                'id_prodi'   => null
-              );
-            }
-            $getGlobalRole = $this->common->getData('global_role','role','',['idRole' => $data_login_dosen['idRole']],'')->result_array()[0];
-            $data_session['global_role'] = $getGlobalRole['global_role'];
-          }else if($cek == 3){ //Mahasiswa
             $data_session = array(
               'id_login'   => $data_login_dosen['NIP'],
               'username'   => $data_login_dosen['NAMA'],
@@ -128,17 +64,58 @@ class Login extends CI_Controller
               'admin_prodi' => false,
               'id_prodi'   => $getProdi->id_prodi
             );
-            $data_session['global_role'] = 'Mahasiswa';
           }
-            
-          $this->session->set_userdata($data_session);
-  				echo base_url().'dashboard';
-
-        }else{
-          $this->session->set_flashdata("message", "Password salah");
-  					echo "p";
-  					// die("password salah");
+          // ketua program studi
+          else if ($data_login_dosen['idRole'] >= 9 && $data_login_dosen['idRole'] <= 11) {
+            $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
+            $data_session = array(
+              'id_login'   => $data_login_dosen['NIP'],
+              'username'   => $data_login_dosen['NAMA'],
+              'level'      => $data_login_dosen['Role'],
+              'kode_level' => $data_login_dosen['idRole'],
+              'koordinator' => false,
+              'kps'        => true,
+              'admin_prodi' => false,
+              'id_prodi'   => $getProdi->id_prodi
+            );
+          }
+          // admin prodi
+          else if ($data_login_dosen['idRole'] >= 3 && $data_login_dosen['idRole'] <= 5) {
+            $getProdi = $this->Dosen_model->getProdi($data_login_dosen['idRole']);
+            $data_session = array(
+              'id_login'   => $data_login_dosen['NIP'],
+              'username'   => $data_login_dosen['NAMA'],
+              'level'      => $data_login_dosen['Role'],
+              'kode_level' => $data_login_dosen['idRole'],
+              'koordinator' => false,
+              'kps'        => false,
+              'admin_prodi' => false,
+              'id_prodi'   => $getProdi->id_prodi
+            );
+          } else {
+            $data_session = array(
+              'id_login'   => $data_login_dosen['NIP'],
+              'username'   => $data_login_dosen['NAMA'],
+              'level'      => $data_login_dosen['Role'],
+              'kode_level' => $data_login_dosen['idRole'],
+              'koordinator' => false,
+              'kps'        => false,
+              'admin_prodi' => false,
+              'id_prodi'   => null
+            );
+          }
+          $getGlobalRole = $this->common->getData('global_role', 'role', '', ['idRole' => $data_login_dosen['idRole']], '')->result_array()[0];
+          $data_session['global_role'] = $getGlobalRole['global_role'];
+        } else if ($cek == 3) { //Mahasiswa
+          $data_session = array(
+            'id_login'   => $data_login_mhs['NIM'],
+            'username'   => $data_login_mhs['NAMA'],
+            'level'      => "Mahasiswa",
+            'kode_level' => 12
+          );
+          $data_session['global_role'] = 'Mahasiswa';
         }
+
         $this->session->set_userdata($data_session);
         echo base_url() . 'dashboard';
       } else {
