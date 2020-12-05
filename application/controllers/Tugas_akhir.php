@@ -16,7 +16,6 @@ class Tugas_akhir extends CI_controller
 
     function index()
     {
-
         $param['pageInfo'] = "List Tugas Akhir";
         if ($_SESSION['kode_level'] == 12) {
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];

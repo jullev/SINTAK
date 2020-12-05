@@ -177,6 +177,7 @@ label {
 .sidebar-brand {
 	box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
 	-webkit-box-shadow: 0 4px 4px -4px rgba(0, 0, 0, 0.1);
+	margin-bottom : 1.5rem;
 }
 .sidebar-dark .nav-item .nav-link {
 	width: 100%;
@@ -185,9 +186,28 @@ label {
 .sidebar-dark .nav-item .nav-link i {
 	color: #b7c0cd !important;
 }
-.sidebar .nav-item .nav-link span,
+.nav-item.active{
+	background : #222d3b;
+}
+.nav-item.active .nav-link i, .nav-item.active .nav-link span{
+	color: #42a5f5 !important;
+}
 .sidebar .nav-item .nav-link i {
-	font-size: 13px !important;
+	font-size: 15px !important;
+	margin-right: 1rem;
+}
+.sidebar .nav-item .nav-link span{
+	font-size: 14px !important;
+	font-weight: 300;
+}
+.sidebar .nav-item{
+	transition: all.5s ease;
+	-webkit-transition: all.5s ease;
+	-moz-transition: all.5s ease;
+	-o-transition: all.5s ease;
+}
+.sidebar .nav-item:hover{
+	background : #222d3b;
 }
 .sidebar .nav-item:hover .nav-link span,
 .sidebar .nav-item:hover .nav-link i,
@@ -213,7 +233,8 @@ label {
 .sidebar .nav-item .collapse .collapse-inner .collapse-item,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item {
 	padding: 0.5rem 0rem !important;
-	font-size: 13px;
+	font-size: 14px;
+	font-weight: 300;
 }
 .sidebar .nav-item .collapse {
 	background: #222d3b;
@@ -285,6 +306,9 @@ label {
 }
 .info-text-page a:hover {
 	color: #42a5f5;
+}
+.color-green {
+	color: #0f6848;
 }
 .color-blue {
 	color: #42a5f5;

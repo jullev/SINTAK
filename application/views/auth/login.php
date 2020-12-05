@@ -99,7 +99,7 @@
                         <form id="FormLogin" class="">
                             <label for="">Username</label>
                             <div class="form-underline username">
-                                <input type="text" placeholder="Masukkan Username" id="username" required>
+                                <input type="text" placeholder="Masukkan Username" id="username" required autofocus>
                                 <span class="fa fa-user"></span>
                             </div>
                             <br>

@@ -59,13 +59,13 @@
 						if ($_SESSION['kode_level'] == 12) {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/add" ?>">
-								<i class="fas fa-fw fa-chalkboard-teacher"></i>
+								<i class="fas fa-fw fa-envelope-open-text"></i>
 								<span>Pengajuan Judul</span></a>
 						<?php
 						} elseif ($_SESSION['kode_level'] != 12) {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/list_pengajuan_judul" ?>">
-								<i class="fas fa-fw fa-chalkboard-teacher"></i>
+								<i class="fas fa-fw  fa-envelope-open-text"></i>
 								<span>Pengajuan Judul</span></a>
 						<?php
 						}
@@ -81,7 +81,7 @@
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir" ?>">
-							<i class="fas fa-fw fa-chalkboard-teacher"></i>
+							<i class="fas fa-fw fa-laptop-code"></i>
 							<span>Tugas Akhir</span></a>
 						<!-- 
               1. Jika  mahasiswa, tampilkan seluruh submit tugas akhir berdasarkan mahasiswa login
@@ -108,7 +108,7 @@
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . 'dosen/pembimbing' ?>">
-							<i class="fas fa-fw fa-chalkboard-teacher"></i>
+							<i class="fas fa-fw fa-headset"></i>
 							<span>Pantau Bimbingan</span></a>
 						<!---
               menu koordinator
@@ -120,7 +120,7 @@
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fas fa-fw fa-desktop"></i>
+							<i class="fab fa-fw fa-slideshare"></i>
 							<span>Seminar</span>
 						</a>
 						<div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -163,7 +163,7 @@
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fas fa-fw fa-desktop"></i>
+							<i class="fas fa-fw fa-graduation-cap"></i>
 							<span>Sidang</span>
 						</a>
 						<div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -195,28 +195,28 @@
                 2. Jika panelis, bisa melihat dan mengACC revisi
                 3. Jika dosen pembimbing, bisa melihat revisi
               -->
-								<?php } ?>
-							</div>
-						</div>
-					</li>
-				<?php } ?>
-				<?php
-				if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 8) {
-				?>
-					<li class="nav-item">
-						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fas fa-fw fa-desktop"></i>
-							<span>Rekap</span>
-						</a>
-						<div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-							<div class="py-2 collapse-inner rounded">
-								<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Rekap Nilai</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Sidang/rekap_sidang" ?>">Rekap Sidang</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Seminar/rekap_seminar" ?>">Rekap Seminar</a>
-							</div>
-						</div>
-					</li>
-				<?php } ?>
+            <?php } ?>  
+              </div>
+            </div>
+            </li>
+            <?php } ?>  
+            <?php 
+                if($_SESSION['kode_level']>=3 && $_SESSION['kode_level']<=8){
+            ?>
+           <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
+              <i class="fas fa-fw fa-file-excel"></i>
+              <span>Rekap</span>
+            </a>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+              <div class="py-2 collapse-inner rounded">
+              <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Rekap Nilai</a>
+                <a class="collapse-item" href="<?php echo base_url()."Sidang/rekap_sidang" ?>">Rekap Sidang</a>
+                <a class="collapse-item" href="<?php echo base_url()."Seminar/rekap_seminar" ?>">Rekap Seminar</a>
+              </div>
+            </div>
+            </li>
+          <?php } ?>  
 
 
 
@@ -226,7 +226,7 @@
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-							<i class="fas fa-fw fa-desktop"></i>
+							<i class="fas fa-fw fa-database"></i>
 							<span>Data Master</span>
 						</a>
 						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -243,7 +243,7 @@
 
 
 				<!-- Sidebar Toggler (Sidebar) -->
-				<div class="text-center d-none d-md-inline">
+				<div class="text-center mt-3 d-none d-md-inline">
 					<button class="rounded-circle border-0" id="sidebarToggle"></button>
 				</div>
 			</ul>

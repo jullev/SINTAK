@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2020 at 07:46 AM
+-- Generation Time: Dec 01, 2020 at 05:13 AM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -44,11 +44,10 @@ CREATE TABLE `dosen` (
 --
 
 INSERT INTO `dosen` (`NIP`, `NIDN`, `NAMA`, `Alamat`, `No_hp`, `password`, `email`, `idRole`) VALUES
-('197008311998031001', '0031087001', 'Moh. Munih Dian W, S.Kom,MT', 'Jember', '123456789', '$2y$10$F1NvhGoBNRexnHwju3t7juyU3QX9qkp9aOMI4NwqdxezLXBNhM7T2', '', 7),
+('197008311998031001', '0031087001', 'Moh. Munih Dian W, S.Kom,MT', 'Jember', '123456789', '$2y$10$F1NvhGoBNRexnHwju3t7juyU3QX9qkp9aOMI4NwqdxezLXBNhM7T2', '', 1),
 ('197104082001121003', '`0008047103', 'Wahyu Kurnia Dewanto,S.Kom, MT', 'Jember', '123456789', '$2y$10$bfkTeoAVQKoWW/VcO.bVN.h/CFqDw.gfiapFAffVqmZ5FJDc82n4S', '', 2),
-('197110092003121001', '0009107104', 'Denny Trias Utomo, S,Si, MT', 'Jember', '123456789', '$2y$10$8AsSB5vCQvuhdZBLGY6J5.cV5W1OGEP87ia.KVLC1Zkujj1Sw1ODO', '', 7),
-('197111151998021001', '0015117106', 'Adi Heru Utomo, S.Kom, M.Kom', 'Jember', '123456789', '$2y$10$MAoTQ2kjQ8tjp0u2k1Fz9eMAxGXsPGPExAay4M.9HoNK6fkgjxsWS', '', 7),
-('197405192003121002', '0019057403', 'Nugroho Setyo Wibowo, ST,MT', 'Jember', '123456789', '$2y$10$nMcWTFOhu56VuBH24E90CeHVUDbb8br6wEGewvXNHA5GZ5nhZMALi', '', 7),
+('197110092003121001', '0009107104', 'Denny Trias Utomo, S,Si, MT', 'Jember', '123456789', '$2y$10$8AsSB5vCQvuhdZBLGY6J5.cV5W1OGEP87ia.KVLC1Zkujj1Sw1ODO', '', 3),
+('197405192003121002', '0019057403', 'Nugroho Setyo Wibowo, ST,MT', 'Jember', '123456789', '$2y$10$nMcWTFOhu56VuBH24E90CeHVUDbb8br6wEGewvXNHA5GZ5nhZMALi', '', 6),
 ('197709292005011003', '0029097704', 'Didit Rahmat Hartadi S.Kom , MT', 'Jember', '123456789', '$2y$10$c8zsQOLjtPmvVr/4Jf1UJ.P97t/jirmyeq.ZIaF2ObLzlceMF/ady', '', 2),
 ('19780816 200501 1 00', '0016087806', 'Beni Widiawan, S.ST, MT', 'jember', '123456789', '19780816 200501 1 002', '', 7),
 ('197808172003121005', '0017067306', 'Ely Mulyadi, S.E., M.Kom.', 'Jember', '123456789', '$2y$10$Un73e/VNKX/DGNvzB7FJvOuXBNrHX0Y5YMaWwTduGmqknIqUw18SW', '', 2),
@@ -68,13 +67,14 @@ INSERT INTO `dosen` (`NIP`, `NIDN`, `NAMA`, `Alamat`, `No_hp`, `password`, `emai
 ('198807022016101001', '', 'Husin, S.Kom., M.MT.', 'Jember', '123456789', '$2y$10$wIkk/oXADm1Y1UZ/mHSBvexONPmjwMa0BEy/ImnlDTpqlwot/9xvG', '', 2),
 ('198903292019031007', '`0029058906', 'Taufiq Rizaldi S,ST,MT', 'Jember', '123456789', '$2y$10$RZFh/PBz78hf2Ff0VNetNu4r9Ki/25Z0G7z.zvEVWN0XvoCTVX4fW', '', 2),
 ('198907102019031010', '0010078903', 'Ery Setiyawan Julev Atmaji,S.Kom,M.Cs', 'Jember', '123456789', '$2y$10$BIGeqqqKrmHSNVeKvQ7OP.79hvbNVxnmy9hcvFhebyRDWt/Wv8asu', '', 7),
-('199002272018032001', '8868110016', 'Trismayanti Dwi P ,S.Kom, M,Cs', 'Jember', '123456789', '$2y$10$qFpE/0objW618aipOZp4gOLnQpYmzSLqdBMljnmgeqIRfmTNPbNny', '', 7),
+('199002272018032001', '8868110016', 'Trismayanti Dwi P ,S.Kom, M,Cs', 'Jember', '123456789', '$2y$10$qFpE/0objW618aipOZp4gOLnQpYmzSLqdBMljnmgeqIRfmTNPbNny', '', 2),
 ('199103152017031001', '', 'Syamsiar Kautsar S.ST., MT.', 'Jember', '123456789', '$2y$10$QC.lcgXV/EpNHJqRHhWLCuyWvHSXK2NN2WqCYkC0c11nlBJiLvIwK', '', 7),
 ('199104292019031011', '0029049102', 'Faisal Lutfi Afriansyah S.Kom.,M.T.', 'Jember', '123456789', '$2y$10$7iP/mfmRT9SbjdLAdRAd2eUK/uh2JKBDLJsqUr7F3SAH3atVGVmRu', '', 1),
 ('199112112018031001', '', 'Khafidurohman A., S.Pd., M.Eng.', 'Jember', '123456789', '$2y$10$wF5/Fe1WfJRvVMacGxSyBeWqtAnlK0xBmguZ0w15h09DOT0W5AK7K', '', 7),
 ('199203022018032001', '', 'Zilvanhisna Emka Fitri ST., MT.', 'Jember', '123456789', '$2y$10$frHWrNt5OZNRTZK6HYvoie9Lpe4jq45wbh1aH22BnlKjZynmoHPHK', '', 7),
 ('199205282018032001', '', 'Bety Etikasari, S.Pd., M.Pd.', 'Jember', '123456789', '$2y$10$IEJ5OSNHiPD5xI4coN7Pv.60kzHjO08Ktcrr.zDradF/Mmr9vm6XC', '', 7),
-('199408122019031013', '0012089401', 'Mukhamad Angga Gumilang, S. Pd., M. Eng.', 'Jember', '123456789', '$2y$10$JD4xbHrj5Tx2QeI/KL2zS.CQFwvPQPeXXEIOyPGkdwOQgoguVeFXm', '', 2);
+('199408122019031013', '0012089401', 'Mukhamad Angga Gumilang, S. Pd., M. Eng.', 'Jember', '123456789', '$2y$10$JD4xbHrj5Tx2QeI/KL2zS.CQFwvPQPeXXEIOyPGkdwOQgoguVeFXm', '', 2),
+('6', '0015117106', 'Adi Heru Utomo, S.Kom, M.Kom', 'Jember', '123456789', '$2y$10$MAoTQ2kjQ8tjp0u2k1Fz9eMAxGXsPGPExAay4M.9HoNK6fkgjxsWS', '', 7);
 
 -- --------------------------------------------------------
 
@@ -416,6 +416,7 @@ INSERT INTO `prodi` (`idProdi`, `Nama_prodi`) VALUES
 CREATE TABLE `role` (
   `idRole` int(2) NOT NULL,
   `Role` varchar(45) DEFAULT NULL,
+  `global_role` enum('Administrator','Dosen Pembimbing','Admin Prodi','Koordinator TA','KPS','Mahasiswa') NOT NULL,
   `id_prodi` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -423,19 +424,19 @@ CREATE TABLE `role` (
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`idRole`, `Role`, `id_prodi`) VALUES
-(1, 'Administrator', 0),
-(2, 'Dosen Pembimbing', 0),
-(3, 'Admin Prodi MIF', 1),
-(4, 'Admin Prodi TKK', 2),
-(5, 'Admin Prodi TIF', 3),
-(6, 'Koordinator TA MIF', 1),
-(7, 'Koordinator TA TKK', 2),
-(8, 'Koordinator TA TIF', 3),
-(9, 'Ketua Program Studi MIF', 1),
-(10, 'Ketua Program Studi TKK', 2),
-(11, 'Ketua Program Studi TIF', 3),
-(12, 'Mahasiswa', 0);
+INSERT INTO `role` (`idRole`, `Role`, `global_role`, `id_prodi`) VALUES
+(1, 'Administrator', 'Administrator', 0),
+(2, 'Dosen Pembimbing', 'Dosen Pembimbing', 0),
+(3, 'Admin Prodi MIF', 'Admin Prodi', 1),
+(4, 'Admin Prodi TKK', 'Admin Prodi', 2),
+(5, 'Admin Prodi TIF', 'Admin Prodi', 3),
+(6, 'Koordinator TA MIF', 'Koordinator TA', 1),
+(7, 'Koordinator TA TKK', 'Koordinator TA', 2),
+(8, 'Koordinator TA TIF', 'Koordinator TA', 3),
+(9, 'Ketua Program Studi MIF', 'KPS', 1),
+(10, 'Ketua Program Studi TKK', 'KPS', 2),
+(11, 'Ketua Program Studi TIF', 'KPS', 3),
+(12, 'Mahasiswa', 'Administrator', 0);
 
 -- --------------------------------------------------------
 
@@ -480,7 +481,8 @@ INSERT INTO `status_ta` (`id_status`, `status`) VALUES
 (7, 'Bimbingan Sidang'),
 (8, 'Pengajuan Sidang'),
 (9, 'Sidang'),
-(10, 'Lulus');
+(10, 'Selesai Sidang'),
+(11, 'Lulus');
 
 -- --------------------------------------------------------
 
@@ -531,8 +533,8 @@ CREATE TABLE `td_seminar` (
 --
 
 INSERT INTO `td_seminar` (`id_seminar`, `Nilai_penelis`, `Nilai_pembimbing`, `Tanggal`, `jam`, `id_TA`, `NIP_Panelis`, `id_status`, `idruangan`, `lampiran_revisi`, `revisi`, `status_revisi`) VALUES
-(9, NULL, 0, NULL, NULL, 1, NULL, NULL, NULL, '', '', 'acc'),
-(10, NULL, 0, NULL, NULL, 1, NULL, NULL, NULL, '', '', 'acc');
+(9, NULL, 0, NULL, NULL, 1, NULL, NULL, NULL, '', '', ''),
+(10, NULL, 0, NULL, NULL, 2, NULL, NULL, NULL, '', '', '');
 
 -- --------------------------------------------------------
 
@@ -549,7 +551,7 @@ CREATE TABLE `td_sidang` (
   `Tanggal` date DEFAULT NULL,
   `jam` time DEFAULT NULL,
   `id_TA` int(6) NOT NULL,
-  `NIP_Anggota` varchar(20) NOT NULL,
+  `NIP_Anggota` varchar(20) DEFAULT NULL,
   `id_status` int(3) DEFAULT NULL,
   `idruangan` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -559,7 +561,7 @@ CREATE TABLE `td_sidang` (
 --
 
 INSERT INTO `td_sidang` (`id_sidang`, `Nilai_panelis`, `Nilai_anggota`, `Nilai_sidang`, `Nilai_bimbingan`, `Tanggal`, `jam`, `id_TA`, `NIP_Anggota`, `id_status`, `idruangan`) VALUES
-(2, 22, 0, 0, 0, '2020-03-29', '15:00:00', 1, '', 4, 1);
+(2, 22, 0, 0, 0, '2020-03-29', '14:00:00', 1, NULL, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -622,16 +624,16 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (2, '\"PENGEMBANGAN SISTEM PENGUKUR KESESUAIAN USER', 'z', 'c', 'b.', '199112112018031001', 'E41161322', 1, 10, NULL, '2020-09-18', ''),
 (3, 'Penentuan Menu Diet Seimbang Bagi Penderita D', 'Penentuan Menu Diet Seimbang Bagi Penderita Diabetes Mellitus Menggunakan Logika Fuzzy Metode Tsukamoto\r\n', 'Penentuan Menu Diet Seimbang Bagi Penderita Diabetes Mellitus Menggunakan Logika Fuzzy Metode Tsukamoto\r\n', 'c.', '197810112005012002', 'E41161779', 1, 7, NULL, '2020-09-18', ''),
 (4, 'Sistem Pendukung Keputusan Pemilihan Menu Mak', 'Sistem Pendukung Keputusan Pemilihan Menu Makanan Pasien Hipertensi Menggunakan Fuzzy Mamdani\r\n', 'Sistem Pendukung Keputusan Pemilihan Menu Makanan Pasien Hipertensi Menggunakan Fuzzy Mamdani\r\n', 'b.', '197810112005012002', 'E41162018', 1, 7, NULL, '2020-09-18', ''),
-(5, 'Sistem Pakar Seleksi Kesiapan Bertelur pada A', 'Sistem Pakar Seleksi Kesiapan Bertelur pada Ayam Ras Menggunakan Metode Certainty Factor\r\n', 'Sistem Pakar Seleksi Kesiapan Bertelur pada Ayam Ras Menggunakan Metode Certainty Factor\r\n', 'c.', '199002272018032001', 'E41161395', 1, 8, NULL, '2020-09-18', ''),
+(5, 'Sistem Pakar Seleksi Kesiapan Bertelur pada A', 'Sistem Pakar Seleksi Kesiapan Bertelur pada Ayam Ras Menggunakan Metode Certainty Factor\r\n', 'Sistem Pakar Seleksi Kesiapan Bertelur pada Ayam Ras Menggunakan Metode Certainty Factor\r\n', 'c.', '199002272018032001', 'E41161395', 2, 8, NULL, '2020-09-18', ''),
 (6, 'Implementasi Fuzzy tsukamoto untuk optimalisa', 'Implementasi Fuzzy tsukamoto untuk optimalisasi produksi batako studi kasus UD.AA', 'Implementasi Fuzzy tsukamoto untuk optimalisasi produksi batako studi kasus UD.AA', 'b.', '198907102019031010', 'E41161189', 1, 3, NULL, '2020-09-18', ''),
-(7, 'Sistem Informasi Diagnosis Ikterus Neonatorum', 'Sistem Informasi Diagnosis Ikterus Neonatorum Menggunakan Logika Fuzzy\r\n', 'Sistem Informasi Diagnosis Ikterus Neonatorum Menggunakan Logika Fuzzy\r\n', 'si.', '199002272018032001', 'E41161390', 1, 12, NULL, '2020-09-18', ''),
+(7, 'Sistem Informasi Diagnosis Ikterus Neonatorum', 'Sistem Informasi Diagnosis Ikterus Neonatorum Menggunakan Logika Fuzzy\r\n', 'Sistem Informasi Diagnosis Ikterus Neonatorum Menggunakan Logika Fuzzy\r\n', 'si.', '199002272018032001', 'E41161390', 2, 12, NULL, '2020-09-18', ''),
 (8, 'SISTEM IDENTIFIKASI KERUSAKAN BIJI KOPI ARABI', 'SISTEM IDENTIFIKASI KERUSAKAN BIJI KOPI ARABIKA MENGGUNAKAN BACKPROPAGATION\r\n', 'SISTEM IDENTIFIKASI KERUSAKAN BIJI KOPI ARABIKA MENGGUNAKAN BACKPROPAGATION\r\n', 'spk.', '199203022018032001', 'E41161965', 1, 8, NULL, '2020-09-18', ''),
 (9, '\"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SM', '\"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SMOOTHING DALAM FORECASTING PENGADAAN BUKU DI DINAS PERPUSTAKAAN DAN KEARSIPAN \r\nKABUPATEN BONDOWOSO\"\r\n', '\"IMPLEMENTASI ALGORITMA DOUBLE EXPONENTIAL SMOOTHING DALAM FORECASTING PENGADAAN BUKU DI DINAS PERPUSTAKAAN DAN KEARSIPAN \r\nKABUPATEN BONDOWOSO\"\r\n', 'pcd.', '198012122005011001', 'E41161281', 1, 4, NULL, '2020-09-18', ''),
 (10, 'Aksara jawa untuk klasifikasi level motorik h', 'Aksara jawa untuk klasifikasi level motorik halus anak usia awal sekolah\r\n', 'Aksara jawa untuk klasifikasi level motorik halus anak usia awal sekolah\r\n', 'A.i', '197808192005012001', 'E41161716', 1, 3, NULL, '2020-09-18', ''),
 (11, 'Penerapan Algoritma C4.5 pada Aplikasi Penent', 'Penerapan Algoritma C4.5 pada Aplikasi Penentuan Kemampuan Motorik Halus Anak Usia Awal Sekolah\r\n', 'Penerapan Algoritma C4.5 pada Aplikasi Penentuan Kemampuan Motorik Halus Anak Usia Awal Sekolah\r\n', 'A.i', '197808192005012001', 'E41161385', 1, 3, NULL, '2020-09-18', ''),
 (12, 'Penerapan Metode Dempster Shafer dan Certaint', 'Penerapan Metode Dempster Shafer dan Certainty Factor pada Sistem Pakar Diagnosis Hama dan Penyakit Tanaman Pisang\r\n', 'Penerapan Metode Dempster Shafer dan Certainty Factor pada Sistem Pakar Diagnosis Hama dan Penyakit Tanaman Pisang\r\n', 'sp.', '198012122005011001', 'E41161211', 1, 8, NULL, '2020-09-18', ''),
 (13, 'Rancang Bangun Sistem Koreksi Otomatis Dengan', 'Rancang Bangun Sistem Koreksi Otomatis Dengan Menggabungkan GLSA dan Thesaurus Pada Dokumen Esai\r\n', 'Rancang Bangun Sistem Koreksi Otomatis Dengan Menggabungkan GLSA dan Thesaurus Pada Dokumen Esai\r\n', 'sc.', '198907102019031010', 'E41161299', 1, 9, NULL, '2020-09-18', ''),
-(14, 'Sistem Pendukung Keputusan Pemilihan Pupuk Pa', 'Sistem Pendukung Keputusan Pemilihan Pupuk Padi Berdasarkan Umur Padi Menggunakan Fuzzy SAW\r\n', 'Sistem Pendukung Keputusan Pemilihan Pupuk Padi Berdasarkan Umur Padi Menggunakan Fuzzy SAW\r\n', 'spk.', '199002272018032001', 'E41161056', 1, 7, NULL, '2020-09-18', ''),
+(14, 'Sistem Pendukung Keputusan Pemilihan Pupuk Pa', 'Sistem Pendukung Keputusan Pemilihan Pupuk Padi Berdasarkan Umur Padi Menggunakan Fuzzy SAW\r\n', 'Sistem Pendukung Keputusan Pemilihan Pupuk Padi Berdasarkan Umur Padi Menggunakan Fuzzy SAW\r\n', 'spk.', '199002272018032001', 'E41161056', 2, 7, NULL, '2020-09-18', ''),
 (15, 'Sistem informasi tata kelola clinical pathway', 'Sistem informasi tata kelola clinical pathway pasien rawat inap BPJS \r\n', 'Sistem informasi tata kelola clinical pathway pasien rawat inap BPJS \r\n', 'si.', '198608022015042002', 'E41160711', 1, 12, NULL, '2020-09-18', ''),
 (16, 'Sistem Pendukung Keputusan Pemilihan Perumaha', 'Sistem Pendukung Keputusan Pemilihan Perumahan\r\n', 'Sistem Pendukung Keputusan Pemilihan Perumahan\r\n', 'spk.', '199205282018032001', 'E41160729', 1, 7, NULL, '2020-09-18', ''),
 (17, 'Sistem Pendukung Keputusan Pemilihan Pemasok ', 'Sistem Pendukung Keputusan Pemilihan Pemasok Menggunakan Metode Fuzzy AHP\r\n', 'Sistem Pendukung Keputusan Pemilihan Pemasok Menggunakan Metode Fuzzy AHP\r\n', 'spk.', '197110092003121001', 'E41161052', 1, 7, NULL, '2020-09-18', ''),
@@ -642,7 +644,7 @@ INSERT INTO `tugas_akhir` (`id`, `Judul_TA`, `Deskripsi`, `abstract`, `keywords`
 (22, 'Implementasi Metode Fuzzy Sugeno Pada Mikroko', 'Implementasi Metode Fuzzy Sugeno Pada Mikrokontrollee Untuk Penentuan Kualitas Air Tambak Secara On-Line\r\n', 'Implementasi Metode Fuzzy Sugeno Pada Mikrokontrollee Untuk Penentuan Kualitas Air Tambak Secara On-Line\r\n', 'iot', '199103152017031001', 'E41161120', 1, 5, NULL, '2020-09-18', ''),
 (23, 'Pengenalan Isyarat Abjad pada Sistem Isyarat ', 'Pengenalan Isyarat Abjad pada Sistem Isyarat Bahasa Indonesia Secara Real-Time dengan Menggunakan Metode Backpropagation\r\n', 'Pengenalan Isyarat Abjad pada Sistem Isyarat Bahasa Indonesia Secara Real-Time dengan Menggunakan Metode Backpropagation\r\n', 'A.i', '197909212005011001', 'E41160605', 1, 3, NULL, '2020-09-18', ''),
 (24, 'Analisis Peramalan Perencanaan Produksi Roti ', 'Analisis Peramalan Perencanaan Produksi Roti Menggunakan Metode Time Series Triple Exponential Smoothing (Studi Kasus: Perusahaan Fatimah Patrang, Jember)\r\n', 'Analisis Peramalan Perencanaan Produksi Roti Menggunakan Metode Time Series Triple Exponential Smoothing (Studi Kasus: Perusahaan Fatimah Patrang, Jember)\r\n', 'si.', '198012122005011001', 'E41161609', 1, 9, NULL, '2020-09-18', ''),
-(25, 'Penentuan Komposisi Bahan Makanan Bagi Pender', 'Penentuan Komposisi Bahan Makanan Bagi Penderita Obesitas Dengan Metode Algoritma Genetika\r\n', 'Penentuan Komposisi Bahan Makanan Bagi Penderita Obesitas Dengan Metode Algoritma Genetika\r\n', 'sp.', '199002272018032001', 'E41160227', 1, 8, NULL, '2020-09-18', ''),
+(25, 'Penentuan Komposisi Bahan Makanan Bagi Pender', 'Penentuan Komposisi Bahan Makanan Bagi Penderita Obesitas Dengan Metode Algoritma Genetika\r\n', 'Penentuan Komposisi Bahan Makanan Bagi Penderita Obesitas Dengan Metode Algoritma Genetika\r\n', 'sp.', '199002272018032001', 'E41160227', 2, 8, NULL, '2020-09-18', ''),
 (26, 'Pengukuran dan pengembangan kualitas website ', 'Pengukuran dan pengembangan kualitas website jurusan kesehatan politeknik negeri jember menggunakan metode webqual 4.0\r\n', 'Pengukuran dan pengembangan kualitas website jurusan kesehatan politeknik negeri jember menggunakan metode webqual 4.0\r\n', 'sc.', '199002272018032001', 'E41161208', 1, 9, NULL, '2020-09-18', ''),
 (27, 'Sistem pakar diagnosa autis sejak dini menggu', 'Sistem pakar diagnosa autis sejak dini menggunakan metode Certainty factor \r\n', 'Sistem pakar diagnosa autis sejak dini menggunakan metode Certainty factor \r\n', 'sp.', '197810112005012002', 'E41160483', 1, 8, NULL, '2020-09-18', ''),
 (28, 'Sistem Pakar Diagnosa Penyakit Ikan Lele Meng', 'Sistem Pakar Diagnosa Penyakit Ikan Lele Menggunakan Metode Certainty Factor\r\n', 'Sistem Pakar Diagnosa Penyakit Ikan Lele Menggunakan Metode Certainty Factor\r\n', 'sp.', '198012122005011001', 'E41160182', 1, 8, NULL, '2020-09-18', ''),
@@ -845,7 +847,7 @@ ALTER TABLE `ruangan`
 -- AUTO_INCREMENT for table `status_ta`
 --
 ALTER TABLE `status_ta`
-  MODIFY `id_status` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_status` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `td_bimbingan`

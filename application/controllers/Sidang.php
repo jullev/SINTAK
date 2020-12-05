@@ -9,6 +9,8 @@ class Sidang extends CI_Controller
         $this->load->model('Ruangan_model');
         $this->load->model('Dosen_model');
         $this->load->model('Status_model');
+        $this->load->model('Mahasiswa_model');
+
         $this->icon = "fa-calendar";
     }
 
@@ -34,6 +36,22 @@ class Sidang extends CI_Controller
     }
     function rekap_sidang()
     {
+        $prodi = $this->input->post('prodi');
+        $angkatan = $this->input->post('angkatan');
+
+        // kondisi ketika  filter digunakan 
+        if ($prodi != "" && $angkatan != "") {
+            $param['rekap_sidang'] = $this->Sidang_model->getRekapSidang($angkatan, $prodi)->result();
+            $param['filter_angkatan'] = $angkatan;
+            $param['filter_prodi'] = $prodi;
+        } else { // Ketika Filter tidak di gunakan
+            $param['rekap_sidang'] = $this->Sidang_model->getRekapSidang()->result();
+            $param['filter_angkatan'] = '';
+            $param['filter_prodi'] = '';
+        }
+
+        $param['angkatan'] = $this->Mahasiswa_model->getAngkatan()->result();
+        $param['prodi'] = $this->Sidang_model->getProdi()->result();
         $param['pageInfo'] = "Rekap Sidang";
 
         $this->template->load("common/template", "pages/Sidang/rekap_sidang", $param);
