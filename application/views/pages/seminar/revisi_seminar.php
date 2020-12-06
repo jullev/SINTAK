@@ -68,7 +68,7 @@
                         }
                         ?>
                     <?php
-                    } elseif ($_SESSION['id_login'] = $nip->dosen_panelis) {
+                    } elseif ($_SESSION['id_login'] == $nip->dosen_panelis) {
                     ?>
                         <?php
                         $no = 1;
@@ -96,7 +96,7 @@
                         ?>
 
                     <?php
-                    } elseif ($_SESSION['id_login'] = $nip->dosen_pembimbing) {
+                    } elseif ($_SESSION['id_login'] == $nip->dosen_pembimbing) {
                     ?>
                         <?php
                         $no = 1;

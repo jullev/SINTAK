@@ -26,8 +26,8 @@ class Seminar_model extends CI_Model
 	function getFilterDosen($nip)
 	{
 		$now = date('Y-m-d');
-		// $nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT amahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, td_seminar.NIP_Panelis FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE td_seminar.Tanggal > '$now' AND td_seminar.NIP_Panelis = '$nip'	");
+		$nip = $_SESSION['id_login'];
+		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_seminar.NIP_Panelis FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE td_seminar.Tanggal > '$now'");
 		return $query->result();
 	}
 

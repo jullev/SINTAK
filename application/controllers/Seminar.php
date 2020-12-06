@@ -18,11 +18,11 @@ class Seminar extends CI_Controller
 		if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
 			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
 		} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
-			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['NIP_Panelis' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
 		} elseif ($_SESSION['kode_level'] == 12) {
-			$param['data_seminar'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA", "tugas_akhir ta", ["mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'tgl_ACC !=' => NULL], "")->result_array();
-			print_r($_SESSION);
+			$param['data_seminar'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA, s.Tanggal", "td_seminar s", ["tugas_akhir ta", "s.id_TA=ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'Tanggal !=' => NULL], "")->result_array();
 		}
+		//		print_r($param);
 		//Mengambil Data Dari Tabel Master
 		$param['Dosen'] = $this->Dosen_model->getAll()->result();
 		$param['Ruangan'] = $this->Ruangan_model->getAll()->result();
@@ -178,7 +178,7 @@ class Seminar extends CI_Controller
 		$param['pageInfo'] = "Jadwal Seminar";
 		$param['jadwal_seminar'] = $this->Seminar_model->getFilterDosen($_SESSION['id_login']);
 		print_r($param);
-		//		$this->template->load("common/template", "pages/Seminar/jadwal_seminar", $param);
+		$this->template->load("common/template", "pages/Seminar/jadwal_seminar", $param);
 	}
 
 	function editJadwal()

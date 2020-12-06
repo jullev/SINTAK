@@ -187,7 +187,7 @@
             -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['kode_level'] != 1 || $_SESSION['kode_level'] != 3 || $_SESSION['kode_level'] != 4 || $_SESSION['kode_level'] != 5) {
+								if ($_SESSION['kode_level'] == 2) {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
 									<!-- 
@@ -195,28 +195,28 @@
                 2. Jika panelis, bisa melihat dan mengACC revisi
                 3. Jika dosen pembimbing, bisa melihat revisi
               -->
-            <?php } ?>  
-              </div>
-            </div>
-            </li>
-            <?php } ?>  
-            <?php 
-                if($_SESSION['kode_level']>=3 && $_SESSION['kode_level']<=8){
-            ?>
-           <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
-              <i class="fas fa-fw fa-file-excel"></i>
-              <span>Rekap</span>
-            </a>
-            <div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-              <div class="py-2 collapse-inner rounded">
-              <a class="collapse-item" href="<?php echo base_url()."Sidang" ?>">Rekap Nilai</a>
-                <a class="collapse-item" href="<?php echo base_url()."Sidang/rekap_sidang" ?>">Rekap Sidang</a>
-                <a class="collapse-item" href="<?php echo base_url()."Seminar/rekap_seminar" ?>">Rekap Seminar</a>
-              </div>
-            </div>
-            </li>
-          <?php } ?>  
+								<?php } ?>
+							</div>
+						</div>
+					</li>
+				<?php } ?>
+				<?php
+				if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 8) {
+				?>
+					<li class="nav-item">
+						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
+							<i class="fas fa-fw fa-file-excel"></i>
+							<span>Rekap</span>
+						</a>
+						<div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+							<div class="py-2 collapse-inner rounded">
+								<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Rekap Nilai</a>
+								<a class="collapse-item" href="<?php echo base_url() . "Sidang/rekap_sidang" ?>">Rekap Sidang</a>
+								<a class="collapse-item" href="<?php echo base_url() . "Seminar/rekap_seminar" ?>">Rekap Seminar</a>
+							</div>
+						</div>
+					</li>
+				<?php } ?>
 
 
 

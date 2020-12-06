@@ -4,32 +4,51 @@
     echo $this->session->flashdata('update_validation');
     echo $this->session->flashdata('delete_validation');
     ?>
+    1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
+    2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
+    3. Jika koordinator TA, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan anggota.
     <div class="table-responsive">
-      1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
-      2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
-      3. Jika koordinator TA, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan anggota.
       <table class="table table-striped table-hover table-bordered datatable table-custom">
         <thead>
           <tr>
             <td>#</td>
-            <td>Mhs.</td>
-            <td>Judul TA</td>
-            <td>Deskripsi</td>
-            <td>Ruangan</td>
-            <td>Tgl. Waktu</td>
-            <td>Panelis</td>
+            <td>NIM</td>
+            <td>Nama Mahasiswa</td>
+            <td>Judul</td>
             <td>Pembimbing</td>
-            <td>Status</td>
-            <td>Nilai</td>
             <td>Aksi</td>
           </tr>
-        </thead>
         <tbody>
+          <?php
+          $no = 1;
+          foreach ($data_sidang as $i) {
+          ?>
+            <tr>
+              <td><?php echo $no++; ?></td>
+              <td><?php echo $i->Mahasiswa_NIM ?></td>
+              <td><?php echo $i->nama_mahasiswa ?></td>
+              <td><?php echo $i->Judul_TA ?></td>
+              <td><?php echo $i->NAMA ?></td>
+              <td class="text-center">
+                <div class="dropdown">
+                  <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Option
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a href="" class="edit-sidang dropdown-item" data-id="<?php echo $i->id_sidang ?>">Edit</a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          <?php } ?>
         </tbody>
       </table>
     </div>
   </div>
 </div>
+
+
+<!-- modal -->
 <div class="modal" id="modalDesc">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -49,7 +68,7 @@
 </div>
 
 <div class="modal" id="modalEdit">
-  <div class="modal-dialog modal-xl">
+  <div class="modal-dialog">
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -63,54 +82,51 @@
         <form action="sidang/update" method="post" id="formValidasi">
           <input type="hidden" name="id_" id="id_">
           <div class="row">
-            <div class="col-md-3">
-              <label for="">Tanggal</label>
-              <input type="date" name="Tanggal" id="Tanggal" class="form-control">
-            </div>
-            <div class="col-md-3">
-              <label for="">Jam</label>
-              <input type="time" name="jam" id="jam" class="form-control">
-            </div>
-            <div class="col-md-6">
-              <label for="">Panelis</label>
-              <select name="NIP_Panelis" id="NIP_Panelis" class="form-control">
-                <option value="">--Pilih--</option>
-                <?php
-                foreach ($Dosen as $i) {
-                  echo "<option value='$i->NIP'>$i->NAMA</option>";
-                }
-                ?>
-              </select>
-            </div>
+            <?php
+            if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+            ?>
+              <div class="col-md-12">
+                <label for="">Tanggal</label>
+                <input type="date" name="Tanggal" id="Tanggal" class="form-control">
+              </div>
+              <div class="col-md-12">
+                <label for="">Jam</label>
+                <input type="time" name="jam" id="jam" class="form-control">
+              </div>
+              <div class="col-md-12">
+                <label for="">Ruangan</label>
+                <select name="idruangan" id="idruangan" class="form-control select2">
+                  <option value="">--Pilih--</option>
+                  <?php
+                  foreach ($Ruangan as $i) {
+                    echo "<option value='$i->idRuangan'>$i->Nama_ruangan</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+
+            <?php
+            } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+            ?>
+              <div class="col-md-12">
+                <label for="">Anggota</label>
+                <select name="NIP_Anggota" id="NIP_Anggota" class="form-control select2">
+                  <option value="">--Pilih--</option>
+                  <?php
+                  foreach ($Dosen as $i) {
+                    echo "<option value='$i->NIP'>$i->NAMA</option>";
+                  }
+                  ?>
+                </select>
+              </div>
+            <?php
+            }
+            ?>
           </div>
-          <div class="row mt-1">
-            <div class="col-md-6">
-              <label for="">Ruangan</label>
-              <select name="idRuangan" id="idRuangan" class="form-control">
-                <option value="">--Pilih--</option>
-                <?php
-                foreach ($Ruangan as $i) {
-                  echo "<option value='$i->idRuangan'>$i->Nama_ruangan</option>";
-                }
-                ?>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="">Status</label>
-              <select name="id_status" id="id_status" class="form-control">
-                <option value="">--Pilih--</option>
-                <?php
-                foreach ($Master_status as $i) {
-                  echo "<option value='$i->idMaster_status'>$i->Status</option>";
-                }
-                ?>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="">Nilai</label>
-              <input type="text" name="Nilai" id="Nilai" class="form-control">
-            </div>
-          </div>
+
+          <!-- <div class="row mt-1">
+
+					</div> -->
           <br>
           <br>
           <?php

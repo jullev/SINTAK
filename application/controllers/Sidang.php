@@ -17,23 +17,38 @@ class Sidang extends CI_Controller
     function index()
     {
         $param['pageInfo'] = "List Sidang";
-        if ($_SESSION['kode_level'] == 8) {
-            $param['data_sidang'] = $this->Sidang_model->getWhere(['Mahasiswa_NIM' => $_SESSION['id_login']])->result();
+        if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+            $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+        } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+            $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
         } elseif ($_SESSION['kode_level'] == 12) {
-            $param['data_sidang'] = $this->Sidang_model->getAll()->result();
-        } else {
-            $param['data_sidang'] = $this->Sidang_model->getAll()->result();
+            $param['data_sidang'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA, s.Tanggal", "td_sidang s", ["tugas_akhir ta", "s.id_TA=ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'Tanggal !=' => NULL], "")->result_array();
         }
+        //		print_r($param);
         //Mengambil Data Dari Tabel Master
         $param['Dosen'] = $this->Dosen_model->getAll()->result();
         $param['Ruangan'] = $this->Ruangan_model->getAll()->result();
-        $param['Master_status'] = $this->Status_model->getAllDataForSidang()->result();
+        $param['Master_status'] = $this->Status_model->getAllDataForsidang()->result();
         if ($_SESSION['kode_level'] == 12) {
-            $this->template->load("common/template", "pages/Seminar/list_sidang_mhs", $param);
+            $this->template->load("common/template", "pages/sidang/list_sidang_mhs", $param);
         } else {
-            $this->template->load("common/template", "pages/Sidang/list_sidang", $param);
+            $this->template->load("common/template", "pages/sidang/list_sidang", $param);
         }
     }
+
+    function ajukanSidang()
+    {
+        $param = $this->common->getData("ta.id", "tugas_akhir ta", ["mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login']], "")->result_array();
+        $this->common->insert("td_sidang", ['id_TA' => $param[0]['id']]);
+        //Flash Message Sukses
+        $this->session->set_flashdata(
+            "input_validation",
+            "<div class='alert alert-success'>
+		        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden=true'>&times;</span></button>Pengajuan Sidang Berhasil</div>"
+        );
+        redirect('sidang');
+    }
+
     function rekap_sidang()
     {
         $prodi = $this->input->post('prodi');
@@ -56,6 +71,7 @@ class Sidang extends CI_Controller
 
         $this->template->load("common/template", "pages/Sidang/rekap_sidang", $param);
     }
+
     function add()
     {
         $param['pageInfo'] = "Pengajuan Sidang";
@@ -108,6 +124,7 @@ class Sidang extends CI_Controller
         header("content-type:json/application");
         echo json_encode($data);
     }
+
     function update()
     {
         $id = $this->input->post('id_');
@@ -147,9 +164,11 @@ class Sidang extends CI_Controller
         redirect(base_url() . 'Sidang');
     }
 
+    // jadwal sidang
     function jadwalSidang()
     {
         $param['pageInfo'] = "Jadwal Sidang";
+        $param['jadwal_sidang'] = $this->Sidang_model->getFilterDosen($_SESSION['id_login']);
         $this->template->load("common/template", "pages/Sidang/jadwal_sidang", $param);
     }
 
@@ -183,6 +202,8 @@ class Sidang extends CI_Controller
         redirect(base_url() . 'Sidang');
     }
 
+
+    // revisi
     function revisiSidang()
     {
         $param['pageInfo'] = "Revisi Sidang";

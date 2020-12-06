@@ -92,7 +92,7 @@
 							</div>
 							<div class="col-md-12">
 								<label for="">Ruangan</label>
-								<select name="idRuangan" id="idRuangan" class="form-control">
+								<select name="idruangan" id="idruangan" class="form-control select2">
 									<option value="">--Pilih--</option>
 									<?php
 									foreach ($Ruangan as $i) {
@@ -107,7 +107,7 @@
 						?>
 							<div class="col-md-12">
 								<label for="">Panelis</label>
-								<select name="NIP_Panelis" id="NIP_Panelis" class="form-control">
+								<select name="NIP_Panelis" id="NIP_Panelis" class="form-control select2">
 									<option value="">--Pilih--</option>
 									<?php
 									foreach ($Dosen as $i) {
