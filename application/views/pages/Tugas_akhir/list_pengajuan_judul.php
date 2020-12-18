@@ -22,7 +22,6 @@
         <tbody>
           <?php
           $no = 1;
-          print_r($_SESSION);
           foreach ($data_tugas_akhir as $i) {
           ?>
             <tr>
