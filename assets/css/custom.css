@@ -258,10 +258,29 @@ label {
 	box-shadow: 0 2px 4px 0 rgba(43, 43, 43, 0.1) !important;
 	border : none;
 }
-.card-dashboard.with-notif{
-	border : 3px solid #ffc107;
-	-webkit-box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25) !important; 
-	box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.25) !important;
+.card-dashboard.has-notif{
+	overflow: hidden;
+}
+.card-dashboard.has-notif,.card-dashboard.has-notif:hover{
+	-webkit-box-shadow: 0px 4px 40px rgba(255, 193, 7, 0.25) !important; 
+	box-shadow: 0px 4px 40px rgba(255, 193, 7, 0.25) !important;
+}
+.card-dashboard.has-notif::before{
+	content :"\f0f3";
+	font-size: 5em;
+	position: absolute;
+	color : #ffc107;
+	opacity: .8;
+	left : 0;
+	top : 0;
+	transform: translate(-25%,-25%);
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;	
+	
+}
+.badge-yellow{
+	background: #ffc107;
+	color : white;
 }
 .card-dashboard {
 	-webkit-box-shadow: none !important;

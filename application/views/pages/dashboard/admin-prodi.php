@@ -3,7 +3,7 @@
 ?>
 <div class="row">
     <div class="col-md-3 mb-4">
-        <div class="card card-dashboard py-2">
+        <div class="card card-dashboard py-2 <?= $pengajuanSeminar!=0 ? 'has-notif' : '' ?>">
             <div class="card-body">    
                 <div class="row">
                     <div class="col-md-7 pr-0">
@@ -20,7 +20,7 @@
         </div>
     </div>
     <div class="col-md-3 mb-4">
-        <div class="card card-dashboard py-2">
+        <div class="card card-dashboard py-2 <?= $pengajuanSidang!=0 ? 'has-notif' : '' ?>">
             <div class="card-body">    
                 <div class="row">
                     <div class="col-md-7 pr-0">
