@@ -76,7 +76,7 @@
 </div>
 
 <?php
-if ($_SESSION['koordinator'] == true) {
+if ($_SESSION['global_role'] == 'Koordinator TA') {
 ?>
   <div class="modal" id="modalEdit">
     <div class="modal-dialog modal-lg">

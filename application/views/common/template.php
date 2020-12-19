@@ -94,7 +94,7 @@
 				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2) {
 				?>
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/list_bimbingan" ?>">
+						<a class="nav-link" href="<?php echo base_url() . "bimbingan/" ?>">
 							<i class="fas fa-fw fa-chalkboard-teacher"></i>
 							<span>Bimbingan</span></a>
 						<!--- 

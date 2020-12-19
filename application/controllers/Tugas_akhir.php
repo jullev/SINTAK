@@ -34,9 +34,9 @@ class Tugas_akhir extends CI_controller
     public function list_pengajuan_judul()
     {
         $param['pageInfo'] = "List Pengajuan Judul";
-
+        print_r($_SESSION);
         // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
-        if ($_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
+        if ($_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'KPS') {
             $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
         } else {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
@@ -52,7 +52,7 @@ class Tugas_akhir extends CI_controller
         $param['pageInfo'] = "List Bimbingan";
 
         // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
-        if ($_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
+        if ($_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'KPS') {
             $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
         } else {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];

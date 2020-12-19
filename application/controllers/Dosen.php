@@ -81,7 +81,7 @@ Class Dosen extends CI_controller{
                 'NAMA' => $this->input->post('NAMA'),
                 'Alamat' => $this->input->post('Alamat'),
                 'No_hp' => $this->input->post('No_hp'),
-                'password' => $this->input->post('NIP'),
+                'password' => password_hash($this->input->post('NIP'),PASSWORD_DEFAULT),
                 'idRole' => $this->input->post('idRole')
             );
             if($this->Dosen_model->save($data)){
@@ -177,7 +177,7 @@ Class Dosen extends CI_controller{
                 'NAMA' => $this->input->post('NAMA'),
                 'Alamat' => $this->input->post('Alamat'),
                 'No_hp' => $this->input->post('No_hp'),
-                'password' => $this->input->post('NIP'),
+                'password' => password_hash($this->input->post('NIP'),PASSWORD_DEFAULT),
                 'idRole' => $this->input->post('idRole')
             );
             if($this->Dosen_model->update($id, $data)){

@@ -11,9 +11,29 @@ class Bimbingan extends CI_controller
             redirect('login');
         }
         $this->load->model('Bimbingan_model');
-        $this->load->model('TugasAkhir_model');
+        $this->load->model('Dosen_model');
+        $this->load->model('Mahasiswa_model');
+        $this->load->model('TugasAkhir_Model');
+        $this->load->model('Topik_model');
+        $this->load->model('Status_model');
         $this->icon = "fa-book";
         $this->load->helper(array('form', 'url'));
+    }
+    function index(){
+
+        $param['pageInfo'] = "List Tugas Akhir";
+        if ($_SESSION['global_role'] == 'Mahasiswa') {
+            $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
+        } else if (isDospem()) {
+            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+        } else {
+            $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
+        }
+        $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
+        $param['Topik'] = $this->Topik_model->getAll()->result();
+        $param['dosen'] = $this->Dosen_model->getAll()->result();
+        $param['status'] = $this->Status_model->getAllDataForTugasAkhir()->result();
+        $this->template->load("common/template", "pages/bimbingan/bimbingan", $param);  
     }
 
     function TugasAkhir($id)
@@ -41,7 +61,7 @@ class Bimbingan extends CI_controller
         $post = $this->input->post();
         //Get ID Tugas Akhir
         $TA_id = $this->input->post('TA_id');
-        $cekIdTA = $this->TugasAkhir_model->getAll(['id' => $TA_id, 'Mahasiswa_NIM' => $_SESSION['id_login']])->num_rows();
+        $cekIdTA = $this->TugasAkhir_Model->getAll(['id' => $TA_id, 'Mahasiswa_NIM' => $_SESSION['id_login']])->num_rows();
         if ($cekIdTA == 1) {
             //Upload Configuration
 

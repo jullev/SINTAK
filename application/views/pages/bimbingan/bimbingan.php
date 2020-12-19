@@ -1,6 +1,5 @@
 <div class="card shadow py-2">
   <div class="card-body">
-      <a href="<?php echo base_url() . "Tugas_akhir/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
     <?php
     $this->load->view("common/msg")
     ?>

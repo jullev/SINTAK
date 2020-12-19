@@ -4,7 +4,7 @@
           echo $this->session->flashdata('input_validation');
           echo $this->session->flashdata('update_validation');
           echo $this->session->flashdata('delete_validation');
-          if($_SESSION['kode_level']==8){
+          if($_SESSION['global_role']=='Mahasiswa'){
         ?>
         <div class="row mb-2">
           <div class="col-md-3">
@@ -38,7 +38,7 @@
                         <td><?=($i->revisi == null) ? 'Belum Di Revisi' : $i->revisi ?></td>
                         <td class="text-center">
                         <?php 
-                          if($_SESSION['kode_level']==8){
+                          if($_SESSION['global_role']=='Mahasiswa'){
                         ?>
                           <div class="dropdown">
                             <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
