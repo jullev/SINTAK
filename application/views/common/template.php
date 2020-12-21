@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-print_r($_SESSION);
-/* 	if(empty($_SESSION['id_login'])){
+	if(empty($_SESSION['id_login'])){
 		redirect(base_url().'login');
 	}
- */?>
+?>
 
 <head>
 	<meta charset="utf-8" />
