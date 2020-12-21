@@ -147,7 +147,8 @@
 								<?php
 								if ($_SESSION['global_role'] != 'Administrator') {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminar" ?>">Jadwal Seminar</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminarPembimbing" ?>">Jadwal Seminar Pembimbing</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminarPanelis" ?>">Jadwal Seminar Panelis</a>
 									<!-- 
 				1.	Menu jadwal seminar hanya untuk dosen pembimbing dan dosen panelis
                 2.	Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.

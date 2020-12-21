@@ -21,9 +21,17 @@ class Sidang_model extends CI_Model
         return $query->result();
     }
 
+    // function getFilterDosenSidang($nip)
+    // {
+    //     $now = date('Y-m-d');
+    //     $nip = $_SESSION['id_login'];
+    //     $query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_sidang.id_seminar, td_sidang.NIP_Anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_sidang.NIP_Anggota JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE td_sidang.Tanggal > '$now'");
+    //     return $query->result();
+    // }
+
     function getById($id)
     {
-        $this->db->select('id_sidang,Tanggal,jam,NIP_Panelis,id_status,idRuangan,Nilai');
+        $this->db->select('id_sidang,Tanggal,jam,NIP_Anggota,id_status,idRuangan,Nilai_anggota,Nilai_sidang,Nilai_bimbingan');
         return $this->db->get_where($this->_table, ["id_sidang" => $id])->result_array();
     }
 

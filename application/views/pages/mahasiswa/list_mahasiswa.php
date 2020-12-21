@@ -2,8 +2,8 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?php echo base_url()."Mahasiswa/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
-                <a href="<?php echo base_url()."Mahasiswa/import" ?>" class="btn btn-success mb-3"> <span class="fa fa-file"></span> Import</a>
+                <a href="<?php echo base_url() . "Mahasiswa/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+                <a href="<?php echo base_url() . "Mahasiswa/import" ?>" class="btn btn-success mb-3"> <span class="fa fa-file"></span> Import</a>
             </div>
             <div class="col-md-6 ml-auto">
                 <div class="row">
@@ -11,22 +11,22 @@
                         <select name="id_prodi" class="select2 form-control" id="id_prodi" onchange="showFilteredDataMahasiswa()">
                             <option value="">Semua Prodi</option>
                             <?php
-                                foreach ($prodi as $value) {
-                                    echo "<option value='".$value->idProdi."'>".$value->Nama_prodi."</option>";
-                                }
-                                ?>
+                            foreach ($prodi as $value) {
+                                echo "<option value='" . $value->idProdi . "'>" . $value->Nama_prodi . "</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <select name="tahun" class="select2 form-control" id="tahun" onchange="showFilteredDataMahasiswa()">
                             <option value="">Semua Tahun</option>
-                            <?php 
-                                $thisYear = date("Y");
-                                for($i=1;$i<=5;$i++){
-                                    $year = (int)$thisYear - $i;
-                                    echo "<option>$year</option>";
-                                }
-                                ?>
+                            <?php
+                            $thisYear = date("Y");
+                            for ($i = 1; $i <= 5; $i++) {
+                                $year = (int)$thisYear - $i;
+                                echo "<option>$year</option>";
+                            }
+                            ?>
                         </select>
                     </div>
                 </div>
@@ -52,31 +52,31 @@
                         <td>Tanggal Lahir</td>
                         <td>Aksi</td>
                     </tr>
-                    <tbody id="body_mahasiswa">
+                <tbody id="body_mahasiswa">
                     <?php
-                        $no = 1;
-                        foreach($data_mahasiswa as $i){
+                    $no = 1;
+                    foreach ($data_mahasiswa as $i) {
                     ?>
-                    <tr>
-                        <td><?php echo $no++; ?></td>
-                        <td><?php echo $i->NIM; ?></td>
-                        <td><?php echo $i->NAMA; ?></td>
-                        <td><?php echo $i->email; ?></td>
-                        <td><?php echo $i->Alamat; ?></td>
-                        <td><?php echo $i->Tahun_masuk; ?></td>
-                        <td><?php echo $i->Nama_prodi; ?></td>
-                        <td><?php echo $i->tanggallahir; ?></td>
-                        <td class="text-center">
-                            <?php 
+                        <tr>
+                            <td><?php echo $no++; ?></td>
+                            <td><?php echo $i->NIM; ?></td>
+                            <td><?php echo $i->NAMA; ?></td>
+                            <td><?php echo $i->email; ?></td>
+                            <td><?php echo $i->Alamat; ?></td>
+                            <td><?php echo $i->Tahun_masuk; ?></td>
+                            <td><?php echo $i->Nama_prodi; ?></td>
+                            <td><?php echo $i->tanggallahir; ?></td>
+                            <td class="text-center">
+                                <?php
                                 $dropdown['link'] = array(
-                                    "Edit" => base_url().'Mahasiswa/edit/'.$i->NIM,
-                                    "Reset Password" => base_url().'Mahasiswa/resetpassword/'.$i->NIM,
-                                    "Delete" => base_url().'Mahasiswa/delete/'.$i->NIM
+                                    "Edit" => base_url() . 'Mahasiswa/edit/' . $i->NIM,
+                                    "Reset Password" => base_url() . 'Mahasiswa/resetpassword/' . $i->NIM,
+                                    "Delete" => base_url() . 'Mahasiswa/delete/' . $i->NIM
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
-                            ?>
-                        </td>
-                    </tr>
+                                ?>
+                            </td>
+                        </tr>
                     <?php } ?>
                 </tbody>
                 </thead>
@@ -85,25 +85,28 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-       
-	});
+    $(document).ready(function() {
 
-    function showFilteredDataMahasiswa(){
+    });
+
+    function showFilteredDataMahasiswa() {
         var id_prodi = parseInt($("#id_prodi").val());
-		var tahun = parseInt($("#tahun").val());
+        var tahun = parseInt($("#tahun").val());
 
         $.ajax({
-        url: "<?php echo base_url()?>Mahasiswa/filter",
-        type: "get",
-        data: {id_prodi:id_prodi, tahun:tahun},
-        success: function (response) {
-            $('#table_mahasiswa').DataTable();
-            $('#body_mahasiswa').html(response);
-            
+            url: "<?php echo base_url() ?>Mahasiswa/filter",
+            type: "get",
+            data: {
+                id_prodi: id_prodi,
+                tahun: tahun
             },
-        error: function(jqXHR, textStatus, errorThrown) {
-           console.log(textStatus, errorThrown);
+            success: function(response) {
+                $('#table_mahasiswa').DataTable();
+                $('#body_mahasiswa').html(response);
+
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
             }
         });
     }

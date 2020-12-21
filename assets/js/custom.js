@@ -237,7 +237,30 @@ $(document).ready(function() {
 				$("#modalEdit #NIP_Panelis").val(response.NIP_Panelis);
 				$("#modalEdit #idRuangan").val(response.idRuangan);
 				$("#modalEdit #id_status").val(response.id_status);
-				$("#modalEdit #Nilai").val(response.Nilai);
+				$("#modalEdit #Nilai_penelis").val(response.Nilai_penelis);
+				$("#modalEdit #Nilai_pembimbing").val(response.Nilai_pembimbing);
+				$("#modalEdit #revisi").val(response.revisi);
+				$("#modalEdit #lampiran_revisi").val(response.Revisi);
+				$("#modalEdit #status_revisi").val(response.status_revisi);
+				$("#modalEdit").modal("show");
+			}
+		});
+	});
+
+		$(".edit-jadwal-seminar").click(function(e) {
+		e.preventDefault();
+		var id = $(this).data("id");
+		$.ajax({
+			type: "get",
+			url: baseUrl + "Seminar/editJadwal",
+			data: { id_seminar: id },
+			success: function (response) {
+				$("#modalEdit #id_").val(response.id_seminar);
+				$("#modalEdit #Nilai_penelis").val(response.Nilai_penelis);
+				$("#modalEdit #Nilai_pembimbing").val(response.Nilai_pembimbing);
+				$("#modalEdit #revisi").val(response.revisi);
+				$("#modalEdit #lampiran_revisi").val(response.Revisi);
+				$("#modalEdit #status_revisi").val(response.status_revisi);
 				$("#modalEdit").modal("show");
 			}
 		});
@@ -254,10 +277,10 @@ $(document).ready(function() {
 				$("#modalEdit #id_").val(response.id_sidang);
 				$("#modalEdit #Tanggal").val(response.Tanggal);
 				$("#modalEdit #jam").val(response.jam);
-				$("#modalEdit #NIP_Panelis").val(response.NIP_Panelis);
+				$("#modalEdit #NIP_Anggota").val(response.NIP_Anggota);
 				$("#modalEdit #idRuangan").val(response.idRuangan);
-				$("#modalEdit #id_status").val(response.id_status);
-				$("#modalEdit #Nilai").val(response.Nilai);
+				// $("#modalEdit #id_status").val(response.id_status);
+				// $("#modalEdit #Nilai").val(response.Nilai);
 				$("#modalEdit").modal("show");
 			}
 		});

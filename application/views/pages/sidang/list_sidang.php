@@ -79,7 +79,7 @@
 
       <!-- Modal body -->
       <div class="modal-body f-15 my-3">
-        <form action="sidang/update" method="post" id="formValidasi">
+        <form action="sidang/updateJadwal" method="post" id="formValidasi">
           <input type="hidden" name="id_" id="id_">
           <div class="row">
             <?php
