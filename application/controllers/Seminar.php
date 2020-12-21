@@ -15,11 +15,11 @@ class Seminar extends CI_Controller
 	function index()
 	{
 		$param['pageInfo'] = "List Seminar";
-		if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+		if ($_SESSION['global_role'] == "Admin Prodi") {
+			$param['data_seminar'] = $this->common->getData("s.id_seminar, k.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+		} elseif ($_SESSION['global_role'] == "Koordinator TA") {
 			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
-		} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
-			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
-		} elseif ($_SESSION['kode_level'] == 12) {
+		} elseif ($_SESSION['global_role'] == "Mahasiswa") {
 			$param['data_seminar'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA, s.Tanggal", "td_seminar s", ["tugas_akhir ta", "s.id_TA=ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'Tanggal !=' => NULL], "")->result_array();
 		}
 		//		print_r($param);
@@ -27,7 +27,7 @@ class Seminar extends CI_Controller
 		$param['Dosen'] = $this->Dosen_model->getAll()->result();
 		$param['Ruangan'] = $this->Ruangan_model->getAll()->result();
 		$param['Master_status'] = $this->Status_model->getAllDataForSeminar()->result();
-		if ($_SESSION['kode_level'] == 12) {
+		if ($_SESSION['global_role'] == "Mahasiswa") {
 			$this->template->load("common/template", "pages/Seminar/list_seminar_mhs", $param);
 		} else {
 			$this->template->load("common/template", "pages/Seminar/list_seminar", $param);
@@ -125,13 +125,13 @@ class Seminar extends CI_Controller
 		$id = $this->input->post('id_');
 		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
 		if ($cekId == 1) {
-			if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+			if ($_SESSION['global_role'] == "Admin Prodi") {
 				$data = array(
 					'Tanggal' => $this->input->post('Tanggal'),
 					'jam' => $this->input->post('jam'),
 					'idRuangan' => $this->input->post('idRuangan'),
 				);
-			} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+			} elseif ($_SESSION['global_role'] == "Koordinator TA") {
 				$data = array(
 					'NIP_Panelis' => $this->input->post('NIP_Panelis'),
 				);
@@ -202,7 +202,7 @@ class Seminar extends CI_Controller
 		$id = $this->input->post('id_');
 		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
 		if ($cekId == 1) {
-			if ($_SESSION['kode_level'] == 2) {
+			if ($_SESSION['global_role'] == "Dosen Pembimbing") {
 				$data = array(
 					'Nilai_penelis' => $this->input->post('Nilai_penelis'),
 					'revisi' => $this->input->post('revisi'),
@@ -229,7 +229,7 @@ class Seminar extends CI_Controller
 		$nilai = $this->input->post('Nilai_pembimbing');
 		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
 		if ($cekId == 1) {
-			if ($_SESSION['kode_level'] == 2) {
+			if ($_SESSION['global_role'] == "Dosen Pembimbing") {
 				$data = array(
 					'Nilai_pembimbing' => $nilai,
 				);
@@ -255,10 +255,10 @@ class Seminar extends CI_Controller
 	{
 		$param['pageInfo'] = "Revisi Seminar";
 		$nip = $_SESSION['id_login'];
-		if ($_SESSION['kode_level'] == 12) {
+		if ($_SESSION['global_role'] == "Mahasiswa") {
 			$param['revisi_seminar'] = $this->Seminar_model->getFilterMhs();
 			$this->template->load("common/template", "pages/Seminar/revisi_seminar", $param);
-			// } elseif ($_SESSION['kode_level'] == $nip) {
+			// } elseif ($_SESSION['global_role'] == $nip) {
 			// 	$param['revisi_seminar'] = $this->Seminar_model->getFilterDospem();
 			// 	$this->template->load("common/template", "pages/Seminar/revisi_seminar", $param);
 		} else {

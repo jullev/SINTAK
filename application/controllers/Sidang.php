@@ -18,7 +18,8 @@ class Sidang extends CI_Controller
     {
         $param['pageInfo'] = "List Sidang";
         if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
-            $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+            $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['m.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+            // 'Tanggal' => NULL,
         } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
             $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['NIP_Anggota' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
         } elseif ($_SESSION['kode_level'] == 12) {
@@ -128,14 +129,23 @@ class Sidang extends CI_Controller
     function update()
     {
         $id = $this->input->post('id_');
-        $data = array(
-            'Tanggal' => $this->input->post('Tanggal'),
-            'jam' => $this->input->post('jam'),
-            'NIP_Anggota' => $this->input->post('NIP_Anggota'),
-            'idRuangan' => $this->input->post('idRuangan'),
-            // 'id_status' => $this->input->post('id_status'),
-            // 'Nilai' => $this->input->post('Nilai'),
-        );
+        if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+            $data = array(
+                'Tanggal' => $this->input->post('Tanggal'),
+                'jam' => $this->input->post('jam'),
+                'idRuangan' => $this->input->post('idRuangan'),
+            );
+        } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+            $data = array(
+                // 'Tanggal' => $this->input->post('Tanggal'),
+                // 'jam' => $this->input->post('jam'),
+                'NIP_Anggota' => $this->input->post('NIP_Anggota'),
+                // 'idRuangan' => $this->input->post('idRuangan'),
+                // 'id_status' => $this->input->post('id_status'),
+                // 'Nilai' => $this->input->post('Nilai'),
+
+            );
+        }
         if ($this->Sidang_model->update($id, $data)) {
             //Flash Message Sukses
             $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>

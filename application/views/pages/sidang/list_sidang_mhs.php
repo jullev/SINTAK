@@ -4,6 +4,7 @@
 		echo $this->session->flashdata('input_validation');
 		if (count($data_sidang) == 0) {
 		?>
+			1. sebelum ajukan seminar sudah bimbingan minimal 6x
 			<div class="alert alert-danger custom-alert">
 				<span class="fa fa-exclamation-triangle sticky"></span>
 				<h1>Belum ACC Sidang</h1>
