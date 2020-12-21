@@ -87,7 +87,7 @@
             <span>Loading...</span>
             </div>
           </div>
-            <div class="col-md-12" id="body_form" style="overflow:auto">
+            <div class="col-md-6" id="body_form" style="overflow:auto">
                 <div class="box-login">
                     <div class="top">
                         <p>RESET PASSWORD</p>

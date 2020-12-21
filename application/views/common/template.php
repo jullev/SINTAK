@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-// if (!isset($_SESSION['username']) && !isset($_SESSION['id_login'])) {
-//   redirect('Login');
-// }
-?>
+print_r($_SESSION);
+/* 	if(empty($_SESSION['id_login'])){
+		redirect(base_url().'login');
+	}
+ */?>
 
 <head>
 	<meta charset="utf-8" />

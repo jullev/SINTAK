@@ -5,6 +5,10 @@ class Dashboard extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        if(empty($_SESSION['id_login'])){
+            redirect(base_url().'login');
+        }
+    
         $this->icon = "fa-tachometer-alt";
         $this->load->model('TugasAkhir_Model');
         $this->load->model('Mahasiswa_model');
