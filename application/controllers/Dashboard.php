@@ -22,17 +22,7 @@ class Dashboard extends CI_Controller
             $param['ruangan'] = $this->common->getData('idRuangan', 'ruangan', '', '', '')->num_rows();
             $param['topik'] = $this->common->getData('idTopik', 'topik', '', '', '')->num_rows();
         } else if ($role == 'Dosen Pembimbing') {
-            $nip = $_SESSION['id_login'];
-            $param['pengajuan'] = $this->common->getData('id', 'tugas_akhir', '', ['id_status' => 1, 'Dosen_NIP' => $nip], '')->num_rows();
-            $param['ta'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '" . $nip . "' and id_status != '1' and id_status != '3' and id_status != '11'", '')->num_rows();
-            $param['bimbingan'] = $this->common->getData('id_bimbingan', 'td_bimbingan b', ["tugas_akhir ta", 'b.Tugas_akhir_id = ta.id'], ['Dosen_NIP' => $nip], '')->num_rows();
-            $param['menungguRevisi'] = $this->common->getData('id_bimbingan', 'td_bimbingan b', ["tugas_akhir ta", 'b.Tugas_akhir_id = ta.id'], ['Dosen_NIP' => $nip, 'revisi' => NULL], '')->num_rows();
-            $param['topik'] = $this->common->getData('t.topik,count(id) ttl', 'tugas_akhir ta', ['topik t', 'ta.id_topik = t.idTopik'], "Dosen_NIP = '$nip' and ta.id_status != '1' and ta.id_status != '3' and ta.id_status != '11'", '', 'id_topik')->result_array();
-
-            $param['belumBimbingan'] = $this->common->getData('id', 'tugas_akhir', '', ["Dosen_NIP" => $nip, 'id_status' => '2'], '')->num_rows();
-            $param['bimbinganSeminar'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '$nip' and id_status between 4 and 6", '')->num_rows();
-            $param['bimbinganTA'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '$nip' and id_status between 7 and 9", '')->num_rows();
-            $param['selesaiSidang'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '$nip' and id_status = '10' ", '')->num_rows();
+            $this->dospem();
         } else if ($role == 'Admin Prodi') {
             $idProdi = $_SESSION['id_prodi'];
             $param['pengajuanSeminar'] = $this->common->getData('s.id_seminar', 'td_seminar s', ['tugas_akhir ta', 's.id_TA = ta.id', 'mahasiswa m', 'ta.Mahasiswa_NIM = m.NIM'], ['m.Prodi_idProdi' => $idProdi, 's.jam' => NULL], '')->num_rows();
@@ -50,12 +40,11 @@ class Dashboard extends CI_Controller
             $param['topik'] = $this->common->getData('t.topik,count(id) ttl','tugas_akhir ta',['topik t','ta.id_topik = t.idTopik','mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],"m.Prodi_idProdi = '$idProdi' and ta.id_status != '1' and ta.id_status != '3' and ta.id_status != '11'",'','id_topik')->result_array();
         }
         else if($role=='KPS'){
-            /*             $idProdi = $_SESSION['id_prodi'];
-            $param['mhs'] = $this->common->getData('NIM','mahasiswa','',['Prodi_idProdi' => $idProdi],'')->num_rows();
+            $idProdi = $_SESSION['id_prodi'];
             $param['prodi'] = $this->common->getData('Nama_prodi','prodi','',['idProdi' => $idProdi],'')->result_array()[0];
+            $param['mhs'] = $this->common->getData('NIM','mahasiswa','',['Prodi_idProdi' => $idProdi],'')->num_rows();
             $param['ta'] = $this->common->getData('ta.id','tugas_akhir ta',['mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],"m.Prodi_idProdi = '".$idProdi."' and ta.id_status != '1' and ta.id_status != '3' and ta.id_status != '11'",'')->num_rows();
-            $param['topik'] = $this->common->getData('t.topik,count(id) ttl','tugas_akhir ta',['topik t','ta.id_topik = t.idTopik','mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],"m.Prodi_idProdi = '$idProdi' and ta.id_status != '1' and ta.id_status != '3' and ta.id_status != '11'",'','id_topik')->result_array();
-*/      }
+      }
         else if($role=='Mahasiswa'){
             $nim = $_SESSION['id_login'];
             $param['getStatus'] = $this->common->getData('s.status,ta.id_status,ta.Judul_TA,Topik,icon',['tugas_akhir ta',0,1],['status_ta s', 'ta.id_status = s.id_status','topik t','ta.id_topik = t.idTopik'],['Mahasiswa_NIM' => $nim],['id','desc'])->result_array();
@@ -95,6 +84,26 @@ class Dashboard extends CI_Controller
             $param['bimbingan'] = $this->common->getData('id_bimbingan','td_bimbingan b',["tugas_akhir ta",'b.Tugas_akhir_id = ta.id'],['Mahasiswa_NIM' => $nim],'')->num_rows();
         }
         
-        $this->template->load("common/template", "pages/dashboard/$view", $param);
+        if($role!='Dosen Pembimbing'){
+            $this->template->load("common/template", "pages/dashboard/$view", $param);
+        }
+    }
+    public function dospem()
+    {
+        $role = $_SESSION['global_role'];
+        $param['pageInfo'] = $_SESSION['level'];
+
+        $nip = $_SESSION['id_login'];
+        $param['pengajuan'] = $this->common->getData('id', 'tugas_akhir', '', ['id_status' => 1, 'Dosen_NIP' => $nip], '')->num_rows();
+        $param['ta'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '" . $nip . "' and id_status != '1' and id_status != '3' and id_status != '11'", '')->num_rows();
+        $param['bimbingan'] = $this->common->getData('id_bimbingan', 'td_bimbingan b', ["tugas_akhir ta", 'b.Tugas_akhir_id = ta.id'], ['Dosen_NIP' => $nip], '')->num_rows();
+        $param['menungguRevisi'] = $this->common->getData('id_bimbingan', 'td_bimbingan b', ["tugas_akhir ta", 'b.Tugas_akhir_id = ta.id'], ['Dosen_NIP' => $nip, 'revisi' => NULL], '')->num_rows();
+        $param['topik'] = $this->common->getData('t.topik,count(id) ttl', 'tugas_akhir ta', ['topik t', 'ta.id_topik = t.idTopik'], "Dosen_NIP = '$nip' and ta.id_status != '1' and ta.id_status != '3' and ta.id_status != '11'", '', 'id_topik')->result_array();
+        
+        $param['belumBimbingan'] = $this->common->getData('id', 'tugas_akhir', '', ["Dosen_NIP" => $nip, 'id_status' => '2'], '')->num_rows();
+        $param['bimbinganSeminar'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '$nip' and id_status between 4 and 6", '')->num_rows();
+        $param['bimbinganTA'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '$nip' and id_status between 7 and 9", '')->num_rows();
+        $param['selesaiSidang'] = $this->common->getData('id', 'tugas_akhir', '', "Dosen_NIP = '$nip' and id_status = '10' ", '')->num_rows();
+        $this->template->load("common/template", "pages/dashboard/dosen-pembimbing", $param);
     }
 }

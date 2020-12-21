@@ -51,18 +51,27 @@
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
+				<?php 
+					if($_SESSION['global_role']!='Dosen Pembimbing' && isDospem()){
+				?>
+				<li class="nav-item">
+					<a class="nav-link" href="<?php echo base_url() . 'dashboard/dospem' ?>">
+						<i class="fas fa-fw fa-tachometer-alt"></i>
+						<span>Dashboard Dospem</span></a>
+				</li>
+				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] != 1 && $_SESSION['kode_level'] != 3 && $_SESSION['kode_level'] != 4 && $_SESSION['kode_level'] != 5) {
+				if (isDospem() || $_SESSION['global_role']!='Mahasiswa') {
 				?>
 					<li class="nav-item">
 						<?php
-						if ($_SESSION['kode_level'] == 12) {
+						if ($_SESSION['global_role']!='Mahasiswa') {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/add" ?>">
 								<i class="fas fa-fw fa-envelope-open-text"></i>
 								<span>Pengajuan Judul</span></a>
 						<?php
-						} elseif ($_SESSION['kode_level'] != 12) {
+						} else {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/list_pengajuan_judul" ?>">
 								<i class="fas fa-fw  fa-envelope-open-text"></i>
@@ -77,7 +86,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2 || $_SESSION['koordinator'] == true || $_SESSION['kps'] == true) {
+				if ($_SESSION['global_role'] == 'Mahasiswa' || isDospem()) {
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir" ?>">
@@ -91,7 +100,7 @@
 				<?php } ?>
 
 				<?php
-				if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 2) {
+				if ($_SESSION['global_role'] == 'Mahasiswa' || isDospem()) {
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "bimbingan/" ?>">
@@ -104,7 +113,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+				if ($_SESSION['global_role'] == 'Koordinator TA') {
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . 'dosen/pembimbing' ?>">
@@ -116,7 +125,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] != 1) {
+				if ($_SESSION['global_role'] != 'Administrator') {
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseTwo">
@@ -126,7 +135,7 @@
 						<div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
 								<?php
-								if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 3 || $_SESSION['kode_level'] == 4 || $_SESSION['kode_level'] == 5  || $_SESSION['kode_level'] == 6 || $_SESSION['kode_level'] == 7 || $_SESSION['kode_level'] == 8) {
+								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || isDospem()) {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar" ?>">Pengajuan Seminar</a>
 									<!-- 
@@ -136,7 +145,7 @@
               -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['kode_level'] != 1) {
+								if ($_SESSION['global_role'] != 'Administrator') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminar" ?>">Jadwal Seminar</a>
 									<!-- 
@@ -145,7 +154,7 @@
               -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['kode_level'] != 1 || $_SESSION['kode_level'] != 3 || $_SESSION['kode_level'] != 4 || $_SESSION['kode_level'] != 5) {
+								if ($_SESSION['global_role'] != 'Administrator' || $_SESSION['global_role'] == 'Admin Prodi') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar/revisiSeminar" ?>">Revisi Seminar</a>
 									<!-- 
@@ -159,7 +168,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] != 1) {
+				if ($_SESSION['global_role'] != 'Administrator') {
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseTwo">
@@ -169,7 +178,7 @@
 						<div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
 								<?php
-								if ($_SESSION['kode_level'] == 12 || $_SESSION['kode_level'] == 3 || $_SESSION['kode_level'] == 4 || $_SESSION['kode_level'] == 5  || $_SESSION['kode_level'] == 6 || $_SESSION['kode_level'] == 7 || $_SESSION['kode_level'] == 8) {
+								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role'] == 'Koordinator TA') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Pengajuan Sidang</a>
 									<!-- 
@@ -179,7 +188,7 @@
               -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['kode_level'] != 1) {
+								if ($_SESSION['global_role'] != 'Administrator') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a>
 									<!-- 
@@ -187,7 +196,7 @@
             -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['kode_level'] == 2) {
+								if (isDospem()) {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
 									<!-- 
@@ -201,7 +210,7 @@
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 8) {
+				if ($_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role'] == 'Koordinator TA') {
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
@@ -222,7 +231,7 @@
 
 				<!-- Nav Item - Pages Collapse Menu -->
 				<?php
-				if ($_SESSION['kode_level'] == 1) {
+				if ($_SESSION['global_role'] == 'Administrator') {
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
