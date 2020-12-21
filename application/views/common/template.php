@@ -65,7 +65,7 @@
 				?>
 					<li class="nav-item">
 						<?php
-						if ($_SESSION['global_role']!='Mahasiswa') {
+						if ($_SESSION['global_role']=='Mahasiswa') {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/add" ?>">
 								<i class="fas fa-fw fa-envelope-open-text"></i>

@@ -23,9 +23,6 @@
           <?php
           $no = 1;
           
-          echo "<pre>";
-          print_r ($_SESSION);
-          echo "</pre>";
           
           foreach ($data_tugas_akhir as $i) {
           ?>
