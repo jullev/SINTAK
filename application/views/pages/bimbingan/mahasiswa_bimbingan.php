@@ -82,7 +82,7 @@
 
       <!-- Modal body -->
       <div class="modal-body f-15">
-        <form method="POST" enctype="multipart/form-data" action="<?php echo base_url().'index.php/bimbingan/add_action' ?>">
+        <form method="POST" enctype="multipart/form-data" action="<?php echo base_url().'bimbingan/add_action' ?>">
           <input type="hidden" name="TA_id" value="<?php echo $TA_id; ?>">
           <div class="row">
             <div class="col-md-12">

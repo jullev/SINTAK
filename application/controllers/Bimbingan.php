@@ -39,7 +39,7 @@ class Bimbingan extends CI_controller
     function TugasAkhir($id)
     {
         // //GET Nama Mahasiswa
-        if ($_SESSION['kode_level'] == 8) {
+        if ($_SESSION['global_role'] == 'Mahasiswa') {
             $filter = ["tugas_akhir.Mahasiswa_NIM" => $_SESSION['id_login']];
         } else {
             $filter = "";

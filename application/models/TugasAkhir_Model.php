@@ -6,20 +6,26 @@ class TugasAkhir_Model extends CI_Model
 
     function getAll($filter = "", $like = "")
     {
-        $this->db->select('id,Judul_TA,tgl_pengajuan,tugas_akhir.Deskripsi,tugas_akhir.abstract,tugas_akhir.keywords,dosen.NAMA,mahasiswa.NIM,mahasiswa.Nama as nama_mhs,master_status.Status,topik.topik,tugas_akhir.id_status,icon,count(td_bimbingan.id_bimbingan) as total_bimbingan, mahasiswa.Tahun_masuk ');
+        $this->db->select('id,Judul_TA,tgl_pengajuan,tugas_akhir.Deskripsi,tugas_akhir.abstract,tugas_akhir.keywords,tugas_akhir.Dosen_NIP,dosen.NAMA,mahasiswa.NIM,mahasiswa.Nama as nama_mhs,status_ta.status,topik.topik,tugas_akhir.id_status,icon,count(td_bimbingan.id_bimbingan) as total_bimbingan, mahasiswa.Tahun_masuk ');
         $this->db->from($this->_table);
         $this->db->join('dosen', 'tugas_akhir.Dosen_NIP = dosen.NIP');
         $this->db->join('mahasiswa', 'tugas_akhir.Mahasiswa_NIM = mahasiswa.NIM');
         $this->db->join('topik', 'tugas_akhir.id_topik = topik.idTopik');
-        $this->db->join('master_status', 'tugas_akhir.id_status = master_status.idMaster_status');
+        $this->db->join('status_ta', 'tugas_akhir.id_status = status_ta.id_status');
+        $this->db->join('prodi p', 'mahasiswa.Prodi_idProdi = p.idProdi');
         $this->db->join('td_bimbingan', 'tugas_akhir.id = td_bimbingan.Tugas_akhir_id', 'left');
         $this->db->group_by('tugas_akhir.id');
 
         if ($filter) {
-            foreach ($filter as $key => $value) {
-                if ($value != "") {
-                    $this->db->where([$key => $value]);
+            if (is_array($filter)) {
+                foreach ($filter as $key => $value) {
+                    if ($value != "") {
+                        $this->db->where([$key => $value]);
+                    }
                 }
+            }
+            else{
+                $this->db->where($filter);
             }
         }
         if ($like != "") {
@@ -32,12 +38,12 @@ class TugasAkhir_Model extends CI_Model
 
     function getPengajuanJudul($filter)
     {
-        $this->db->select('id,Judul_TA,tgl_pengajuan,tugas_akhir.Deskripsi,tugas_akhir.abstract,tugas_akhir.keywords,dosen.NAMA,mahasiswa.NIM,mahasiswa.Nama as nama_mhs,master_status.Status,topik.topik,tugas_akhir.id_status,icon,count(td_bimbingan.id_bimbingan) as total_bimbingan, mahasiswa.Tahun_masuk ');
+        $this->db->select('id,Judul_TA,tgl_pengajuan,tugas_akhir.Deskripsi,tugas_akhir.abstract,tugas_akhir.keywords,tugas_akhir.Dosen_NIP,dosen.NAMA,mahasiswa.NIM,mahasiswa.Nama as nama_mhs,status_ta.status,topik.topik,tugas_akhir.id_status,icon,count(td_bimbingan.id_bimbingan) as total_bimbingan, mahasiswa.Tahun_masuk ');
         $this->db->from($this->_table);
         $this->db->join('dosen', 'tugas_akhir.Dosen_NIP = dosen.NIP');
         $this->db->join('mahasiswa', 'tugas_akhir.Mahasiswa_NIM = mahasiswa.NIM');
         $this->db->join('topik', 'tugas_akhir.id_topik = topik.idTopik');
-        $this->db->join('master_status', 'tugas_akhir.id_status = master_status.idMaster_status');
+        $this->db->join('status_ta', 'tugas_akhir.id_status = status_ta.id_status');
         $this->db->join('td_bimbingan', 'tugas_akhir.id = td_bimbingan.Tugas_akhir_id', 'left');
         $this->db->group_by('tugas_akhir.id');
 
@@ -54,12 +60,12 @@ class TugasAkhir_Model extends CI_Model
     }
     function getBimbingan($filter)
     {
-        $this->db->select('id,Judul_TA,tgl_pengajuan,tugas_akhir.Deskripsi,tugas_akhir.abstract,tugas_akhir.keywords,dosen.NAMA,mahasiswa.NIM,mahasiswa.Nama as nama_mhs,master_status.Status,topik.topik,tugas_akhir.id_status,icon,count(td_bimbingan.id_bimbingan) as total_bimbingan, mahasiswa.Tahun_masuk ');
+        $this->db->select('id,Judul_TA,tgl_pengajuan,tugas_akhir.Deskripsi,tugas_akhir.abstract,tugas_akhir.keywords,dosen.NAMA,mahasiswa.NIM,mahasiswa.Nama as nama_mhs,status_ta.status,topik.topik,tugas_akhir.id_status,icon,count(td_bimbingan.id_bimbingan) as total_bimbingan, mahasiswa.Tahun_masuk ');
         $this->db->from($this->_table);
         $this->db->join('dosen', 'tugas_akhir.Dosen_NIP = dosen.NIP');
         $this->db->join('mahasiswa', 'tugas_akhir.Mahasiswa_NIM = mahasiswa.NIM');
         $this->db->join('topik', 'tugas_akhir.id_topik = topik.idTopik');
-        $this->db->join('master_status', 'tugas_akhir.id_status = master_status.idMaster_status');
+        $this->db->join('status_ta', 'tugas_akhir.id_status = status_ta.id_status');
         $this->db->join('td_bimbingan', 'tugas_akhir.id = td_bimbingan.Tugas_akhir_id', 'left');
         $this->db->group_by('tugas_akhir.id');
 
@@ -120,10 +126,10 @@ class TugasAkhir_Model extends CI_Model
     }
     public function getMhsBimbing($nip, $row = '')
     {
-        $this->db->select('tugas_akhir.id,tugas_akhir.Judul_TA,tugas_akhir.Mahasiswa_NIM,mahasiswa.NAMA,master_status.Status,mahasiswa.Tahun_masuk,p.Nama_prodi');
+        $this->db->select('tugas_akhir.id,tugas_akhir.Judul_TA,tugas_akhir.Mahasiswa_NIM,mahasiswa.NAMA,status_ta.status,mahasiswa.Tahun_masuk,p.Nama_prodi');
         $this->db->join('mahasiswa', 'tugas_akhir.Mahasiswa_NIM = mahasiswa.NIM');
         $this->db->join('prodi p', 'mahasiswa.Prodi_idProdi = p.idProdi');
-        $this->db->join('master_status', 'tugas_akhir.id_status = master_status.idMaster_status');
+        $this->db->join('status_ta', 'tugas_akhir.id_status = status_ta.id_status');
         $this->db->from('tugas_akhir');
         if (isset($_GET['tahun'])) {
             $this->db->where(array('mahasiswa.Tahun_masuk' => $_GET['tahun'], 'mahasiswa.Prodi_idProdi' => $_GET['id_prodi']));

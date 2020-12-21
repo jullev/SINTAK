@@ -17,12 +17,12 @@ class Tugas_akhir extends CI_controller
     function index()
     {
         $param['pageInfo'] = "List Tugas Akhir";
-        if ($_SESSION['kode_level'] == 12) {
+        if ($_SESSION['global_role'] == 'Mahasiswa') {
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
-        } else if ($_SESSION['kode_level'] == 2) {
+        } else if ($_SESSION['global_role'] == 'Dosen Pembimbing') {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         } else {
-            $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
+            $filter = ["Prodi_idProdi = '$_SESSION[id_prodi]' OR Dosen_NIP = '$_SESSION[id_prodi]'"];
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
@@ -34,7 +34,7 @@ class Tugas_akhir extends CI_controller
     public function list_pengajuan_judul()
     {
         $param['pageInfo'] = "List Pengajuan Judul";
-        print_r($_SESSION);
+        // print_r($_SESSION);
         // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
         if ($_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'KPS') {
             $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
