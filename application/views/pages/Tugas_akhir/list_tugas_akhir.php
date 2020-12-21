@@ -37,26 +37,25 @@
               <td><?php echo $i->topik; ?></td>
               <td><?php echo $i->nama_mhs; ?></td>
               <td><?php echo $i->NAMA; ?></td>
-              <td><?php echo $i->Status; ?></td>
-              <td><?php echo $i->tgl_pengajuan; ?></td>
+              <td><?php echo $i->status; ?></td>
+              <td><?php echo date('d-m-Y', strtotime($i->tgl_pengajuan))?></td>
               <td class="text-center">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Option
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <?php
-                    if ($_SESSION['global_role'] == 'Koordinator TA' || isDospem()) {
+                <?php
+                if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'Dosen Pembimbing' || $_SESSION['global_role'] == 'KPS') {
+                  if ($i->id_status != '1') {
                     ?>
-                      <a href="#" class="edit-ta dropdown-item" data-id="<?php echo $i->id ?>">Validasi</a>
-                    <?php 
-                    } 
-                    if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'Dosen Pembimbing' && $i->id_status != 1) {
-                    ?>
-                      <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>
-                    <?php } ?>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Option
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>
+                    </div>
                   </div>
-                </div>
+                    <?php
+                  }
+                ?>
+                <?php } ?>
               </td>
             </tr>
           <?php } ?>

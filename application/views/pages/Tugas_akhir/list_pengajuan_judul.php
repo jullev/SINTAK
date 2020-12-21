@@ -22,6 +22,8 @@
         <tbody>
           <?php
           $no = 1;
+          
+          
           foreach ($data_tugas_akhir as $i) {
           ?>
             <tr>
@@ -36,18 +38,24 @@
               <td><?php echo $i->topik; ?></td>
               <td><?php echo $i->nama_mhs; ?></td>
               <td><?php echo $i->NAMA; ?></td>
-              <td><?php echo $i->Status; ?></td>
+              <td><?php echo $i->status?></td>
               <td><?php echo $i->tgl_pengajuan; ?></td>
               <td class="text-center">
-                <div class="dropdown">
-                  <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Option
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="#" class="pengajuan-judul dropdown-item" data-url="<?php echo base_url() . 'Tugas_akhir/getPembimbing' ?>" data-id="<?php echo $i->id ?>">Validasi</a>
+              <?php
+               if ($_SESSION['global_role'] == 'Koordinator TA'  || $_SESSION['id_login'] == $i->Dosen_NIP) {
+              ?>
+                  <div class="dropdown">
+                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Option
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                      <a href="#" class="pengajuan-judul dropdown-item" data-url="<?php echo base_url() . 'Tugas_akhir/getPembimbing' ?>" data-id="<?php echo $i->id ?>">Validasi</a>
+                    </div>
                   </div>
-                </div>
-              </td>
+                  <?php
+               }
+               ?>
+               </td>
             </tr>
           <?php } ?>
         </tbody>

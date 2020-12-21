@@ -58,10 +58,10 @@ class Login extends CI_Controller
               'id_login'   => $data_login_dosen['NIP'],
               'username'   => $data_login_dosen['NAMA'],
               'level'      => $data_login_dosen['Role'],
-              'kode_level' => $data_login_dosen['idRole'],
-              'koordinator' => true,
-              'kps'        => false,
-              'admin_prodi' => false,
+              // 'kode_level' => $data_login_dosen['idRole'],
+              // 'koordinator' => true,
+              // 'kps'        => false,
+              // 'admin_prodi' => false,
               'id_prodi'   => $getProdi->id_prodi
             );
           }
@@ -72,10 +72,10 @@ class Login extends CI_Controller
               'id_login'   => $data_login_dosen['NIP'],
               'username'   => $data_login_dosen['NAMA'],
               'level'      => $data_login_dosen['Role'],
-              'kode_level' => $data_login_dosen['idRole'],
-              'koordinator' => false,
-              'kps'        => true,
-              'admin_prodi' => false,
+              // 'kode_level' => $data_login_dosen['idRole'],
+              // 'koordinator' => false,
+              // 'kps'        => true,
+              // 'admin_prodi' => false,
               'id_prodi'   => $getProdi->id_prodi
             );
           }
@@ -86,10 +86,10 @@ class Login extends CI_Controller
               'id_login'   => $data_login_dosen['NIP'],
               'username'   => $data_login_dosen['NAMA'],
               'level'      => $data_login_dosen['Role'],
-              'kode_level' => $data_login_dosen['idRole'],
-              'koordinator' => false,
-              'kps'        => false,
-              'admin_prodi' => false,
+              // 'kode_level' => $data_login_dosen['idRole'],
+              // 'koordinator' => false,
+              // 'kps'        => false,
+              // 'admin_prodi' => false,
               'id_prodi'   => $getProdi->id_prodi
             );
           } else {
@@ -97,10 +97,10 @@ class Login extends CI_Controller
               'id_login'   => $data_login_dosen['NIP'],
               'username'   => $data_login_dosen['NAMA'],
               'level'      => $data_login_dosen['Role'],
-              'kode_level' => $data_login_dosen['idRole'],
-              'koordinator' => false,
-              'kps'        => false,
-              'admin_prodi' => false,
+              // 'kode_level' => $data_login_dosen['idRole'],
+              // 'koordinator' => false,
+              // 'kps'        => false,
+              // 'admin_prodi' => false,
               'id_prodi'   => null
             );
           }
@@ -111,7 +111,7 @@ class Login extends CI_Controller
             'id_login'   => $data_login_mhs['NIM'],
             'username'   => $data_login_mhs['NAMA'],
             'level'      => "Mahasiswa",
-            'kode_level' => 12
+            // 'kode_level' => 12
           );
           $data_session['global_role'] = 'Mahasiswa';
         }
