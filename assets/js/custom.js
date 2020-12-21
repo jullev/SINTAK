@@ -279,8 +279,10 @@ $(document).ready(function() {
 				$("#modalEdit #jam").val(response.jam);
 				$("#modalEdit #NIP_Anggota").val(response.NIP_Anggota);
 				$("#modalEdit #idRuangan").val(response.idRuangan);
-				// $("#modalEdit #id_status").val(response.id_status);
-				// $("#modalEdit #Nilai").val(response.Nilai);
+				$("#modalEdit #id_status").val(response.id_status);
+				$("#modalEdit #Nilai_panelis").val(response.Nilai_panelis);
+				$("#modalEdit #Nilai_sidang").val(response.Nilai_sidang);
+				$("#modalEdit #Nilai_bimbingan").val(response.Nilai_bimbingan);
 				$("#modalEdit").modal("show");
 			}
 		});

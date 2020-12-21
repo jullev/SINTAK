@@ -133,8 +133,8 @@ class Sidang extends CI_Controller
             'jam' => $this->input->post('jam'),
             'NIP_Anggota' => $this->input->post('NIP_Anggota'),
             'idRuangan' => $this->input->post('idRuangan'),
-            'id_status' => $this->input->post('id_status'),
-            'Nilai' => $this->input->post('Nilai'),
+            // 'id_status' => $this->input->post('id_status'),
+            // 'Nilai' => $this->input->post('Nilai'),
         );
         if ($this->Sidang_model->update($id, $data)) {
             //Flash Message Sukses
