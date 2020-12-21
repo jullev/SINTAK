@@ -64,6 +64,7 @@ Class Resetpassword extends CI_controller{
           try {
             $this->email->send();
             echo "success";
+            $this->session->set_flashdata("message", "Password salah");
           } catch (\Throwable $th) {
             echo "gagal kirim email";
           }

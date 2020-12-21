@@ -142,6 +142,7 @@ $(document).ready(function(e){
            alert(err);
       },
       success: function(response) {
+        response = response.trim()
         if (response == "u") {
           $('#body_form').removeClass('animated bounceOut');
           $('#body_form').addClass('animated bounceIn');
