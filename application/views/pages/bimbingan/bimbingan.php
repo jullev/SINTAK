@@ -36,7 +36,7 @@
               <td><?php echo $i->topik; ?></td>
               <td><?php echo $i->nama_mhs; ?></td>
               <td><?php echo $i->NAMA; ?></td>
-              <td><?php echo $i->Status; ?></td>
+              <td><?php echo $i->status; ?></td>
               <td><?php echo $i->tgl_pengajuan; ?></td>
               <td class="text-center">
                 <div class="dropdown">

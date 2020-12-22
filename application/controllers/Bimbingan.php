@@ -75,7 +75,7 @@ class Bimbingan extends CI_controller
             $ori_name = pathinfo($_FILES['data_dukung']['name'], PATHINFO_FILENAME);
             $name_file = $_FILES['data_dukung']['name'];
             $extension_file = substr($name_file, strpos($name_file, '.'), strlen($name_file) - 1);
-            $nm_file_bimbingan =  $TA_id . '_' . $ori_name . '_' . $post['Tanggal_bimbingan'] . $extension_file;
+            $nm_file_bimbingan =  $TA_id . '_' . $ori_name . '_' . $post['Tanggal_bimbingan'] .'_'. time() . $extension_file;
             $tmp_file = $_FILES['data_dukung']['tmp_name'];
 
             $up_rab = move_uploaded_file($tmp_file, $dir_file . '/' . $nm_file_bimbingan);
@@ -188,13 +188,14 @@ class Bimbingan extends CI_controller
     }
     function update_action()
     {
+        $post = $this->input->post();
         $id_bimbingan = $this->input->post('Bimbingan_ID');
         $cekIdBimbingan = $this->Bimbingan_model->getById($id_bimbingan, $_SESSION['id_login'])->num_rows();
         if ($cekIdBimbingan == 1) {
-            $config['upload_path'] = 'uploaded_file/'; //path folder
-            $config['allowed_types'] = 'jpg|png|jpeg|pdf|xls|xlsx|doc|docx|txt'; //type yang dapat diakses bisa anda sesuaikan
-            $config['encrypt_name'] = TRUE; //nama yang terupload nantinya 
-            $this->load->library('upload', $config);
+            // $config['upload_path'] = 'uploaded_file/'; //path folder
+            // $config['allowed_types'] = 'jpg|png|jpeg|pdf|xls|xlsx|doc|docx|txt'; //type yang dapat diakses bisa anda sesuaikan
+            // $config['encrypt_name'] = TRUE; //nama yang terupload nantinya 
+            // $this->load->library('upload', $config);
 
             //GET ID Bimbingan
             //Variabel Untuk Menampung beberapa isi record berdasarkan ID Bimbingan
@@ -228,24 +229,30 @@ class Bimbingan extends CI_controller
                     'Tanggal_bimbingan' => $this->input->post('e_Tanggal_bimbingan'),
                     'Deskripsi' => $this->input->post('e_deskripsi')
                 );
-
+                
                 // Jika Ada File Yang diupload //Ganti File
-                if ($this->upload->do_upload('e_data_dukung')) {
+                if (file_exists($_FILES['e_data_dukung']['tmp_name']) || is_uploaded_file($_FILES['e_data_dukung']['tmp_name'])) {
+                    $dir_file = realpath(APPPATH . '../assets/berkas/bimbingan/');
+                    $ori_name = pathinfo($_FILES['e_data_dukung']['name'], PATHINFO_FILENAME);
+                    $name_file = $_FILES['e_data_dukung']['name'];
+                    $extension_file = substr($name_file, strpos($name_file, '.'), strlen($name_file) - 1);
+                    $nm_file_bimbingan =  $TA_id . '_' . $ori_name . '_' . $post['e_Tanggal_bimbingan'] .'_'. time() . $extension_file;
+                    $tmp_file = $_FILES['e_data_dukung']['tmp_name'];
+                  
+                    $up_rab = move_uploaded_file($tmp_file, $dir_file . '/' . $nm_file_bimbingan);
 
                     //Delete File Lama
                     $data_dukung = $Bimbingan['Data_Dukung'];
-                    unlink('uploaded_file/' . $data_dukung);
+                    unlink("assets/berkas/bimbingan/" . $data_dukung);
 
                     //Input Ke Database
-                    $image_data = $this->upload->data();
                     $data = array(
                         'Tanggal_bimbingan' => $this->input->post('e_Tanggal_bimbingan'),
                         'Deskripsi' => $this->input->post('e_deskripsi'),
-                        'Data_Dukung' => $image_data['file_name']
+                        'Data_Dukung' => $nm_file_bimbingan
 
                     );
                 }
-
                 if ($this->Bimbingan_model->update($id_bimbingan, $data)) {
                     //Flash Message Sukses
                     $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
@@ -274,7 +281,7 @@ class Bimbingan extends CI_controller
             $document = $data_bimbingan['Data_Dukung'];
 
             //Delete Document
-            unlink("uploaded_file/" . $document);
+            unlink("assets/berkas/bimbingan/" . $document);
 
             if ($this->Bimbingan_model->delete($id)) {
                 //Flash Message Sukses

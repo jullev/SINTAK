@@ -34,7 +34,7 @@
                         <td><?php echo $no++; ?></td>
                         <td><?php echo $i->Tanggal_bimbingan; ?></td>
                         <td><?php echo $i->Deskripsi; ?></td>
-                        <td><a href="<?php echo base_url().'assets/berkas/bimbingan/'.$i->Data_Dukung; ?>"><?php echo $i->Data_Dukung; ?></a></td>
+                        <td><a target="_blank" href="<?php echo base_url().'assets/berkas/bimbingan/'.$i->Data_Dukung; ?>"><?php echo $i->Data_Dukung; ?></a></td>
                         <td><?=($i->revisi == null) ? 'Belum Di Revisi' : $i->revisi ?></td>
                         <td class="text-center">
                         <?php 
@@ -49,7 +49,7 @@
                               <a href="<?php echo base_url().'index.php/bimbingan/delete/'.$i->id_bimbingan; ?>" class="dropdown-item confirm">Delete</a>
                             </div>
                           </div>
-                          <?php } else if($_SESSION['kode_level']==2){ ?>
+                          <?php } else if($_SESSION['global_role']=='Dosen Pembimbing'){ ?>
                             <div class="dropdown">
                             <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Option
