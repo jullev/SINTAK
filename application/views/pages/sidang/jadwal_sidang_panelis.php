@@ -22,6 +22,7 @@
 					<?php
 					print_r($_SESSION);
 					$no = 1;
+					// print_r($jadwal_sidang);
 					foreach ($jadwal_sidang as $i) {
 					?>
 						<tr>
@@ -38,7 +39,7 @@
 										Option
 									</button>
 									<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-										<a href="" class="edit-sidang dropdown-item" data-id="<?php echo $i->id_sidang ?>">Edit</a>
+										<a href="" class="edit-jadwal-sidang dropdown-item" data-id="<?php echo $i->id_sidang ?>">Edit</a>
 									</div>
 								</div>
 							</td>
@@ -81,30 +82,17 @@
 
 			<!-- Modal body -->
 			<div class="modal-body f-15 my-3">
-				<form action="sidang/update_jadwal" method="post" id="formValidasi">
+				<form action="<?= base_url() ?>sidang/updateJadwalPanelis" method="post" id="formValidasi">
 					<input type="hidden" name="id_" id="id_">
 					<div class="row">
-						<?php
-						if ($_SESSION['id_login'] = $i->dosen_pembimbing) {
-						?>
-							<div class="col-md-12">
-								<label for="">Nilai Pembimbing</label>
-								<input type="text" name="Nilai_pembimbing" id="Nilai_pembimbing" class="form-control">
-							</div>
-						<?php
-						} elseif ($_SESSION['id_login'] = $i->dosen_panelis) {
-						?>
-							<div class="col-md-12">
-								<label for="">Nilai Panelis</label>
-								<input name="Nilai_penelis" id="Nilai_penelis" class="form-control">
-							</div>
-							<div class="col-md-12">
-								<label for="">Revisi</label>
-								<input type="text" name="revisi" id="revisi" class="form-control">
-							</div>
-						<?php
-						}
-						?>
+						<div class="col-md-12">
+							<label for="">Nilai Panelis</label>
+							<input type="number" name="Nilai_panelis" id="Nilai_panelis" class="form-control" min="0" max="100">
+						</div>
+						<div class="col-md-12">
+							<label for="">Revisi</label>
+							<input type="text" name="revisi" id="revisi" class="form-control">
+						</div>
 					</div>
 
 					<!-- <div class="row mt-1">

@@ -17,12 +17,11 @@ class Sidang extends CI_Controller
     function index()
     {
         $param['pageInfo'] = "List Sidang";
-        if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
-            $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['m.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
-            // 'Tanggal' => NULL,
-        } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+        if ($_SESSION['global_role'] == "Admin Prodi") {
+            $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+        } elseif ($_SESSION['global_role'] == "Koordinator TA") {
             $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['NIP_Anggota' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
-        } elseif ($_SESSION['kode_level'] == 12) {
+        } elseif ($_SESSION['global_role'] == "Mahasiswa") {
             $param['data_sidang'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA, s.Tanggal", "td_sidang s", ["tugas_akhir ta", "s.id_TA=ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'Tanggal !=' => NULL], "")->result_array();
         }
         //		print_r($param);
@@ -30,7 +29,7 @@ class Sidang extends CI_Controller
         $param['Dosen'] = $this->Dosen_model->getAll()->result();
         $param['Ruangan'] = $this->Ruangan_model->getAll()->result();
         $param['Master_status'] = $this->Status_model->getAllDataForsidang()->result();
-        if ($_SESSION['kode_level'] == 12) {
+        if ($_SESSION['global_role'] == "Mahasiswa") {
             $this->template->load("common/template", "pages/sidang/list_sidang_mhs", $param);
         } else {
             $this->template->load("common/template", "pages/sidang/list_sidang", $param);
@@ -129,13 +128,13 @@ class Sidang extends CI_Controller
     function update()
     {
         $id = $this->input->post('id_');
-        if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+        if ($_SESSION['global_role'] == "Admin Prodi") {
             $data = array(
                 'Tanggal' => $this->input->post('Tanggal'),
                 'jam' => $this->input->post('jam'),
                 'idRuangan' => $this->input->post('idRuangan'),
             );
-        } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+        } elseif ($_SESSION['global_role'] = "Koordinator TA") {
             $data = array(
                 // 'Tanggal' => $this->input->post('Tanggal'),
                 // 'jam' => $this->input->post('jam'),
@@ -175,11 +174,29 @@ class Sidang extends CI_Controller
     }
 
     // jadwal sidang
-    function jadwalSidang()
+    function jadwalSidangPanelis()
     {
         $param['pageInfo'] = "Jadwal Sidang";
         $param['jadwal_sidang'] = $this->Sidang_model->getFilterDosenSidang($_SESSION['id_login']);
-        $this->template->load("common/template", "pages/Sidang/jadwal_sidang", $param);
+        $this->template->load("common/template", "pages/Sidang/jadwal_sidang_panelis", $param);
+    }
+
+    function jadwalSidangPembimbing()
+    {
+        $param['pageInfo'] = "Jadwal Sidang";
+        $param['jadwal_sidang'] = $this->Sidang_model->getFilterDosenPembimbing($_SESSION['id_login']);
+        $this->template->load("common/template", "pages/Sidang/jadwal_sidang_pembimbing", $param);
+    }
+    function jadwalSidangAnggota()
+    {
+        $param['pageInfo'] = "Jadwal Sidang";
+        $param['jadwal_sidang'] = $this->Sidang_model->getFIlterDosenAnggota($_SESSION['id_login']);
+        // if ($_SESSION['global_role'] == "Dosen Pembimbing") {
+        //     $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], "", "")->result();
+        // }
+        // print_r($param);
+        // return;
+        $this->template->load("common/template", "pages/Sidang/jadwal_sidang_anggota", $param);
     }
 
     function editJadwal()
@@ -189,17 +206,99 @@ class Sidang extends CI_Controller
         echo json_encode($data);
     }
 
+    function updateJadwalPanelis()
+    {
+        $id = $this->input->post('id_');
+        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
+        if ($cekId == 1) {
+            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
+                $data = array(
+                    'Nilai_panelis' => $this->input->post('Nilai_panelis'),
+                    'revisi' => $this->input->post('revisi'),
+                );
+            }
+            if ($this->Sidang_model->update($id, $data)) {
+                //Flash Message Sukses
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
+            } else {
+                //Flash Message Gagal
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+            }
+            redirect(base_url() . 'Sidang/jadwalSidangPanelis');
+        } else {
+            show_404();
+        }
+    }
+
+    function updateJadwalAnggota()
+    {
+        $id = $this->input->post('id_');
+        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
+        if ($cekId == 1) {
+            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
+                $data = array(
+                    'Nilai_Anggota' => $this->input->post('Nilai_Anggota'),
+                );
+            }
+            if ($this->Sidang_model->update($id, $data)) {
+                //Flash Message Sukses
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
+            } else {
+                //Flash Message Gagal
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+            }
+            redirect(base_url() . 'Sidang/jadwalSidangAnggota');
+        } else {
+            show_404();
+        }
+    }
+
+    function updateJadwalPembimbing()
+    {
+        $id = $this->input->post('id_');
+        $nilai = $this->input->post('Nilai_pembimbing');
+        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
+        if ($cekId == 1) {
+            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
+                $data = array(
+                    // 'Nilai_pembimbing' => $nilai,
+                    'Nilai_bimbingan' => $this->input->post('Nilai_bimbingan'),
+                );
+            }
+            $input = $this->Sidang_model->update($id, $data);
+            if ($input) {
+                //Flash Message Sukses
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
+            } else {
+                //Flash Message Gagal
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+            }
+            redirect(base_url() . 'Sidang/jadwalSidangPembimbing');
+        } else {
+            show_404();
+        }
+    }
+
     function updateJadwal()
     {
         $id = $this->input->post('id_');
-        $data = array(
-            'Tanggal' => $this->input->post('Tanggal'),
-            'jam' => $this->input->post('jam'),
-            'NIP_Anggota' => $this->input->post('NIP_Anggota'),
-            'idRuangan' => $this->input->post('idRuangan'),
-            // 'id_status' => $this->input->post('id_status'),
-            // 'Nilai' => $this->input->post('Nilai'),
-        );
+        if ($_SESSION['global_role'] == "Admin Prodi") {
+            $data = array(
+                'Tanggal' => $this->input->post('Tanggal'),
+                'jam' => $this->input->post('jam'),
+                'idRuangan' => $this->input->post('idRuangan'),
+            );
+        } elseif ($_SESSION['global_role'] = "Koordinator TA") {
+            $data = array(
+                'NIP_Anggota' => $this->input->post('NIP_Anggota'),
+            );
+        }
         if ($this->Sidang_model->update($id, $data)) {
             //Flash Message Sukses
             $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>

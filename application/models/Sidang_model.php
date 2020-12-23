@@ -13,25 +13,34 @@ class Sidang_model extends CI_Model
     }
 
 
-    function getFilterDosen($nip)
+    function getFilterDosenPembimbing($nip)
     {
-        $now = date('Y-m-d');
+        // $now = date('Y-m-d');
+        // $nip = $_SESSION['id_login'];
+        // $query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_sidang.id_sidang, td_sidang.NIP_Anggota, td_seminar.NIP_Panelis FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospang on dospang.NIP = td_sidang.NIP_Anggota JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis WHERE td_sidang.Tanggal > '$now'");
+        // return $query->result();
         $nip = $_SESSION['id_login'];
-        $query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_sidang.id_sidang, td_sidang.NIP_Anggota, td_seminar.NIP_Panelis FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospang on dospang.NIP = td_sidang.NIP_Anggota JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis WHERE td_sidang.Tanggal > '$now'");
+        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE tugas_akhir.Dosen_NIP = '$nip'");
         return $query->result();
     }
 
-    // function getFilterDosenSidang($nip)
-    // {
-    //     $now = date('Y-m-d');
-    //     $nip = $_SESSION['id_login'];
-    //     $query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_sidang.id_seminar, td_sidang.NIP_Anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_sidang.NIP_Anggota JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE td_sidang.Tanggal > '$now'");
-    //     return $query->result();
-    // }
+    function getFIlterDosenAnggota($nip)
+    {
+        $nip = $_SESSION['id_login'];
+        $query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam, td_sidang.id_sidang, td_sidang.NIP_Anggota, td_sidang.Nilai_panelis, td_sidang.Nilai_anggota, td_sidang.Nilai_bimbingan FROM  tugas_akhir JOIN td_sidang ON td_sidang.id_TA = tugas_akhir.id JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE td_sidang.NIP_Anggota = '$nip'");
+        return $query->result();
+    }
+
+    function getFilterDosenSidang($nip)
+    {
+        $nip = $_SESSION['id_login'];
+        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE td_seminar.NIP_Panelis = '$nip'");
+        return $query->result();
+    }
 
     function getById($id)
     {
-        $this->db->select('id_sidang,Tanggal,jam,NIP_Anggota,id_status,idRuangan,Nilai_anggota,Nilai_sidang,Nilai_bimbingan');
+        $this->db->select('id_sidang,Tanggal,jam,NIP_Anggota,revisi,id_status,idRuangan,Nilai_anggota,Nilai_panelis,Nilai_bimbingan');
         return $this->db->get_where($this->_table, ["id_sidang" => $id])->result_array();
     }
 

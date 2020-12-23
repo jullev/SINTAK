@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-	if(empty($_SESSION['id_login'])){
-		redirect(base_url().'login');
-	}
+if (empty($_SESSION['id_login'])) {
+	redirect(base_url() . 'login');
+}
 ?>
 
 <head>
@@ -51,21 +51,21 @@
 						<i class="fas fa-fw fa-tachometer-alt"></i>
 						<span>Dashboard</span></a>
 				</li>
-				<?php 
-					if($_SESSION['global_role']!='Dosen Pembimbing' && isDospem()){
+				<?php
+				if ($_SESSION['global_role'] != 'Dosen Pembimbing' && isDospem()) {
 				?>
-				<li class="nav-item">
-					<a class="nav-link" href="<?php echo base_url() . 'dashboard/dospem' ?>">
-						<i class="fas fa-fw fa-tachometer-alt"></i>
-						<span>Dashboard Dospem</span></a>
-				</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<?php echo base_url() . 'dashboard/dospem' ?>">
+							<i class="fas fa-fw fa-tachometer-alt"></i>
+							<span>Dashboard Dospem</span></a>
+					</li>
 				<?php } ?>
 				<?php
-				if (isDospem() || $_SESSION['global_role']!='Mahasiswa') {
+				if (isDospem() || $_SESSION['global_role'] != 'Mahasiswa') {
 				?>
 					<li class="nav-item">
 						<?php
-						if ($_SESSION['global_role']=='Mahasiswa') {
+						if ($_SESSION['global_role'] == 'Mahasiswa') {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/add" ?>">
 								<i class="fas fa-fw fa-envelope-open-text"></i>
@@ -192,6 +192,9 @@
 								if ($_SESSION['global_role'] != 'Administrator') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPembimbing" ?>">Jadwal Sidang Pembimbing</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangAnggota" ?>">Jadwal Sidang Anggota</a>
 									<!-- 
               Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
             -->

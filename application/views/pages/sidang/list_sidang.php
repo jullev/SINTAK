@@ -83,7 +83,7 @@
           <input type="hidden" name="id_" id="id_">
           <div class="row">
             <?php
-            if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+            if ($_SESSION['global_role'] == "Admin Prodi") {
             ?>
               <div class="col-md-12">
                 <label for="">Tanggal</label>
@@ -106,7 +106,7 @@
               </div>
 
             <?php
-            } elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+            } elseif ($_SESSION['global_role'] == "Koordinator TA") {
             ?>
               <div class="col-md-12">
                 <label for="">Anggota</label>

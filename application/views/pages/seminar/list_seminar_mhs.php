@@ -22,10 +22,16 @@
 				</div>
 			</div>
 			<hr>
-			<a href="<?php echo base_url() . 'seminar/ajukanSeminar' ?>" class="btn btn-primary"><span class="fas fa-file-upload"> Ajukan Seminar</span></a>
-		<?php
+			<?php
+			$getId = $this->common->getData("ta.Mahasiswa_NIM, tb.Tugas_akhir_id", "td_bimbingan tb", ['tugas_akhir ta', 'tb.Tugas_akhir_id=ta.id'], ["ta.Mahasiswa_NIM" => $_SESSION['id_login']], "")->result();
+			$hitungBimbingan = count($getId);
+			if ($hitungBimbingan >= 3) {
+			?>
+				<a href="<?php echo base_url() . 'seminar/ajukanSeminar' ?>" class="btn btn-primary"><span class="fas fa-file-upload"> Ajukan Seminar</span></a>
+			<?php
+			}
 		} else {
-		?>
+			?>
 			<div class="alert alert-success custom-alert">
 				<span class="fas fa-laptop-code sticky"></span>
 				<h2 class="font-weight-bold"><?= $data_seminar[0]["Judul_TA"] ?></h2>

@@ -288,6 +288,27 @@ $(document).ready(function() {
 		});
 	});
 
+		$(".edit-jadwal-sidang").click(function(e) {
+		e.preventDefault();
+		var id = $(this).data("id");
+		$.ajax({
+			type: "get",
+			url: baseUrl + "Sidang/editJadwal",
+			data: { id_sidang: id },
+			success: function (response) {
+				$("#modalEdit #id_").val(response.id_sidang);
+				$("#modalEdit #Nilai_panelis").val(response.Nilai_panelis);
+				$("#modalEdit #Nilai_bimbingan").val(response.Nilai_bimbingan);
+				$("#modalEdit #Nilai_anggota").val(response.Nilai_anggota);
+				$("#modalEdit #revisi").val(response.revisi);
+				// $("#modalEdit #lampiran_revisi").val(response.Revisi);
+				// $("#modalEdit #status_revisi").val(response.status_revisi);
+
+				$("#modalEdit").modal("show");
+			}
+		});
+	});
+
 	$(".submitConfirm").submit(function(e) {
 		var id = $(this).attr("id");
 		e.preventDefault();
