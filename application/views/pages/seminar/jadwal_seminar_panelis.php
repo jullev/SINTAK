@@ -17,10 +17,8 @@
 						<td>Revisi</td>
 						<td>Aksi</td>
 					</tr>
-					Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
 				<tbody>
 					<?php
-					print_r($_SESSION);
 					$no = 1;
 					foreach ($jadwal_seminar as $i) {
 					?>

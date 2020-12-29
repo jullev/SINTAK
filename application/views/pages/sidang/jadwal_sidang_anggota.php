@@ -4,7 +4,19 @@
 		echo $this->session->flashdata('update_validation');
 		echo $this->session->flashdata('delete_validation');
 		?>
-		Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
+		<p>
+			<a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+				Link with href
+			</a>
+			<button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+				Button with data-bs-target
+			</button>
+		</p>
+		<div class="collapse" id="collapseExample">
+			<div class="card card-body">
+				Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+			</div>
+		</div>
 		<div class="table-responsive">
 			<table class="table table-striped table-hover table-bordered datatable table-custom">
 				<thead>
@@ -19,7 +31,6 @@
 					</tr>
 				<tbody>
 					<?php
-					print_r($_SESSION);
 					$no = 1;
 					foreach ($jadwal_sidang as $i) {
 					?>

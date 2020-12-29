@@ -27,8 +27,32 @@ class Seminar_model extends CI_Model
 	{
 		$now = date('Y-m-d');
 		$nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_seminar.NIP_Panelis FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE td_seminar.Tanggal > '$now'");
+		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.Nilai_pembimbing, td_seminar.Nilai_penelis ,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_seminar.NIP_Panelis FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE tugas_akhir.Dosen_NIP = '$nip'");
 		return $query->result();
+	}
+
+	function getFilterDsn()
+	{
+		$nip = $_SESSION['id_login'];
+		$query = $this->db->query("SELECT td_seminar.id_seminar,td_seminar.revisi, td_seminar.status_revisi, td_seminar.lampiran_revisi, tugas_akhir.Judul_TA, master_status.Status
+									FROM  td_seminar
+									JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA
+									JOIN dosen ON dosen.NIP = td_seminar.NIP_Panelis
+									JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM
+									JOIN master_status on master_status.idMaster_status
+									WHERE td_seminar.NIP_Panelis = '$nip'")->result();
+		return $query;
+	}
+
+	function getFilterMhs()
+	{
+		$nim = $_SESSION['id_login'];
+		$query = $this->db->query("SELECT td_seminar.id_seminar,td_seminar.revisi, td_seminar.status_revisi, td_seminar.lampiran_revisi, tugas_akhir.Judul_TA
+									FROM  td_seminar
+									JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA
+									JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM
+									WHERE mahasiswa.NIM = '$nim'")->result();
+		return $query;
 	}
 
 	function getFIlterDosenPanelis($nip)
@@ -38,54 +62,6 @@ class Seminar_model extends CI_Model
 		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, td_seminar.NIP_Panelis, td_seminar.Nilai_penelis, td_seminar.revisi FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE td_seminar.Tanggal > '$now'");
 		return $query->result();
 	}
-
-	function getFIlterDosenPembimbing($nip)
-	{
-		$now = date('Y-m-d');
-		$nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, td_seminar.NIP_Panelis, td_seminar.Nilai_penelis, td_seminar.Nilai_pembimbing FROM  tugas_akhir JOIN td_seminar ON td_seminar.id_TA = tugas_akhir.id JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE tugas_akhir.Dosen_NIP = '$nip'");
-		return $query->result();
-	}
-
-	function getFilterDospem()
-	{
-		$nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, 
-									td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.status_revisi, td_seminar.lampiran_revisi
-									FROM  td_seminar
-									JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA
-									JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM
-									JOIN dosen as dospem ON dospem.NIP = td_seminar.NIP_Panelis
-									JOIN dosen as dospan ON dospan.NIP = tugas_akhir.Dosen_NIP
-									WHERE dospem.nip = '$nip'")->result();
-		return $query;
-	}
-
-	function getFilterDospan()
-	{
-		$nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, 
-									td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.status_revisi, td_seminar.lampiran_revisi
-									FROM  td_seminar
-									JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA
-									JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM
-									JOIN dosen as dospem ON dospem.NIP = td_seminar.NIP_Panelis
-									JOIN dosen as dospan ON dospan.NIP = tugas_akhir.Dosen_NIP
-									WHERE dospan.nip = '$nip'")->result();
-		return $query;
-	}
-
-	function getFilterMhs()
-	{
-		$nim = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT td_seminar.id_seminar, td_seminar.status_revisi, td_seminar.lampiran_revisi, tugas_akhir.Judul_TA
-									FROM  td_seminar
-									JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA
-									JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM
-									WHERE mahasiswa.NIM = '$nim'")->result();
-		return $query;
-	}
-
 
 	function getById($id)
 	{
@@ -101,7 +77,8 @@ class Seminar_model extends CI_Model
 	function update($id, $data)
 	{
 		$where = array('id_seminar' => $id);
-		return $this->db->update($this->_table, $data, $where);
+		$this->db->where($where);
+		return $this->db->update($this->_table, $data);
 	}
 
 	function delete($id)
@@ -109,6 +86,13 @@ class Seminar_model extends CI_Model
 		$where = array('id_seminar' => $id);
 		return $this->db->delete($this->_table, $where);
 	}
+
+	public function getLampiran($id)
+	{
+		$this->db->select("lampiran_revisi");
+		return $this->db->get_where($this->_table, ["id" => $id])->result_array();
+	}
+
 	public function seminarNIP($field, $nip)
 	{
 		$this->db->where($field, $nip);

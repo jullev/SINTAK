@@ -4,7 +4,6 @@
 		echo $this->session->flashdata('update_validation');
 		echo $this->session->flashdata('delete_validation');
 		?>
-		Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
 		<div class="table-responsive">
 			<table class="table table-striped table-hover table-bordered datatable table-custom">
 				<thead>
@@ -20,7 +19,6 @@
 					</tr>
 				<tbody>
 					<?php
-					print_r($_SESSION);
 					$no = 1;
 					foreach ($jadwal_sidang as $i) {
 					?>
@@ -87,6 +85,12 @@
 						<div class="col-md-12">
 							<label for="">Nilai Bimbingan</label>
 							<input type="text" name="Nilai_bimbingan" id="Nilai_bimbingan" class="form-control">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label for="">Nilai Sidang</label>
+							<input type="text" name="Nilai_sidang" id="Nilai_sidang" class="form-control">
 						</div>
 					</div>
 

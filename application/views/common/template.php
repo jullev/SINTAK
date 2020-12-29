@@ -135,7 +135,7 @@ if (empty($_SESSION['id_login'])) {
 						<div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
 								<?php
-								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || isDospem()) {
+								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar" ?>">Pengajuan Seminar</a>
 									<!-- 
@@ -145,7 +145,7 @@ if (empty($_SESSION['id_login'])) {
               -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['global_role'] != 'Administrator') {
+								if ($_SESSION['global_role'] != 'Administrator' && $_SESSION['global_role'] != 'Mahasiswa') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminarPembimbing" ?>">Jadwal Seminar Pembimbing</a>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminarPanelis" ?>">Jadwal Seminar Panelis</a>
@@ -182,6 +182,7 @@ if (empty($_SESSION['id_login'])) {
 								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role'] == 'Koordinator TA') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Pengajuan Sidang</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
 									<!-- 
                 1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
                 2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
@@ -189,12 +190,13 @@ if (empty($_SESSION['id_login'])) {
               -->
 								<?php } ?>
 								<?php
-								if ($_SESSION['global_role'] != 'Administrator') {
+								if ($_SESSION['global_role'] != 'Mahasiswa') {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
+									<!-- <a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a> -->
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPembimbing" ?>">Jadwal Sidang Pembimbing</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangAnggota" ?>">Jadwal Sidang Anggota</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
 									<!-- 
               Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
             -->
@@ -202,7 +204,11 @@ if (empty($_SESSION['id_login'])) {
 								<?php
 								if (isDospem()) {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
+									<!-- <a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPembimbing" ?>">Jadwal Sidang Pembimbing</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangAnggota" ?>">Jadwal Sidang Anggota</a>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a> -->
 									<!-- 
                 1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
                 2. Jika panelis, bisa melihat dan mengACC revisi

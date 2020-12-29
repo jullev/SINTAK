@@ -299,6 +299,7 @@ $(document).ready(function() {
 				$("#modalEdit #id_").val(response.id_sidang);
 				$("#modalEdit #Nilai_panelis").val(response.Nilai_panelis);
 				$("#modalEdit #Nilai_bimbingan").val(response.Nilai_bimbingan);
+				$("#modalEdit #Nilai_sidang").val(response.Nilai_sidang);
 				$("#modalEdit #Nilai_anggota").val(response.Nilai_anggota);
 				$("#modalEdit #revisi").val(response.revisi);
 				// $("#modalEdit #lampiran_revisi").val(response.Revisi);

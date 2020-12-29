@@ -136,12 +136,7 @@ class Sidang extends CI_Controller
             );
         } elseif ($_SESSION['global_role'] = "Koordinator TA") {
             $data = array(
-                // 'Tanggal' => $this->input->post('Tanggal'),
-                // 'jam' => $this->input->post('jam'),
                 'NIP_Anggota' => $this->input->post('NIP_Anggota'),
-                // 'idRuangan' => $this->input->post('idRuangan'),
-                // 'id_status' => $this->input->post('id_status'),
-                // 'Nilai' => $this->input->post('Nilai'),
 
             );
         }
@@ -267,6 +262,7 @@ class Sidang extends CI_Controller
                 $data = array(
                     // 'Nilai_pembimbing' => $nilai,
                     'Nilai_bimbingan' => $this->input->post('Nilai_bimbingan'),
+                    'Nilai_sidang' => $this->input->post('Nilai_sidang'),
                 );
             }
             $input = $this->Sidang_model->update($id, $data);
@@ -312,10 +308,91 @@ class Sidang extends CI_Controller
     }
 
 
-    // revisi
-    function revisiSidang()
+    //revisi sidang
+    function revisisidang()
     {
-        $param['pageInfo'] = "Revisi Sidang";
-        $this->template->load("common/template", "pages/Sidang/revisi_sidang", $param);
+        $param['pageInfo'] = "Revisi sidang";
+        $nip = $_SESSION['id_login'];
+        if ($_SESSION['global_role'] == "Mahasiswa") {
+            $param['revisi_sidang'] = $this->Sidang_model->getFilterMhs();
+            $this->template->load("common/template", "pages/sidang/revisi_sidang_mhs", $param);
+        } else {
+            // $param['revisi_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.lampiran_revisi, s.revisi, s.status_revisi", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['s.nip_panelis' => $nip], "")->result();
+            $param['revisi_sidang'] = $this->Sidang_model->getFilterDosenSidang($_SESSION['id_login']);
+            // $this->Sidang_model->getFilterDosenSidang($_SESSION['id_login']);
+            $this->template->load("common/template", "pages/sidang/revisi_sidang_dsn", $param);
+        }
+    }
+
+    function editSidang()
+    {
+        $data = $this->Sidang_model->getById($_GET['id_sidang'])[0];
+        header("content-type:json/application");
+        echo json_encode($data);
+    }
+
+    function updateRevisiSidangMhs()
+    {
+
+        $id = $this->input->post('id_');
+        $post = $this->input->post();
+        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
+        $data = [];
+        if ($cekId == 1) {
+            if ($_SESSION['global_role'] == 'Mahasiswa') {
+                $dir_file = realpath(APPPATH . '../assets/berkas/sidang/');
+                $ori_name = pathinfo($_FILES['lampiran_revisi']['name'], PATHINFO_FILENAME);
+                $name_file = $_FILES['lampiran_revisi']['name'];
+                $extension_file = substr($name_file, strpos($name_file, '.'), strlen($name_file) - 1);
+                $nm_file_revisi =  $id . '_' . $ori_name . '_'  . '_' . time() . $extension_file;
+                $tmp_file = $_FILES['lampiran_revisi']['tmp_name'];
+
+
+                if (isset($_FILES['lampiran_revisi'])) { //Jika validasi Form Berhasil
+                    move_uploaded_file($tmp_file, $dir_file . '/' . $nm_file_revisi);
+                    $data = array(
+                        'id_sidang' => $id,
+                        'lampiran_revisi' => $nm_file_revisi,
+                    );
+                }
+            }
+            if ($this->Sidang_model->update($id, $data)) {
+                //Flash Message Sukses
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
+            } else {
+                //Flash Message Gagal
+                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+            }
+            redirect(base_url() . 'Sidang/revisiSidang');
+        } else {
+            show_404();
+        }
+    }
+
+    public function updateRevisiSidangDsn()
+    {
+        $id = $this->input->post('id_');
+        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
+        if ($cekId == 1) {
+            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
+                $data = array(
+                    'status_revisi' => $this->input->post('status_revisi'),
+                );
+                if ($this->Sidang_model->update($id, $data)) {
+                    //Flash Message Sukses
+                    $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
+                } else {
+                    //Flash Message Gagal
+                    $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+                }
+                redirect(base_url() . 'Sidang/revisiSidang');
+            } else {
+                show_404();
+            }
+        }
     }
 }

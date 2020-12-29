@@ -28,10 +28,10 @@
               <td><?php echo $no++; ?></td>
               <td><?php echo $i->Judul_TA; ?></td>
               <td>
-                <a href="#" class="open-desc" data-id="<?php echo $i->id ?>" data-url ="<?php echo base_url().'Tugas_akhir/deskripsi'?>">Lihat Deskripsi</a>
+                <a href="#" class="open-desc" data-id="<?php echo $i->id ?>" data-url="<?php echo base_url() . 'Tugas_akhir/deskripsi' ?>">Lihat Deskripsi</a>
               </td>
               <td>
-                <a href="#" class="open-abstract" data-url ="<?php echo base_url().'Tugas_akhir/abstract'?>" data-id="<?php echo $i->id ?>">Lihat Abstract</a>
+                <a href="#" class="open-abstract" data-url="<?php echo base_url() . 'Tugas_akhir/abstract' ?>" data-id="<?php echo $i->id ?>">Lihat Abstract</a>
               </td>
               <td><?php echo $i->topik; ?></td>
               <td><?php echo $i->nama_mhs; ?></td>
@@ -48,8 +48,8 @@
                     if ($_SESSION['global_role'] == 'Koordinator TA' || isDospem()) {
                     ?>
                       <a href="#" class="edit-ta dropdown-item" data-id="<?php echo $i->id ?>">Validasi</a>
-                    <?php 
-                    } 
+                    <?php
+                    }
                     if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'Dosen Pembimbing' && $i->id_status != 1) {
                     ?>
                       <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>

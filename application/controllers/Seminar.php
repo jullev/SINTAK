@@ -10,6 +10,7 @@ class Seminar extends CI_Controller
 		$this->load->model('Dosen_model');
 		$this->load->model('Status_model');
 		$this->load->model('Mahasiswa_model');
+		$this->load->helper(array('form', 'url'));
 		$this->icon = "fa-calendar";
 	}
 	function index()
@@ -177,7 +178,6 @@ class Seminar extends CI_Controller
 
 		$param['pageInfo'] = "Jadwal Seminar Panelis";
 		$param['jadwal_seminar'] = $this->Seminar_model->getFilterDosenPanelis($_SESSION['id_login']);
-		print_r($param);
 		$this->template->load("common/template", "pages/Seminar/jadwal_seminar_panelis", $param);
 	}
 
@@ -185,8 +185,7 @@ class Seminar extends CI_Controller
 	{
 
 		$param['pageInfo'] = "Jadwal Seminar Pembimbing";
-		$param['jadwal_seminar'] = $this->Seminar_model->getFIlterDosenPembimbing($_SESSION['id_login']);
-		print_r($param);
+		$param['jadwal_seminar'] = $this->Seminar_model->getFilterDosen($_SESSION['id_login']);
 		$this->template->load("common/template", "pages/Seminar/jadwal_seminar_pembimbing", $param);
 	}
 
@@ -257,13 +256,82 @@ class Seminar extends CI_Controller
 		$nip = $_SESSION['id_login'];
 		if ($_SESSION['global_role'] == "Mahasiswa") {
 			$param['revisi_seminar'] = $this->Seminar_model->getFilterMhs();
-			$this->template->load("common/template", "pages/Seminar/revisi_seminar", $param);
-			// } elseif ($_SESSION['global_role'] == $nip) {
-			// 	$param['revisi_seminar'] = $this->Seminar_model->getFilterDospem();
-			// 	$this->template->load("common/template", "pages/Seminar/revisi_seminar", $param);
+			$this->template->load("common/template", "pages/Seminar/revisi_seminar_mhs", $param);
 		} else {
-			$param['revisi_seminar'] = $this->Seminar_model->getFilterDosen();
-			$this->template->load("common/template", "pages/Seminar/revisi_seminar", $param);
+			$param['revisi_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.lampiran_revisi, s.revisi, s.status_revisi", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['s.nip_panelis' => $nip], "")->result();
+			$this->template->load("common/template", "pages/Seminar/revisi_seminar_dsn", $param);
+		}
+	}
+
+	function editSeminar()
+	{
+		$data = $this->Seminar_model->getById($_GET['id_seminar'])[0];
+		header("content-type:json/application");
+		echo json_encode($data);
+	}
+
+	function updateRevisiSeminarMhs()
+	{
+
+		$id = $this->input->post('id_');
+		$post = $this->input->post();
+		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
+		$data = [];
+		if ($cekId == 1) {
+			if ($_SESSION['global_role'] == 'Mahasiswa') {
+				$dir_file = realpath(APPPATH . '../assets/berkas/seminar/');
+				$ori_name = pathinfo($_FILES['lampiran_revisi']['name'], PATHINFO_FILENAME);
+				$name_file = $_FILES['lampiran_revisi']['name'];
+				$extension_file = substr($name_file, strpos($name_file, '.'), strlen($name_file) - 1);
+				$nm_file_revisi =  $id . '_' . $ori_name . '_'  . '_' . time() . $extension_file;
+				$tmp_file = $_FILES['lampiran_revisi']['tmp_name'];
+
+
+				if (isset($_FILES['lampiran_revisi'])) { //Jika validasi Form Berhasil
+					move_uploaded_file($tmp_file, $dir_file . '/' . $nm_file_revisi);
+					$data = array(
+						'id_seminar' => $id,
+						'lampiran_revisi' => $nm_file_revisi,
+					);
+				}
+			}
+			if ($this->Seminar_model->update($id, $data)) {
+				//Flash Message Sukses
+				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
+			} else {
+				//Flash Message Gagal
+				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+			}
+			redirect(base_url() . 'Seminar/revisiSeminar');
+		} else {
+			show_404();
+		}
+	}
+
+	public function updateRevisiSeminarDsn()
+	{
+		$id = $this->input->post('id_');
+		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
+		if ($cekId == 1) {
+			if ($_SESSION['global_role'] == "Dosen Pembimbing") {
+				$data = array(
+					'status_revisi' => $this->input->post('status_revisi'),
+				);
+				if ($this->Seminar_model->update($id, $data)) {
+					//Flash Message Sukses
+					$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
+				} else {
+					//Flash Message Gagal
+					$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+				}
+				redirect(base_url() . 'Seminar/revisiSeminar');
+			} else {
+				show_404();
+			}
 		}
 	}
 }
