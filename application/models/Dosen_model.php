@@ -11,7 +11,6 @@ Class Dosen_model extends CI_Model{
     function getDosenPembimbing(){
         $this->db->select('NIP,NIDN,NAMA');
         $this->db->from($this->_table);
-        $this->db->where('idRole',7);
         return $this->db->get();
     }
 

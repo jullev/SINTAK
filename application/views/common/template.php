@@ -14,7 +14,7 @@ if (empty($_SESSION['id_login'])) {
 	<meta name="author" content="" />
 	<?php
 	$uri = !empty($this->uri->segment(2)) ? $this->uri->segment(2) : $this->uri->segment(1);
-	$pageTitle = ucwords(str_replace("_", " ", $uri));
+	$pageTitle = ucwords(str_replace(["_",'-'], " ", $uri));
 	?>
 	<title><?php echo $pageTitle . " - " . $pageInfo ?></title>
 
@@ -116,7 +116,7 @@ if (empty($_SESSION['id_login'])) {
 				if ($_SESSION['global_role'] == 'Koordinator TA') {
 				?>
 					<li class="nav-item">
-						<a class="nav-link" href="<?php echo base_url() . 'dosen/pembimbing' ?>">
+						<a class="nav-link" href="<?php echo base_url() . 'pantau-bimbingan' ?>">
 							<i class="fas fa-fw fa-headset"></i>
 							<span>Pantau Bimbingan</span></a>
 						<!---
@@ -411,7 +411,7 @@ if (empty($_SESSION['id_login'])) {
 						<div class="h4 mb-0 solid-color font-weight-bold">
 							<span class="fa <?php echo $this->icon ?> info-icon-page"></span>
 							<?php
-							echo ucwords(str_replace("_", " ", $this->uri->segment(1)));
+							echo ucwords(str_replace(["_",'-'], " ", $this->uri->segment(1)));
 							?>
 						</div>
 						<div class="float-right info-text-page">

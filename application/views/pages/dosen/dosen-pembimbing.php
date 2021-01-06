@@ -47,7 +47,6 @@
                         <td>Panelis</td>
                         <td>Anggota</td>
                         <td>Sekretaris</td>
-                        <td></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -56,7 +55,7 @@
                         foreach($data_dosen as $i){
                             $mhsBimbingRows = $this->TugasAkhir_Model->getMhsBimbing($i->NIP,'rows');
                             $mhsBimbing = $this->TugasAkhir_Model->getMhsBimbing($i->NIP);
-                            $panelis = $this->Seminar_model->seminarNIP('NIP_Panelis',$i->NIP)->num_rows();
+                            $panelis = $this->common->getData('',$i->NIP)->num_rows();
                             $anggota = $this->Seminar_model->seminarNIP('NIP_Anggota',$i->NIP)->num_rows();
                             $sekretaris = $this->Seminar_model->seminarNIP('NIP_Sekretaris',$i->NIP)->num_rows();
                             ?>
@@ -69,45 +68,7 @@
                         <td><?php echo $panelis.'x'; ?></td>
                         <td><?php echo $anggota.'x'; ?></td>
                         <td><?php echo $sekretaris.'x'; ?></td>
-                        <td>
-                            <a role="button" aria-expanded="false" aria-controls="collapse<?= $no ?>" data-toggle="collapse" href="#collapse<?= $no ?>"><span class="fa fa-chevron-circle-down fa-lg solid-color"></span></a>
-                        </td>
                     </tr>
-                        <tr class="collapse" id="collapse<?= $no ?>">
-                            <td colspan="9">
-                                <table class="table">
-                                    <tr>
-                                        <td>#</td>
-                                        <td>NIM</td>
-                                        <td>Mahasiswa</td>
-                                        <td>Tahun</td>
-                                        <td>Prodi</td>
-                                        <td>Judul</td>
-                                        <td>Bimbingan</td>
-                                        <td>Status</td>
-                                    </tr>
-                                    <?php 
-                                        $n = 0;
-                                        foreach ($mhsBimbing as $key => $value) {
-                                            $n++;
-                                        $bimbingan = $this->Bimbingan_model->getTA_id($value['id'])->num_rows();
-                                    ?>
-                                        <tr>
-                                            <td><?= $n ?></td>
-                                            <td><?= $value['Mahasiswa_NIM'] ?></td>
-                                            <td><?= $value['NAMA'] ?></td>
-                                            <td><?= $value['Tahun_masuk'] ?></td>
-                                            <td><?= $value['Nama_prodi'] ?></td>
-                                            <td><?= $value['Judul_TA'] ?></td>
-                                            <td><?= $bimbingan ?>x</td>
-                                            <td><?= $value['Status'] ?></td>
-                                        </tr>
-                                    <?php
-                                        }
-                                    ?>
-                                </table>
-                            </td>
-                        </tr>
                         <?php } ?>
                 </tbody>
             </table>

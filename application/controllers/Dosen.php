@@ -217,17 +217,4 @@ Class Dosen extends CI_controller{
         }
         redirect(base_url().'Dosen');
     }
-    public function pembimbing()
-    {
-        $this->load->model('TugasAkhir_Model');
-        $this->load->model('Bimbingan_model');
-        $this->load->model('Prodi_model');
-        $this->load->model('Mahasiswa_model');
-        $this->load->model('Seminar_model');
-        $this->icon = "fa-chalkboard-teacher";
-        $param['pageInfo'] = "Data Dosen Pembimbing";
-        $param['data_dosen'] = $this->Dosen_model->getDosenPembimbing()->result();
-        $param['prodi'] = $this->Prodi_model->getAll()->result_array();
-		$this->template->load("common/template", "pages/dosen/dosen-pembimbing", $param);
-    }
 }
