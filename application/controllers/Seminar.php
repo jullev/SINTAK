@@ -17,17 +17,21 @@ class Seminar extends CI_Controller
 	{
 		$param['pageInfo'] = "List Seminar";
 		if ($_SESSION['global_role'] == "Admin Prodi") {
-			$param['data_seminar'] = $this->common->getData("s.id_seminar, k.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
-		} elseif ($_SESSION['global_role'] == "Koordinator TA") {
 			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['Tanggal' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
+			//Mengambil Data Dari Tabel Master
+			$param['Dosen'] = $this->Dosen_model->getAll()->result();
+			$param['Ruangan'] = $this->Ruangan_model->getAll()->result();
+			$param['Master_status'] = $this->Status_model->getAllDataForSeminar()->result();
+		} elseif ($_SESSION['global_role'] == "Koordinator TA") {
+			//Mengambil Data Dari Tabel Master
+			$param['Dosen'] = $this->Dosen_model->getAll()->result();
+			$param['Ruangan'] = $this->Ruangan_model->getAll()->result();
+			$param['Master_status'] = $this->Status_model->getAllDataForSeminar()->result();
+			$param['data_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['NIP_Panelis' => NULL, 'm.Prodi_idProdi' => $_SESSION['id_prodi']], "")->result();
 		} elseif ($_SESSION['global_role'] == "Mahasiswa") {
-			$param['data_seminar'] = $this->common->getData("ta.Judul_TA, ta.Deskripsi, ta.Mahasiswa_NIM, m.NAMA, s.Tanggal", "td_seminar s", ["tugas_akhir ta", "s.id_TA=ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login'], 'Tanggal !=' => NULL], "")->result_array();
+			$param['bimbingan'] = $this->common->getData("count(id_bimbingan) ttl, ta.id", "td_bimbingan b", ["tugas_akhir ta", "b.Tugas_akhir_id=ta.id"], ['Mahasiswa_NIM' => $_SESSION['id_login']], "")->result_array();
 		}
-		//		print_r($param);
-		//Mengambil Data Dari Tabel Master
-		$param['Dosen'] = $this->Dosen_model->getAll()->result();
-		$param['Ruangan'] = $this->Ruangan_model->getAll()->result();
-		$param['Master_status'] = $this->Status_model->getAllDataForSeminar()->result();
+
 		if ($_SESSION['global_role'] == "Mahasiswa") {
 			$this->template->load("common/template", "pages/Seminar/list_seminar_mhs", $param);
 		} else {
@@ -40,7 +44,7 @@ class Seminar extends CI_Controller
 		//
 		$param = $this->common->getData("ta.id", "tugas_akhir ta", ["mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login']], "")->result_array();
 		// print_r($param[0]['id']);
-		$this->common->insert("td_seminar", ['id_TA' => $param[0]['id']]);
+		$this->common->insert("td_seminar", ['id_TA' => $param[0]['id'],'status_revisi' => '']);
 		//Flash Message Sukses
 		$this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
 		        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pengajuan Seminar Berhasil</div>");
@@ -124,27 +128,41 @@ class Seminar extends CI_Controller
 	function update()
 	{
 		$id = $this->input->post('id_');
-		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
-		if ($cekId == 1) {
+		$seminar = $this->common->getData('Tanggal,NIP_Panelis','td_seminar','',["id_seminar" => $id],'')->result_array();
+		if (count($seminar) == 1) {
+			$sendTele = false;
 			if ($_SESSION['global_role'] == "Admin Prodi") {
 				$data = array(
 					'Tanggal' => $this->input->post('Tanggal'),
 					'jam' => $this->input->post('jam'),
-					'idRuangan' => $this->input->post('idRuangan'),
+					'idRuangan' => $this->input->post('idruangan'),
 				);
+				if($seminar[0]['NIP_Panelis']!=NULL){
+					$sendTele = true;
+				}
 			} elseif ($_SESSION['global_role'] == "Koordinator TA") {
 				$data = array(
 					'NIP_Panelis' => $this->input->post('NIP_Panelis'),
 				);
+				if($seminar[0]['Tanggal']!=NULL){
+					$sendTele = true;
+				}
 			}
 			if ($this->Seminar_model->update($id, $data)) {
 				//Flash Message Sukses
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
+				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Berhasil Diupdate</b></div>");
+				$getIdTA = $this->common->getData('id_TA','td_seminar','',['id_seminar' => $id],'')->result_array()[0];
+				$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+				if($chatId!=0 && $sendTele){
+					$getRuangan = $this->common->getData('Nama_ruangan','ruangan','',['idRuangan' => $_POST['idruangan']],'')->result_array();
+					$send = urlencode("<b>Jadwal Seminar</b>\n<b>Tanggal :</b> ".date('d-m-Y',$_POST['Tanggal'])."\n<b>Jam :</b> ".date('H:i', $_POST['jam'])." WIB\n<b>Tempat :</b> ".$getRuangan[0]['Nama_ruangan']);
+					sendTele($chatId,$send);
+				}
 			} else {
 				//Flash Message Gagal
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
 			redirect(base_url() . 'Seminar');
 		} else {

@@ -80,17 +80,17 @@
 					<input type="hidden" name="id_" id="id_">
 					<div class="row">
 						<?php
-						if ($_SESSION['kode_level'] >= 3 && $_SESSION['kode_level'] <= 5) {
+						if ($_SESSION['global_role']=='Admin Prodi') {
 						?>
-							<div class="col-md-12">
+							<div class="col-md-12 mb-3">
 								<label for="">Tanggal</label>
 								<input type="date" name="Tanggal" id="Tanggal" class="form-control">
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12 mb-3">
 								<label for="">Jam</label>
 								<input type="time" name="jam" id="jam" class="form-control">
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12 mb-3">
 								<label for="">Ruangan</label>
 								<select name="idruangan" id="idruangan" class="form-control select2">
 									<option value="">--Pilih--</option>
@@ -103,9 +103,9 @@
 							</div>
 
 						<?php
-						} elseif ($_SESSION['kode_level'] >= 6 && $_SESSION['kode_level'] <= 8) {
+						} elseif ($_SESSION['global_role']=='Koordinator TA') {
 						?>
-							<div class="col-md-12">
+							<div class="col-md-12 mb-3">
 								<label for="">Panelis</label>
 								<select name="NIP_Panelis" id="NIP_Panelis" class="form-control select2">
 									<option value="">--Pilih--</option>
@@ -124,8 +124,6 @@
 					<!-- <div class="row mt-1">
 
 					</div> -->
-					<br>
-					<br>
 					<?php
 					$this->load->view("common/btn")
 					?>

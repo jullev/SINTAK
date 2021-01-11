@@ -135,7 +135,7 @@ if (empty($_SESSION['id_login'])) {
 						<div id="collapseSix" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
 								<?php
-								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi') {
+								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role']=='Koordinator TA') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Seminar" ?>">Pengajuan Seminar</a>
 									<!-- 

@@ -348,6 +348,26 @@ $(document).ready(function() {
 			}
 		);
 	});
+	$(".confirm-alert").click(function(e) {
+		e.preventDefault();
+		var url = $(this).attr("href");
+		var text = $(this).data('alert')
+		var submit = $(this).data('submit')
+		swal(
+			{
+				title: "Data Akan Dihapus",
+				text: text,
+				type: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#DD6B55",
+				confirmButtonText: submit,
+				closeOnConfirm: false
+			},
+			function() {
+				window.location = url;
+			}
+		);
+	});
 
     $('#filter_angkatan').on('change', function() {
 		const data = $('#filter_angkatan :selected').attr('data-angkatan');

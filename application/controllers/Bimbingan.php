@@ -131,7 +131,7 @@ class Bimbingan extends CI_controller
                     $this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Pencatatan Bimbingan Berhasil</b></div>");
                     $getData = $this->common->getData('d.telegram_id,m.NAMA,Judul_TA','tugas_akhir ta',['dosen d','ta.Dosen_NIP = d.NIP','mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],['ta.id' => $TA_id],'')->result_array()[0];
-                    $countBimbingan = $this->common->getData('id','tugas_akhir','',['id' => $TA_id],'')->num_rows();
+                    $countBimbingan = $this->common->getData('id_bimbingan','td_bimbingan','',['Tugas_akhir_id' => $TA_id],'')->num_rows();
                     $chatId = $getData['telegram_id'];
                     if($chatId!=0){
                         $textCount = $countBimbingan==1 ? 'pertama' : 'ke-'.$countBimbingan;
