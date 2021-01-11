@@ -14,6 +14,7 @@
             <td>Topik</td>
             <td>Mahasiswa</td>
             <td>Pembimbing</td>
+            <td>Bimbingan</td>
             <td>Status</td>
             <td>Tanggal Pengajuan</td>
             <td>Aksi</td>
@@ -28,14 +29,15 @@
               <td><?php echo $no++; ?></td>
               <td><?php echo $i->Judul_TA; ?></td>
               <td>
-                <a href="#" class="open-desc" data-id="<?php echo $i->id ?>" data-url="<?php echo base_url() . 'Tugas_akhir/deskripsi' ?>">Lihat Deskripsi</a>
+                <a href="#" class="open-desc" data-id="<?php echo $i->id ?>" data-url="<?php echo base_url() . 'Tugas_akhir/deskripsi' ?>">Lihat</a>
               </td>
               <td>
-                <a href="#" class="open-abstract" data-url="<?php echo base_url() . 'Tugas_akhir/abstract' ?>" data-id="<?php echo $i->id ?>">Lihat Abstract</a>
+                <a href="#" class="open-abstract" data-url="<?php echo base_url() . 'Tugas_akhir/abstract' ?>" data-id="<?php echo $i->id ?>">Lihat</a>
               </td>
               <td><?php echo $i->topik; ?></td>
               <td><?php echo $i->nama_mhs; ?></td>
               <td><?php echo $i->NAMA; ?></td>
+              <td><?php echo $i->total_bimbingan; ?>x</td>
               <td><?php echo $i->status; ?></td>
               <td><?php echo $i->tgl_pengajuan; ?></td>
               <td class="text-center">

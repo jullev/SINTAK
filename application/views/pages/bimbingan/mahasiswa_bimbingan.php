@@ -4,12 +4,11 @@
           echo $this->session->flashdata('input_validation');
           echo $this->session->flashdata('update_validation');
           echo $this->session->flashdata('delete_validation');
-          if($_SESSION['global_role']=='Mahasiswa'){
+          if($_SESSION['global_role']=='Mahasiswa' && $TA_id!=0){
         ?>
         <div class="row mb-2">
           <div class="col-md-3">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalDesc">Catat Bimbingan</button>
-            
           </div>
         </div>
         <?php } ?>
@@ -49,7 +48,7 @@
                               <a href="<?php echo base_url().'index.php/bimbingan/delete/'.$i->id_bimbingan; ?>" class="dropdown-item confirm">Delete</a>
                             </div>
                           </div>
-                          <?php } else if($_SESSION['global_role']=='Dosen Pembimbing'){ ?>
+                          <?php } else if(isDospem()){ ?>
                             <div class="dropdown">
                             <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Option

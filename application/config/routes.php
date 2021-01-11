@@ -53,3 +53,4 @@ $route['default_controller'] = 'welcome';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['pantau-bimbingan'] = 'pantau_bimbingan';
+$route['pengajuan-judul'] = 'tugas_akhir/list_pengajuan_judul';

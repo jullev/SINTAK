@@ -21,7 +21,7 @@
             $validation_keywords = $this->session->flashdata('error_field')->keywords;
         }
         ?>
-        <form method="POST" action="<?php if ($_SESSION['kode_level'] == 1) {
+        <form method="POST" action="<?php if ($_SESSION['global_role'] == 'Administrator') {
         echo base_url() . 'Tugas_akhir/add_action_admin';
         } else{
             echo base_url() . 'Tugas_akhir/add_action';   
@@ -52,7 +52,7 @@
             </div>
             <div class="row">
                 <?php
-                if ($_SESSION['kode_level'] == 1) {
+                if ($_SESSION['global_role'] == 'Administrator') {
                 ?>
                     <div class="col-md-4 form-group">
                         <label>Dosen Pembimbing</label>

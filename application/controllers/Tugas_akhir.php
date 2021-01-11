@@ -24,6 +24,8 @@ class Tugas_akhir extends CI_controller
         } else {
             $filter = ["Prodi_idProdi = '$_SESSION[id_prodi]' OR Dosen_NIP = '$_SESSION[id_prodi]'"];
         }
+        $filter['tugas_akhir.id_status !='] = 1;
+        $param['cekAcc'] = $this->common->getData('id','tugas_akhir','',['tgl_ACC !=' => NULL],'')->num_rows();
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
@@ -36,10 +38,9 @@ class Tugas_akhir extends CI_controller
         $param['pageInfo'] = "List Pengajuan Judul";
         // print_r($_SESSION);
         // $filter = [['Dosen_NIP' => $_SESSION['id_login']]];
+        $filter = "Dosen_NIP = '".$_SESSION['id_login']."'";
         if ($_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'KPS') {
-            $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
-        } else {
-            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+            $filter.=" or Prodi_idProdi = '".$_SESSION['id_prodi']."' ";
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getPengajuanJudul($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
@@ -142,8 +143,13 @@ class Tugas_akhir extends CI_controller
             $error_field->id_topik = form_error('id_topik');
             $this->session->set_flashdata("error_field", $error_field);
         }
-
         redirect('Tugas_akhir');
+    }
+    public function testTele()
+    {
+        $msg = urlencode("*PENGAJUAN JUDUL TUGAS AKHIR.* Nim = E41170244. Nama = David Setya Ainur Hakiki Ramadhan. Judul Tugas Akhir = Analisa analisa");
+        $chatId = "1138930287";
+        sendTele($chatId,$msg);
     }
     function add_action_admin()
     {
@@ -249,16 +255,26 @@ class Tugas_akhir extends CI_controller
 
     public function validasi()
     {
-        // if($_SESSION['kode_level']==7 || $_SESSION['kode_level']==1){
         $update = array(
             "Dosen_NIP" => $_POST['Dosen_NIP'],
             'id_status' => $_POST['id_status'],
             'tgl_ACC' => date('Y-m-d')
         );
 
-        $msg = $this->TugasAkhir_Model->update($_POST['id'], $update) ? "Validasi Berhasil" : "Validasi Gagal";
+        if($this->TugasAkhir_Model->update($_POST['id'], $update)){
+            $chatId = $this->common->getChatId('mahasiwa',['id' => $_POST['id']],true);
+            if($chatId!=0){
+                $getStatus = $this->common->getData("status",'status_ta','',['id_status' => $_POST['id_status']],'')->result_array()[0];
+                $getDosen = $this->common->getData("NAMA",'dosen','',['NIP' => $_POST['Dosen_NIP']],'')->result_array()[0];
+                $send = urlencode("<b>Validasi Tugas Akhir.</b>\nStatus Tugas Akhir Kamu : <b>".$getStatus['status']."</b>\nDosen Pembimbing : <b>".$getDosen['NAMA']."</b>");
+                $msg = "Validasi Berhasil";
+                sendTele($chatId,$send);
+            }
+        }
+        else{
+            $msg = "Validasi Gagal";
+        }
         $this->session->set_flashdata('msg', $msg);
         redirect(base_url() . 'Tugas_akhir/list_pengajuan_judul');
-        // }
     }
 }

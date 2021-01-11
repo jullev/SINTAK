@@ -64,4 +64,23 @@
 			}
 			return $sql;
 		}
+		public function getChatId($tb,$where,$fromTA=false)
+		{	
+			$this->db->select('telegram_id');
+			if($fromTA){
+				$this->db->from('tugas_akhir ta');
+				if($tb=='mahasiswa'){
+					$this->db->join('mahasiswa m','ta.Mahasiswa_NIM = m.NIM');
+				}
+				else{
+					$this->db->join('dosen d','ta.Dosen_NIP = d.NIP');
+				}
+			}
+			else{
+				$this->db->from($tb);
+			}
+			$this->db->where($where);
+			$sql = $this->db->get();
+			return $sql->result_array()[0]['telegram_id'];
+		}
 	}

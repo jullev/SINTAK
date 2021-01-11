@@ -1,6 +1,10 @@
 <div class="card shadow py-2">
   <div class="card-body">
+    <?php 
+        if($cekAcc==0){
+    ?>
       <a href="<?php echo base_url() . "Tugas_akhir/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+    <?php } ?>
     <?php
     $this->load->view("common/msg")
     ?>
@@ -15,8 +19,7 @@
             <td>Topik</td>
             <td>Mahasiswa</td>
             <td>Pembimbing</td>
-            <td>Status</td>
-            <td>Tanggal Pengajuan</td>
+            <td>Bimbingan</td>
             <td>Aksi</td>
           </tr>
         </thead>
@@ -37,12 +40,10 @@
               <td><?php echo $i->topik; ?></td>
               <td><?php echo $i->nama_mhs; ?></td>
               <td><?php echo $i->NAMA; ?></td>
-              <td><?php echo $i->status; ?></td>
-              <td><?php echo date('d-m-Y', strtotime($i->tgl_pengajuan))?></td>
+              <td><?php echo $i->total_bimbingan; ?>x</td>
               <td class="text-center">
                 <?php
                 if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'Dosen Pembimbing' || $_SESSION['global_role'] == 'KPS') {
-                  if ($i->id_status != '1') {
                     ?>
                   <div class="dropdown">
                     <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,9 +53,6 @@
                         <a href="<?php echo base_url() . 'bimbingan/TugasAkhir/' . $i->id; ?>" class="dropdown-item">Bimbingan</a>
                     </div>
                   </div>
-                    <?php
-                  }
-                ?>
                 <?php } ?>
               </td>
             </tr>

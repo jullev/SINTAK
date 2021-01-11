@@ -47,12 +47,15 @@ class TugasAkhir_Model extends CI_Model
         $this->db->join('td_bimbingan', 'tugas_akhir.id = td_bimbingan.Tugas_akhir_id', 'left');
         $this->db->group_by('tugas_akhir.id');
 
-        if ($filter) {
+        if (is_array($filter)) {
             foreach ($filter as $key => $value) {
                 if ($value != "") {
                     $this->db->where([$key => $value]);
                 }
             }
+        }
+        else{
+            $this->db->where($filter);
         }
         $this->db->where('tgl_ACC', NULL);
         $this->db->order_by("id", 'asc');

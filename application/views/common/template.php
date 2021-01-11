@@ -73,7 +73,7 @@ if (empty($_SESSION['id_login'])) {
 						<?php
 						} else {
 						?>
-							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/list_pengajuan_judul" ?>">
+							<a class="nav-link" href="<?php echo base_url() . "pengajuan-judul/" ?>">
 								<i class="fas fa-fw  fa-envelope-open-text"></i>
 								<span>Pengajuan Judul</span></a>
 						<?php
@@ -105,7 +105,7 @@ if (empty($_SESSION['id_login'])) {
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "bimbingan/" ?>">
 							<i class="fas fa-fw fa-chalkboard-teacher"></i>
-							<span>Bimbingan</span></a>
+							<span><?php echo isDospem() ? 'Bimbingan Baru' : 'Bimbingan' ?></span></a>
 						<!--- 
               1. Jika mahasiswa tampilkan daftar riwayat bimbingan
               2. Jika dosen pembimbing, munculkan list submit bimbingan, order by id  desc
