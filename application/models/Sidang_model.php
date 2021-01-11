@@ -69,7 +69,7 @@ class Sidang_model extends CI_Model
     }
     public function getRekapSidang($angkatan = "", $prodi = "")
     {
-        $this->db->select("a.id_sidang, a.Nilai_panelis as nil_sid_panelis, a.Nilai_anggota as nil_sid_anggota, a.Nilai_sidang, a.Nilai_bimbingan, a.NIP_Anggota, b.Judul_TA, a.Tanggal, a.jam, c.Nama_ruangan, d.NAMA as nama_panelis, dd.NAMA as nama_pembimbing, ddd.NAMA as nama_anggota, e.NAMA as nama_mahasiswa, e.NIM, bb.Nilai_penelis as nil_sem_panelis, bb.Nilai_pembimbing as nil_sem_pembimbing, e.Tahun_masuk, f.Nama_prodi ");
+        $this->db->select("a.id_sidang, a.Nilai_panelis as nil_sid_panelis, a.Nilai_anggota as nil_sid_anggota, a.Nilai_sidang, a.Nilai_bimbingan, a.NIP_Anggota, b.Judul_TA, a.Tanggal, a.jam, c.Nama_ruangan, d.NAMA as nama_panelis, dd.NAMA as nama_pembimbing, ddd.NAMA as nama_anggota, e.NAMA as nama_mahasiswa, e.NIM, bb.Nilai_panelis as nil_sem_panelis, bb.Nilai_pembimbing as nil_sem_pembimbing, e.Tahun_masuk, f.Nama_prodi ");
         $this->db->from("td_sidang as a");
         $this->db->join("td_seminar as bb", "bb.id_TA = a.id_TA");
         $this->db->join("tugas_akhir as b", "b.id = a.id_TA");

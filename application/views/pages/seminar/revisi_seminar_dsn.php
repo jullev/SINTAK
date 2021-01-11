@@ -30,7 +30,7 @@
                                     <?php echo $i->lampiran_revisi ?>
                                 </a>
                             </td>
-                            <td><?php echo $i->status_revisi ?></td>
+                            <td><?php echo $i->status_revisi=='' ? 'Belum Revisi' : ucwords($i->status_revisi) ?></td>
                             <td class="text-center">
                                 <div class="dropdown">
                                     <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

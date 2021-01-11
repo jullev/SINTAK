@@ -27,7 +27,7 @@ class Seminar_model extends CI_Model
 	{
 		$now = date('Y-m-d');
 		$nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.Nilai_pembimbing, td_seminar.Nilai_penelis ,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_seminar.NIP_Panelis FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE tugas_akhir.Dosen_NIP = '$nip'");
+		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.Nilai_pembimbing, td_seminar.Nilai_panelis ,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_seminar.NIP_Panelis FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE tugas_akhir.Dosen_NIP = '$nip' and td_seminar.status_revisi != 'acc' and td_seminar.Tanggal >= '$now'");
 		return $query->result();
 	}
 
@@ -59,7 +59,7 @@ class Seminar_model extends CI_Model
 	{
 		$now = date('Y-m-d');
 		$nip = $_SESSION['id_login'];
-		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, td_seminar.NIP_Panelis, td_seminar.Nilai_penelis, td_seminar.revisi FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE td_seminar.Tanggal > '$now'");
+		$query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_seminar.Tanggal, td_seminar.jam, td_seminar.id_seminar, td_seminar.NIP_Panelis, td_seminar.Nilai_panelis,td_seminar.Nilai_pembimbing, td_seminar.revisi FROM  td_seminar JOIN tugas_akhir ON tugas_akhir.id = td_seminar.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE td_seminar.NIP_panelis = '$nip' and td_seminar.status_revisi != 'acc' and td_seminar.Tanggal >= '$now' ");
 		return $query->result();
 	}
 
@@ -101,7 +101,7 @@ class Seminar_model extends CI_Model
 
 	public function getRekapSeminar($angkatan = "", $prodi = "")
 	{
-		$this->db->select("a.id_seminar, b.Judul_TA, a.Tanggal, a.jam, c.Nama_ruangan, d.NAMA as nama_panelis, dd.NAMA as nama_pembimbing, e.NAMA as nama_mahasiswa, e.NIM, a.Nilai_penelis, a.Nilai_pembimbing, e.Tahun_masuk, f.Nama_prodi ");
+		$this->db->select("a.id_seminar, b.Judul_TA, a.Tanggal, a.jam, c.Nama_ruangan, d.NAMA as nama_panelis, dd.NAMA as nama_pembimbing, e.NAMA as nama_mahasiswa, e.NIM, a.Nilai_panelis, a.Nilai_pembimbing, e.Tahun_masuk, f.Nama_prodi ");
 		$this->db->from("td_seminar as a");
 		$this->db->join("tugas_akhir as b", "b.id = a.id_TA");
 		$this->db->join("ruangan as c", "c.idRuangan = a.idruangan");

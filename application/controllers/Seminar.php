@@ -217,25 +217,33 @@ class Seminar extends CI_Controller
 	function updateJadwalPanelis()
 	{
 		$id = $this->input->post('id_');
-		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
-		if ($cekId == 1) {
-			if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-				$data = array(
-					'Nilai_penelis' => $this->input->post('Nilai_penelis'),
-					'revisi' => $this->input->post('revisi'),
-				);
-			}
+		$seminar = $this->common->getData('Nilai_pembimbing','td_seminar','',["id_seminar" => $id],'')->result_array();
+		if (count($seminar) == 1 && isDospem()) {
+			$data = array(
+				'Nilai_panelis' => $this->input->post('Nilai_panelis'),
+				'revisi' => $this->input->post('revisi'),
+			);
 			if ($this->Seminar_model->update($id, $data)) {
+				if($seminar[0]['Nilai_pembimbing']!=0){
+					$getIdTA = $this->common->getData('id_TA','td_seminar','',['id_seminar' => $id],'')->result_array()[0];
+					$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+					if($chatId!=0){
+						$send = urlencode("<b>Nilai Seminar</b>\n<b>Nilai Pembimbing :</b> ".$seminar[0]['Nilai_pembimbing']."\n<b>Nilai Panelis :</b> ".$_POST['Nilai_panelis']."\n<b>Revisi :</b> ".$_POST['revisi']);
+						sendTele($chatId,$send);
+					}
+				}
+
 				//Flash Message Sukses
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
+				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Berhasil Diupdate</b></div>");
 			} else {
 				//Flash Message Gagal
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate<b></div>");
 			}
 			redirect(base_url() . 'Seminar/jadwalSeminarPanelis');
-		} else {
+		}
+		else {
 			show_404();
 		}
 	}
@@ -244,22 +252,29 @@ class Seminar extends CI_Controller
 	{
 		$id = $this->input->post('id_');
 		$nilai = $this->input->post('Nilai_pembimbing');
-		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
-		if ($cekId == 1) {
-			if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-				$data = array(
-					'Nilai_pembimbing' => $nilai,
-				);
-			}
+		$seminar = $this->common->getData('Nilai_panelis,revisi','td_seminar','',["id_seminar" => $id],'')->result_array();
+
+		if (count($seminar) == 1 && isDospem()) {
+			$data = array(
+				'Nilai_pembimbing' => $nilai,
+			);
 			$input = $this->Seminar_model->update($id, $data);
 			if ($input) {
+				if($seminar[0]['Nilai_panelis']!=0){
+					$getIdTA = $this->common->getData('id_TA','td_seminar','',['id_seminar' => $id],'')->result_array()[0];
+					$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+					if($chatId!=0){
+						$send = urlencode("<b>Nilai Seminar</b>\n<b>Nilai Pembimbing :</b> ".$nilai."\n<b>Nilai Panelis :</b> ".$seminar[0]['Nilai_panelis']."\n<b>Revisi :</b> ".$seminar[0]['revisi']);
+						sendTele($chatId,$send);
+					}
+				}
 				//Flash Message Sukses
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
+				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Berhasil Diupdate</b></div>");
 			} else {
 				//Flash Message Gagal
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
 			redirect(base_url() . 'Seminar/jadwalSeminarPembimbing');
 		} else {
@@ -276,7 +291,7 @@ class Seminar extends CI_Controller
 			$param['revisi_seminar'] = $this->Seminar_model->getFilterMhs();
 			$this->template->load("common/template", "pages/Seminar/revisi_seminar_mhs", $param);
 		} else {
-			$param['revisi_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.lampiran_revisi, s.revisi, s.status_revisi", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['s.nip_panelis' => $nip], "")->result();
+			$param['revisi_seminar'] = $this->common->getData("s.id_seminar, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.lampiran_revisi, s.revisi, s.status_revisi", "td_seminar s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['s.nip_panelis' => $nip,'s.Nilai_panelis !=' => 0, 's.Nilai_pembimbing !=' => 0,'s.status_revisi !=' => 'acc'], "")->result();
 			$this->template->load("common/template", "pages/Seminar/revisi_seminar_dsn", $param);
 		}
 	}
@@ -310,17 +325,18 @@ class Seminar extends CI_Controller
 					$data = array(
 						'id_seminar' => $id,
 						'lampiran_revisi' => $nm_file_revisi,
+						'status_revisi' => 'pending'
 					);
 				}
 			}
 			if ($this->Seminar_model->update($id, $data)) {
 				//Flash Message Sukses
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Berhasil Diupdate</b></div>");
 			} else {
 				//Flash Message Gagal
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
 			redirect(base_url() . 'Seminar/revisiSeminar');
 		} else {
@@ -332,24 +348,31 @@ class Seminar extends CI_Controller
 	{
 		$id = $this->input->post('id_');
 		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
-		if ($cekId == 1) {
-			if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-				$data = array(
-					'status_revisi' => $this->input->post('status_revisi'),
-				);
-				if ($this->Seminar_model->update($id, $data)) {
-					//Flash Message Sukses
-					$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Berhasil Diupdate</div>");
-				} else {
-					//Flash Message Gagal
-					$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Seminar Gagal Diupdate</div>");
+
+		if ($cekId == 1 && isDospem()) {
+			$data = array(
+				'status_revisi' => $this->input->post('status_revisi'),
+			);
+			if ($this->Seminar_model->update($id, $data)) {
+				//Flash Message Sukses
+				$getIdTA = $this->common->getData('id_TA','td_seminar','',['id_seminar' => $id],'')->result_array()[0];
+				$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+				if($chatId!=0){
+					$send = urlencode("<b>Revisi Seminar</b>\n<b>Status Revisi :</b> ".ucwords($_POST['status_revisi']));
+					sendTele($chatId,$send);
 				}
-				redirect(base_url() . 'Seminar/revisiSeminar');
+
+				$this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+			<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Berhasil Diupdate</b></div>");
 			} else {
-				show_404();
+				//Flash Message Gagal
+				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+			<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
+			redirect(base_url() . 'Seminar/revisiSeminar');
+		}
+		else {
+			show_404();
 		}
 	}
 }

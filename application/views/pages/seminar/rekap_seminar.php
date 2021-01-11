@@ -59,7 +59,7 @@
                             <td><?= $n ?></td>
                             <td><?= $key->nama_mahasiswa?></td>
                             <td><?= $key->NIM?> </td>
-                            <td><?= $key->Nilai_penelis + $key->Nilai_pembimbing / 2 ?> </td>
+                            <td><?= $key->Nilai_panelis + $key->Nilai_pembimbing / 2 ?> </td>
 
                             <td>
                                 <a role="button"  aria-controls="collapse<?= $n ?>" data-toggle="collapse" href="#collapse<?= $n ?>"><span class="fa fa-chevron-circle-down fa-lg solid-color"></span></a>
@@ -78,7 +78,7 @@
                                     <tr>
                                         <td>Nilai panelis :</td>
                                         <td><?= $key->nama_panelis?></td>
-                                        <td><?= $key->Nilai_penelis?></td>
+                                        <td><?= $key->Nilai_panelis?></td>
                                     </tr>
                                     <tr>
                                         <!-- cell data mahasiswa -->

@@ -198,7 +198,7 @@ if (empty($_SESSION['id_login'])) {
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangAnggota" ?>">Jadwal Sidang Anggota</a>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
 									<!-- 
-              Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris penelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
+              Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris panelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
             -->
 								<?php } ?>
 								<?php

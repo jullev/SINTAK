@@ -237,7 +237,7 @@ $(document).ready(function() {
 				$("#modalEdit #NIP_Panelis").val(response.NIP_Panelis);
 				$("#modalEdit #idRuangan").val(response.idRuangan);
 				$("#modalEdit #id_status").val(response.id_status);
-				$("#modalEdit #Nilai_penelis").val(response.Nilai_penelis);
+				$("#modalEdit #Nilai_panelis").val(response.Nilai_panelis);
 				$("#modalEdit #Nilai_pembimbing").val(response.Nilai_pembimbing);
 				$("#modalEdit #revisi").val(response.revisi);
 				$("#modalEdit #lampiran_revisi").val(response.Revisi);
@@ -256,7 +256,7 @@ $(document).ready(function() {
 			data: { id_seminar: id },
 			success: function (response) {
 				$("#modalEdit #id_").val(response.id_seminar);
-				$("#modalEdit #Nilai_penelis").val(response.Nilai_penelis);
+				$("#modalEdit #Nilai_panelis").val(response.Nilai_panelis);
 				$("#modalEdit #Nilai_pembimbing").val(response.Nilai_pembimbing);
 				$("#modalEdit #revisi").val(response.revisi);
 				$("#modalEdit #lampiran_revisi").val(response.Revisi);

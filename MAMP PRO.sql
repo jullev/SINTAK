@@ -470,7 +470,7 @@ INSERT INTO `td_bimbingan` (`id_bimbingan`, `Tugas_akhir_id`, `Deskripsi`, `Data
 -- Dumping structure for table sinta.td_seminar
 CREATE TABLE IF NOT EXISTS `td_seminar` (
   `id_seminar` int(6) NOT NULL AUTO_INCREMENT,
-  `Nilai_penelis` int(3) DEFAULT NULL,
+  `Nilai_panelis` int(3) DEFAULT NULL,
   `Nilai_pembimbing` int(3) NOT NULL,
   `Tanggal` date DEFAULT NULL,
   `jam` time DEFAULT NULL,
@@ -490,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `td_seminar` (
 
 -- Dumping data for table sinta.td_seminar: ~3 rows (approximately)
 /*!40000 ALTER TABLE `td_seminar` DISABLE KEYS */;
-INSERT INTO `td_seminar` (`id_seminar`, `Nilai_penelis`, `Nilai_pembimbing`, `Tanggal`, `jam`, `id_TA`, `NIP_Panelis`, `id_status`, `idruangan`, `lampiran_revisi`, `revisi`, `status_revisi`) VALUES
+INSERT INTO `td_seminar` (`id_seminar`, `Nilai_panelis`, `Nilai_pembimbing`, `Tanggal`, `jam`, `id_TA`, `NIP_Panelis`, `id_status`, `idruangan`, `lampiran_revisi`, `revisi`, `status_revisi`) VALUES
 	(9, NULL, 0, NULL, NULL, 1, NULL, NULL, NULL, '', '', ''),
 	(10, NULL, 0, NULL, NULL, 2, NULL, NULL, NULL, '', '', ''),
 	(11, NULL, 0, '2021-12-12', '14:32:00', 107, '198101152005011011', NULL, 1, '', '', 'acc');

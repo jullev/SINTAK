@@ -1,0 +1,11 @@
+Update field
+1. td_seminar
+-Nilai_panelis(Default None)
+-Nilai_panelis -> Nilai_panelis
+
+2. Dosen
+-Add telegram_id
+
+3. Mahasiswa
+-Add telegram_id
+

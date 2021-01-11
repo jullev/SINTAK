@@ -27,18 +27,13 @@
 							<td><?php echo $i->NIM ?></td>
 							<td><?php echo $i->NAMA ?></td>
 							<td><?php echo $i->Judul_TA ?></td>
-							<td><?php echo $i->Tanggal . ' ' . $i->jam; ?></td>
+							<td><?php echo date('d-m-Y', strtotime($i->Tanggal)) . ' ' . date('H:i', strtotime($i->jam)); ?></td>
 							<td><?php echo $i->Nilai_pembimbing ?></td>
-							<td><?php echo $i->Nilai_penelis ?></td>
-							<td class="text-center">
-								<div class="dropdown">
-									<button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										Option
-									</button>
-									<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-										<a href="" class="edit-jadwal-seminar dropdown-item" data-id="<?php echo $i->id_seminar ?>">Edit</a>
-									</div>
-								</div>
+							<td><?php echo $i->Nilai_panelis ?></td>
+							<td width='13%'>
+								<?php if(strtotime($i->Tanggal)>=strtotime(date('Y-m-d'))){?>
+								<a href="" class="edit-jadwal-seminar btn btn-default" data-id="<?php echo $i->id_seminar ?>"><span class="fa fa-edit"></span> Penilaian</a>
+								<?php } else{ echo '-'; } ?>
 							</td>
 						</tr>
 					<?php } ?>

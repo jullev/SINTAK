@@ -24,16 +24,9 @@
                             <td><?php echo $no++; ?></td>
                             <td><?php echo $i->Judul_TA ?></td>
                             <td><?php echo $i->revisi ?></td>
-                            <td><?php echo $i->status_revisi ?></td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Option
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <a href="" class="edit-seminar dropdown-item" data-id="<?php echo $i->id_seminar ?>">Edit</a>
-                                    </div>
-                                </div>
+                            <td><?php echo $i->status_revisi=='' ? 'Belum Revisi' : ucwords($i->status_revisi) ?></td>
+                            <td>
+                                <a href="" class="edit-seminar btn btn-default" data-id="<?php echo $i->id_seminar ?>"><span class="fa fa-upload"></span> Upload Revisi</a>
                             </td>
                         </tr>
                     <?php
