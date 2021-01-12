@@ -98,10 +98,12 @@ class Seminar extends CI_Controller
 		$this->form_validation->set_rules($config);
 		if ($this->form_validation->run() == TRUE) { //Jika validasi Form Berhasil
 			$data = array(
-				'id_TA' => $this->input->post('Judul_TA')
+				'id_TA' => $this->input->post('Judul_TA'),
+				'status_revisi' => '',
 			);
 			if ($this->Seminar_model->save($data)) {
 				//Flash Message Sukses
+				$this->common->update('tugas_akhir',['id_status' => 5],['id' => $data['id_TA']]);
 				$this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pengajuan Seminar Berhasil</div>");
 			} else {
@@ -155,6 +157,8 @@ class Seminar extends CI_Controller
 				$getIdTA = $this->common->getData('id_TA','td_seminar','',['id_seminar' => $id],'')->result_array()[0];
 				$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
 				if($chatId!=0 && $sendTele){
+					$this->common->update('tugas_akhir',['id_status' => 6],['id' => $getIdTA['id_TA']]);
+
 					$getRuangan = $this->common->getData('Nama_ruangan','ruangan','',['idRuangan' => $_POST['idruangan']],'')->result_array();
 					$send = urlencode("<b>Jadwal Seminar</b>\n<b>Tanggal :</b> ".date('d-m-Y',$_POST['Tanggal'])."\n<b>Jam :</b> ".date('H:i', $_POST['jam'])." WIB\n<b>Tempat :</b> ".$getRuangan[0]['Nama_ruangan']);
 					sendTele($chatId,$send);

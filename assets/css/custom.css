@@ -281,6 +281,11 @@ label {
 	font-weight: 900;	
 	
 }
+.sidebar .nav-item .nav-link span.badge{
+	font-size : 12px !important;
+	font-weight: bold;
+	padding: .15em .5em;
+}
 .badge-yellow{
 	background: #ffc107;
 	color : white;
@@ -328,6 +333,9 @@ label {
 }
 .info-text-page a:hover {
 	color: #42a5f5;
+}
+.color-white {
+	color: white !important;
 }
 .color-green {
 	color: #0f6848;

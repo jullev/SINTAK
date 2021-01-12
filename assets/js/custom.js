@@ -355,7 +355,7 @@ $(document).ready(function() {
 		var submit = $(this).data('submit')
 		swal(
 			{
-				title: "Data Akan Dihapus",
+				title: "Apakah anda yakin?",
 				text: text,
 				type: "warning",
 				showCancelButton: true,

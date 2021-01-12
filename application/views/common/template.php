@@ -105,7 +105,18 @@ if (empty($_SESSION['id_login'])) {
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "bimbingan/" ?>">
 							<i class="fas fa-fw fa-chalkboard-teacher"></i>
-							<span><?php echo isDospem() ? 'Bimbingan Baru' : 'Bimbingan' ?></span></a>
+							<span>
+							<?php 
+								if(isDospem()){
+									echo "Bimbingan Baru ";
+									$bimbinganBaru = $this->common->getData('id_bimbingan','td_bimbingan b',['tugas_akhir ta','b.Tugas_akhir_id = ta.id'],['revisi' => NULL,'ta.Dosen_NIP' => $_SESSION['id_login']],'')->num_rows();
+									echo $bimbinganBaru!=0 ? "<span class='badge badge-yellow color-white'>$bimbinganBaru</span>" : "";
+								}
+								else{
+									echo "Bimbingan";
+								}
+							?>
+							</span></a>
 						<!--- 
               1. Jika mahasiswa tampilkan daftar riwayat bimbingan
               2. Jika dosen pembimbing, munculkan list submit bimbingan, order by id  desc

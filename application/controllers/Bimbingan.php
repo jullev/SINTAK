@@ -29,17 +29,12 @@ class Bimbingan extends CI_controller
             $param['data_bimbingan'] = $this->common->getData('b.*','td_bimbingan b',['tugas_akhir ta','b.Tugas_akhir_id = ta.id'],['ta.Mahasiswa_NIM' => $_SESSION['id_login']],['id_bimbingan','desc'])->result();
             $this->template->load("common/template", "pages/Bimbingan/mahasiswa_bimbingan", $param);
         } 
+        else if(isDospem()){
+            $param['bimbingan'] = $this->common->getData('m.NAMA,m.NIM,b.id_bimbingan,Tanggal_bimbingan,b.revisi,b.Deskripsi,Data_dukung,Tanggal_bimbingan','td_bimbingan b',['tugas_akhir ta','b.Tugas_akhir_id = ta.id','mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],['Dosen_NIP' => $_SESSION['id_login'],'revisi' => NULL],'')->result();
+            $this->template->load("common/template", "pages/bimbingan/bimbingan", $param);  
+        }
         else{
-            if (isDospem()) {
-                $filter = ['Dosen_NIP' => $_SESSION['id_login']];
-            } else {
-                $filter = ['Prodi_idProdi' => $_SESSION['id_prodi']];
-            }
-            $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
-/*             $param['Topik'] = $this->Topik_model->getAll()->result();
-            $param['dosen'] = $this->Dosen_model->getAll()->result();
-            $param['status'] = $this->Status_model->getAllDataForTugasAkhir()->result();
- */            $this->template->load("common/template", "pages/bimbingan/bimbingan", $param);  
+            show_404();
         }
     }
 
@@ -130,8 +125,13 @@ class Bimbingan extends CI_controller
                     //Flash Message Sukses
                     $this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Pencatatan Bimbingan Berhasil</b></div>");
-                    $getData = $this->common->getData('d.telegram_id,m.NAMA,Judul_TA','tugas_akhir ta',['dosen d','ta.Dosen_NIP = d.NIP','mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],['ta.id' => $TA_id],'')->result_array()[0];
+                    $getData = $this->common->getData('d.telegram_id,m.NAMA,Judul_TA,ta.id_status','tugas_akhir ta',['dosen d','ta.Dosen_NIP = d.NIP','mahasiswa m','ta.Mahasiswa_NIM = m.NIM'],['ta.id' => $TA_id],'')->result_array()[0];
                     $countBimbingan = $this->common->getData('id_bimbingan','td_bimbingan','',['Tugas_akhir_id' => $TA_id],'')->num_rows();
+                    if($countBimbingan==1){
+                        $this->common->update('tugas_akhir',['id_status' => 4],['id' => $TA_id]);
+                    } else if($getData['id_status']==6){
+                        $this->common->update('tugas_akhir',['id_status' => 7],['id' => $TA_id]);
+                    }
                     $chatId = $getData['telegram_id'];
                     if($chatId!=0){
                         $textCount = $countBimbingan==1 ? 'pertama' : 'ke-'.$countBimbingan;
@@ -308,14 +308,44 @@ class Bimbingan extends CI_controller
             if ($this->Bimbingan_model->delete($id)) {
                 //Flash Message Sukses
                 $this->session->set_flashdata("delete_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Bimbingan Berhasil Dihapus</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Bimbingan Berhasil Dihapus</b></div>");
             } else {
                 //Flash Message Gagal
                 $this->session->set_flashdata("delete_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Bimbingan Gagal Dihapus </div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Bimbingan Gagal Dihapus</b> </div>");
             }
             redirect(base_url() . '/bimbingan/TugasAkhir/' . $TA_id);
         } else {
+            show_404();
+        }
+    }
+    public function acc($id='')
+    {
+        if(isDospem()){
+            $cekIdBimbingan = $this->Bimbingan_model->getById($id)->num_rows();
+            if($cekIdBimbingan==1){
+                if($this->common->update('td_bimbingan',['revisi' => '-'],['id_bimbingan' => $id])){
+                    $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Berhasil ACC Revisi</b></div>");
+
+                    $getIdTA = $this->common->getData('Tugas_akhir_id','td_bimbingan','',['id_bimbingan' => $id],'')->result_array()[0];
+                    $chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['Tugas_akhir_id']],true);
+                    if($chatId!=0){
+                        $send = urlencode("<b>Bimbingan telah di ACC</b>\n");
+                        sendTele($chatId,$send);
+                    }
+                }
+                else{
+                    $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Gagal ACC Revisi</b></div>");
+                }
+               echo "<script>window.history.back()</script>";
+            }
+            else{
+                show_404();
+            }
+        }
+        else{
             show_404();
         }
     }
