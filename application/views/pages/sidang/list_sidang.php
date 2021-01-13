@@ -4,9 +4,6 @@
     echo $this->session->flashdata('update_validation');
     echo $this->session->flashdata('delete_validation');
     ?>
-    1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
-    2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
-    3. Jika koordinator TA, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan anggota.
     <div class="table-responsive">
       <table class="table table-striped table-hover table-bordered datatable table-custom">
         <thead>
@@ -85,15 +82,15 @@
             <?php
             if ($_SESSION['global_role'] == "Admin Prodi") {
             ?>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label for="">Tanggal</label>
                 <input type="date" name="Tanggal" id="Tanggal" class="form-control">
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label for="">Jam</label>
                 <input type="time" name="jam" id="jam" class="form-control">
               </div>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label for="">Ruangan</label>
                 <select name="idruangan" id="idruangan" class="form-control select2">
                   <option value="">--Pilih--</option>
@@ -108,7 +105,7 @@
             <?php
             } elseif ($_SESSION['global_role'] == "Koordinator TA") {
             ?>
-              <div class="col-md-12">
+              <div class="col-md-12 mb-3">
                 <label for="">Anggota</label>
                 <select name="NIP_Anggota" id="NIP_Anggota" class="form-control select2">
                   <option value="">--Pilih--</option>
@@ -127,8 +124,6 @@
           <!-- <div class="row mt-1">
 
 					</div> -->
-          <br>
-          <br>
           <?php
           $this->load->view("common/btn")
           ?>

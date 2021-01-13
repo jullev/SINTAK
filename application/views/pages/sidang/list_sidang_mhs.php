@@ -1,55 +1,69 @@
 <div class="card shadow py-2">
 	<div class="card-body">
-		<?php
+	<?php 
 		echo $this->session->flashdata('input_validation');
-		if (count($data_sidang) == 0) {
-		?>
-			1. sebelum ajukan seminar sudah bimbingan minimal 6x
-			<div class="alert alert-danger custom-alert">
-				<span class="fa fa-exclamation-triangle sticky"></span>
-				<h1>Belum ACC Sidang</h1>
+
+		if($bimbingan[0]['ttl']<6){
+	?>
+		<div class="alert alert-danger custom-alert">
+			<span class="fa fa-exclamation-triangle sticky"></span>
+			<b>Belum Bisa Mengajukan Sidang</b>
+			<br>
+			Note: Dapat mengajukan sidang setelah bimbingan minimal 6x.
+		</div>
+	<?php
+		}
+		else{
+			$sidang = $this->common->getData('Tanggal,NIP_Anggota,jam,idRuangan','td_sidang','',['id_TA' => $bimbingan[0]['id']],'')->result_array();
+			if(count($sidang)==0){
+	?>
+			<div class="alert alert-info custom-alert">
+				<span class="fab fa-fw fa-slideshare sticky"></span>
+				<b>Kamu Bisa Mengajukan Sidang Sekarang!</b>
+				<p class="mt-1">
+				Sudah bimbingan sebanyak <?= $bimbingan[0]['ttl'] ?>x
+				</p>
+				<a href="<?php echo base_url() . 'sidang/ajukanSidang' ?>" class="btn btn-default confirm-alert" data-alert="Dengan menekan tombol 'Ajukan', kamu setuju akan mengajukan sidang." data-submit='Ajukan'>Ajukan Sidang</a>
 			</div>
-			<div class="col-md-12">
-				<div class="card-body py-2">
-					<div class="row">
-						<div class="col-md-12">
-							<span class="fas fa-file-alt sticky">
-								Deskripsi
-							</span>
-							<h2 class="color-primary font-weight-bold">Belum ACC Sidang</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<?php
-			$getId = $this->common->getData("ta.Mahasiswa_NIM, tb.Tugas_akhir_id", "td_bimbingan tb", ['tugas_akhir ta', 'tb.Tugas_akhir_id=ta.id'], ["ta.Mahasiswa_NIM" => $_SESSION['id_login']], "")->result();
-			$hitungBimbingan = count($getId);
-			if ($hitungBimbingan >= 6) {
-			?>
-				<a href="<?php echo base_url() . 'sidang/ajukanSidang' ?>" class="btn btn-primary"><span class="fas fa-file-upload"> Ajukan sidang</span></a>
-			<?php
+	<?php
 			}
-		} else {
-			?>
-			<div class="alert alert-success custom-alert">
-				<span class="fas fa-laptop-code sticky"></span>
-				<h2 class="font-weight-bold"><?= $data_sidang[0]["Judul_TA"] ?></h2>
-			</div>
-			<div class="col-md-12">
-				<div class="card-body py-2">
-					<div class="row">
-						<div class="col-md-12">
-							<span class="fas fa-file-alt sticky">
-								Deskripsi
-							</span>
-							<h2 class="color-primary font-weight-bold"><?= $data_sidang[0]["Deskripsi"] ?></h2>
-						</div>
+			else{
+				if($sidang[0]['Tanggal']==NULL && $sidang[0]['NIP_Anggota']==NULL){
+					?>
+					<div class="alert alert-primary custom-alert">
+						<span class="fa fa-fw fa-clock sticky"></span>
+						<b>Menunggu Jadwal</b>
+						<p class="mt-1">
+						Pengajuan sidang kamu sedang dalam proses penentuan tanggal dan tempat.
+						<br> Lengkapi berkas-berkas sidang dengan cara Download di link dibawah.
+						</p>
+					<a href="#" class="btn btn-default confirm-alert" >Download Berkas Sidang</a>
 					</div>
-				</div>
-			</div>
-			<hr>
-			<a href="" class="btn btn-success"><span class="fas fa-file-download"> Unduh Berkas Sidang</span></a>
-		<?php } ?>
+					<?php
+				}
+				else{
+					$getRuangan = $this->common->getData('Nama_ruangan','ruangan','',['idRuangan' => $sidang[0]['idruangan']],'')->result_array();
+					?>
+					<div class="alert alert-success custom-alert">
+						<span class="fa fa-fw fa-check-circle sticky"></span>
+						<b>Sidang Sudah Terjadwal</b>
+						<p class="mt-2 mb-2">
+						Sidang kamu sudah terjadwal dengan jadwal sebagai berikut:
+						</p>
+						<p class="mb-2">
+							<b>Tanggal : </b> <?php echo date('d-m-Y', strtotime($sidang[0]['Tanggal'])) ?>
+						</p>
+						<p class="mb-2">
+							<b>Jam : </b> <?php echo date('H:i', strtotime($sidang[0]['jam'])) ?> WIB
+						</p>
+						<p class="mb-2">
+							<b>Ruangan : </b> <?php echo $getRuangan[0]['Nama_ruangan'] ?>
+						</p>
+					</div>
+				<?php
+				}
+			}
+		}
+	?>
 	</div>
 </div>

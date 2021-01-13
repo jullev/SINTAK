@@ -47,7 +47,7 @@ class Sidang_model extends CI_Model
 
     function getById($id)
     {
-        $this->db->select('id_sidang,Tanggal,jam,NIP_Anggota,revisi,id_status,idRuangan,Nilai_anggota,Nilai_panelis,Nilai_bimbingan');
+        $this->db->select('id_sidang,Tanggal,jam,NIP_Anggota,id_status,idRuangan,Nilai_anggota,Nilai_panelis,Nilai_bimbingan');
         return $this->db->get_where($this->_table, ["id_sidang" => $id])->result_array();
     }
 

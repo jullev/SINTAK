@@ -1,6 +1,8 @@
 <div class="card shadow py-2">
 	<div class="card-body">
 	<?php 
+		echo $this->session->flashdata('input_validation');
+
 		if($bimbingan[0]['ttl']<3){
 	?>
 		<div class="alert alert-danger custom-alert">
@@ -12,7 +14,7 @@
 	<?php
 		}
 		else{
-			$seminar = $this->common->getData('Tanggal,NIP_Panelis,jam,Nama_ruangan','td_seminar s',['ruangan r','s.idruangan = r.idRuangan'],['id_TA' => $bimbingan[0]['id']],'')->result_array();
+			$seminar = $this->common->getData('Tanggal,NIP_Panelis,jam,idruangan','td_seminar','',['id_TA' => $bimbingan[0]['id']],'')->result_array();
 			if(count($seminar)==0){
 	?>
 			<div class="alert alert-info custom-alert">
@@ -40,6 +42,8 @@
 					<?php
 				}
 				else{
+					$getRuangan = $this->common->getData('Nama_ruangan','ruangan','',['idRuangan' => $seminar[0]['idruangan']],'')->result_array();
+
 					?>
 					<div class="alert alert-success custom-alert">
 						<span class="fa fa-fw fa-check-circle sticky"></span>
@@ -54,7 +58,7 @@
 							<b>Jam : </b> <?php echo date('H:i', strtotime($seminar[0]['jam'])) ?> WIB
 						</p>
 						<p class="mb-2">
-							<b>Ruangan : </b> <?php echo $seminar[0]['Nama_ruangan'] ?>
+							<b>Ruangan : </b> <?php echo $getRuangan[0]['Nama_ruangan'] ?>
 						</p>
 					</div>
 				<?php

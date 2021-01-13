@@ -44,11 +44,17 @@ class Seminar extends CI_Controller
 		//
 		$param = $this->common->getData("ta.id", "tugas_akhir ta", ["mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login']], "")->result_array();
 		// print_r($param[0]['id']);
-		$this->common->insert("td_seminar", ['id_TA' => $param[0]['id'],'status_revisi' => '']);
-		//Flash Message Sukses
-		$this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
-		        <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pengajuan Seminar Berhasil</div>");
-		redirect('seminar');
+		$insert = $this->common->insert("td_seminar", ['id_TA' => $param[0]['id'],'status_revisi' => '']);
+		if($insert){
+			$this->common->update('tugas_akhir',['id_status' => 5],['id' => $param[0]['id']]);
+			//Flash Message Sukses
+			$this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
+					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pengajuan Seminar Berhasil</div>");
+			redirect('seminar');
+		}
+		else{
+			show_404();
+		}
 	}
 
 	function rekap_seminar()
@@ -160,7 +166,7 @@ class Seminar extends CI_Controller
 					$this->common->update('tugas_akhir',['id_status' => 6],['id' => $getIdTA['id_TA']]);
 
 					$getRuangan = $this->common->getData('Nama_ruangan','ruangan','',['idRuangan' => $_POST['idruangan']],'')->result_array();
-					$send = urlencode("<b>Jadwal Seminar</b>\n<b>Tanggal :</b> ".date('d-m-Y',$_POST['Tanggal'])."\n<b>Jam :</b> ".date('H:i', $_POST['jam'])." WIB\n<b>Tempat :</b> ".$getRuangan[0]['Nama_ruangan']);
+					$send = urlencode("<b>Jadwal Seminar</b>\n<b>Tanggal :</b> ".date('d-m-Y',strtotime($_POST['Tanggal']))."\n<b>Jam :</b> ".date('H:i', strtotime($_POST['jam']))." WIB\n<b>Tempat :</b> ".$getRuangan[0]['Nama_ruangan']);
 					sendTele($chatId,$send);
 				}
 			} else {
