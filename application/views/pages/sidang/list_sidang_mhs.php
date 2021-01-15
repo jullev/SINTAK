@@ -14,7 +14,7 @@
 	<?php
 		}
 		else{
-			$sidang = $this->common->getData('Tanggal,NIP_Anggota,jam,idRuangan','td_sidang','',['id_TA' => $bimbingan[0]['id']],'')->result_array();
+			$sidang = $this->common->getData('Tanggal,NIP_Anggota,jam,idruangan','td_sidang','',['id_TA' => $bimbingan[0]['id']],'')->result_array();
 			if(count($sidang)==0){
 	?>
 			<div class="alert alert-info custom-alert">

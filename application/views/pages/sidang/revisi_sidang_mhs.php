@@ -23,16 +23,13 @@
                             <td><?php echo $no++; ?></td>
                             <td><?php echo $i->Judul_TA ?></td>
                             <td><?php echo $i->revisi ?></td>
-                            <td><?php echo $i->status_revisi ?></td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Option
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <a href="" class="edit-sidang dropdown-item" data-id="<?php echo $i->id_sidang ?>">Edit</a>
-                                    </div>
-                                </div>
+                            <td><?php echo ucwords($i->status_revisi) ?></td>
+                            <td width='10%'>
+                            <?php 
+                                if($i->status_revisi!='acc'){
+                            ?>
+                                <a href="" class="edit-sidang btn btn-default" data-id="<?php echo $i->id_sidang ?>"><span class="fa fa-edit"></span> Edit</a>
+                            <?php } ?>
                             </td>
                         </tr>
                     <?php

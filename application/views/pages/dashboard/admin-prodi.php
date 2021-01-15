@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="">Lihat Detail</a>
+                <a href="<?php echo base_url()."seminar" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="">Lihat Detail</a>
+                <a href="<?php echo base_url()."sidang" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -62,19 +62,19 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="<?php echo base_url()."seminar/rekap_seminar" ?>">
                             <span class="fa fa-file-excel color-green fa-4x mb-2"></span>
                             Seminar
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="<?php echo base_url()."sidang/rekap_sidang" ?>">
                             <span class="fa fa-file-excel color-green fa-4x mb-2"></span>
                             Sidang
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="<?php echo base_url()."sidang/rekap_nilai" ?>">
                             <span class="fa fa-file-excel color-green fa-4x mb-2"></span>
                             Nilai
                         </a>

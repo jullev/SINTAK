@@ -61,17 +61,19 @@ if (empty($_SESSION['id_login'])) {
 					</li>
 				<?php } ?>
 				<?php
-				if (isDospem() || $_SESSION['global_role'] != 'Mahasiswa') {
+				if (isDospem() || $_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role']=='Koordinator TA' || $_SESSION['global_role']=='Admin Prodi' || $_SESSION['global_role']=='KPS') {
 				?>
 					<li class="nav-item">
 						<?php
 						if ($_SESSION['global_role'] == 'Mahasiswa') {
+							$cekAcc = $this->common->getData("id",'tugas_akhir','',['Mahasiswa_NIM' => $_SESSION['id_login'],'tgl_ACC !=' => NULL],'')->num_rows();
+							if($cekAcc==0){
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/add" ?>">
 								<i class="fas fa-fw fa-envelope-open-text"></i>
 								<span>Pengajuan Judul</span></a>
 						<?php
-						} else {
+						}} else {
 						?>
 							<a class="nav-link" href="<?php echo base_url() . "pengajuan-judul/" ?>">
 								<i class="fas fa-fw  fa-envelope-open-text"></i>
@@ -86,7 +88,7 @@ if (empty($_SESSION['id_login'])) {
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['global_role'] == 'Mahasiswa' || isDospem()) {
+				if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Koordinator TA' || isDospem()) {
 				?>
 					<li class="nav-item">
 						<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir" ?>">
@@ -109,9 +111,9 @@ if (empty($_SESSION['id_login'])) {
 							<?php 
 								if(isDospem()){
 									echo "Bimbingan Baru ";
-									$bimbinganBaru = $this->common->getData('id_bimbingan','td_bimbingan b',['tugas_akhir ta','b.Tugas_akhir_id = ta.id'],['revisi' => NULL,'ta.Dosen_NIP' => $_SESSION['id_login']],'')->num_rows();
+/* 									$bimbinganBaru = $this->common->getData('id_bimbingan','td_bimbingan b',['tugas_akhir ta','b.Tugas_akhir_id = ta.id'],['revisi' => NULL,'ta.Dosen_NIP' => $_SESSION['id_login']],'')->num_rows();
 									echo $bimbinganBaru!=0 ? "<span class='badge badge-yellow color-white'>$bimbinganBaru</span>" : "";
-								}
+ */								}
 								else{
 									echo "Bimbingan";
 								}
@@ -190,7 +192,7 @@ if (empty($_SESSION['id_login'])) {
 						<div id="collapseSeven" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
 								<?php
-								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role'] == 'Koordinator TA') {
+								if ($_SESSION['global_role'] == 'Mahasiswa') {
 								?>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Pengajuan Sidang</a>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
@@ -198,11 +200,10 @@ if (empty($_SESSION['id_login'])) {
                 1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
                 2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
                 3. Jika koordinator TA, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan anggota.
-              -->
+			-->
+								<?php } else{ if($_SESSION['global_role']=='Koordinator TA' || $_SESSION['global_role']=='Admin Prodi'){?>
+									<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Pengajuan Sidang</a>
 								<?php } ?>
-								<?php
-								if ($_SESSION['global_role'] != 'Mahasiswa') {
-								?>
 									<!-- <a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a> -->
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPembimbing" ?>">Jadwal Sidang Pembimbing</a>
 									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
@@ -211,20 +212,6 @@ if (empty($_SESSION['id_login'])) {
 									<!-- 
               Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris panelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
             -->
-								<?php } ?>
-								<?php
-								if (isDospem()) {
-								?>
-									<!-- <a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPembimbing" ?>">Jadwal Sidang Pembimbing</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangAnggota" ?>">Jadwal Sidang Anggota</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a> -->
-									<!-- 
-                1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
-                2. Jika panelis, bisa melihat dan mengACC revisi
-                3. Jika dosen pembimbing, bisa melihat revisi
-              -->
 								<?php } ?>
 							</div>
 						</div>
@@ -240,7 +227,7 @@ if (empty($_SESSION['id_login'])) {
 						</a>
 						<div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
-								<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Rekap Nilai</a>
+								<a class="collapse-item" href="<?php echo base_url() . "Sidang/rekap_nilai" ?>">Rekap Nilai</a>
 								<a class="collapse-item" href="<?php echo base_url() . "Sidang/rekap_sidang" ?>">Rekap Sidang</a>
 								<a class="collapse-item" href="<?php echo base_url() . "Seminar/rekap_seminar" ?>">Rekap Seminar</a>
 							</div>
@@ -293,18 +280,6 @@ if (empty($_SESSION['id_login'])) {
 						<i class="fa fa-bars"></i>
 					</button>
 
-					<!-- Topbar Search -->
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-						<div class="input-group">
-							<input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-primary" type="button">
-									<i class="fas fa-search fa-sm"></i>
-								</button>
-							</div>
-						</div>
-					</form>
-
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
 
@@ -328,57 +303,6 @@ if (empty($_SESSION['id_login'])) {
 							</div>
 						</li>
 
-						<!-- Nav Item - Alerts -->
-						<li class="nav-item dropdown no-arrow mx-1">
-							<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fas fa-bell fa-fw"></i>
-								<!-- Counter - Alerts -->
-								<span class="badge badge-danger badge-counter">3+</span>
-							</a>
-							<!-- Dropdown - Alerts -->
-							<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
-								<h6 class="dropdown-header">
-									Alerts Center
-								</h6>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-primary">
-											<i class="fas fa-file-alt text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 12, 2019</div>
-										<span class="font-weight-bold">A new monthly report is ready to download!</span>
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-success">
-											<i class="fas fa-donate text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 7, 2019</div>
-										$290.29 has been deposited into your account!
-									</div>
-								</a>
-								<a class="dropdown-item d-flex align-items-center" href="#">
-									<div class="mr-3">
-										<div class="icon-circle bg-warning">
-											<i class="fas fa-exclamation-triangle text-white"></i>
-										</div>
-									</div>
-									<div>
-										<div class="small text-gray-500">December 2, 2019</div>
-										Spending Alert: We've noticed unusually high spending for your account.
-									</div>
-								</a>
-								<a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-							</div>
-						</li>
-
-						<!-- Nav Item - Messages -->
-
 						<div class="topbar-divider d-none d-sm-block"></div>
 
 						<!-- Nav Item - User Information -->
@@ -393,15 +317,6 @@ if (empty($_SESSION['id_login'])) {
 									<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
 									Profile
 								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-									Settings
-								</a>
-								<a class="dropdown-item" href="#">
-									<i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-									Activity Log
-								</a>
-								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout

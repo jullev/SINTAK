@@ -178,7 +178,7 @@ class Sidang extends CI_Controller
     {
         $param['pageInfo'] = "Jadwal Sidang";
         $param['jadwal_sidang'] = $this->Sidang_model->getFilterDosenSidang($_SESSION['id_login']);
-        $this->template->load("common/template", "pages/Sidang/jadwal_sidang_panelis", $param);
+       $this->template->load("common/template", "pages/Sidang/jadwal_sidang_panelis", $param);
     }
 
     function jadwalSidangPembimbing()
@@ -189,14 +189,14 @@ class Sidang extends CI_Controller
     }
     function jadwalSidangAnggota()
     {
-        $param['pageInfo'] = "Jadwal Sidang";
-        $param['jadwal_sidang'] = $this->Sidang_model->getFIlterDosenAnggota($_SESSION['id_login']);
-        // if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-        //     $param['data_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, d.NAMA", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], "", "")->result();
-        // }
-        // print_r($param);
-        // return;
-        $this->template->load("common/template", "pages/Sidang/jadwal_sidang_anggota", $param);
+        if($_SESSION['global_role']!='Mahasiswa'){
+            $param['pageInfo'] = "Jadwal Sidang";
+            $param['jadwal_sidang'] = $this->Sidang_model->getFIlterDosenAnggota($_SESSION['id_login']);
+            $this->template->load("common/template", "pages/Sidang/jadwal_sidang_anggota", $param);
+        }
+        else{
+            show_404();
+        }
     }
 
     function editJadwal()
@@ -209,22 +209,32 @@ class Sidang extends CI_Controller
     function updateJadwalPanelis()
     {
         $id = $this->input->post('id_');
-        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
-        if ($cekId == 1) {
-            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-                $data = array(
-                    'Nilai_panelis' => $this->input->post('Nilai_panelis'),
-                    'revisi' => $this->input->post('revisi'),
-                );
-            }
+		$sidang = $this->common->getData('Nilai_anggota,Nilai_sidang,Nilai_bimbingan','td_sidang','',["id_sidang" => $id],'')->result_array();
+        
+        if (count($sidang) == 1 && isDospem()) {
+            $data = array(
+                'Nilai_panelis' => $this->input->post('Nilai_panelis'),
+                'revisi' => $this->input->post('revisi'),
+            );
             if ($this->Sidang_model->update($id, $data)) {
+				if($sidang[0]['Nilai_anggota']!=0 && $sidang[0]['Nilai_sidang']!=0 && $sidang[0]['Nilai_bimbingan']!=0){
+                    $this->common->update('tugas_akhir',['id_status' => 10],['id_sidang' => $id]);
+
+					$getIdTA = $this->common->getData('id_TA','td_sidang','',['id_sidang' => $id],'')->result_array()[0];
+					$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+					if($chatId!=0){
+						$send = urlencode("<b>Nilai Sidang</b>\n<b>Nilai Sidang :</b> ".$sidang[0]['Nilai_sidang']."\n<b>Nilai Bimbingan :</b> ".$sidang[0]['Nilai_bimbingan']."\n<b>Nilai Anggota :</b> ".$sidang[0]['Nilai_anggota']."\n<b>Nilai Panelis :</b> ".$_POST['Nilai_panelis']."\n<b>Revisi :</b> ".$_POST['revisi']);
+						sendTele($chatId,$send);
+					}
+				}
+
                 //Flash Message Sukses
                 $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Sidang Berhasil Diupdate</b></div>");
             } else {
                 //Flash Message Gagal
                 $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Sidang Gagal Diupdate</b></div>");
             }
             redirect(base_url() . 'Sidang/jadwalSidangPanelis');
         } else {
@@ -235,20 +245,30 @@ class Sidang extends CI_Controller
     function updateJadwalAnggota()
     {
         $id = $this->input->post('id_');
-        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
-        if ($cekId == 1) {
-            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-                $data = array(
-                    'Nilai_Anggota' => $this->input->post('Nilai_Anggota'),
-                );
-            }
+		$sidang = $this->common->getData('Nilai_panelis,Nilai_sidang,Nilai_bimbingan,revisi','td_sidang','',["id_sidang" => $id],'')->result_array();
+        
+        if (count($sidang) == 1 && isDospem()) {
+            $data = array(
+                'Nilai_anggota' => $this->input->post('Nilai_Anggota'),
+            );
+            
             if ($this->Sidang_model->update($id, $data)) {
+                if($sidang[0]['Nilai_panelis']!=0 && $sidang[0]['Nilai_sidang']!=0 && $sidang[0]['Nilai_bimbingan']!=0){
+                    $this->common->update('tugas_akhir',['id_status' => 10],['id_sidang' => $id]);
+
+                    $getIdTA = $this->common->getData('id_TA','td_sidang','',['id_sidang' => $id],'')->result_array()[0];
+                    $chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+                    if($chatId!=0){
+                        $send = urlencode("<b>Nilai Sidang</b>\n<b>Nilai Sidang :</b> ".$sidang[0]['Nilai_sidang']."\n<b>Nilai Bimbingan :</b> ".$sidang[0]['Nilai_bimbingan']."\n<b>Nilai Anggota :</b> ".$_POST['Nilai_Anggota']."\n<b>Nilai Panelis :</b> ".$sidang[0]['Nilai_panelis']."\n<b>Revisi :</b> ".$sidang[0]['revisi']);
+                        sendTele($chatId,$send);
+                    }
+                }
                 //Flash Message Sukses
-                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
             } else {
                 //Flash Message Gagal
-                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
             redirect(base_url() . 'Sidang/jadwalSidangAnggota');
@@ -261,23 +281,31 @@ class Sidang extends CI_Controller
     {
         $id = $this->input->post('id_');
         $nilai = $this->input->post('Nilai_pembimbing');
-        $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
-        if ($cekId == 1) {
-            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-                $data = array(
-                    // 'Nilai_pembimbing' => $nilai,
-                    'Nilai_bimbingan' => $this->input->post('Nilai_bimbingan'),
-                    'Nilai_sidang' => $this->input->post('Nilai_sidang'),
-                );
-            }
+		$sidang = $this->common->getData('Nilai_panelis,Nilai_anggota,revisi','td_sidang','',["id_sidang" => $id],'')->result_array();
+        if (count($sidang) == 1 && isDospem()) {
+            $data = array(
+                // 'Nilai_pembimbing' => $nilai,
+                'Nilai_bimbingan' => $this->input->post('Nilai_bimbingan'),
+                'Nilai_sidang' => $this->input->post('Nilai_sidang'),
+            );
             $input = $this->Sidang_model->update($id, $data);
             if ($input) {
+                if($sidang[0]['Nilai_panelis']!=0 && $sidang[0]['Nilai_anggota']!=0){
+                    $this->common->update('tugas_akhir',['id_status' => 10],['id_sidang' => $id]);
+                    $getIdTA = $this->common->getData('id_TA','td_sidang','',['id_sidang' => $id],'')->result_array()[0];
+                    $chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+                    if($chatId!=0){
+                        $send = urlencode("<b>Nilai Sidang</b>\n<b>Nilai Sidang :</b> ".$_POST['Nilai_sidang']."\n<b>Nilai Bimbingan :</b> ".$_POST['Nilai_bimbingan']."\n<b>Nilai Anggota :</b> ".$sidang[0]['Nilai_anggota']."\n<b>Nilai Panelis :</b> ".$sidang[0]['Nilai_panelis']."\n<b>Revisi :</b> ".$sidang[0]['revisi']);
+                        sendTele($chatId,$send);
+                    }
+                }
+
                 //Flash Message Sukses
-                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-success'>
 				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
             } else {
                 //Flash Message Gagal
-                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
             redirect(base_url() . 'Sidang/jadwalSidangPembimbing');
@@ -296,7 +324,7 @@ class Sidang extends CI_Controller
                 $data = array(
                     'Tanggal' => $this->input->post('Tanggal'),
                     'jam' => $this->input->post('jam'),
-                    'idRuangan' => $this->input->post('idRuangan'),
+                    'idruangan' => $this->input->post('idruangan'),
                 );
 				if($sidang[0]['NIP_Anggota']!=NULL){
 					$sendTele = true;
@@ -347,9 +375,7 @@ class Sidang extends CI_Controller
             $param['revisi_sidang'] = $this->Sidang_model->getFilterMhs();
             $this->template->load("common/template", "pages/sidang/revisi_sidang_mhs", $param);
         } else {
-            // $param['revisi_sidang'] = $this->common->getData("s.id_sidang, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.lampiran_revisi, s.revisi, s.status_revisi", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], ['s.nip_panelis' => $nip], "")->result();
-            $param['revisi_sidang'] = $this->Sidang_model->getFilterDosenSidang($_SESSION['id_login']);
-            // $this->Sidang_model->getFilterDosenSidang($_SESSION['id_login']);
+            $param['revisi_sidang'] = $this->common->getData("s.id_sidang, m.NIM, m.NAMA as nama_mahasiswa, ta.Mahasiswa_NIM, ta.Judul_TA, s.lampiran_revisi, s.revisi, s.status_revisi, d.NAMA dosen_pembimbing,sem.NIP_Panelis", "td_sidang s", ["tugas_akhir ta", "s.id_TA = ta.id","td_seminar sem","ta.id = sem.id_TA", "mahasiswa m", "ta.Mahasiswa_NIM = m.NIM", "dosen d", "d.NIP = ta.Dosen_NIP"], "sem.NIP_Panelis = '$nip' or ta.Dosen_NIP = '$nip' and s.Nilai_panelis != 0 and s.Nilai_anggota != 0 and s.Nilai_sidang != 0 and s.Nilai_bimbingan != 0 and s.status_revisi != 'acc'", "")->result();
             $this->template->load("common/template", "pages/sidang/revisi_sidang_dsn", $param);
         }
     }
@@ -388,11 +414,11 @@ class Sidang extends CI_Controller
             }
             if ($this->Sidang_model->update($id, $data)) {
                 //Flash Message Sukses
-                $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-success'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
             } else {
                 //Flash Message Gagal
-                $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
             redirect(base_url() . 'Sidang/revisiSidang');
@@ -405,24 +431,34 @@ class Sidang extends CI_Controller
     {
         $id = $this->input->post('id_');
         $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
-        if ($cekId == 1) {
-            if ($_SESSION['global_role'] == "Dosen Pembimbing") {
-                $data = array(
-                    'status_revisi' => $this->input->post('status_revisi'),
-                );
-                if ($this->Sidang_model->update($id, $data)) {
-                    //Flash Message Sukses
-                    $this->session->set_flashdata("update_validation", "<div class='alert alert-success'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
-                } else {
-                    //Flash Message Gagal
-                    $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
-                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
+        if ($cekId == 1 && isDospem()) {
+            $data = array(
+                'status_revisi' => $this->input->post('status_revisi'),
+            );
+            if ($this->Sidang_model->update($id, $data)) {
+                $getIdTA = $this->common->getData('id_TA','td_sidang','',['id_sidang' => $id],'')->result_array()[0];
+                $chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
+                if($chatId!=0){
+                    $send = urlencode("<b>Revisi Sidang</b>\n<b>Status Revisi :</b> ".ucwords($_POST['status_revisi']));
+                    sendTele($chatId,$send);
                 }
-                redirect(base_url() . 'Sidang/revisiSidang');
+
+                if($_POST['status_revisi']=='acc'){
+                    $this->common->update('tugas_akhir',['id_status' => 11],['id_sidang' => $id]);
+                }
+
+                //Flash Message Sukses
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-success'>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Berhasil Diupdate</div>");
             } else {
-                show_404();
+                //Flash Message Gagal
+                $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
+            redirect(base_url() . 'Sidang/revisiSidang');
+        }
+        else {
+            show_404();
         }
     }
 }

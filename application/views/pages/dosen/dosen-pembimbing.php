@@ -55,9 +55,9 @@
                         foreach($data_dosen as $i){
                             $mhsBimbingRows = $this->TugasAkhir_Model->getMhsBimbing($i->NIP,'rows');
                             $mhsBimbing = $this->TugasAkhir_Model->getMhsBimbing($i->NIP);
-                            $panelis = $this->common->getData('',$i->NIP)->num_rows();
-                            $anggota = $this->Seminar_model->seminarNIP('NIP_Anggota',$i->NIP)->num_rows();
-                            $sekretaris = $this->Seminar_model->seminarNIP('NIP_Sekretaris',$i->NIP)->num_rows();
+                            $panelis = $this->Seminar_model->seminarNIP('NIP_Panelis',$i->NIP)->num_rows();
+                            $anggota = $this->Sidang_model->getwhere(['NIP_Anggota',$i->NIP])->num_rows();
+                            $sekretaris = $this->common->getData('id_sidang','td_sidang s',['tugas_akhir ta','s.id_TA = ta.id'],['ta.Dosen_NIP' => $i->NIP],'')->num_rows();
                             ?>
                     <tr>
                         <td><?php echo $no++; ?></td>

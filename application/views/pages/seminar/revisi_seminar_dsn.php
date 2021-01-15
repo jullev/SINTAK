@@ -9,7 +9,10 @@
                 <thead>
                     <tr>
                         <td>#</td>
+                        <td>NIM</td>
+                        <td>Nama Mahasiswa</td>
                         <td>Judul Tugas Akhir</td>
+                        <td>Dosen Pembimbing</td>
                         <td>Catatan Revisi</td>
                         <td>Lampiran Revisi</td>
                         <td>Status Revisi</td>
@@ -23,7 +26,10 @@
                     ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
+                            <td><?php echo $i->NIM ?></td>
+                            <td><?php echo $i->nama_mahasiswa ?></td>
                             <td><?php echo $i->Judul_TA ?></td>
+                            <td><?php echo $i->dosen_pembimbing ?></td>
                             <td><?php echo $i->revisi ?></td>
                             <td>
                                 <a href="<?= assetUrl() . 'berkas/seminar/' . $i->lampiran_revisi; ?>" target="_blank">
@@ -31,15 +37,13 @@
                                 </a>
                             </td>
                             <td><?php echo $i->status_revisi=='' ? 'Belum Revisi' : ucwords($i->status_revisi) ?></td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Option
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <a href="" class="edit-seminar dropdown-item" data-id="<?php echo $i->id_seminar ?>">Edit</a>
-                                    </div>
-                                </div>
+                            <td width="10%">
+                            <?php 
+                                if($i->NIP_Panelis==$_SESSION['id_login']){
+                            ?>
+                                <a href="" class="edit-seminar btn btn-default" data-id="<?php echo $i->id_seminar ?>"><span class="fa fa-edit"></span> Edit</a>
+
+                            <?php } else { echo "-"; } ?>
                             </td>
                         </tr>
                     <?php

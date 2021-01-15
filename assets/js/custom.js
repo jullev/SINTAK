@@ -312,15 +312,19 @@ $(document).ready(function() {
 
 	$(".submitConfirm").submit(function(e) {
 		var id = $(this).attr("id");
+		var info = "Apakah anda yakin untuk memvalidasi tugas akhir ini?"
+		if($(this).data('info')){
+			info = $(this).data('info')
+		}
 		e.preventDefault();
 		swal(
 			{
-				title: "Validasi Judul",
-				text: "Apakah anda yakin untuk memvalidasi tugas akhir ini?",
+				title: "Apakah Anda Yakin?",
+				text: info,
 				type: "warning",
 				showCancelButton: true,
 				confirmButtonColor: "#DD6B55",
-				confirmButtonText: "Perbarui",
+				confirmButtonText: "Yakin",
 				closeOnConfirm: false
 			},
 			function() {

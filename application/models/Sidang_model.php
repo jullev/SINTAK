@@ -15,8 +15,9 @@ class Sidang_model extends CI_Model
 
     function getFilterDosenPembimbing($nip)
     {
+		$now = date('Y-m-d');
         $nip = $_SESSION['id_login'];
-        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE tugas_akhir.Dosen_NIP = '$nip'");
+        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, td_sidang.revisi, td_sidang.lampiran_revisi, td_sidang.status_revisi, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota,anggota.NAMA as dosen_anggota, td_sidang.Nilai_sidang,Nilai_bimbingan FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP JOIN dosen as anggota on td_sidang.NIP_Anggota = anggota.NIP WHERE tugas_akhir.Dosen_NIP = '$nip'  and td_sidang.status_revisi != 'acc' and td_sidang.Tanggal >= '$now' ");
         return $query->result();
     }
 
@@ -33,15 +34,17 @@ class Sidang_model extends CI_Model
 
     function getFIlterDosenAnggota($nip)
     {
+		$now = date('Y-m-d');
         $nip = $_SESSION['id_login'];
-        $query = $this->db->query("SELECT mahasiswa.NIM, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam, td_sidang.id_sidang, td_sidang.NIP_Anggota, td_sidang.Nilai_panelis, td_sidang.Nilai_anggota, td_sidang.Nilai_bimbingan FROM  tugas_akhir JOIN td_sidang ON td_sidang.id_TA = tugas_akhir.id JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM WHERE td_sidang.NIP_Anggota = '$nip'");
+        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, td_sidang.revisi, td_sidang.lampiran_revisi, td_sidang.status_revisi, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota,anggota.NAMA as dosen_anggota, td_sidang.Nilai_anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP JOIN dosen as anggota on td_sidang.NIP_Anggota = anggota.NIP WHERE td_sidang.NIP_Anggota = '$nip'  and td_sidang.status_revisi != 'acc' and td_sidang.Tanggal >= '$now' ");
         return $query->result();
     }
 
     function getFilterDosenSidang($nip)
     {
+		$now = date('Y-m-d');
         $nip = $_SESSION['id_login'];
-        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, td_sidang.revisi, td_sidang.lampiran_revisi, td_sidang.status_revisi, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP WHERE td_seminar.NIP_Panelis = '$nip'");
+        $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, td_sidang.revisi, td_sidang.lampiran_revisi, td_sidang.status_revisi, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota,anggota.NAMA as dosen_anggota, td_sidang.Nilai_panelis FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP JOIN dosen as anggota on td_sidang.NIP_Anggota = anggota.NIP WHERE td_seminar.NIP_Panelis = '$nip'  and td_sidang.status_revisi != 'acc' and td_sidang.Tanggal >= '$now' ");
         return $query->result();
     }
 

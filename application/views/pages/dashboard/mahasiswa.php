@@ -49,7 +49,7 @@
                 </div>
             </div>
             <hr>
-            <a href="">Lihat Detail</a>
+            <a href="<?php echo base_url()."bimbingan" ?>">Lihat Detail</a>
         </div>
     </div>
 </div>

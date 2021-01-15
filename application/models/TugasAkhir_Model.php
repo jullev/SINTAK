@@ -28,6 +28,7 @@ class TugasAkhir_Model extends CI_Model
                 $this->db->where($filter);
             }
         }
+        $this->db->where("tugas_akhir.id_status != 1 and tugas_akhir.id_status != 3 and tugas_akhir.id_status != 11");
         if ($like != "") {
             $this->db->like("LOWER(Judul_TA)", strtolower($like));
             $this->db->or_like("LOWER(topik.topik)", strtolower($like));
@@ -46,7 +47,7 @@ class TugasAkhir_Model extends CI_Model
         $this->db->join('status_ta', 'tugas_akhir.id_status = status_ta.id_status');
         $this->db->join('td_bimbingan', 'tugas_akhir.id = td_bimbingan.Tugas_akhir_id', 'left');
         $this->db->group_by('tugas_akhir.id');
-
+        
         if (is_array($filter)) {
             foreach ($filter as $key => $value) {
                 if ($value != "") {
@@ -57,7 +58,7 @@ class TugasAkhir_Model extends CI_Model
         else{
             $this->db->where($filter);
         }
-        $this->db->where('tgl_ACC', NULL);
+        $this->db->where(['tgl_ACC', NULL,'tugas_akhir.id_status' => 1]);
         $this->db->order_by("id", 'asc');
         return $this->db->get();
     }

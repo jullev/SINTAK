@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="">Lihat Detail</a>
+                <a href="<?php echo base_url()."seminar" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="">Lihat Detail</a>
+                <a href="<?php echo base_url()."sidang" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="">Lihat Detail</a>
+                <a href="<?php echo base_url()."pengajuan-judul" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -66,7 +66,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="">Lihat Detail</a>
+                <a href="<?php echo base_url()."Tugas_akhir" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>    
@@ -83,8 +83,8 @@
                                 <th>#</th>
                                 <th>Topik</th>
                                 <th>Jml Mahasiswa</th>
-                                <th>Opsi</th>
-                            </tr>
+<!--                                 <th>Opsi</th>
+ -->                            </tr>
                         </thead>
                         <tbody>
                             <?php 
@@ -95,7 +95,7 @@
                                     <td><?= $key ?></td>
                                     <td><?= $value['topik'] ?></td>
                                     <td><?= $value['ttl'] ?></td>
-                                    <td><a href="">Detail</a></td>
+                                    <!-- <td><a href="">Detail</a></td> -->
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -130,19 +130,19 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="<?php echo base_url()."seminar/rekap_seminar" ?>">
                             <span class="fa fa-file-excel color-green fa-4x mb-2"></span>
                             Seminar
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="<?php echo base_url()."sidang/rekap_sidang" ?>">
                             <span class="fa fa-file-excel color-green fa-4x mb-2"></span>
                             Sidang
                         </a>
                     </div>
                     <div class="col-md-4">
-                        <a href="">
+                        <a href="<?php echo base_url()."sidang/rekap_nilai" ?>">
                             <span class="fa fa-file-excel color-green fa-4x mb-2"></span>
                             Nilai
                         </a>

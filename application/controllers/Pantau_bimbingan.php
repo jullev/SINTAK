@@ -5,6 +5,7 @@ Class Pantau_bimbingan extends CI_controller{
     function __construct(){
         parent::__construct();
         $this->load->model('Dosen_model');
+        $this->load->model('Sidang_model');
         $this->icon = "fa-user";
     }
 

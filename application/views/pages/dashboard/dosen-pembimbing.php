@@ -15,7 +15,7 @@
                 </div>
             </div>
             <hr>
-            <a href="">Lihat Detail</a>
+            <a href="<?php echo base_url()."bimbingan" ?>">Lihat Detail</a>
         </div>
     </div>
 </div>
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <hr>
-            <a href="">Lihat Detail</a>
+            <a href="<?php echo base_url()."pengajuan-judul" ?>">Lihat Detail</a>
         </div>
     </div>
 </div>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <hr>
-            <a href="">Lihat Detail</a>
+            <a href="<?php echo base_url()."Tugas_akhir" ?>">Lihat Detail</a>
         </div>
     </div>
 </div>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <hr>
-            <a href="">Lihat Detail</a>
+            <a href="<?php echo base_url()."bimbingan" ?>">Lihat Detail</a>
         </div>
     </div>
 </div>
@@ -85,7 +85,6 @@
                                 <th>#</th>
                                 <th>Topik</th>
                                 <th>Jml Mahasiswa</th>
-                                <th>Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -97,7 +96,6 @@
                                     <td><?= $key ?></td>
                                     <td><?= $value['topik'] ?></td>
                                     <td><?= $value['ttl'] ?></td>
-                                    <td><a href="">Detail</a></td>
                                 </tr>
                             <?php } ?>
                         </tbody>

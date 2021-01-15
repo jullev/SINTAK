@@ -5,13 +5,15 @@
           echo $this->session->flashdata('update_validation');
           echo $this->session->flashdata('delete_validation');
           if($_SESSION['global_role']=='Mahasiswa' && $TA_id!=0){
+            $status = $this->common->getData('id_status','tugas_akhir','',['id' => $TA_id],'')->result_array()[0];
+            if($status['id_status']!=11){
         ?>
         <div class="row mb-2">
           <div class="col-md-3">
             <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalDesc">Catat Bimbingan</button>
           </div>
         </div>
-        <?php } ?>
+        <?php } } ?>
         <div class="table-responsive">
             <table class="table table-striped table-hover table-bordered datatable table-custom">
                 <thead>

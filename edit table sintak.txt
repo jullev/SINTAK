@@ -9,3 +9,8 @@ Update field
 3. Mahasiswa
 -Add telegram_id
 
+4. td_sidang
+-Add revisi(text)
+-Add status_revisi(enum('acc','pending'))
+-Lampiran_revisi(varchar 100)
+-Nilai_panelis(Default None)

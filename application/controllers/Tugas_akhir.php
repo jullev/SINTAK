@@ -19,12 +19,14 @@ class Tugas_akhir extends CI_controller
         $param['pageInfo'] = "List Tugas Akhir";
         if ($_SESSION['global_role'] == 'Mahasiswa') {
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
-        } else if ($_SESSION['global_role'] == 'Dosen Pembimbing') {
-            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+        } else if (isDospem()) {
+            $filter = "Dosen_NIP = '$_SESSION[id_login]'";
+            if($_SESSION['global_role']=='Koordinator TA'){
+                $filter.=" or Prodi_idProdi = '$_SESSION[id_prodi]'";
+            }
         } else {
-            $filter = ["Prodi_idProdi = '$_SESSION[id_prodi]' OR Dosen_NIP = '$_SESSION[id_prodi]'"];
+            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         }
-        $filter['tugas_akhir.id_status !='] = 1;
         $param['cekAcc'] = $this->common->getData('id','tugas_akhir','',['tgl_ACC !=' => NULL],'')->num_rows();
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
@@ -258,8 +260,10 @@ class Tugas_akhir extends CI_controller
         $update = array(
             "Dosen_NIP" => $_POST['Dosen_NIP'],
             'id_status' => $_POST['id_status'],
-            'tgl_ACC' => date('Y-m-d')
         );
+        if($_POST['id_status']==2){
+            $update['tgl_ACC'] = date('Y-m-d');
+        }
 
         if($this->TugasAkhir_Model->update($_POST['id'], $update)){
             $chatId = $this->common->getChatId('mahasiwa',['id' => $_POST['id']],true);

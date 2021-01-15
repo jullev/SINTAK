@@ -9,7 +9,10 @@
                 <thead>
                     <tr>
                         <td>#</td>
+                        <td>NIM</td>
+                        <td>Nama Mahasiswa</td>
                         <td>Judul Tugas Akhir</td>
+                        <td>Dosen Pembimbing</td>
                         <td>Catatan Revisi</td>
                         <td>Lampiran Revisi</td>
                         <td>Status Revisi</td>
@@ -23,23 +26,24 @@
                     ?>
                         <tr>
                             <td><?php echo $no++; ?></td>
+                            <td><?php echo $i->NIM ?></td>
+                            <td><?php echo $i->nama_mahasiswa ?></td>
                             <td><?php echo $i->Judul_TA ?></td>
+                            <td><?php echo $i->dosen_pembimbing ?></td>
                             <td><?php echo $i->revisi ?></td>
                             <td>
                                 <a href="<?= assetUrl() . 'berkas/sidang/' . $i->lampiran_revisi; ?>" target="_blank">
                                     <?php echo $i->lampiran_revisi ?>
                                 </a>
                             </td>
-                            <td><?php echo $i->status_revisi ?></td>
-                            <td class="text-center">
-                                <div class="dropdown">
-                                    <button class="btn btn-sm btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Option
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                        <a href="" class="edit-sidang dropdown-item" data-id="<?php echo $i->id_sidang ?>">Edit</a>
-                                    </div>
-                                </div>
+                            <td><?php echo $i->status_revisi=='' ? 'Belum Revisi' : ucwords($i->status_revisi) ?></td>
+                            <td width="10%">
+                            <?php 
+                                if($i->NIP_Panelis==$_SESSION['id_login']){
+                            ?>
+                                <a href="" class="edit-sidang btn btn-default" data-id="<?php echo $i->id_sidang ?>"><span class="fa fa-edit"></span> Edit</a>
+
+                            <?php } else { echo "-"; } ?>
                             </td>
                         </tr>
                     <?php
@@ -66,7 +70,7 @@
                 <form action="<?= base_url() ?>sidang/updateRevisisidangDsn" method="post" id="formValidasi">
                     <input type="hidden" name="id_" id="id_">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-12 mb-3">
                             <label for="">Status Revisi</label>
                             <select name="status_revisi" id="status_revisi" class="form-control select2">
                                 <option value="">--Pilih--</option>
@@ -79,8 +83,6 @@
                     <!-- <div class="row mt-1">
 
 					</div> -->
-                    <br>
-                    <br>
                     <?php
                     $this->load->view("common/btn")
                     ?>
