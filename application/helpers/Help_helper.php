@@ -32,12 +32,12 @@ function isDospem()
     }
 }
 function sendTele($chatId,$msg){
-    $token = "bot"."1553760840:AAHEfnGRmM72D-NC85DszYfJAWgDuz5U3qs";
+    $token = "bot1553760840:AAHEfnGRmM72D-NC85DszYfJAWgDuz5U3qs";
     $url = "https://api.telegram.org/$token/sendMessage?parse_mode=HTML&chat_id=$chatId&text=$msg";
     $result = file_get_contents($url,true);
 }
 function sendTeleDosen($chatId,$msg){
-    $token = "bot"."1440500582:AAHcodvxhblt6xhHuDcr5GqqCbHnM_xmWsU";
+    $token = "bot1440500582:AAHcodvxhblt6xhHuDcr5GqqCbHnM_xmWsU";
     $url = "https://api.telegram.org/$token/sendMessage?parse_mode=HTML&chat_id=$chatId&text=$msg";
     $result = file_get_contents($url,true);
 }
