@@ -37,7 +37,7 @@
 						Pengajuan seminar kamu sedang dalam proses penentuan tanggal dan tempat.
 						<br> Lengkapi berkas-berkas seminar dengan cara Download di link dibawah.
 						</p>
-					<a href="#" class="btn btn-default confirm-alert" >Download Berkas Seminar</a>
+					<a href="<?php echo base_url()."assets/Berita Acara Ujian Proposal TA-TIF 2020 - Fix.docx" ?>" class="btn btn-default confirm-alert" >Download Berkas Seminar</a>
 					</div>
 					<?php
 				}

@@ -38,7 +38,7 @@ class Sidang extends CI_Controller
     function ajukanSidang()
     {
         $param = $this->common->getData("ta.id", "tugas_akhir ta", ["mahasiswa m", "ta.Mahasiswa_NIM = m.NIM"], ['Mahasiswa_NIM' => $_SESSION['id_login']], "")->result_array();
-        $insert = $this->common->insert("td_sidang", ['id_TA' => $param[0]['id']]);
+        $insert = $this->common->insert("td_sidang", ['id_TA' => $param[0]['id'],'status_revisi' => '']);
         if($insert){
             $this->common->update('tugas_akhir',['id_status' => 8],['id' => $param[0]['id']]);
             //Flash Message Sukses
@@ -209,7 +209,7 @@ class Sidang extends CI_Controller
     function updateJadwalPanelis()
     {
         $id = $this->input->post('id_');
-		$sidang = $this->common->getData('Nilai_anggota,Nilai_sidang,Nilai_bimbingan','td_sidang','',["id_sidang" => $id],'')->result_array();
+        $sidang = $this->common->getData('Nilai_anggota,Nilai_sidang,Nilai_bimbingan,id_TA','td_sidang','',["id_sidang" => $id],'')->result_array();
         
         if (count($sidang) == 1 && isDospem()) {
             $data = array(
@@ -218,7 +218,7 @@ class Sidang extends CI_Controller
             );
             if ($this->Sidang_model->update($id, $data)) {
 				if($sidang[0]['Nilai_anggota']!=0 && $sidang[0]['Nilai_sidang']!=0 && $sidang[0]['Nilai_bimbingan']!=0){
-                    $this->common->update('tugas_akhir',['id_status' => 10],['id_sidang' => $id]);
+                    $this->common->update('tugas_akhir',['id_status' => 10],['id' => $sidang[0]['id_TA']]);
 
 					$getIdTA = $this->common->getData('id_TA','td_sidang','',['id_sidang' => $id],'')->result_array()[0];
 					$chatId = $this->common->getChatId('mahasiswa',['id' => $getIdTA['id_TA']],true);
@@ -444,7 +444,7 @@ class Sidang extends CI_Controller
                 }
 
                 if($_POST['status_revisi']=='acc'){
-                    $this->common->update('tugas_akhir',['id_status' => 11],['id_sidang' => $id]);
+                    $this->common->update('tugas_akhir',['id_status' => 11],['id' => $getIdTA['id_TA']]);
                 }
 
                 //Flash Message Sukses

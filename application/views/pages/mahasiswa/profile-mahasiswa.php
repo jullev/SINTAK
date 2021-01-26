@@ -18,9 +18,32 @@
 
 <div class="card shadow py-2">
     <div class="card-body">
-
-        <form action="">
-            
+    <?php
+        echo $this->session->flashdata('alert');
+    ?>
+        <form action="profile/updatePassword" method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="">Password Lama</label>
+                    <input type="password" class="form-control" name="old">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="">Password Baru</label>
+                    <input type="password" class="form-control" name="new">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="">Ulangi Password</label>
+                    <input type="password" class="form-control" name="again">
+                </div>
+                <div class="col-md-6 mb-3">
+                <br>
+                <div class="mt-2">
+                    <?php 
+                        $this->load->view("common/btn");
+                    ?>
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 </div>
