@@ -87,16 +87,13 @@
             <span>Loading...</span>
             </div>
           </div>
-            <div class="col-md-6" id="body_form" style="overflow:auto">
+            <div class="col-md-10" id="body_form" style="overflow:auto">
                 <div class="box-login">
-                    <div class="top">
-                        <p>RESET PASSWORD</p>
-                    </div>
-                    <div class="body">
+                    <div class="left" style="display:flex;align-items:center">
                       <div class="tmp_alert">
 
                       </div>
-                        <form id="FormResetPassword" class="">
+                        <form id="FormResetPassword" style="width:100%">
                             <label for="">Email</label>
                             <div class="form-underline email">
                                 <input type="email" placeholder="Masukan Email Anda" id="email" required>
@@ -107,12 +104,18 @@
                             <button type="submit" class="btn btn-primary px-5 font-weight-bold ls-1">Submit</button>
                         </form>
                     </div>
+                <div class="right">
+                        <div class="text">
+                            <h5>Reset Password</h5>
+                            <p class="font-weight-light">Sistem Informasi Tugas Akhir (SINTAK JTI)</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="copyright mt-4">
-        Copyright 2020 - SIMTAK
+        Copyright 2020 - SINTAK
     </div>
 </body>
 </html>

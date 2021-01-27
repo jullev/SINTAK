@@ -34,7 +34,7 @@ class Sidang_model extends CI_Model
 
     function getFIlterDosenAnggota($nip)
     {
-		$now = date('Y-m-d');
+        $now = date('Y-m-d');
         $nip = $_SESSION['id_login'];
         $query = $this->db->query("SELECT mahasiswa.NIM, td_sidang.id_sidang, td_sidang.revisi, td_sidang.lampiran_revisi, td_sidang.status_revisi, mahasiswa.NAMA, tugas_akhir.Judul_TA, td_sidang.Tanggal, td_sidang.jam,dospem.NAMA as dosen_pembimbing, dospan.NAMA as dosen_panelis, td_seminar.id_seminar, td_sidang.NIP_Anggota,anggota.NAMA as dosen_anggota, td_sidang.Nilai_anggota FROM  td_sidang JOIN tugas_akhir ON tugas_akhir.id = td_sidang.id_TA JOIN mahasiswa ON mahasiswa.NIM = tugas_akhir.Mahasiswa_NIM JOIN td_seminar on td_seminar.id_TA = td_sidang.id_TA JOIN dosen as dospan on dospan.NIP = td_seminar.NIP_Panelis JOIN dosen as dospem on dospem.NIP = tugas_akhir.Dosen_NIP JOIN dosen as anggota on td_sidang.NIP_Anggota = anggota.NIP WHERE td_sidang.NIP_Anggota = '$nip'  and td_sidang.status_revisi != 'acc' and td_sidang.Tanggal >= '$now' ");
         return $query->result();

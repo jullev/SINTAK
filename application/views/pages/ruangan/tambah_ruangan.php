@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-        <a href="<?php echo base_url()."Ruangan" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+        <a href="<?php echo base_url()."Ruangan" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Lihat Data</a>
         <?php
         //Form Validation
         //Memunculkan Pemberitahuan Sukses/Gagalnya Input
@@ -15,13 +15,12 @@
     <hr>
         <form method="POST" action="<?php echo base_url().'Ruangan/add_action' ?>">
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Nama Ruangan</label>
-                    <input type="text" class="form-control form-control-sm" name="Nama_Ruangan" placeholder="Masukkan Nama Ruangan">
+                    <input type="text" class="form-control" name="Nama_Ruangan" placeholder="Masukkan Nama Ruangan">
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_Nama_Ruangan; ?></div>
                 </div>
             </div>
-            <br>
             <?php 
                 $this->load->view("common/btn");
             ?>

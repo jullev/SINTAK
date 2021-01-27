@@ -87,12 +87,9 @@
             <span style="text">Loading...</span>
             </div>
           </div>
-            <div class="col-md-6" id="body_form" style="overflow:auto">
+            <div class="col-md-10" id="body_form" style="overflow:auto">
                 <div class="box-login">
-                    <div class="top">
-                        <p>LOGIN SINTAK</p>
-                    </div>
-                    <div class="body">
+                    <div class="left">
                       <div class="tmp_alert">
 
                       </div>
@@ -114,6 +111,12 @@
                             <br>
                             <button type="sumit" class="btn btn-primary px-5 font-weight-bold ls-1">Login</button>
                         </form>
+                    </div>
+                    <div class="right">
+                        <div class="text">
+                            <h5>Selamat Datang di</h5>
+                            <p class="font-weight-light">Sistem Informasi Tugas Akhir (SINTAK JTI)</p>
+                        </div>
                     </div>
                 </div>
             </div>

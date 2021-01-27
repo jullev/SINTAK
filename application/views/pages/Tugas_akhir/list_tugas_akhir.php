@@ -1,15 +1,17 @@
-<div class="card shadow py-2">
-  <div class="card-body">
     <?php 
-        if($cekAcc==0){
+        echo $this->session->flashdata('input_validation');
+        $this->load->view("common/msg");
+        if(isset($cekAcc) && $cekAcc==0 || count((array)$data_tugas_akhir)==0){
+          $this->load->view('common/empty');
+          if($_SESSION['global_role']=='Mahasiswa'){
+            if(count($statusTA)==0 || $statusTA[0]['id_status']==3){
     ?>
-      <a href="<?php echo base_url() . "Tugas_akhir/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
-    <?php } ?>
-    <?php
-    $this->load->view("common/msg")
-    ?>
+    <div class="text-center">
+      <a href="<?php echo base_url() . "Tugas_akhir/add" ?>" class="btn btn-primary mb-3"> <span class="fas fa-fw fa-envelope-open-text"></span> Ajukan Judul</a>
+    </div>
+    <?php } } } else{ ?>
     <div class="table-responsive">
-      <table class="table table-striped table-hover table-bordered datatable table-custom">
+      <table class="table datatable table-custom">
         <thead>
           <tr>
             <td>#</td>
@@ -60,8 +62,6 @@
         </tbody>
       </table>
     </div>
-  </div>
-</div>
 <!-- show deskripsi -->
 <div class="modal" id="modalDesc">
   <div class="modal-dialog modal-lg">
@@ -82,7 +82,7 @@
 </div>
 
 <?php
-if ($_SESSION['global_role'] == 7) {
+  if ($_SESSION['global_role']=='Koordinator TA') {
 ?>
 
   <div class="modal" id="modalEdit">
@@ -126,4 +126,4 @@ if ($_SESSION['global_role'] == 7) {
       </div>
     </div>
   </div>
-<?php } ?>
+<?php } } ?>

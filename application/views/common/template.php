@@ -69,7 +69,7 @@ if (empty($_SESSION['id_login'])) {
 							$cekAcc = $this->common->getData("id",'tugas_akhir','',['Mahasiswa_NIM' => $_SESSION['id_login'],'tgl_ACC !=' => NULL],'')->num_rows();
 							if($cekAcc==0){
 						?>
-							<a class="nav-link" href="<?php echo base_url() . "Tugas_akhir/add" ?>">
+							<a class="nav-link" href="<?php echo base_url() . "pengajuan-judul" ?>">
 								<i class="fas fa-fw fa-envelope-open-text"></i>
 								<span>Pengajuan Judul</span></a>
 						<?php
@@ -150,7 +150,7 @@ if (empty($_SESSION['id_login'])) {
 								<?php
 								if ($_SESSION['global_role'] == 'Mahasiswa' || $_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role']=='Koordinator TA') {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar" ?>">Pengajuan Seminar</a>
+									<a class="nav-link" href="<?php echo base_url() . "pengajuan-seminar" ?>">Pengajuan Seminar</a>
 									<!-- 
                 1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan seminar, setelah submit, munculkan tombol download berkas2 seminar
                 2. Jika admin prodi, tampilkan seluruh list pengajuan seminar berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
@@ -160,8 +160,8 @@ if (empty($_SESSION['id_login'])) {
 								<?php
 								if ($_SESSION['global_role'] != 'Administrator' && $_SESSION['global_role'] != 'Mahasiswa') {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminarPembimbing" ?>">Jadwal Seminar Pembimbing</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar/jadwalSeminarPanelis" ?>">Jadwal Seminar Panelis</a>
+									<a class="nav-link" href="<?php echo base_url() . "jadwal-seminar-pembimbing" ?>">Jadwal Seminar Pembimbing</a>
+									<a class="nav-link" href="<?php echo base_url() . "jadwal-seminar-panelis" ?>">Jadwal Seminar Panelis</a>
 									<!-- 
 				1.	Menu jadwal seminar hanya untuk dosen pembimbing dan dosen panelis
                 2.	Sebagai dosen pembimbimbing, dan Dosen panelis, tampilkan seluruh jadwal yang seminar yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi.
@@ -170,7 +170,7 @@ if (empty($_SESSION['id_login'])) {
 								<?php
 								if ($_SESSION['global_role'] != 'Administrator' || $_SESSION['global_role'] == 'Admin Prodi') {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Seminar/revisiSeminar" ?>">Revisi Seminar</a>
+									<a class="nav-link" href="<?php echo base_url() . "revisi-seminar" ?>">Revisi Seminar</a>
 									<!-- 
                 1. Jika mahasiswa, akan melihat status revisi dan menampilkan form upload utk revisi
                 2. Jika panelis, bisa melihat dan mengACC revisi
@@ -194,21 +194,21 @@ if (empty($_SESSION['id_login'])) {
 								<?php
 								if ($_SESSION['global_role'] == 'Mahasiswa') {
 								?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Pengajuan Sidang</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
+									<a class="nav-link" href="<?php echo base_url() . "pengajuan-sidang" ?>">Pengajuan Sidang</a>
+									<a class="nav-link" href="<?php echo base_url() . "revisi-sidang" ?>">Revisi Sidang</a>
 									<!-- 
                 1. Jika mahasiswa, akan menampilkan judul yg di acc beserta deskripsinya, dan tombol untuk submit atau pengajuan sidang, jika sudah submit, munculkan status pengajuan sidang dan munculkan tombol download berkas2 sidang
                 2. Jika admin prodi, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan waktu dan tempat.
                 3. Jika koordinator TA, tampilkan seluruh list pengajuan sidang berdasarkan prodi dan ada menu untuk edit, hanya bisa mengedit/menentukan anggota.
 			-->
 								<?php } else{ if($_SESSION['global_role']=='Koordinator TA' || $_SESSION['global_role']=='Admin Prodi'){?>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang" ?>">Pengajuan Sidang</a>
+									<a class="nav-link" href="<?php echo base_url() . "pengajuan-sidang" ?>">Pengajuan Sidang</a>
 								<?php } ?>
-									<!-- <a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a> -->
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPembimbing" ?>">Jadwal Sidang Pembimbing</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangPanelis" ?>">Jadwal Sidang Panelis</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/jadwalSidangAnggota" ?>">Jadwal Sidang Anggota</a>
-									<a class="collapse-item" href="<?php echo base_url() . "Sidang/revisiSidang" ?>">Revisi Sidang</a>
+									<!-- <a class="nav-link" href="<?php echo base_url() . "Sidang/jadwalSidang" ?>">Jadwal Sidang</a> -->
+									<a class="nav-link" href="<?php echo base_url() . "jadwal-sidang-pembimbing" ?>">Jadwal Sidang Pembimbing</a>
+									<a class="nav-link" href="<?php echo base_url() . "jadwal-sidang-panelis" ?>">Jadwal Sidang Panelis</a>
+									<a class="nav-link" href="<?php echo base_url() . "jadwal-sidang-anggota" ?>">Jadwal Sidang Anggota</a>
+									<a class="nav-link" href="<?php echo base_url() . "revisi-sidang" ?>">Revisi Sidang</a>
 									<!-- 
               Sebagai dosen pembimbimbing, Dosen panelis dan Dosen anggota, tampilkan seluruh jadwal yang sidang yg akan datang, dan dapat memberikan nilai. Khusus dosen panelis bisa memberikan revisi dan dosen pembimbing/sekretaris panelis memberikan 2 nilai, yaitu nilai bimbingan dan nilai sidang.
             -->
@@ -218,7 +218,7 @@ if (empty($_SESSION['id_login'])) {
 					</li>
 				<?php } ?>
 				<?php
-				if ($_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role'] == 'Koordinator TA') {
+				if ($_SESSION['global_role'] == 'Admin Prodi' || $_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role']=='KPS') {
 				?>
 					<li class="nav-item">
 						<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseTwo">
@@ -227,9 +227,9 @@ if (empty($_SESSION['id_login'])) {
 						</a>
 						<div id="collapseFive" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
-								<a class="collapse-item" href="<?php echo base_url() . "Sidang/rekap_nilai" ?>">Rekap Nilai</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Sidang/rekap_sidang" ?>">Rekap Sidang</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Seminar/rekap_seminar" ?>">Rekap Seminar</a>
+								<a class="nav-link" href="<?php echo base_url() . "rekap-nilai" ?>">Rekap Nilai</a>
+								<a class="nav-link" href="<?php echo base_url() . "rekap-sidang" ?>">Rekap Sidang</a>
+								<a class="nav-link" href="<?php echo base_url() . "rekap-seminar" ?>">Rekap Seminar</a>
 							</div>
 						</div>
 					</li>
@@ -248,11 +248,10 @@ if (empty($_SESSION['id_login'])) {
 						</a>
 						<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 							<div class="py-2 collapse-inner rounded">
-								<a class="collapse-item" href="<?php echo base_url() . "Dosen" ?>">Dosen</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Mahasiswa" ?>">Mahasiswa</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Topik" ?>">Topik</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Ruangan" ?>">Ruangan</a>
-								<a class="collapse-item" href="<?php echo base_url() . "Master_status" ?>">Master Status</a>
+								<a class="nav-link" href="<?php echo base_url() . "Dosen" ?>">Dosen</a>
+								<a class="nav-link" href="<?php echo base_url() . "Mahasiswa" ?>">Mahasiswa</a>
+								<a class="nav-link" href="<?php echo base_url() . "Topik" ?>">Topik</a>
+								<a class="nav-link" href="<?php echo base_url() . "Ruangan" ?>">Ruangan</a>
 							</div>
 						</div>
 					</li>
@@ -335,7 +334,6 @@ if (empty($_SESSION['id_login'])) {
 					<!-- Page Heading -->
 					<div class="d-sm-flex align-items-center justify-content-between mb-4">
 						<div class="h4 mb-0 solid-color font-weight-bold">
-							<span class="fa <?php echo $this->icon ?> info-icon-page"></span>
 							<?php
 							echo ucwords(str_replace(["_",'-'], " ", $this->uri->segment(1)));
 							?>

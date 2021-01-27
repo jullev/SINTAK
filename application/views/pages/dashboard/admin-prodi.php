@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="<?php echo base_url()."seminar" ?>">Lihat Detail</a>
+                <a href="<?php echo base_url()."pengajuan-seminar" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <hr>
-                <a href="<?php echo base_url()."sidang" ?>">Lihat Detail</a>
+                <a href="<?php echo base_url()."pengajuan-sidang" ?>">Lihat Detail</a>
             </div>
         </div>
     </div>

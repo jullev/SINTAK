@@ -1,12 +1,10 @@
-<div class="card shadow py-2">
-  <div class="card-body">
     <?php
     $this->load->view("common/msg");
     echo $this->session->flashdata('update_validation');
 
     ?>
     <div class="table-responsive">
-    <table class="table table-striped table-hover table-bordered datatable table-custom">
+    <table class="table datatable table-custom">
                 <thead>
                     <tr>
                         <td>#</td>
@@ -49,8 +47,6 @@
                 </tbody>
             </table>
     </div>
-  </div>
-</div>
 <!-- --------- modal revisi ------------- -->
 <div class="modal" id="modalRevisi">
   <div class="modal-dialog modal-lg">

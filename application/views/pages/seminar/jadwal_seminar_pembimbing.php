@@ -1,11 +1,9 @@
-<div class="card shadow py-2">
-	<div class="card-body">
 		<?php
 		echo $this->session->flashdata('update_validation');
 		echo $this->session->flashdata('delete_validation');
 		?>
 		<div class="table-responsive">
-			<table class="table table-striped table-hover table-bordered datatable table-custom">
+			<table class="table datatable table-custom">
 				<thead>
 					<tr>
 						<td>#</td>
@@ -40,27 +38,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div>
-</div>
-
-
-<div class="modal" id="modalDesc">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h5 class="modal-title">Modal Heading</h5>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
-
-			<!-- Modal body -->
-			<div class="modal-body f-15">
-
-			</div>
-		</div>
-	</div>
-</div>
 
 <div class="modal" id="modalEdit">
 	<div class="modal-dialog">
@@ -68,7 +45,7 @@
 
 			<!-- Modal Header -->
 			<div class="modal-header">
-				<h5 class="modal-title">Edit Item Seminar</h5>
+				<h5 class="modal-title">Penilaian Pembimbing</h5>
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 

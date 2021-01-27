@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-        <a href="<?php echo base_url()."Master_status/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+        <a href="<?php echo base_url()."Master_status/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Data</a>
         <?php
         //Memunculkan Pemberitahuan Sukses/Gagalnya Delete
         echo $this->session->flashdata('delete_validation');

@@ -1,12 +1,10 @@
-<div class="card shadow py-2">
-    <div class="card-body">
-        <a href="<?php echo base_url()."Dosen/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+        <a href="<?php echo base_url()."Dosen/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Data</a>
         <?php
         //Memunculkan Pemberitahuan Sukses/Gagalnya Delete
         echo $this->session->flashdata('delete_validation');
         ?>
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-bordered datatable table-custom">
+            <table class="table datatable table-custom">
                 <thead>
                     <tr>
                         <td>#</td>
@@ -32,11 +30,11 @@
                         <td><?php echo $i->Alamat; ?></td>
                         <td><?php echo $i->No_hp; ?></td>
                         <td><?php echo $i->Role; ?></td>
-                        <td class="text-center">
+                        <td>
                             <?php 
                                 $dropdown['link'] = array(
                                     "Edit" => base_url().'Dosen/edit/'.$i->NIP,
-                                    "Delete" => base_url().'Dosen/delete/'.$i->NIP
+                                    "Delete" => array(base_url().'Dosen/delete/'.$i->NIP,"confirm")
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                             ?>
@@ -46,5 +44,3 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>

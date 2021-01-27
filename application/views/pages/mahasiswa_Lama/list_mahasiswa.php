@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?php echo base_url()."Mahasiswa/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+                <a href="<?php echo base_url()."Mahasiswa/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Data</a>
                 <a href="<?php echo base_url()."Mahasiswa/import" ?>" class="btn btn-success mb-3"> <span class="fa fa-file"></span> Import</a>
             </div>
             <div class="col-md-6 ml-auto">

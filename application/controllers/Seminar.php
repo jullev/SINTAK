@@ -4,6 +4,8 @@ class Seminar extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+        date_default_timezone_set('Asia/Jakarta');
+
 		$this->load->model('Seminar_model');
 		$this->load->model('TugasAkhir_model');
 		$this->load->model('Ruangan_model');
@@ -50,7 +52,7 @@ class Seminar extends CI_Controller
 			//Flash Message Sukses
 			$this->session->set_flashdata("input_validation", "<div class='alert alert-success'>
 					<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Pengajuan Seminar Berhasil</div>");
-			redirect('seminar');
+			redirect('pengajuan-seminar');
 		}
 		else{
 			show_404();
@@ -174,7 +176,7 @@ class Seminar extends CI_Controller
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
-			redirect(base_url() . 'Seminar');
+			redirect(base_url() . 'pengajuan-seminar');
 		} else {
 			show_404();
 		}
@@ -228,7 +230,7 @@ class Seminar extends CI_Controller
 	{
 		$id = $this->input->post('id_');
 		$seminar = $this->common->getData('Nilai_pembimbing','td_seminar','',["id_seminar" => $id],'')->result_array();
-		if (count($seminar) == 1 && isDospem()) {
+		if (count($seminar) == 1 /* && isDospem() */) {
 			$data = array(
 				'Nilai_panelis' => $this->input->post('Nilai_panelis'),
 				'revisi' => $this->input->post('revisi'),
@@ -251,7 +253,7 @@ class Seminar extends CI_Controller
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
 				<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate<b></div>");
 			}
-			redirect(base_url() . 'Seminar/jadwalSeminarPanelis');
+			redirect(base_url() . 'jadwal-seminar-panelis');
 		}
 		else {
 			show_404();
@@ -286,7 +288,7 @@ class Seminar extends CI_Controller
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
-			redirect(base_url() . 'Seminar/jadwalSeminarPembimbing');
+			redirect(base_url() . 'jadwal-seminar-pembimbing');
 		} else {
 			show_404();
 		}
@@ -348,7 +350,7 @@ class Seminar extends CI_Controller
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
-			redirect(base_url() . 'Seminar/revisiSeminar');
+			redirect(base_url() . 'revisi-seminar');
 		} else {
 			show_404();
 		}
@@ -359,7 +361,7 @@ class Seminar extends CI_Controller
 		$id = $this->input->post('id_');
 		$cekId = $this->Seminar_model->getWhere(["id_seminar" => $id])->num_rows();
 
-		if ($cekId == 1 && isDospem()) {
+		if ($cekId == 1 /* && isDospem()*/) {
 			$data = array(
 				'status_revisi' => $this->input->post('status_revisi'),
 			);
@@ -379,7 +381,7 @@ class Seminar extends CI_Controller
 				$this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
 			<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Seminar Gagal Diupdate</b></div>");
 			}
-			redirect(base_url() . 'Seminar/revisiSeminar');
+			redirect(base_url() . 'revisi-seminar');
 		}
 		else {
 			show_404();

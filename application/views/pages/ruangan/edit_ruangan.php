@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-        <a href="<?php echo base_url()."Ruangan" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+        <a href="<?php echo base_url()."Ruangan" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Lihat Data</a>
         <?php
         //Form Validation
         //Memunculkan Pemberitahuan Sukses/Gagalnya Input
@@ -17,12 +17,13 @@
             <?php foreach($data_ruangan as $data){ ?>
             <input type="hidden" name="id_" value="<?php echo $data->idRuangan; ?>">
             <div class="row">
+            <div class="col-md-12 mb-3">
                 <label>Nama Ruangan</label>
-                <input type="text" class="form-control form-control-sm" name="Nama_Ruangan" placeholder="Masukkan Nama Ruangan" value="<?php echo $data->Nama_ruangan; ?>">
+                <input type="text" class="form-control" name="Nama_Ruangan" placeholder="Masukkan Nama Ruangan" value="<?php echo $data->Nama_ruangan; ?>">
                 <div class="text-danger ml-1 mt-1"><?php echo $validation_Nama_Ruangan; ?></div>
             </div>
+            </div>
             <?php } ?>
-            <br>
             <?php 
                 $this->load->view("common/btn");
             ?>

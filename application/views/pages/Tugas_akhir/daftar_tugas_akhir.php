@@ -1,3 +1,9 @@
+<?php 
+    if(count($status)==1 && $status[0]['id_status']==1 || count($status)==1 && $status[0]['tgl_ACC']!=NULL){
+        echo "<div class='alert alert-success'><b>Status Tugas Akhir : </b>".$status[0]['status']."</div>";
+    }
+    else{
+?>
 <div class="card shadow py-2">
     <div class="card-body">
         <?php
@@ -130,3 +136,4 @@
         </form>
     </div>
 </div>
+<?php } ?>

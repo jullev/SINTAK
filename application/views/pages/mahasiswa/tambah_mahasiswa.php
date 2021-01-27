@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-    <a href="<?php echo base_url()."Mahasiswa" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+    <a href="<?php echo base_url()."Mahasiswa" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Lihat Data</a>
     <?php
     //Form Validation
     //Memunculkan Pemberitahuan Sukses/Gagalnya Input
@@ -27,24 +27,24 @@
     <hr>
         <form method="POST" action="<?php echo base_url().'Mahasiswa/add_action' ?>">
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>NIM</label>
-                    <input type="text" class="form-control form-control-sm" name="NIM" placeholder="Masukkan NIM" required>
+                    <input type="text" class="form-control" name="NIM" placeholder="Masukkan NIM" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NIM; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>NAMA</label>
-                    <input type="text" class="form-control form-control-sm" name="NAMA" placeholder="Masukkan Nama" required>
+                    <input type="text" class="form-control" name="NAMA" placeholder="Masukkan Nama" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NAMA; ?></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Email</label>
-                    <input type="text" class="form-control form-control-sm" name="email" placeholder="Masukkan Email" required>
+                    <input type="text" class="form-control" name="email" placeholder="Masukkan Email" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_email; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Tahun Masuk</label>
                     <select name="tahunmasuk" id="tahunmasuk" class="form-control select2" required>
                         <option value="">--Pilih--</option>
@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Tanggal Lahir</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -68,17 +68,17 @@
                     </div>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_tanggallahir; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Alamat</label>
-                    <textarea name="Alamat" class="form-control form-control-sm" required></textarea>
+                    <textarea name="Alamat" class="form-control" required></textarea>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_Alamat; ?></div>
                 </div>
             </div>
             <div class="row">
                 
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Prodi</label>
-                    <select class="form-control form-control-sm select2" name="idProdi" required>
+                    <select class="form-control select2" name="idProdi" required>
                         <option value="">--Pilih--</option>
                         <?php 
                             foreach($prodi as $i){

@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-    <a href="<?php echo base_url()."Mahasiswa" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+    <a href="<?php echo base_url()."Mahasiswa" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Lihat Data</a>
     <?php
     //Form Validation
     //Memunculkan Pemberitahuan Sukses/Gagalnya Input
@@ -29,24 +29,24 @@
             <?php foreach($data_mahasiswa as $data){ ?>
             <input type="hidden" name="id_" value="<?php echo $data->NIM; ?>">
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>NIM</label>
-                    <input type="text" class="form-control form-control-sm" name="NIM" placeholder="Masukkan NIM" value="<?php echo $data->NIM; ?>" >
+                    <input type="text" class="form-control" name="NIM" placeholder="Masukkan NIM" value="<?php echo $data->NIM; ?>" >
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NIM; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>NAMA</label>
-                    <input type="text" class="form-control form-control-sm" name="NAMA" placeholder="Masukkan Nama" value="<?php echo $data->NAMA; ?>" >
+                    <input type="text" class="form-control" name="NAMA" placeholder="Masukkan Nama" value="<?php echo $data->NAMA; ?>" >
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NAMA; ?></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Email</label>
-                    <input type="text" class="form-control form-control-sm" name="email" placeholder="Masukkan Email" value="<?php echo $data->email; ?>" >
+                    <input type="text" class="form-control" name="email" placeholder="Masukkan Email" value="<?php echo $data->email; ?>" >
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_email; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Tahun Masuk</label>
                     <select name="tahunmasuk" id="tahunmasuk" class="form-control" >
                         <option value="">--Pilih--</option>
@@ -64,22 +64,22 @@
                 </div>
             </div>
             <div class="row">
-            <div class="col-md-6 form-group">
+            <div class="col-md-12 mb-3">
                     <label>Tanggal Lahir</label>
-                    <input type="text" class="form-control datepicker form-control-sm" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value="<?php echo $data->tanggallahir; ?>" >
+                    <input type="text" class="form-control datepicker" name="tanggallahir" placeholder="Masukkan Tanggal Lahir" value="<?php echo $data->tanggallahir; ?>" >
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_tanggallahir; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Alamat</label>
-                    <textarea name="Alamat" class="form-control form-control-sm" ><?php echo $data->Alamat; ?></textarea>
+                    <textarea name="Alamat" class="form-control" ><?php echo $data->Alamat; ?></textarea>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_Alamat; ?></div>
                 </div>
             </div>
             <div class="row">
                 
-                <div class="col-md-6 form-group">
-                    <label>Roles</label>
-                    <select class="form-control form-control-sm" name="idProdi">
+                <div class="col-md-12 mb-3">
+                    <label>Prodi</label>
+                    <select class="form-control select2" name="idProdi">
                         <option value="">--Pilih--</option>
                         <?php 
                             foreach($prodi as $i){

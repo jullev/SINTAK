@@ -19,6 +19,8 @@ class Tugas_akhir extends CI_controller
         $param['pageInfo'] = "List Tugas Akhir";
         if ($_SESSION['global_role'] == 'Mahasiswa') {
             $filter = ['Mahasiswa_NIM' => $_SESSION['id_login']];
+            $param['cekAcc'] = $this->common->getData('id','tugas_akhir','',['tgl_ACC !=' => NULL,'Mahasiswa_NIM' => $_SESSION['id_login']],'')->num_rows();
+            $param['statusTA'] = $this->common->getData('id_status','tugas_akhir','',['Mahasiswa_NIM' => $_SESSION['id_login']],'')->result_array();
         } else if (isDospem()) {
             $filter = "Dosen_NIP = '$_SESSION[id_login]'";
             if($_SESSION['global_role']=='Koordinator TA'){
@@ -27,7 +29,6 @@ class Tugas_akhir extends CI_controller
         } else {
             $filter = ['Dosen_NIP' => $_SESSION['id_login']];
         }
-        $param['cekAcc'] = $this->common->getData('id','tugas_akhir','',['tgl_ACC !=' => NULL],'')->num_rows();
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
         $param['dosen'] = $this->Dosen_model->getAll()->result();
@@ -68,14 +69,29 @@ class Tugas_akhir extends CI_controller
     }
     function add()
     {
-        $param['pageInfo'] = "Pendaftaran Tugas Akhir";
-        $param['role'] = $this->TugasAkhir_Model->getAll()->result();
-        $param['Topik'] = $this->Topik_model->getAll()->result();
-        $param['dosen'] = $this->Dosen_model->getAll()->result();
-        $param['mahasiswa'] = $this->Mahasiswa_model->getAll()->result();
-        $this->template->load("common/template", "pages/Tugas_akhir/daftar_tugas_akhir", $param);
+        if($_SESSION['global_role']=='Mahasiswa'){
+            $param['pageInfo'] = "Pendaftaran Tugas Akhir";
+            $param['role'] = $this->TugasAkhir_Model->getAll()->result();
+            $param['Topik'] = $this->Topik_model->getAll()->result();
+            $param['dosen'] = $this->Dosen_model->getAll()->result();
+            $param['mahasiswa'] = $this->Mahasiswa_model->getAll()->result();
+            $param['status'] = $this->common->getData('ta.id_status,s.status,ta.tgl_ACC','tugas_akhir ta',['status_ta s','ta.id_status = s.id_status'],['Mahasiswa_NIM' => $_SESSION['id_login']],'')->result_array();
+            $this->template->load("common/template", "pages/Tugas_akhir/daftar_tugas_akhir", $param);
+        }
+        else{
+            $param['pageInfo'] = "List Pengajuan Judul";
+            $filter = "Dosen_NIP = '".$_SESSION['id_login']."'";
+            if ($_SESSION['global_role'] == 'Koordinator TA' || $_SESSION['global_role'] == 'KPS') {
+                $filter.=" or Prodi_idProdi = '".$_SESSION['id_prodi']."' ";
+            }
+            $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getPengajuanJudul($filter)->result();
+            $param['Topik'] = $this->Topik_model->getAll()->result();
+            $param['dosen'] = $this->Dosen_model->getAll()->result();
+            $param['status'] = $this->Status_model->getAllDataForPengajuanJudul()->result();
+            $this->template->load("common/template", "pages/Tugas_akhir/list_pengajuan_judul", $param);
+        }
     }
-
+    
     function add_action()
     {
         $config = array(

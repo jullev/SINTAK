@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-    <a href="<?php echo base_url()."pages/table" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+    <a href="<?php echo base_url()."pages/table" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Lihat Data</a>
     <hr>
         <form action="">
             <label>Input Text</label>

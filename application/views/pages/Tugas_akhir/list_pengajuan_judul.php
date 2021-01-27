@@ -1,10 +1,8 @@
-<div class="card shadow py-2">
-  <div class="card-body">
     <?php
     $this->load->view("common/msg")
     ?>
     <div class="table-responsive">
-      <table class="table table-striped table-hover table-bordered datatable table-custom">
+      <table class="table datatable table-custom">
         <thead>
           <tr>
             <td>#</td>
@@ -38,7 +36,7 @@
               <td><?php echo $i->nama_mhs; ?></td>
               <td><?php echo $i->NAMA; ?></td>
               <td><?php echo $i->tgl_pengajuan; ?></td>
-              <td class="text-center">
+              <td>
               <?php
                if ($_SESSION['global_role'] == 'Koordinator TA'  || $_SESSION['id_login'] == $i->Dosen_NIP) {
               ?>
@@ -59,8 +57,6 @@
         </tbody>
       </table>
     </div>
-  </div>
-</div>
 <!-- show deskripsi -->
 <div class="modal" id="modalDesc">
   <div class="modal-dialog modal-lg">

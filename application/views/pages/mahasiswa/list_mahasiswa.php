@@ -1,8 +1,6 @@
-<div class="card shadow py-2">
-    <div class="card-body">
         <div class="row">
             <div class="col-md-3">
-                <a href="<?php echo base_url() . "Mahasiswa/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Add New Record</a>
+                <a href="<?php echo base_url() . "Mahasiswa/add" ?>" class="btn btn-primary mb-3"> <span class="fa fa-plus-circle"></span> Tambah Data</a>
                 <a href="<?php echo base_url() . "Mahasiswa/import" ?>" class="btn btn-success mb-3"> <span class="fa fa-file"></span> Import</a>
             </div>
             <div class="col-md-6 ml-auto">
@@ -39,7 +37,7 @@
         $this->load->view('common/msg')
         ?>
         <div class="table-responsive">
-            <table id="table_mahasiswa" class="table table-striped table-hover table-bordered datatable table-custom">
+            <table id="table_mahasiswa" class="table datatable table-custom">
                 <thead>
                     <tr>
                         <td>#</td>
@@ -66,12 +64,12 @@
                             <td><?php echo $i->Tahun_masuk; ?></td>
                             <td><?php echo $i->Nama_prodi; ?></td>
                             <td><?php echo $i->tanggallahir; ?></td>
-                            <td class="text-center">
+                            <td>
                                 <?php
                                 $dropdown['link'] = array(
                                     "Edit" => base_url() . 'Mahasiswa/edit/' . $i->NIM,
                                     "Reset Password" => base_url() . 'Mahasiswa/resetpassword/' . $i->NIM,
-                                    "Delete" => base_url() . 'Mahasiswa/delete/' . $i->NIM
+                                    "Delete" => array(base_url() . 'Mahasiswa/delete/' . $i->NIM)
                                 );
                                 $this->load->view("common/dropdown", $dropdown);
                                 ?>
@@ -82,8 +80,6 @@
                 </thead>
             </table>
         </div>
-    </div>
-</div>
 <script>
     $(document).ready(function() {
 

@@ -1,6 +1,6 @@
 <div class="card shadow py-2">
     <div class="card-body">
-    <a href="<?php echo base_url()."Dosen" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Back to table</a>
+    <a href="<?php echo base_url()."Dosen" ?>" class="btn btn-success mb-3"> <span class="fa fa-arrow-alt-circle-left"></span> Lihat Data</a>
     <?php
     //Form Validation
     //Memunculkan Pemberitahuan Sukses/Gagalnya Input
@@ -25,38 +25,38 @@
     <hr>
         <form method="POST" action="<?php echo base_url().'Dosen/add_action' ?>">
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>NIP</label>
-                    <input type="text" class="form-control form-control-sm" name="NIP" placeholder="Masukkan NIP" required>
+                    <input type="text" class="form-control" name="NIP" placeholder="Masukkan NIP" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NIP; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>NIDN</label>
-                    <input type="text" class="form-control form-control-sm" name="NIDN" placeholder="Masukkan NIDN" required>
+                    <input type="text" class="form-control" name="NIDN" placeholder="Masukkan NIDN" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NIDN; ?></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Nama</label>
-                    <input type="text" class="form-control form-control-sm" name="NAMA" placeholder="Masukkan Nama" required>
+                    <input type="text" class="form-control" name="NAMA" placeholder="Masukkan Nama" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_NAMA; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Alamat</label>
-                    <textarea class="form-control form-control-sm" name="Alamat" required></textarea>
+                    <textarea class="form-control" name="Alamat" required></textarea>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_Alamat; ?></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>No.HP</label>
-                    <input type="text" class="form-control form-control-sm" name="No_hp" placeholder="Masukkan No. HP" required>
+                    <input type="text" class="form-control" name="No_hp" placeholder="Masukkan No. HP" required>
                     <div class="text-danger ml-1 mt-1"><?php echo $validation_No_hp; ?></div>
                 </div>
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 mb-3">
                     <label>Roles</label>
-                    <select class="form-control form-control-sm select2" name="idRole" required>
+                    <select class="form-control select2" name="idRole" required>
                         <option value="">--Pilih--</option>
                         <?php 
                             foreach($role as $i){

@@ -4,6 +4,8 @@ class Sidang extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        date_default_timezone_set('Asia/Jakarta');
+
         $this->load->model('Sidang_model');
         $this->load->model('TugasAkhir_model');
         $this->load->model('Ruangan_model');
@@ -211,7 +213,7 @@ class Sidang extends CI_Controller
         $id = $this->input->post('id_');
         $sidang = $this->common->getData('Nilai_anggota,Nilai_sidang,Nilai_bimbingan,id_TA','td_sidang','',["id_sidang" => $id],'')->result_array();
         
-        if (count($sidang) == 1 && isDospem()) {
+        if (count($sidang) == 1 /* && isDospem() */) {
             $data = array(
                 'Nilai_panelis' => $this->input->post('Nilai_panelis'),
                 'revisi' => $this->input->post('revisi'),
@@ -236,7 +238,7 @@ class Sidang extends CI_Controller
                 $this->session->set_flashdata("update_validation", "<div class='alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button><b>Data Sidang Gagal Diupdate</b></div>");
             }
-            redirect(base_url() . 'Sidang/jadwalSidangPanelis');
+            redirect(base_url() . 'jadwal-sidang-panelis');
         } else {
             show_404();
         }
@@ -247,7 +249,7 @@ class Sidang extends CI_Controller
         $id = $this->input->post('id_');
 		$sidang = $this->common->getData('Nilai_panelis,Nilai_sidang,Nilai_bimbingan,revisi','td_sidang','',["id_sidang" => $id],'')->result_array();
         
-        if (count($sidang) == 1 && isDospem()) {
+        if (count($sidang) == 1 /* && isDospem() */) {
             $data = array(
                 'Nilai_anggota' => $this->input->post('Nilai_Anggota'),
             );
@@ -271,7 +273,7 @@ class Sidang extends CI_Controller
                 $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
-            redirect(base_url() . 'Sidang/jadwalSidangAnggota');
+            redirect(base_url() . 'jadwal-sidang-anggota');
         } else {
             show_404();
         }
@@ -282,7 +284,7 @@ class Sidang extends CI_Controller
         $id = $this->input->post('id_');
         $nilai = $this->input->post('Nilai_pembimbing');
 		$sidang = $this->common->getData('Nilai_panelis,Nilai_anggota,revisi','td_sidang','',["id_sidang" => $id],'')->result_array();
-        if (count($sidang) == 1 && isDospem()) {
+        if (count($sidang) == 1 /* && isDospem()*/) {
             $data = array(
                 // 'Nilai_pembimbing' => $nilai,
                 'Nilai_bimbingan' => $this->input->post('Nilai_bimbingan'),
@@ -308,7 +310,7 @@ class Sidang extends CI_Controller
                 $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
-            redirect(base_url() . 'Sidang/jadwalSidangPembimbing');
+            redirect(base_url() . 'jadwal-sidang-pembimbing');
         } else {
             show_404();
         }
@@ -421,7 +423,7 @@ class Sidang extends CI_Controller
                 $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
                 <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
-            redirect(base_url() . 'Sidang/revisiSidang');
+            redirect(base_url() . 'revisi-sidang');
         } else {
             show_404();
         }
@@ -431,7 +433,7 @@ class Sidang extends CI_Controller
     {
         $id = $this->input->post('id_');
         $cekId = $this->Sidang_model->getWhere(["id_sidang" => $id])->num_rows();
-        if ($cekId == 1 && isDospem()) {
+        if ($cekId == 1 /* && isDospem() */) {
             $data = array(
                 'status_revisi' => $this->input->post('status_revisi'),
             );
@@ -455,7 +457,7 @@ class Sidang extends CI_Controller
                 $this->session->set_flashdata("update_validation", "<div class='font-weight-bold alert alert-danger'>
             <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>Data Sidang Gagal Diupdate</div>");
             }
-            redirect(base_url() . 'Sidang/revisiSidang');
+            redirect(base_url() . 'revisi-sidang');
         }
         else {
             show_404();
