@@ -23,7 +23,7 @@ class Bimbingan extends CI_controller
 
         $param['pageInfo'] = "List Tugas Akhir";
         if ($_SESSION['global_role'] == 'Mahasiswa') {
-            $idTA = $this->common->getData("id",'tugas_akhir','',['tgl_ACC !=' => NULL],'')->result_array();
+            $idTA = $this->common->getData("id",'tugas_akhir','',['tgl_ACC !=' => NULL,'Mahasiswa_NIM' => $_SESSION['id_login']],'')->result_array();
             $param['pageInfo'] = "Bimbingan - " . $_SESSION['username'] . ' (' . $_SESSION['id_login'] . ')';
             $param['TA_id'] = count($idTA)==0 ? 0 : $idTA[0]['id'];
             $param['data_bimbingan'] = $this->common->getData('b.*','td_bimbingan b',['tugas_akhir ta','b.Tugas_akhir_id = ta.id'],['ta.Mahasiswa_NIM' => $_SESSION['id_login']],['id_bimbingan','desc'])->result();
