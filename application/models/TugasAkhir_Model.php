@@ -58,7 +58,7 @@ class TugasAkhir_Model extends CI_Model
         else{
             $this->db->where($filter);
         }
-        $this->db->where(['tgl_ACC', NULL,'tugas_akhir.id_status' => 1]);
+        $this->db->where(['tgl_ACC'=> NULL,'tugas_akhir.id_status' => 1]);
         $this->db->order_by("id", 'desc');
         return $this->db->get();
     }

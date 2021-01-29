@@ -50,6 +50,9 @@
                   </div>
                   <?php
                }
+               else{
+                 echo "-";
+               }
                ?>
                </td>
             </tr>
@@ -57,30 +60,12 @@
         </tbody>
       </table>
     </div>
-<!-- show deskripsi -->
-<div class="modal" id="modalDesc">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h5 class="modal-title">Modal Heading</h5>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body f-15">
-
-      </div>
-    </div>
-  </div>
-</div>
 
 <?php
 if ($_SESSION['global_role'] == 'Koordinator TA') {
 ?>
   <div class="modal" id="modalEdit">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
 
         <!-- Modal Header -->
@@ -124,7 +109,7 @@ if ($_SESSION['global_role'] == 'Koordinator TA') {
 } else {
 ?>
   <div class="modal" id="modalEdit">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
 
         <!-- Modal Header -->
@@ -138,7 +123,7 @@ if ($_SESSION['global_role'] == 'Koordinator TA') {
           <form action="<?php echo base_url() . 'Tugas_akhir/validasi' ?>" method="post" class="submitConfirm" id="formValidasi">
             <input type="hidden" name="id" id="id">
             <input type="hidden" name="Dosen_NIP" value="<?php echo $_SESSION['id_login'] ?>">
-            <label for="" class="mt-3">Status</label>
+            <label>Status</label>
             <select name="id_status" class="mb-3 form-control select2" id="status" style="width :100%">
               <?php
               foreach ($status as $key => $value) {
