@@ -23,11 +23,15 @@ class Tugas_akhir extends CI_controller
             $param['statusTA'] = $this->common->getData('id_status','tugas_akhir','',['Mahasiswa_NIM' => $_SESSION['id_login']],'')->result_array();
         } else if (isDospem()) {
             $filter = "Dosen_NIP = '$_SESSION[id_login]'";
-            if($_SESSION['global_role']=='Koordinator TA'){
+            if($_SESSION['global_role']=='Koordinator TA' || $_SESSION['global_role']=='KPS'){
                 $filter.=" or Prodi_idProdi = '$_SESSION[id_prodi]'";
             }
-        } else {
-            $filter = ['Dosen_NIP' => $_SESSION['id_login']];
+        }
+        else if($_SESSION['global_role']=='Koordinator TA' || $_SESSION['global_role']=='KPS'){
+            $filter = "Prodi_idProdi = '$_SESSION[id_prodi]'";
+        }
+        else {
+            $filter = "";
         }
         $param['data_tugas_akhir'] = $this->TugasAkhir_Model->getAll($filter)->result();
         $param['Topik'] = $this->Topik_model->getAll()->result();
