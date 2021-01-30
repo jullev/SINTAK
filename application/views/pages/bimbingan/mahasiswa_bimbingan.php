@@ -66,8 +66,6 @@
                 </tbody>
             </table>
         </div>
-    </div>
-</div>
 <div class="modal" id="modalDesc">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -113,6 +111,8 @@
 						$this->load->view("common/btn")
 					?>
         </form>
+      </div>
+    </div>
       </div>
     </div>
 
