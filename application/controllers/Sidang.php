@@ -78,7 +78,28 @@ class Sidang extends CI_Controller
 
         $this->template->load("common/template", "pages/Sidang/rekap_sidang", $param);
     }
+    function rekap_nilai()
+    {
+        $prodi = $this->input->post('prodi');
+        $angkatan = $this->input->post('angkatan');
 
+        // kondisi ketika  filter digunakan 
+        if ($prodi != "" && $angkatan != "") {
+            $param['rekap_sidang'] = $this->Sidang_model->getRekapSidang($angkatan, $prodi)->result();
+            $param['filter_angkatan'] = $angkatan;
+            $param['filter_prodi'] = $prodi;
+        } else { // Ketika Filter tidak di gunakan
+            $param['rekap_sidang'] = $this->Sidang_model->getRekapSidang()->result();
+            $param['filter_angkatan'] = '';
+            $param['filter_prodi'] = '';
+        }
+
+        $param['angkatan'] = $this->Mahasiswa_model->getAngkatan()->result();
+        $param['prodi'] = $this->Sidang_model->getProdi()->result();
+        $param['pageInfo'] = "Rekap Nilai";
+
+        $this->template->load("common/template", "pages/Sidang/rekap_nilai", $param);
+    }
     function add()
     {
         $param['pageInfo'] = "Pengajuan Sidang";

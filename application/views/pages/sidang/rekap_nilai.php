@@ -45,9 +45,9 @@
                         <td>#</td>
                         <td>Nama Mahasiswa</td>
                         <td>NIM</td>
-                        <!-- <td>Nilai Seminar</td> -->
+                        <td>Nilai Seminar</td>
                         <td>Nilai Sidang</td>
-                        <!-- <td>Nilai Total</td> -->
+                        <td>Nilai Total</td>
                         <td>Aksi</td>
                     </tr>
                 </thead>
@@ -56,9 +56,9 @@
                         $n = 0;
                         foreach ($rekap_sidang as $key ) {
                             
-                        $nilai_seminar = $key->nil_sem_panelis / 2 + $key->nil_sem_pembimbing / 2;
-                        $nilai_sidang = $key->nil_sid_panelis * 30/100 + $key->nil_sid_anggota * 30/100 + $key->Nilai_bimbingan * 40/100 ;
-                        $nilai_total = $nilai_seminar / 2 + $nilai_sidang / 2;
+                            $nilai_seminar = $key->nil_sem_panelis / 2 + $key->nil_sem_pembimbing / 2;
+                            $nilai_sidang = $key->nil_sid_panelis * 30/100 + $key->nil_sid_anggota * 30/100 + $key->Nilai_bimbingan * 40/100 ;
+                            $nilai_total = $nilai_seminar / 2 + $nilai_sidang / 2;
 
                             $n++;
                     ?>  
@@ -66,9 +66,9 @@
                             <td>1</td>
                             <td><?= $key->nama_mahasiswa?></td>
                             <td><?= $key->NIM?></td>
-                            <!-- <td><?= $nilai_seminar ?></td> -->
+                            <td><?= $nilai_seminar ?></td>
                             <td><?= $nilai_sidang ?></td>
-                            <!-- <td><?= $nilai_total ?></td> -->
+                            <td><?= $nilai_total ?></td>
 
                             <td>
                                 <a role="button"  aria-controls="collapse<?= $n ?>" data-toggle="collapse" href="#collapse<?= $n ?>"><span class="fa fa-chevron-circle-down fa-lg solid-color"></span></a>
